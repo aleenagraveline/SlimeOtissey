@@ -24,6 +24,7 @@ public class Cat extends Player {
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
+        
         super.draw(graphicsHandler);
     }
 
