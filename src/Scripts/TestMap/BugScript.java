@@ -48,7 +48,9 @@ public class BugScript extends Script {
                     }
                 });
                 
-                addScriptAction(new TextboxScriptAction("Oh...uh...awkward..."));
+                addScriptAction(new TextboxScriptAction("HOW DARE YOU??"));
+                addScriptAction(new ChangeFlagScriptAction("isInBugBattle", true));
+                addScriptAction(new ChangeFlagScriptAction("hatesBugs", true));
             }});
         }});
 
