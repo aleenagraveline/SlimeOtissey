@@ -100,7 +100,7 @@ public class BugFightScreen extends Screen {
                 this.playLevelScreen.map.setActiveScript(new SimpleTextScript(new String[] {
                     "Alex won!", 
                     "This is when Otis' friendship would increase.", 
-                    "If Otis was more than a figment of Alex's imagination,\nthat is."}));
+                    "If Otis didn't hate Alex in this world, that is."}));
                 //TODO Figure out why the bug stops walking after this.
             } else if (menuItemSelected == 1) { // restart level
                 this.playLevelScreen.resetLevel();
