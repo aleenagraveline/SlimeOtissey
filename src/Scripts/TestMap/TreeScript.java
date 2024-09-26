@@ -44,8 +44,8 @@ public class TreeScript extends Script {
 
                 addScriptAction(new TextboxScriptAction() {{
                     addText("...");
-                    addText("I found a ball inside of the tree!\nYippee!");
-                    addText("Maybe I can use the ball to befriend someone! \n(Alex would gain friendship points with Otis)");
+                    addText("I found a key inside of the tree!\nYippee!");
+                    addText("Maybe I can use the key to break into Otis's house! \n(Alex would gain friendship points with Otis)");
                 }});
 
                 addScriptAction(new ChangeFlagScriptAction("hasFoundBall", true));
