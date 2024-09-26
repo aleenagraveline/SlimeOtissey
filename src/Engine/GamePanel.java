@@ -7,6 +7,7 @@ import Utils.Colors;
 import javax.swing.*;
 import java.awt.*;
 
+
 /*
  * This is where the game loop process and render back buffer is setup
  */
@@ -20,11 +21,13 @@ public class GamePanel extends JPanel {
 
 	private boolean isGamePaused = false;
 	private boolean isViewingInventory = false;
+	private boolean isPlayingPuzzle = false;
 	private SpriteFont pauseLabel;
 	private SpriteFont inventoryLabel;
 	private KeyLocker keyLocker = new KeyLocker();
 	private final Key pauseKey = Key.P;
 	private final Key inventoryKey = Key.I;
+	private final Key memoryKey = Key.M;
 	private Thread gameLoopProcess;
 
 	private Key showFPSKey = Key.G;
@@ -91,7 +94,7 @@ public class GamePanel extends JPanel {
 		updateInventoryState();
 		updateShowFPSState();
 
-		if (!isGamePaused && !isViewingInventory) {
+		if (!isGamePaused && !isViewingInventory && !isPlayingPuzzle) {
 			screenManager.update();
 		}
 	}
@@ -117,6 +120,18 @@ public class GamePanel extends JPanel {
 			keyLocker.unlockKey(inventoryKey);
 		}
 	}
+
+	private void updatePuzzleState() {
+		if (Keyboard.isKeyDown(memoryKey) && !keyLocker.isKeyLocked(memoryKey)) {
+			isPlayingPuzzle = !isPlayingPuzzle;
+			keyLocker.lockKey(memoryKey);
+		}
+
+		if (Keyboard.isKeyUp(memoryKey)) {
+			keyLocker.unlockKey(memoryKey);
+		}
+	}
+
 
 
 	private void updateShowFPSState() {
@@ -148,6 +163,10 @@ public class GamePanel extends JPanel {
 			for(int inventorySpaces=0; inventorySpaces<10; inventorySpaces++) {
 				graphicsHandler.drawFilledRectangleWithBorder((int)(2.5 + ScreenManager.getScreenWidth()/10)*inventorySpaces, ScreenManager.getScreenHeight()/2 - 50, ScreenManager.getScreenWidth()/10, 100, new Color(0, 0, 0), new Color(0, 100, 0), 5);
 			}
+		}
+
+		if(isPlayingPuzzle) {
+			//Puzzles.MemoryGameDisplay.startMemoryPuzzle();
 		}
 
 		if (showFPS) {

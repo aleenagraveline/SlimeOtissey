@@ -1,3 +1,4 @@
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
@@ -10,14 +11,13 @@ public class MemoryGameDisplay{
 	public static final int GRN = 3;
 	public static final int BLU = 4;
 
-	public static JPanel memoryPuzzle;
-
 	private static final int CORRECT_SEQUENCE[] = {RED, RED, GRN, YLW, BLU, GRN};
 	private static int correctGuesses = 0;
 
-	public static void startMemoryPuzzle(){
-		memoryPuzzle = new JPanel();
-		memoryPuzzle.setSize(700, 500);
+	public static void main(String[] args){
+
+		JFrame frame = new JFrame("Memory Puzzle Demo");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		GameButton redButton = new GameButton(100, Color.red, RED);
 		GameButton yellowButton = new GameButton(100, Color.yellow, YLW);
@@ -27,6 +27,8 @@ public class MemoryGameDisplay{
 
 		JPanel mainPanel = new JPanel();
 		JPanel buttonPanel = new JPanel();
+		
+		frame.getContentPane();
 
 		mainPanel.setLayout(new BorderLayout());
 
@@ -39,7 +41,9 @@ public class MemoryGameDisplay{
 		mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 		mainPanel.add(colorSequence, BorderLayout.CENTER);
 
-		memoryPuzzle.add(mainPanel);
+		frame.add(mainPanel);
+		frame.setSize(700, 500);
+		frame.setVisible(true);
 	}
 
 	public static void checkSequence(int memColor) {
