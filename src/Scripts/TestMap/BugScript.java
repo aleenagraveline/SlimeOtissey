@@ -19,7 +19,7 @@ public class BugScript extends Script {
         scriptActions.add(new NPCFacePlayerScriptAction());
 
         scriptActions.add(new TextboxScriptAction() {{
-            addText("Hello!");
+            addText("Hello Alex!");
             addText("Do you like bugs?", new String[] { "Yes", "No" });
         }});
 

@@ -21,7 +21,7 @@ public class DinoScript extends Script {
 
         ArrayList<ScriptAction> scriptActions = new ArrayList<>();
         scriptActions.add(new LockPlayerScriptAction());
-        scriptActions.add(new TextboxScriptAction("Isn't my garden so lovely?"));
+        scriptActions.add(new TextboxScriptAction("Oh, Alex, it's you..."));
 
         scriptActions.add(new ConditionalScriptAction() {{
             addConditionalScriptActionGroup(new ConditionalScriptActionGroup() {{
@@ -31,11 +31,7 @@ public class DinoScript extends Script {
                 addScriptAction(new WaitScriptAction(70));
                 addScriptAction(new NPCFacePlayerScriptAction());
                 addScriptAction(new TextboxScriptAction () {{
-                    addText("Oh, you're still here...");
-                    addText("...You heard from Walrus that he saw me with your\nball?");
-                    addText("Well, I saw him playing with it and was worried it would\nroll into my garden.");
-                    addText("So I kicked it as far as I could into the forest to the left.");
-                    addText("Now, if you'll excuse me, I have to go.");
+                    addText("Alex...Go away!");
                 }});
                 addScriptAction(new NPCStandScriptAction(Direction.RIGHT));
 
