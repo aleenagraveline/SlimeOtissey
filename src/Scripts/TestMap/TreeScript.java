@@ -16,7 +16,6 @@ import ScriptActions.UnlockPlayerScriptAction;
 // script for talking to tree with hole in it
 // checkout the documentation website for a detailed guide on how this script works
 public class TreeScript extends Script {
-
     @Override
     public ArrayList<ScriptAction> loadScriptActions() {
         ArrayList<ScriptAction> scriptActions = new ArrayList<>();
