@@ -98,7 +98,7 @@ public class BugFightScreen extends Screen {
             if (menuItemSelected == 0) { // continue level
                 this.playLevelScreen.exitBugBattle();
                 this.playLevelScreen.map.setActiveScript(new SimpleTextScript(new String[] {
-                    "Alex the Cat won!", 
+                    "Alex won!", 
                     "This is when Otis' friendship would increase.", 
                     "If Otis was more than a figment of Alex's imagination,\nthat is."}));
                 //TODO Figure out why the bug stops walking after this.
