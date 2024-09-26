@@ -19,9 +19,12 @@ public class GamePanel extends JPanel {
 	private GraphicsHandler graphicsHandler;
 
 	private boolean isGamePaused = false;
+	private boolean isViewingInventory = false;
 	private SpriteFont pauseLabel;
+	private SpriteFont inventoryLabel;
 	private KeyLocker keyLocker = new KeyLocker();
 	private final Key pauseKey = Key.P;
+	private final Key inventoryKey = Key.I;
 	private Thread gameLoopProcess;
 
 	private Key showFPSKey = Key.G;
@@ -45,6 +48,10 @@ public class GamePanel extends JPanel {
 		pauseLabel = new SpriteFont("PAUSE", 365, 280, "Arial", 24, Color.white);
 		pauseLabel.setOutlineColor(Color.black);
 		pauseLabel.setOutlineThickness(2.0f);
+
+		inventoryLabel = new SpriteFont("INVENTORY", 320, 0, "Arial", 24, Color.white);
+		inventoryLabel.setOutlineColor(Color.black);
+		inventoryLabel.setOutlineThickness(2.0f);
 
 		fpsDisplayLabel = new SpriteFont("FPS", 4, 3, "Arial", 12, Color.black);
 
@@ -81,9 +88,10 @@ public class GamePanel extends JPanel {
 
 	public void update() {
 		updatePauseState();
+		updateInventoryState();
 		updateShowFPSState();
 
-		if (!isGamePaused) {
+		if (!isGamePaused && !isViewingInventory) {
 			screenManager.update();
 		}
 	}
@@ -98,6 +106,18 @@ public class GamePanel extends JPanel {
 			keyLocker.unlockKey(pauseKey);
 		}
 	}
+
+	private void updateInventoryState() {
+		if (Keyboard.isKeyDown(inventoryKey) && !keyLocker.isKeyLocked(inventoryKey)) {
+			isViewingInventory = !isViewingInventory;
+			keyLocker.lockKey(inventoryKey);
+		}
+
+		if (Keyboard.isKeyUp(inventoryKey)) {
+			keyLocker.unlockKey(inventoryKey);
+		}
+	}
+
 
 	private void updateShowFPSState() {
 		if (Keyboard.isKeyDown(showFPSKey) && !keyLocker.isKeyLocked(showFPSKey)) {
@@ -120,6 +140,14 @@ public class GamePanel extends JPanel {
 		if (isGamePaused) {
 			pauseLabel.draw(graphicsHandler);
 			graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(), new Color(0, 0, 0, 100));
+		}
+
+		if(isViewingInventory) {
+			inventoryLabel.draw(graphicsHandler);
+
+			for(int inventorySpaces=0; inventorySpaces<10; inventorySpaces++) {
+				graphicsHandler.drawFilledRectangleWithBorder((int)(2.5 + ScreenManager.getScreenWidth()/10)*inventorySpaces, ScreenManager.getScreenHeight()/2 - 50, ScreenManager.getScreenWidth()/10, 100, new Color(0, 0, 0), new Color(0, 100, 0), 5);
+			}
 		}
 
 		if (showFPS) {
