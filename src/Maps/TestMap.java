@@ -66,6 +66,8 @@ public class TestMap extends Map {
 
         getMapTile(20, 4).setInteractScript(new SimpleTextScript("Otis's house"));
 
+        getMapTile(18, 26).setInteractScript(new SimpleTextScript("To Forest:\n>>>>"));
+
         getMapTile(2, 6).setInteractScript(new TreeScript());
     }
 }
