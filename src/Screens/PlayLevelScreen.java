@@ -34,6 +34,7 @@ public class PlayLevelScreen extends Screen {
         flagManager.addFlag("hasFoundBall", false);
         flagManager.addFlag("isInBugBattle", false);
         flagManager.addFlag("hatesBugs", false);
+        flagManager.addFlag("moveToForestOne", false);
 
         // define/setup map
         map = new TestMap();
@@ -90,6 +91,12 @@ public class PlayLevelScreen extends Screen {
         // if flag is set at any point during gameplay, game is "won"
         if (map.getFlagManager().isFlagSet("hasFoundBall")) {
             playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
+        }
+
+        // If flag is set, move to next screen and unset flag
+        if (map.getFlagManager().isFlagSet("moveToForestOne")) {
+            screenCoordinator.setGameState(GameState.FOREST_ONE);
+            map.getFlagManager().unsetFlag("moveToForestOne");
         }
     }
 
