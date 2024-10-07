@@ -11,7 +11,7 @@ public class ForestOneMap extends Map {
 
     public ForestOneMap() {
         super("forest_one_map.txt", new CommonTileset());
-        this.playerStartPosition = getMapTile(0, 9).getLocation(); // middle of path on left
+        this.playerStartPosition = getMapTile(0, 8).getLocation().addY(24); // middle of path on left
     }
 
     @Override
