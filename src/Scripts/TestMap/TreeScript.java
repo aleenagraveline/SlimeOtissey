@@ -24,7 +24,8 @@ public class TreeScript extends Script {
         scriptActions.add(new ConditionalScriptAction() {{
             addConditionalScriptActionGroup(new ConditionalScriptActionGroup() {{
                 addRequirement(new FlagRequirement("hasTalkedToDinosaur", true));
-                addRequirement(new FlagRequirement("hasFoundBall", false));
+                addRequirement(new FlagRequirement("hasFoundKey", false));
+                addRequirement(new FlagRequirement("keyIsInTree", true));
                 addRequirement(new CustomRequirement() {
 
                     @Override
@@ -48,7 +49,8 @@ public class TreeScript extends Script {
                     addText("Maybe I can use the key to break into Otis's house! \n(Alex would gain friendship points with Otis)");
                 }});
 
-                addScriptAction(new ChangeFlagScriptAction("hasFoundBall", true));
+                addScriptAction(new ChangeFlagScriptAction("hasFoundKey", true));
+                addScriptAction(new ChangeFlagScriptAction("keyIsInTree", false));
             }});
 
 
