@@ -630,7 +630,7 @@ public class TreeScript extends Script {
         scriptActions.add(new ConditionalScriptAction() {{
             addConditionalScriptActionGroup(new ConditionalScriptActionGroup() {{
                 addRequirement(new FlagRequirement("hasTalkedToDinosaur", true));
-                addRequirement(new FlagRequirement("hasFoundBall", false));
+                addRequirement(new FlagRequirement("hasFoundKey", false));
                 addRequirement(new CustomRequirement() {
 
                     @Override
@@ -653,7 +653,7 @@ public class TreeScript extends Script {
                     addText("I found my ball inside of the tree!\nYippee!");
                 }});
 
-                addScriptAction(new ChangeFlagScriptAction("hasFoundBall", true));
+                addScriptAction(new ChangeFlagScriptAction("hasFoundKey", true));
             }});
 
 
@@ -672,8 +672,8 @@ The player needs to have spoken to the dinosaur already before they are allowed 
 Additionally, there is a custom requirement that checks that the player is standing below the tree trunk rather than to the side of it -- this is done to force the player to have to move the pushable rock out of the way in order to find the ball.
 Isn't it interesting how much thought has to go into the code for such a simple game event?
 
-Once the requirements of the conditional have been met, the script simply uses a `TextboxScriptAction` to show some text that the ball was found, and then uses a `ChangeFlagScriptAction` to set the flag `hasFoundBall`.
-The game then detects that the flag `hasFoundBall` is set and pulls up the win screen (but this is done in a different spot all the way in the `PlayLevelScreen` class -- it is not the responsibility of the script to end the game, it's just the script's job to tell the game what state it is in).
+Once the requirements of the conditional have been met, the script simply uses a `TextboxScriptAction` to show some text that the ball was found, and then uses a `ChangeFlagScriptAction` to set the flag `hasFoundKey`.
+The game then detects that the flag `hasFoundKey` is set and pulls up the win screen (but this is done in a different spot all the way in the `PlayLevelScreen` class -- it is not the responsibility of the script to end the game, it's just the script's job to tell the game what state it is in).
 
 This script is attached to the map tile at location x: 2, Y: 6 (which is the base of the tree in the top left corner) in the `TestMap` class with the following code:
 

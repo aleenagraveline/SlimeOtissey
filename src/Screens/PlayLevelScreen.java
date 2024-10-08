@@ -1,5 +1,6 @@
 package Screens;
 
+import Engine.GamePanel;
 import Engine.GraphicsHandler;
 import Engine.Screen;
 import Game.GameState;
@@ -31,7 +32,8 @@ public class PlayLevelScreen extends Screen {
         flagManager.addFlag("hasLostBall", false);
         flagManager.addFlag("hasTalkedToWalrus", false);
         flagManager.addFlag("hasTalkedToDinosaur", false);
-        flagManager.addFlag("hasFoundBall", false);
+        flagManager.addFlag("hasFoundKey", false);
+        flagManager.addFlag("keyIsInTree", true);
         flagManager.addFlag("isInBugBattle", false);
         flagManager.addFlag("hatesBugs", false);
 
@@ -88,8 +90,10 @@ public class PlayLevelScreen extends Screen {
         }
 
         // if flag is set at any point during gameplay, game is "won"
-        if (map.getFlagManager().isFlagSet("hasFoundBall")) {
-            playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
+        if (map.getFlagManager().isFlagSet("hasFoundKey")) {
+            //playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
+            GamePanel.addToInventory("Key");
+            map.getFlagManager().unsetFlag("hasFoundKey");
         }
     }
 
@@ -130,4 +134,8 @@ public class PlayLevelScreen extends Screen {
     private enum PlayLevelScreenState {
         RUNNING, IN_BUG_BATTLE, LEVEL_COMPLETED
     }
+
+    /*public static Map getMap() {
+        return map;
+    }*/
 }
