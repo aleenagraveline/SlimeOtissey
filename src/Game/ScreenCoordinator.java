@@ -4,6 +4,7 @@ import Engine.DefaultScreen;
 import Engine.GraphicsHandler;
 import Engine.Screen;
 import Screens.CreditsScreen;
+import Screens.ForestOneScreen;
 import Screens.MenuScreen;
 import Screens.PlayLevelScreen;
 
@@ -12,8 +13,20 @@ import Screens.PlayLevelScreen;
  * There can only be one "currentScreen", although screens can have "nested" screens
  */
 public class ScreenCoordinator extends Screen {
+	
+	static final int NUM_OF_MAJOR_SCREENS = 4; // The number of major screens to be loaded
+	
+	// Index for each major screen
+	static final int CREDITS_INDEX = 0;
+	static final int MENU_INDEX = 1;
+	static final int SPAWN_INDEX = 2;
+	static final int FOREST_ONE_INDEX = 3;
+
 	// currently shown Screen
 	protected Screen currentScreen = new DefaultScreen();
+
+	// array to keep non-subscreen screens
+	protected Screen[] majorScreens = new Screen[NUM_OF_MAJOR_SCREENS];
 
 	// keep track of gameState so ScreenCoordinator knows which Screen to show
 	protected GameState gameState;
@@ -32,6 +45,17 @@ public class ScreenCoordinator extends Screen {
 	public void initialize() {
 		// start game off with Menu Screen
 		gameState = GameState.MENU;
+
+		// Fill majorScreens
+		majorScreens[CREDITS_INDEX] = new CreditsScreen(this);
+		majorScreens[MENU_INDEX] = new MenuScreen(this);
+		majorScreens[SPAWN_INDEX] = new PlayLevelScreen(this);
+		majorScreens[FOREST_ONE_INDEX] = new ForestOneScreen(this);
+
+		// Initialize each major screen
+		for (int index = 0; index < NUM_OF_MAJOR_SCREENS; index++) {
+			majorScreens[index].initialize();
+		}
 	}
 
 	@Override
@@ -42,16 +66,18 @@ public class ScreenCoordinator extends Screen {
 			if (previousGameState != gameState) {
 				switch(gameState) {
 					case MENU:
-						currentScreen = new MenuScreen(this);
+						currentScreen = majorScreens[MENU_INDEX];
 						break;
-					case LEVEL:
-						currentScreen = new PlayLevelScreen(this);
+					case SPAWN:
+						currentScreen = majorScreens[SPAWN_INDEX];
+						break;
+					case FOREST_ONE:
+						currentScreen = majorScreens[FOREST_ONE_INDEX];
 						break;
 					case CREDITS:
-						currentScreen = new CreditsScreen(this);
+						currentScreen = majorScreens[CREDITS_INDEX];
 						break;
 				}
-				currentScreen.initialize();
 			}
 			previousGameState = gameState;
 
