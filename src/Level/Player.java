@@ -68,7 +68,7 @@ public abstract class Player extends GameObject {
             lastAmountMovedY = super.moveYHandleCollision(moveAmountY);
             lastAmountMovedX = super.moveXHandleCollision(moveAmountX);
         }
-        
+    
         handlePlayerAnimation();
 
         updateLockedKeys();
