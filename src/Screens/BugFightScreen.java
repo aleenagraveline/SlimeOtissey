@@ -97,10 +97,11 @@ public class BugFightScreen extends Screen {
             menuItemSelected = currentMenuItemHovered;
             if (menuItemSelected == 0) { // continue level
                 this.playLevelScreen.exitBugBattle();
+                Player.gainFriendshipPoints(1);
                 this.playLevelScreen.map.setActiveScript(new SimpleTextScript(new String[] {
                     "Alex won!", 
-                    "This is when Otis' friendship would increase.", 
-                    "If Otis didn't hate Alex in this world, that is."}));
+                    "Alex gains friendship points with Otis!", 
+                    "But Otis still hates him... too early to change that"}));
                 //TODO Figure out why the bug stops walking after this.
             } else if (menuItemSelected == 1) { // restart level
                 this.playLevelScreen.resetLevel();

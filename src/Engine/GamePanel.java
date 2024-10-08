@@ -1,6 +1,7 @@
 package Engine;
 
 import GameObject.Rectangle;
+import Level.Player;
 import SpriteFont.SpriteFont;
 import Utils.Colors;
 import java.util.ArrayList;
@@ -17,12 +18,13 @@ public class GamePanel extends JPanel {
 	private ScreenManager screenManager;
 
 	// used to draw graphics to the panel
-	private GraphicsHandler graphicsHandler;
+	private static GraphicsHandler graphicsHandler;
 
 	private boolean isGamePaused = false;
 	private boolean isViewingInventory = false;
 	private SpriteFont pauseLabel;
 	private SpriteFont inventoryLabel;
+	private static SpriteFont friendshipPointsLabel;
 	private KeyLocker keyLocker = new KeyLocker();
 	private final Key pauseKey = Key.P;
 	private final Key inventoryKey = Key.I;
@@ -34,6 +36,7 @@ public class GamePanel extends JPanel {
 	private static String itemInUse = "";
 	private static boolean isUsingItem = false;
 	private ArrayList<String> droppableItems = new ArrayList<>();
+	private static boolean shouldDrawFriendshipPoints = false;
 
 	private Key showFPSKey = Key.G;
 	private SpriteFont fpsDisplayLabel;
@@ -60,6 +63,8 @@ public class GamePanel extends JPanel {
 		inventoryLabel = new SpriteFont("INVENTORY", 250, ScreenManager.getScreenHeight() + 140, "Arial", 24, Color.white);
 		inventoryLabel.setOutlineColor(Color.black);
 		inventoryLabel.setOutlineThickness(2.0f);
+
+		friendshipPointsLabel = new SpriteFont("FRIENDSHIP POINTS: " + Player.getFriendshipPoints(), 5, 5, "Arial", 24, Color.white);
 		for(int i=0; i<itemsInInventory.length; i++) {
 			itemsInInventory[i] = "EMPTY";
 		}
@@ -101,10 +106,15 @@ public class GamePanel extends JPanel {
 		updatePauseState();
 		updateInventoryState();
 		updateShowFPSState();
+		updateFriendshipPoints();
 
 		if (!isGamePaused && !isViewingInventory) {
 			screenManager.update();
 		}
+	}
+
+	public static void updateFriendshipPoints() {
+		friendshipPointsLabel.setText("FRIENDSHIP POINTS: " + Player.getFriendshipPoints());
 	}
 
 	private void updatePauseState() {
@@ -214,9 +224,18 @@ public class GamePanel extends JPanel {
 		fpsDisplayLabel.setText("FPS: " + currentFPS);
 	}
 
+	public static void enableDrawFriendshipPoints(boolean enabled) {
+		shouldDrawFriendshipPoints = enabled;
+	}
+
 	public void draw() {			
 		// draw current game state
 		screenManager.draw(graphicsHandler);
+
+		if(shouldDrawFriendshipPoints)
+		{
+			friendshipPointsLabel.draw(graphicsHandler);
+		}
 
 		// if game is paused, draw pause gfx over Screen gfx
 		if (isGamePaused) {
