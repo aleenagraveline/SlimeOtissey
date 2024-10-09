@@ -153,7 +153,7 @@ flagManager = new FlagManager();
 flagManager.addFlag("hasLostBall", false);
 flagManager.addFlag("hasTalkedToWalrus", false);
 flagManager.addFlag("hasTalkedToDinosaur", false);
-flagManager.addFlag("hasFoundBall", false);
+flagManager.addFlag("hasFoundKey", false);
 ```
 
 As you can see, each flag is given a descriptive enough name in order to figure out what it represents.
