@@ -21,6 +21,7 @@ public class PlayLevelScreen extends Screen {
     protected BugFightScreen bugFightScreen; // BugFightScreen as a subscreen of PlayLevelScreen
     protected WinScreen winScreen;
     protected FlagManager flagManager;
+    protected TownhouseScreen townhouseScreen; // TownHouseScreen as a subscreen of PlayLevelSCreen
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -37,6 +38,7 @@ public class PlayLevelScreen extends Screen {
         flagManager.addFlag("isInBugBattle", false);
         flagManager.addFlag("hatesBugs", false);
         flagManager.addFlag("moveToForestOne", false);
+        flagManager.addFlag("moveToTownhouse", false);
 
         // define/setup map
         map = new TestMap();
@@ -59,6 +61,7 @@ public class PlayLevelScreen extends Screen {
 
         winScreen = new WinScreen(this);
         bugFightScreen = new BugFightScreen(this);
+        townhouseScreen = new TownhouseScreen(this);
     }
 
     public void update() {
@@ -74,10 +77,18 @@ public class PlayLevelScreen extends Screen {
             case IN_BUG_BATTLE:
                 bugFightScreen.update();
                 break;
+            case IN_TOWNHOUSE:
+                townhouseScreen.update();
+                break;
             // if level has been completed, bring up level cleared screen
             case LEVEL_COMPLETED:
                 winScreen.update();
                 break;
+        }
+
+        // If flag is set, move into house
+        if (map.getFlagManager().isFlagSet("moveToTownhouse")) {
+            playLevelScreenState = PlayLevelScreenState.IN_TOWNHOUSE;
         }
 
         // if flag is set, bug battle starts
@@ -115,6 +126,9 @@ public class PlayLevelScreen extends Screen {
             case IN_BUG_BATTLE:
                 bugFightScreen.draw(graphicsHandler);
                 break;
+            case IN_TOWNHOUSE:
+                townhouseScreen.draw(graphicsHandler);
+                break;
             case LEVEL_COMPLETED:
                 winScreen.draw(graphicsHandler);
                 break;
@@ -131,6 +145,12 @@ public class PlayLevelScreen extends Screen {
         this.update();
     }
 
+    public void exitTownhouse() {
+        map.getFlagManager().unsetFlag("moveToTownhouse");
+        playLevelScreenState = PlayLevelScreenState.RUNNING;
+        this.update();
+    }
+
     public void resetLevel() {
         initialize();
     }
@@ -141,7 +161,7 @@ public class PlayLevelScreen extends Screen {
 
     // This enum represents the different states this screen can be in
     private enum PlayLevelScreenState {
-        RUNNING, IN_BUG_BATTLE, LEVEL_COMPLETED
+        RUNNING, IN_BUG_BATTLE, IN_TOWNHOUSE, LEVEL_COMPLETED
     }
 
     /*public static Map getMap() {
