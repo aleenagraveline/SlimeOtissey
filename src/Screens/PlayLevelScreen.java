@@ -36,6 +36,7 @@ public class PlayLevelScreen extends Screen {
         flagManager.addFlag("keyIsInTree", true);
         flagManager.addFlag("isInBugBattle", false);
         flagManager.addFlag("hatesBugs", false);
+        flagManager.addFlag("moveToForestOne", false);
 
         // define/setup map
         map = new TestMap();
@@ -96,6 +97,12 @@ public class PlayLevelScreen extends Screen {
             GamePanel.addToInventory("Key");
             Player.gainFriendshipPoints(1);
             map.getFlagManager().unsetFlag("hasFoundKey");
+        }
+
+        // If flag is set, move to next screen and unset flag
+        if (map.getFlagManager().isFlagSet("moveToForestOne")) {
+            screenCoordinator.setGameState(GameState.FOREST_ONE);
+            map.getFlagManager().unsetFlag("moveToForestOne");
         }
     }
 
