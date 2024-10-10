@@ -82,10 +82,10 @@ public class MemoryPuzzleScreen extends Screen {
         blueButton.resetColor();
 
         // if left or right is pressed, change menu item "hovered" over (blue square in front of text will move along with currentMenuItemHovered changing)
-        if (Keyboard.isKeyDown(Key.RIGHT) && keyPressTimer == 0) {
+        if (Keyboard.isKeyDown(Key.D) && keyPressTimer == 0) {
             keyPressTimer = 14;
             currentMenuItemHovered++;
-        } else if (Keyboard.isKeyDown(Key.LEFT) && keyPressTimer == 0) {
+        } else if (Keyboard.isKeyDown(Key.A) && keyPressTimer == 0) {
             keyPressTimer = 14;
             currentMenuItemHovered--;
         } else {
