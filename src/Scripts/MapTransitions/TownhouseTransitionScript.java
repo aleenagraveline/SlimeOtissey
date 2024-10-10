@@ -41,7 +41,7 @@ public class TownhouseTransitionScript extends Script {
                 // Text sequence
                 addScriptAction(new TextboxScriptAction("Alex used the key!"));
                 addScriptAction(new WaitScriptAction(70));
-                addScriptAction(new TextboxScriptAction("(He's nervous to talk to Otis,\nso his hands are a little slippery.)"));
+                addScriptAction(new TextboxScriptAction("(He's a little intimidated,\nso his hands are kinda slippery.)"));
                 addScriptAction(new WaitScriptAction(70));
                 addScriptAction(new TextboxScriptAction() {{
                     addText(".");

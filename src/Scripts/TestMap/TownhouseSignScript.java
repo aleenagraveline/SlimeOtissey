@@ -16,7 +16,7 @@ public class TownhouseSignScript extends Script {
 
         scriptActions.add(new LockPlayerScriptAction());
         scriptActions.add(new TextboxScriptAction() {{
-            addText("Slimes Monthly October 2024\nInterior Design Contest Winner: Otis");
+            addText("Kings Monthly October 2024\nInterior Design Contest Winner: King Lodeon");
             addText("Judge's Comments: \"Quite a beautifully tiled home\nand carpeted entrance!\"");
         }});
         scriptActions.add(new UnlockPlayerScriptAction());

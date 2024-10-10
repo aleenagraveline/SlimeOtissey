@@ -18,7 +18,7 @@ public class OtisHouseScript extends Script {
 
         scriptActions.add(new TextboxScriptAction() {{
             addText("Alex?!");
-            addText("How did you get into my house?!");
+            addText("How did you get into my castle?!");
         }});
 
         scriptActions.add(new UnlockPlayerScriptAction());
