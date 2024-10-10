@@ -27,7 +27,11 @@ public class WalrusScript extends Script {
 
             addConditionalScriptActionGroup(new ConditionalScriptActionGroup() {{
                 addRequirement(new FlagRequirement("hasTalkedToWalrus", true));
+                addRequirement(new FlagRequirement("playedMemPuzzle", false));
                 addScriptAction(new TextboxScriptAction("Oh hello again, Alex!"));
+                addScriptAction(new TextboxScriptAction("I just found this memory puzzle,\nwhy don't you give it a try!"));
+                addScriptAction(new ChangeFlagScriptAction("isInMemPuzzle", true));
+                addScriptAction(new ChangeFlagScriptAction("playedMemPuzzle", true));
             }});
         }});
 
