@@ -10,7 +10,6 @@ import Level.*;
 import Maps.BugFightMap;
 import Puzzles.MemoryPuzzle.*;
 import Scripts.SimpleTextScript;
-import ScriptActions.ChangeFlagScriptAction;
 
 import java.awt.*;
 
@@ -174,8 +173,8 @@ public class MemoryPuzzleScreen extends Screen {
 				this.playLevelScreen.exitMemPuzzle();
                 this.playLevelScreen.map.setActiveScript(new SimpleTextScript(new String[] {
                     "You did the puzzle!", 
-                    "This is when you would get a key.", 
-                    "If locks were invented in this world, that is."}));
+                    "This is when you would get another key.", 
+                    "But there's only enough metal in this world for one key."}));
 			}
 		}
 	}

@@ -88,6 +88,7 @@ public class PlayLevelScreen extends Screen {
             // if in the memory puzzle, bring up the puzzle interface
             case IN_MEM_PUZZLE:
                 memoryPuzzleScreen.update();
+                break;
             case IN_TOWNHOUSE:
                 townhouseScreen.update();
                 break;
@@ -161,6 +162,7 @@ public class PlayLevelScreen extends Screen {
                 break;
             case IN_MEM_PUZZLE:
                 memoryPuzzleScreen.draw(graphicsHandler);
+                break;
             case IN_TOWNHOUSE:
                 townhouseScreen.draw(graphicsHandler);
                 break;
