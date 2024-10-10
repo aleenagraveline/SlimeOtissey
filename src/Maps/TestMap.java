@@ -70,7 +70,7 @@ public class TestMap extends Map {
 
         getMapTile(7, 26).setInteractScript(new SimpleTextScript("Walrus's house"));
 
-        getMapTile(20, 4).setInteractScript(new SimpleTextScript("Otis's house"));
+        getMapTile(20, 4).setInteractScript(new SimpleTextScript("King Lodeon's... Castle..."));
 
         // Forest sign interaction
         getMapTile(18, 26).setInteractScript(new SimpleTextScript("To Forest:\n>>>>"));
