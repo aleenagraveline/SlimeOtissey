@@ -29,9 +29,11 @@ public class RandomBugBattleScreen extends Screen {
 
     protected int playerHealth;
     protected int playerStrength;
+    protected SpriteFont playerHealthDisplay;
     
     protected int bugHealth;
     protected int bugStrength;
+    protected SpriteFont bugHealthDisplay;
 
     public RandomBugBattleScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -46,6 +48,14 @@ public class RandomBugBattleScreen extends Screen {
         bugStrength = 3;
 
         // setup menu options
+        playerHealthDisplay = new SpriteFont("PLAYER HEALTH: " + playerHealth, 50, 50, "Arial", 30, new Color(49, 207, 240));
+        playerHealthDisplay.setOutlineColor(Color.black);
+        playerHealthDisplay.setOutlineThickness(3);
+
+        bugHealthDisplay = new SpriteFont("BUG HEALTH: " + playerHealth, 500, 50, "Arial", 30, new Color(49, 207, 240));
+        bugHealthDisplay.setOutlineColor(Color.black);
+        bugHealthDisplay.setOutlineThickness(3);
+
         attack = new SpriteFont("ATTACK", 100, 500, "Arial", 30, new Color(49, 207, 240));
         attack.setOutlineColor(Color.black);
         attack.setOutlineThickness(3);
@@ -122,7 +132,7 @@ public class RandomBugBattleScreen extends Screen {
             keyLocker.lockKey(Key.SPACE);
             if (menuItemSelected == 0) { // continue level
                 bugHealth -= attack(playerStrength);
-                System.out.println(bugHealth);
+                bugHealthDisplay.setText("BUG HEALTH: " + bugHealth);
                 if (bugHealth <= 0) {
                     Player.gainFriendshipPoints(1);
                     this.background.setActiveScript(new SimpleTextScript(new String[] {
@@ -132,14 +142,14 @@ public class RandomBugBattleScreen extends Screen {
                     this.screenCoordinator.leaveRandomBattle();
                 } else {
                     playerHealth -= attack(bugStrength);
-                    System.out.println(playerHealth);
+                    playerHealthDisplay.setText("PLAYER HEALTH: " + playerHealth);
                     if (playerHealth <= 0) {
                         this.screenCoordinator.leaveRandomBattle();
                     }
                 }
             } else if (menuItemSelected == 1) { // restart level
                 playerHealth -= attack(bugStrength);
-                    System.out.println(playerHealth);
+                playerHealthDisplay.setText("PLAYER HEALTH: " + playerHealth);
             } else if (menuItemSelected == 2) {
                 this.screenCoordinator.leaveRandomBattle();
             }
@@ -150,9 +160,14 @@ public class RandomBugBattleScreen extends Screen {
 
     public void draw(GraphicsHandler graphicsHandler) {
         background.draw(graphicsHandler);
+
+        playerHealthDisplay.draw(graphicsHandler);
+        bugHealthDisplay.draw(graphicsHandler);
+
         attack.draw(graphicsHandler);
         pass.draw(graphicsHandler);
         runAway.draw(graphicsHandler);
+
         graphicsHandler.drawFilledRectangleWithBorder(pointerLocationX, pointerLocationY, 20, 20, new Color(49, 207, 240), Color.black, 2);
     }
 
