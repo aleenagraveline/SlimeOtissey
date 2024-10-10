@@ -139,7 +139,7 @@ public class BugFightScreen extends Screen {
                 if (bugHealth <= 0) {
                     this.playLevelScreen.exitBugBattle();
                     Player.gainFriendshipPoints(1);
-                    this.background.setActiveScript(new SimpleTextScript(new String[] {
+                    this.playLevelScreen.map.setActiveScript(new SimpleTextScript(new String[] {
                     "Alex won!", 
                     "Alex gains friendship points with Otis!", 
                     "But Otis still hates him... too early to change that"}));
@@ -158,7 +158,7 @@ public class BugFightScreen extends Screen {
                 }
             } else if (menuItemSelected == 2) {
                 this.playLevelScreen.exitBugBattle();
-                this.background.setActiveScript(new SimpleTextScript(new String[] {
+                this.playLevelScreen.map.setActiveScript(new SimpleTextScript(new String[] {
                     "Alex ran away...", 
                     "Alex won't gain any friendship points with Otis", 
                     "But at least he's still alive!"}));
