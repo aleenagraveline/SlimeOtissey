@@ -15,7 +15,7 @@ import java.util.HashMap;
 public class Dinosaur extends NPC {
 
     public Dinosaur(int id, Point location) {
-        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("Otis Dino Demo.png"), 24, 24), "STAND_LEFT");
+        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("Small Otis.png"), 24, 24), "STAND_LEFT");
     }
 
     @Override
