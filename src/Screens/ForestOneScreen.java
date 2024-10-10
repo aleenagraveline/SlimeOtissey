@@ -54,6 +54,7 @@ public class ForestOneScreen extends Screen {
             case RUNNING:
                 player.update();
                 map.update(player);
+                this.screenCoordinator.increaseRandomBattleStepCounter();
                 break;
         }
 
