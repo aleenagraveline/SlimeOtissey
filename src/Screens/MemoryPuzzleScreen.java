@@ -175,6 +175,7 @@ public class MemoryPuzzleScreen extends Screen {
                     "You did the puzzle!", 
                     "This is when you would get another key.", 
                     "But there's only enough metal in this world for one key."}));
+                    Player.gainFriendshipPoints(1);
 			}
 		}
 	}
