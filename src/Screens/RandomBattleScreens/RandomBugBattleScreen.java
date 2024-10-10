@@ -1,4 +1,4 @@
-package Screens;
+package Screens.RandomBattleScreens;
 
 import Engine.GraphicsHandler;
 import Engine.Key;
@@ -13,10 +13,8 @@ import SpriteFont.SpriteFont;
 
 import java.awt.*;
 
-// This is the class for the bug combat screen
-public class BugFightScreen extends Screen {
-    // Hold playLevelScreen to return to same level screen
-    protected PlayLevelScreen playLevelScreen;
+// This is the class for the random bug battle screen
+public class RandomBugBattleScreen extends Screen {
 
     protected ScreenCoordinator screenCoordinator;
     protected int currentMenuItemHovered = 0;
@@ -28,9 +26,8 @@ public class BugFightScreen extends Screen {
     protected int pointerLocationX, pointerLocationY;
     protected KeyLocker keyLocker = new KeyLocker();
 
-    public BugFightScreen(PlayLevelScreen playLevelScreen) {
-        this.playLevelScreen = playLevelScreen;
-        this.initialize();
+    public RandomBugBattleScreen(ScreenCoordinator screenCoordinator) {
+        this.screenCoordinator = screenCoordinator;
     }
 
     public void initialize() {
@@ -96,15 +93,14 @@ public class BugFightScreen extends Screen {
         if (!keyLocker.isKeyLocked(Key.SPACE) && Keyboard.isKeyDown(Key.SPACE)) {
             menuItemSelected = currentMenuItemHovered;
             if (menuItemSelected == 0) { // continue level
-                this.playLevelScreen.exitBugBattle();
                 Player.gainFriendshipPoints(1);
-                this.playLevelScreen.map.setActiveScript(new SimpleTextScript(new String[] {
+                this.background.setActiveScript(new SimpleTextScript(new String[] {
                     "Alex won!", 
                     "Alex gains friendship points with Otis!", 
                     "But Otis still hates him... too early to change that"}));
-                //TODO Figure out why the bug stops walking after this.
+                this.screenCoordinator.leaveRandomBattle();
             } else if (menuItemSelected == 1) { // restart level
-                this.playLevelScreen.resetLevel();
+                this.screenCoordinator.initialize();
             }
         }
 

@@ -6,6 +6,7 @@ import NPCs.Bug;
 import NPCs.Dinosaur;
 import NPCs.Walrus;
 import Scripts.SimpleTextScript;
+import Scripts.MapTransitions.ForestOneTransitionScript;
 import Scripts.TestMap.*;
 import Tilesets.CommonTileset;
 
@@ -52,9 +53,14 @@ public class TestMap extends Map {
     @Override
     public ArrayList<Trigger> loadTriggers() {
         ArrayList<Trigger> triggers = new ArrayList<>();
+        // story start triggers
         triggers.add(new Trigger(790, 1030, 100, 10, new LostBallScript(), "hasLostBall"));
         triggers.add(new Trigger(790, 960, 10, 80, new LostBallScript(), "hasLostBall"));
         triggers.add(new Trigger(890, 960, 10, 80, new LostBallScript(), "hasLostBall"));
+
+        // forest transition trigger
+        triggers.add(new Trigger(1140, 1152, 12, 144, new ForestOneTransitionScript()));
+
         return triggers;
     }
 
@@ -65,6 +71,9 @@ public class TestMap extends Map {
         getMapTile(7, 26).setInteractScript(new SimpleTextScript("Walrus's house"));
 
         getMapTile(20, 4).setInteractScript(new SimpleTextScript("Otis's house"));
+
+        // Forest sign interaction
+        getMapTile(18, 26).setInteractScript(new SimpleTextScript("To Forest:\n>>>>"));
 
         getMapTile(2, 6).setInteractScript(new TreeScript());
     }

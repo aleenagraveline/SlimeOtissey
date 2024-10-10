@@ -2,6 +2,7 @@ package Level;
 
 import java.awt.Color;
 
+import Engine.GamePanel;
 import Engine.GraphicsHandler;
 import Engine.Key;
 import Engine.KeyLocker;
@@ -33,13 +34,15 @@ public abstract class Player extends GameObject {
 
     // define keys
     protected KeyLocker keyLocker = new KeyLocker();
-    protected Key MOVE_LEFT_KEY = Key.LEFT;
-    protected Key MOVE_RIGHT_KEY = Key.RIGHT;
-    protected Key MOVE_UP_KEY = Key.UP;
-    protected Key MOVE_DOWN_KEY = Key.DOWN;
+    protected Key MOVE_LEFT_KEY = Key.A;
+    protected Key MOVE_RIGHT_KEY = Key.D;
+    protected Key MOVE_UP_KEY = Key.W;
+    protected Key MOVE_DOWN_KEY = Key.S;
     protected Key INTERACT_KEY = Key.SPACE;
 
     protected boolean isLocked = false;
+
+    protected static int friendshipPoints = 0;
 
     public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
         super(spriteSheet, x, y, startingAnimationName);
@@ -65,7 +68,7 @@ public abstract class Player extends GameObject {
             lastAmountMovedY = super.moveYHandleCollision(moveAmountY);
             lastAmountMovedX = super.moveXHandleCollision(moveAmountX);
         }
-
+    
         handlePlayerAnimation();
 
         updateLockedKeys();
@@ -253,6 +256,15 @@ public abstract class Player extends GameObject {
         else if (direction == Direction.RIGHT) {
             moveX(speed);
         }
+    }
+
+    public static 
+    void gainFriendshipPoints(int pointsToGain) {
+        friendshipPoints += pointsToGain;
+    }
+
+    public static int getFriendshipPoints() {
+        return friendshipPoints;
     }
 
     // Uncomment this to have game draw player's bounds to make it easier to visualize
