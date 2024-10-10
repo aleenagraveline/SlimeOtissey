@@ -7,7 +7,6 @@ import NPCs.Dinosaur;
 import NPCs.Walrus;
 import Scripts.SimpleTextScript;
 import Scripts.MapTransitions.ForestOneTransitionScript;
-import Scripts.MapTransitions.TownhouseTransitionScript;
 import Scripts.TestMap.*;
 import Tilesets.CommonTileset;
 
@@ -77,9 +76,6 @@ public class TestMap extends Map {
         getMapTile(18, 26).setInteractScript(new SimpleTextScript("To Forest:\n>>>>"));
 
         getMapTile(2, 6).setInteractScript(new TreeScript());
-
-        // Townhouse door
-        getMapTile(17, 4).setInteractScript(new TownhouseTransitionScript());
     }
 }
 

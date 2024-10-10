@@ -1,5 +1,5 @@
 package Screens;
-// TODO: Add key requirement, door animation, and Otis
+
 import Engine.*;
 import Level.*;
 import Players.Cat;

@@ -39,6 +39,8 @@ public class PlayLevelScreen extends Screen {
         flagManager.addFlag("hatesBugs", false);
         flagManager.addFlag("moveToForestOne", false);
         flagManager.addFlag("moveToTownhouse", false);
+        flagManager.addFlag("usingKey", false); // These two used in conditionalScript logic
+        flagManager.addFlag("usedKey", false); // ^^^
 
         // define/setup map
         map = new TestMap();
@@ -114,6 +116,17 @@ public class PlayLevelScreen extends Screen {
         if (map.getFlagManager().isFlagSet("moveToForestOne")) {
             screenCoordinator.setGameState(GameState.FOREST_ONE);
             map.getFlagManager().unsetFlag("moveToForestOne");
+        }
+
+        // Wrapped in if statement to avoid running every update
+        // If key is in inventory and is being used, set flag
+        if (!map.getFlagManager().isFlagSet("keyIsInTree") && !map.getFlagManager().isFlagSet("usedKey")) {
+            if (GamePanel.getIsUsingItem() && GamePanel.getItemInUse().equals("Key")) {
+                map.getFlagManager().setFlag("usingKey");
+            }
+            else {
+                map.getFlagManager().unsetFlag("usingKey");
+            }
         }
     }
 

@@ -1,8 +1,13 @@
 package Maps;
 
+import java.util.ArrayList;
+
 import Level.Map;
-import Scripts.SimpleTextScript;
+import Level.NPC;
+import NPCs.Dinosaur;
 import Scripts.MapTransitions.SpawnTransitionScript;
+import Scripts.TestMap.OtisHouseScript;
+import Scripts.TestMap.TownhouseSignScript;
 import Tilesets.CommonTileset;
 
 public class TownhouseMap extends Map{
@@ -13,12 +18,23 @@ public class TownhouseMap extends Map{
     }
 
     @Override
+    public ArrayList<NPC> loadNPCs() {
+        ArrayList<NPC> npcs = new ArrayList<>();
+
+        Dinosaur dinosaur = new Dinosaur(1, getMapTile(6, 6).getLocation());
+        dinosaur.setInteractScript(new OtisHouseScript());
+        npcs.add(dinosaur);
+
+        return npcs;
+    }
+
+    @Override
     public void loadScripts() {
         // door script
         getMapTile(12, 1).setInteractScript(new SpawnTransitionScript());
 
         // sign script
-        getMapTile(5,2).setInteractScript(new SimpleTextScript("What a beautifully tiled home\nand carpeted entrance..."));
+        getMapTile(5,2).setInteractScript(new TownhouseSignScript());
     }
 
 }
