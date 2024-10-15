@@ -1,9 +1,11 @@
 package Level;
 
 import Engine.Config;
+import Engine.GameWindow;
 import Engine.GraphicsHandler;
 import Engine.ScreenManager;
 import GameObject.Rectangle;
+import Screens.PlayLevelScreen;
 import Utils.Direction;
 import Utils.Point;
 
@@ -72,6 +74,9 @@ public abstract class Map {
 
     // map's textbox instance
     protected Textbox textbox;
+ 
+    // Maps sound player
+    public SoundPlayer soundPlayer;
 
     // reference to current player
     protected Player player;
@@ -88,6 +93,11 @@ public abstract class Map {
         this.yMidPoint = (ScreenManager.getScreenHeight() / 2);
         this.playerStartPosition = new Point(0, 0);
     }
+
+    protected void addMusic(String soundPath) {
+    this.soundPlayer = new SoundPlayer(GameWindow.getGameWindow(), soundPath, (int) PlayLevelScreen.getCurrentVolume());
+    this.soundPlayer.pause();
+  }
 
     // sets up map by reading in the map file to create the tile map
     // loads in enemies, enhanced map tiles, and npcs

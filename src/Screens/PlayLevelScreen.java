@@ -24,6 +24,7 @@ public class PlayLevelScreen extends Screen {
     protected WinScreen winScreen;
     protected FlagManager flagManager;
     protected TownhouseScreen townhouseScreen; // TownHouseScreen as a subscreen of PlayLevelSCreen
+    private static double currentVolume;
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -193,6 +194,14 @@ public class PlayLevelScreen extends Screen {
         playLevelScreenState = PlayLevelScreenState.RUNNING;
         this.update();
     }
+
+    public void setCurrentVolume(float volume) {
+        this.currentVolume = currentVolume;
+      }
+    
+      public static double getCurrentVolume() {
+        return currentVolume;
+      }
 
     public void resetLevel() {
         initialize();
