@@ -8,6 +8,8 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 import javax.swing.JFrame;
 
+//import Maps.ForestOneMap;
+
 public class SoundPlayer extends JFrame {
   Long currentFrame;
   public String status;
@@ -18,7 +20,7 @@ public class SoundPlayer extends JFrame {
 
   private AudioInputStream audioInputStream;
 
-  public SoundPlayer(JFrame frame, String soundFilePath) {
+  public SoundPlayer(JFrame jFrame, String soundFilePath, int startVolume) {
     try {
       soundPath = soundFilePath;
       audioInputStream = AudioSystem.getAudioInputStream(new File(soundFilePath).getAbsoluteFile());
@@ -26,33 +28,42 @@ public class SoundPlayer extends JFrame {
       clip.open(audioInputStream);
       System.out.println("clip opened");
       volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN); // set the volume for the the audio
-                                                                                     // clip
+      setVolume(startVolume);                                                                              // clip
       clip.loop(Clip.LOOP_CONTINUOUSLY);
     } catch (Exception e) {
       System.out.println("Error with creating sound player");
       e.printStackTrace();
     }
-
   }
 
-  public SoundPlayer(JFrame frame, String soundFilePath, int startVolume) {
-    this(frame, soundFilePath);
-    setVolume(startVolume);
-  }
+
+
+  // public SoundPlayer(JFrame frame, String soundFilePath, int startVolume) {
+  //   this(frame, soundFilePath);
+  //   setVolume(startVolume);
+  // }
 
   // volume from 0-100;
   public void setVolume(int volume) {
     // clamp and adjust volume to usable value
-    float vol = Utils.MathUtils.clamp(volume, 0, 100) / 100f;
-    //float vol = 100;
-    float dB = (float) (Math.log(vol) / Math.log(10.0) * 20.0);
+    float vol = 1.0f;  // 100% volume corresponds to 1.0
+    float dB = (float) (Math.log10(vol) * 20);
     if (volumeControl != null)
       volumeControl.setValue(dB);
+
+    //   public void setVolume() {
+    //     // Hardcode the volume to 100
+
+    //     if (volumeControl != null) {
+    //         volumeControl.setValue(dB);  // Set to maximum volume (100%)
+    //     }
+    // }
+    
   }
 
-  public FloatControl getVolume() {
-    return volumeControl;
-  }
+  // public FloatControl getVolume() {
+  //   return volumeControl;
+  // }
 
   public void play() {
     clip.start();
