@@ -19,25 +19,54 @@ public class RandomBugBattleScreen extends Screen {
     protected ScreenCoordinator screenCoordinator;
     protected int currentMenuItemHovered = 0;
     protected int menuItemSelected = -1;
-    protected SpriteFont win;
-    protected SpriteFont lose;
+    protected SpriteFont attack;
+    protected SpriteFont pass;
+    protected SpriteFont runAway;
     protected Map background;
     protected int keyPressTimer;
     protected int pointerLocationX, pointerLocationY;
     protected KeyLocker keyLocker = new KeyLocker();
+
+    protected int playerHealth;
+    protected int playerStrength;
+    protected SpriteFont playerHealthDisplay;
+    
+    protected int bugHealth;
+    protected int bugStrength;
+    protected SpriteFont bugHealthDisplay;
 
     public RandomBugBattleScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
     }
 
     public void initialize() {
+        // setup combat attributes
+        playerHealth = 50;
+        playerStrength = 5;
+
+        bugHealth = 15;
+        bugStrength = 3;
+
         // setup menu options
-        win = new SpriteFont("WIN", 250, 500, "Arial", 30, new Color(49, 207, 240));
-        win.setOutlineColor(Color.black);
-        win.setOutlineThickness(3);
-        lose = new SpriteFont("LOSE", 450, 500, "Arial", 30, new Color(49, 207, 240));
-        lose.setOutlineColor(Color.black);
-        lose.setOutlineThickness(3);
+        playerHealthDisplay = new SpriteFont("PLAYER HEALTH: " + playerHealth, 50, 50, "Arial", 30, new Color(49, 207, 240));
+        playerHealthDisplay.setOutlineColor(Color.black);
+        playerHealthDisplay.setOutlineThickness(3);
+
+        bugHealthDisplay = new SpriteFont("BUG HEALTH: " + playerHealth, 500, 50, "Arial", 30, new Color(49, 207, 240));
+        bugHealthDisplay.setOutlineColor(Color.black);
+        bugHealthDisplay.setOutlineThickness(3);
+
+        attack = new SpriteFont("ATTACK", 100, 500, "Arial", 30, new Color(49, 207, 240));
+        attack.setOutlineColor(Color.black);
+        attack.setOutlineThickness(3);
+
+        pass = new SpriteFont("PASS TURN", 300, 500, "Arial", 30, new Color(49, 207, 240));
+        pass.setOutlineColor(Color.black);
+        pass.setOutlineThickness(3);
+
+        runAway = new SpriteFont("RUN AWAY", 550, 500, "Arial", 30, new Color(49, 207, 240));
+        runAway.setOutlineColor(Color.black);
+        runAway.setOutlineThickness(3);
 
         // define/setup map
         background = new BugFightMap();
@@ -54,10 +83,10 @@ public class RandomBugBattleScreen extends Screen {
         background.update(null);
 
         // if left or right is pressed, change menu item "hovered" over (blue square in front of text will move along with currentMenuItemHovered changing)
-        if (Keyboard.isKeyDown(Key.RIGHT) && keyPressTimer == 0) {
+        if (Keyboard.isKeyDown(Key.D) && keyPressTimer == 0) {
             keyPressTimer = 14;
             currentMenuItemHovered++;
-        } else if (Keyboard.isKeyDown(Key.LEFT) && keyPressTimer == 0) {
+        } else if (Keyboard.isKeyDown(Key.A) && keyPressTimer == 0) {
             keyPressTimer = 14;
             currentMenuItemHovered--;
         } else {
@@ -67,22 +96,30 @@ public class RandomBugBattleScreen extends Screen {
         }
 
         // if right is pressed on last menu item or left is pressed on first menu item, "loop" the selection back around to the beginning/end
-        if (currentMenuItemHovered > 1) {
+        if (currentMenuItemHovered > 2) {
             currentMenuItemHovered = 0;
         } else if (currentMenuItemHovered < 0) {
-            currentMenuItemHovered = 1;
+            currentMenuItemHovered = 2;
         }
 
         // sets location for blue square in front of text (pointerLocation) and also sets color of spritefont text based on which menu item is being hovered
         if (currentMenuItemHovered == 0) {
-            win.setColor(new Color(255, 215, 0));
-            lose.setColor(new Color(49, 207, 240));
-            pointerLocationX = 220;
+            attack.setColor(new Color(255, 215, 0));
+            pass.setColor(new Color(49, 207, 240));
+            runAway.setColor(new Color(49, 207, 240));
+            pointerLocationX = (int) attack.getX() - 30;
             pointerLocationY = 507;
         } else if (currentMenuItemHovered == 1) {
-            win.setColor(new Color(49, 207, 240));
-            lose.setColor(new Color(255, 215, 0));
-            pointerLocationX = 420;
+            attack.setColor(new Color(49, 207, 240));
+            pass.setColor(new Color(255, 215, 0));
+            runAway.setColor(new Color(49, 207, 240));
+            pointerLocationX = (int) pass.getX() - 30;
+            pointerLocationY = 507;
+        } else if (currentMenuItemHovered == 2) {
+            attack.setColor(new Color(49, 207, 240));
+            pass.setColor(new Color(49, 207, 240));
+            runAway.setColor(new Color(255, 215, 0));
+            pointerLocationX = (int) runAway.getX() - 30;
             pointerLocationY = 507;
         }
 
@@ -92,25 +129,49 @@ public class RandomBugBattleScreen extends Screen {
         }
         if (!keyLocker.isKeyLocked(Key.SPACE) && Keyboard.isKeyDown(Key.SPACE)) {
             menuItemSelected = currentMenuItemHovered;
+            keyLocker.lockKey(Key.SPACE);
             if (menuItemSelected == 0) { // continue level
-                Player.gainFriendshipPoints(1);
-                this.background.setActiveScript(new SimpleTextScript(new String[] {
+                bugHealth -= attack(playerStrength);
+                bugHealthDisplay.setText("BUG HEALTH: " + bugHealth);
+                if (bugHealth <= 0) {
+                    Player.gainFriendshipPoints(1);
+                    this.background.setActiveScript(new SimpleTextScript(new String[] {
                     "Alex won!", 
                     "Alex gains friendship points with Otis!", 
                     "But Otis still hates him... too early to change that"}));
-                this.screenCoordinator.leaveRandomBattle();
+                    this.screenCoordinator.leaveRandomBattle();
+                } else {
+                    playerHealth -= attack(bugStrength);
+                    playerHealthDisplay.setText("PLAYER HEALTH: " + playerHealth);
+                    if (playerHealth <= 0) {
+                        this.screenCoordinator.leaveRandomBattle();
+                    }
+                }
             } else if (menuItemSelected == 1) { // restart level
-                this.screenCoordinator.initialize();
+                playerHealth -= attack(bugStrength);
+                playerHealthDisplay.setText("PLAYER HEALTH: " + playerHealth);
+            } else if (menuItemSelected == 2) {
+                this.screenCoordinator.leaveRandomBattle();
             }
-        }
 
+            menuItemSelected = -1;
+        }
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
         background.draw(graphicsHandler);
-        win.draw(graphicsHandler);
-        lose.draw(graphicsHandler);
+
+        playerHealthDisplay.draw(graphicsHandler);
+        bugHealthDisplay.draw(graphicsHandler);
+
+        attack.draw(graphicsHandler);
+        pass.draw(graphicsHandler);
+        runAway.draw(graphicsHandler);
+
         graphicsHandler.drawFilledRectangleWithBorder(pointerLocationX, pointerLocationY, 20, 20, new Color(49, 207, 240), Color.black, 2);
     }
-    
+
+    public int attack(int attackStrength) {
+        return (int) (Math.random() * 7 - (attackStrength * 0.6)) + attackStrength;
+    }
 }

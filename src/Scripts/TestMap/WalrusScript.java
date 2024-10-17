@@ -30,6 +30,7 @@ public class WalrusScript extends Script {
                 addRequirement(new FlagRequirement("playedMemPuzzle", false));
                 addScriptAction(new TextboxScriptAction("Oh hello again, Alex!"));
                 addScriptAction(new TextboxScriptAction("I just found this memory puzzle,\nwhy don't you give it a try!"));
+                addScriptAction(new TextboxScriptAction("There was this note on the puzzle, it said to use\nA and D to change selection then space to confirm."));
                 addScriptAction(new ChangeFlagScriptAction("isInMemPuzzle", true));
                 addScriptAction(new ChangeFlagScriptAction("playedMemPuzzle", true));
             }});
