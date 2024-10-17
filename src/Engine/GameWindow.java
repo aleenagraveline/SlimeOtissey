@@ -7,7 +7,7 @@ import javax.swing.*;
  * Just does some setup and exposes the gamePanel's screenManager to allow an external class to setup their own content and attach it to this engine.
  */
 public class GameWindow {
-	private JFrame gameWindow;
+	private static JFrame gameWindow;
 	private GamePanel gamePanel;
 
 	public GameWindow() {
@@ -35,6 +35,10 @@ public class GameWindow {
 
 	public GamePanel getGamePanel() {
 		return gamePanel;
+	}
+
+	public static JFrame getGameWindow() {
+		return gameWindow;
 	}
 
 }
