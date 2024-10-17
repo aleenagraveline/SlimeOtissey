@@ -33,6 +33,8 @@ public class RandomBugBattleScreen extends Screen {
     
     protected int bugHealth;
     protected int bugStrength;
+    protected boolean armored;
+    protected boolean flying;
     protected SpriteFont bugHealthDisplay;
 
     public RandomBugBattleScreen(ScreenCoordinator screenCoordinator) {
@@ -46,6 +48,8 @@ public class RandomBugBattleScreen extends Screen {
 
         bugHealth = 15;
         bugStrength = 3;
+        armored = true;
+        flying = false;
 
         // setup menu options
         playerHealthDisplay = new SpriteFont("PLAYER HEALTH: " + playerHealth, 50, 50, "Arial", 30, new Color(49, 207, 240));
@@ -134,12 +138,12 @@ public class RandomBugBattleScreen extends Screen {
                 bugHealth -= attack(playerStrength);
                 bugHealthDisplay.setText("BUG HEALTH: " + bugHealth);
                 if (bugHealth <= 0) {
+                    this.screenCoordinator.leaveRandomBattle();
                     Player.gainFriendshipPoints(1);
                     this.background.setActiveScript(new SimpleTextScript(new String[] {
                     "Alex won!", 
                     "Alex gains friendship points with Otis!", 
                     "But Otis still hates him... too early to change that"}));
-                    this.screenCoordinator.leaveRandomBattle();
                 } else {
                     playerHealth -= attack(bugStrength);
                     playerHealthDisplay.setText("PLAYER HEALTH: " + playerHealth);
@@ -150,8 +154,15 @@ public class RandomBugBattleScreen extends Screen {
             } else if (menuItemSelected == 1) { // restart level
                 playerHealth -= attack(bugStrength);
                 playerHealthDisplay.setText("PLAYER HEALTH: " + playerHealth);
+                if (playerHealth <= 0) {
+                    this.screenCoordinator.leaveRandomBattle();
+                }
             } else if (menuItemSelected == 2) {
                 this.screenCoordinator.leaveRandomBattle();
+                this.background.setActiveScript(new SimpleTextScript(new String[] {
+                    "Alex ran away...", 
+                    "Alex won't gain any friendship points with Otis", 
+                    "But at least he's still alive!"}));
             }
 
             menuItemSelected = -1;

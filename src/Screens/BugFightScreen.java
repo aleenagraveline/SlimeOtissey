@@ -31,9 +31,13 @@ public class BugFightScreen extends Screen {
 
     protected int playerHealth;
     protected int playerStrength;
+    protected SpriteFont playerHealthDisplay;
     
     protected int bugHealth;
     protected int bugStrength;
+    protected boolean armored;
+    protected boolean flying;
+    protected SpriteFont bugHealthDisplay;
 
     public BugFightScreen(PlayLevelScreen playLevelScreen) {
         this.playLevelScreen = playLevelScreen;
@@ -47,8 +51,18 @@ public class BugFightScreen extends Screen {
 
         bugHealth = 15;
         bugStrength = 3;
+        armored = true;
+        flying = false;
 
         // setup menu options
+        playerHealthDisplay = new SpriteFont("PLAYER HEALTH: " + playerHealth, 50, 50, "Arial", 30, new Color(49, 207, 240));
+        playerHealthDisplay.setOutlineColor(Color.black);
+        playerHealthDisplay.setOutlineThickness(3);
+
+        bugHealthDisplay = new SpriteFont("BUG HEALTH: " + playerHealth, 500, 50, "Arial", 30, new Color(49, 207, 240));
+        bugHealthDisplay.setOutlineColor(Color.black);
+        bugHealthDisplay.setOutlineThickness(3);
+
         attack = new SpriteFont("ATTACK", 100, 500, "Arial", 30, new Color(49, 207, 240));
         attack.setOutlineColor(Color.black);
         attack.setOutlineThickness(3);
@@ -125,7 +139,7 @@ public class BugFightScreen extends Screen {
             keyLocker.lockKey(Key.SPACE);
             if (menuItemSelected == 0) { // continue level
                 bugHealth -= attack(playerStrength);
-                System.out.println(bugHealth);
+                bugHealthDisplay.setText("BUG HEALTH: " + bugHealth);
                 if (bugHealth <= 0) {
                     this.playLevelScreen.exitBugBattle();
                     Player.gainFriendshipPoints(1);
@@ -135,14 +149,14 @@ public class BugFightScreen extends Screen {
                     "But Otis still hates him... too early to change that"}));
                 } else {
                     playerHealth -= attack(bugStrength);
-                    System.out.println(playerHealth);
+                    playerHealthDisplay.setText("PLAYER HEALTH: " + playerHealth);
                     if (playerHealth <= 0) {
                         this.playLevelScreen.resetLevel();
                     }
                 }
             } else if (menuItemSelected == 1) { // restart level
                 playerHealth -= attack(bugStrength);
-                System.out.println(playerHealth);
+                playerHealthDisplay.setText("PLAYER HEALTH: " + playerHealth);
                 if (playerHealth <= 0) {
                     this.playLevelScreen.resetLevel();
                 }
@@ -158,9 +172,14 @@ public class BugFightScreen extends Screen {
 
     public void draw(GraphicsHandler graphicsHandler) {
         background.draw(graphicsHandler);
+
+        playerHealthDisplay.draw(graphicsHandler);
+        bugHealthDisplay.draw(graphicsHandler);
+
         attack.draw(graphicsHandler);
         pass.draw(graphicsHandler);
         runAway.draw(graphicsHandler);
+        
         graphicsHandler.drawFilledRectangleWithBorder(pointerLocationX, pointerLocationY, 20, 20, new Color(49, 207, 240), Color.black, 2);
     }
 
