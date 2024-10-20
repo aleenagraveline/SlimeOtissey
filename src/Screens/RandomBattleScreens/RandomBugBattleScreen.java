@@ -64,7 +64,7 @@ public class RandomBugBattleScreen extends Screen {
         playerHealthDisplay.setOutlineColor(Color.black);
         playerHealthDisplay.setOutlineThickness(3);
 
-        bugHealthDisplay = new SpriteFont("BUG HEALTH: " + playerHealth, 500, 50, "Arial", 30, new Color(49, 207, 240));
+        bugHealthDisplay = new SpriteFont("BUG HEALTH: " + bugHealth, 500, 50, "Arial", 30, new Color(49, 207, 240));
         bugHealthDisplay.setOutlineColor(Color.black);
         bugHealthDisplay.setOutlineThickness(3);
 
