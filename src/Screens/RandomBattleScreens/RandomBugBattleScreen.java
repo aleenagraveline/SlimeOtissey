@@ -230,6 +230,7 @@ public class RandomBugBattleScreen extends Screen {
                 }
 
                 attacking = false;
+                currentMenuItemHovered = 0;
             }
         }
     }
