@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 import java.awt.*;
 
+
 /*
  * This is where the game loop process and render back buffer is setup
  */
@@ -22,12 +23,14 @@ public class GamePanel extends JPanel {
 
 	private boolean isGamePaused = false;
 	private boolean isViewingInventory = false;
+	private boolean isPlayingPuzzle = false;
 	private SpriteFont pauseLabel;
 	private SpriteFont inventoryLabel;
 	private static SpriteFont friendshipPointsLabel;
 	private KeyLocker keyLocker = new KeyLocker();
 	private final Key pauseKey = Key.P;
 	private final Key inventoryKey = Key.I;
+	private final Key memoryKey = Key.M;
 	private Thread gameLoopProcess;
 	private Font arial = new Font("Arial", Font.BOLD, 18);
 	private static int inventorySelector = -1;
@@ -110,7 +113,7 @@ public class GamePanel extends JPanel {
 		updateShowFPSState();
 		updateFriendshipPoints();
 
-		if (!isGamePaused && !isViewingInventory) {
+		if (!isGamePaused && !isViewingInventory && !isPlayingPuzzle) {
 			screenManager.update();
 		}
 	}
@@ -246,6 +249,18 @@ public class GamePanel extends JPanel {
 		
 	}
 
+	private void updatePuzzleState() {
+		if (Keyboard.isKeyDown(memoryKey) && !keyLocker.isKeyLocked(memoryKey)) {
+			isPlayingPuzzle = !isPlayingPuzzle;
+			keyLocker.lockKey(memoryKey);
+		}
+
+		if (Keyboard.isKeyUp(memoryKey)) {
+			keyLocker.unlockKey(memoryKey);
+		}
+	}
+
+
 
 	private void updateShowFPSState() {
 		if (Keyboard.isKeyDown(showFPSKey) && !keyLocker.isKeyLocked(showFPSKey)) {
@@ -320,6 +335,10 @@ public class GamePanel extends JPanel {
 			//graphicsHandler.drawString("Info", ScreenManager.getScreenWidth()/2 + 95, ScreenManager.getScreenHeight()/2 + 50, arial, new Color(255, 255, 255));
 
 			inventoryLabel.draw(graphicsHandler);
+		}
+
+		if(isPlayingPuzzle) {
+			//Puzzles.MemoryGameDisplay.startMemoryPuzzle();
 		}
 
 		if (showFPS) {

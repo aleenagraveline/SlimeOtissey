@@ -7,7 +7,7 @@ import Builders.MapTileBuilder;
 import GameObject.Frame;
 import Level.*;
 import ScriptActions.*;
-
+import Scripts.MapTransitions.TownhouseTransitionScript;
 import Utils.Direction;
 import Utils.Point;
 import Utils.Visibility;
@@ -73,7 +73,7 @@ public class DinoScript extends Script {
                         MapTile mapTile = new MapTileBuilder(doorFrame)
                             .withTileType(TileType.NOT_PASSABLE)
                             .build(location.x, location.y);
-
+                        mapTile.setInteractScript(new TownhouseTransitionScript()); // Enable door to be interacted with after Otis goes inside
                         map.setMapTile(17, 4, mapTile);
                         return ScriptState.COMPLETED;
                     }

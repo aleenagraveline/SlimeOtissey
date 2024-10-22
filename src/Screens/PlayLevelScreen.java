@@ -9,6 +9,7 @@ import Level.*;
 import Maps.TestMap;
 import Players.Cat;
 import Scripts.TestMap.BugHaterScript;
+import Scripts.TestMap.WalrusSmartScript;
 import Utils.Direction;
 import Utils.Point;
 
@@ -19,8 +20,11 @@ public class PlayLevelScreen extends Screen {
     protected Player player;
     protected PlayLevelScreenState playLevelScreenState;
     protected BugFightScreen bugFightScreen; // BugFightScreen as a subscreen of PlayLevelScreen
+    protected MemoryPuzzleScreen memoryPuzzleScreen;
     protected WinScreen winScreen;
     protected FlagManager flagManager;
+    protected TownhouseScreen townhouseScreen; // TownHouseScreen as a subscreen of PlayLevelSCreen
+    private static double currentVolume;
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -36,6 +40,13 @@ public class PlayLevelScreen extends Screen {
         flagManager.addFlag("keyIsInTree", true);
         flagManager.addFlag("isInBugBattle", false);
         flagManager.addFlag("hatesBugs", false);
+        flagManager.addFlag("isInMemPuzzle", false);
+        flagManager.addFlag("playedMemPuzzle", false);
+        flagManager.addFlag("moveToForestOne", false);
+        flagManager.addFlag("moveToTownhouse", false);
+        flagManager.addFlag("usingKey", false); // These two used in conditionalScript logic
+        flagManager.addFlag("usedKey", false); // ^^^
+
 
         // define/setup map
         map = new TestMap();
@@ -58,6 +69,8 @@ public class PlayLevelScreen extends Screen {
 
         winScreen = new WinScreen(this);
         bugFightScreen = new BugFightScreen(this);
+        memoryPuzzleScreen = new MemoryPuzzleScreen(this);
+        townhouseScreen = new TownhouseScreen(this);
     }
 
     public void update() {
@@ -73,10 +86,22 @@ public class PlayLevelScreen extends Screen {
             case IN_BUG_BATTLE:
                 bugFightScreen.update();
                 break;
+            // if in the memory puzzle, bring up the puzzle interface
+            case IN_MEM_PUZZLE:
+                memoryPuzzleScreen.update();
+                break;
+            case IN_TOWNHOUSE:
+                townhouseScreen.update();
+                break;
             // if level has been completed, bring up level cleared screen
             case LEVEL_COMPLETED:
                 winScreen.update();
                 break;
+        }
+
+        // If flag is set, move into house
+        if (map.getFlagManager().isFlagSet("moveToTownhouse")) {
+            playLevelScreenState = PlayLevelScreenState.IN_TOWNHOUSE;
         }
 
         // if flag is set, bug battle starts
@@ -90,12 +115,40 @@ public class PlayLevelScreen extends Screen {
             map.getFlagManager().unsetFlag("hatesBugs");
         }
 
+        // if flag is set, memory puzzle starts
+        if (map.getFlagManager().isFlagSet("isInMemPuzzle")) {
+            playLevelScreenState = PlayLevelScreenState.IN_MEM_PUZZLE;
+        }
+
+        // if flag is set, change bug npc script and change flag back to avoid unnecessary running of this method
+        if (map.getFlagManager().isFlagSet("playedMemPuzzle")) {
+            map.getNPCById(1).setInteractScript(new WalrusSmartScript());
+            map.getFlagManager().unsetFlag("playedMemPuzzle");
+        }
+
         // if flag is set at any point during gameplay, game is "won"
         if (map.getFlagManager().isFlagSet("hasFoundKey")) {
             //playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
             GamePanel.addToInventory("Key");
             Player.gainFriendshipPoints(1);
             map.getFlagManager().unsetFlag("hasFoundKey");
+        }
+
+        // If flag is set, move to next screen and unset flag
+        if (map.getFlagManager().isFlagSet("moveToForestOne")) {
+            screenCoordinator.setGameState(GameState.FOREST_ONE);
+            map.getFlagManager().unsetFlag("moveToForestOne");
+        }
+
+        // Wrapped in if statement to avoid running every update
+        // If key is in inventory and is being used, set flag
+        if (!map.getFlagManager().isFlagSet("keyIsInTree") && !map.getFlagManager().isFlagSet("usedKey")) {
+            if (GamePanel.getIsUsingItem() && GamePanel.getItemInUse().equals("Key")) {
+                map.getFlagManager().setFlag("usingKey");
+            }
+            else {
+                map.getFlagManager().unsetFlag("usingKey");
+            }
         }
     }
 
@@ -107,6 +160,12 @@ public class PlayLevelScreen extends Screen {
                 break;
             case IN_BUG_BATTLE:
                 bugFightScreen.draw(graphicsHandler);
+                break;
+            case IN_MEM_PUZZLE:
+                memoryPuzzleScreen.draw(graphicsHandler);
+                break;
+            case IN_TOWNHOUSE:
+                townhouseScreen.draw(graphicsHandler);
                 break;
             case LEVEL_COMPLETED:
                 winScreen.draw(graphicsHandler);
@@ -124,6 +183,26 @@ public class PlayLevelScreen extends Screen {
         this.update();
     }
 
+    public void exitMemPuzzle() {
+        map.getFlagManager().unsetFlag("isInMemPuzzle");
+        playLevelScreenState = PlayLevelScreenState.RUNNING;
+        this.update();
+    }
+
+    public void exitTownhouse() {
+        map.getFlagManager().unsetFlag("moveToTownhouse");
+        playLevelScreenState = PlayLevelScreenState.RUNNING;
+        this.update();
+    }
+
+    public void setCurrentVolume(float volume) {
+        this.currentVolume = currentVolume;
+      }
+    
+      public static double getCurrentVolume() {
+        return currentVolume;
+      }
+
     public void resetLevel() {
         initialize();
     }
@@ -134,7 +213,7 @@ public class PlayLevelScreen extends Screen {
 
     // This enum represents the different states this screen can be in
     private enum PlayLevelScreenState {
-        RUNNING, IN_BUG_BATTLE, LEVEL_COMPLETED
+        RUNNING, IN_BUG_BATTLE, IN_MEM_PUZZLE, IN_TOWNHOUSE, LEVEL_COMPLETED
     }
 
     /*public static Map getMap() {

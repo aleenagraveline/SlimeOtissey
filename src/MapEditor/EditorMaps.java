@@ -4,6 +4,8 @@ import Level.Map;
 import Maps.TestMap;
 import Maps.TitleScreenMap;
 import Maps.BugFightMap;
+import Maps.TownhouseMap;
+import Maps.ForestOneMap;
 
 import java.util.ArrayList;
 
@@ -13,6 +15,8 @@ public class EditorMaps {
             add("TestMap");
             add("TitleScreen");
             add("BugFightMap");
+            add("TownhouseMap");
+            add("ForestOneMap");
         }};
     }
 
@@ -24,6 +28,10 @@ public class EditorMaps {
                 return new TitleScreenMap();
             case "BugFightMap":
                 return new BugFightMap();
+            case "TownhouseMap":
+                return new TownhouseMap();
+            case "ForestOneMap":
+                return new ForestOneMap();
             default:
                 throw new RuntimeException("Unrecognized map name");
         }
