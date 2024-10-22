@@ -31,12 +31,14 @@ public class GamePanel extends JPanel {
 	private Thread gameLoopProcess;
 	private Font arial = new Font("Arial", Font.BOLD, 18);
 	private static int inventorySelector = -1;
+	private static int actionSelector = -1;
 	private static int inventorySlotsFilled = 0;
 	private static String[] itemsInInventory = new String[10];
 	private static String itemInUse = "";
 	private static boolean isUsingItem = false;
 	private ArrayList<String> droppableItems = new ArrayList<>();
 	private static boolean shouldDrawFriendshipPoints = false;
+	private static int scrollingMode = 0;
 
 	private Key showFPSKey = Key.G;
 	private SpriteFont fpsDisplayLabel;
@@ -132,6 +134,12 @@ public class GamePanel extends JPanel {
 		//show inventory
 		if (Keyboard.isKeyDown(inventoryKey) && !keyLocker.isKeyLocked(inventoryKey)) {
 			isViewingInventory = !isViewingInventory;
+			if(isViewingInventory) {
+				scrollingMode = 1;
+			}
+			else {
+				scrollingMode = 0;
+			}
 			keyLocker.lockKey(inventoryKey);
 		}
 
@@ -140,38 +148,66 @@ public class GamePanel extends JPanel {
 		}
 
 		//inventory navigation
-		if(Keyboard.isKeyDown(Key.DOWN) && !keyLocker.isKeyLocked(Key.DOWN) && isViewingInventory) {
-			keyLocker.lockKey(Key.DOWN);
+		if(Keyboard.isKeyDown(Key.S) && !keyLocker.isKeyLocked(Key.S) && isViewingInventory) {
+			keyLocker.lockKey(Key.S);
 
-			if(inventorySelector < 9) {
-				inventorySelector++;
-			}
-			else {
-				inventorySelector = 0;
-			}
-		}
-
-		if (Keyboard.isKeyUp(Key.DOWN)) {
-			keyLocker.unlockKey(Key.DOWN);
-		}
-
-		if(Keyboard.isKeyDown(Key.UP) && !keyLocker.isKeyLocked(Key.UP) && isViewingInventory) {
-			keyLocker.lockKey(Key.UP);
-
-			if(inventorySelector > 0) {
-				inventorySelector--;
-			}
-			else {
-				inventorySelector = 9;
+			if(scrollingMode == 1) {
+				if(inventorySelector < 9) {
+					inventorySelector++;
+				} else {
+					inventorySelector = 0;
+				}
+			} else if(inventorySelector >= 0 && !itemsInInventory[inventorySelector].isEmpty()) {
+				if(actionSelector < 1) {
+					actionSelector++;
+				} else {
+					actionSelector = 0;
+				}
 			}
 		}
 
-		if (Keyboard.isKeyUp(Key.UP)) {
-			keyLocker.unlockKey(Key.UP);
+		if (Keyboard.isKeyUp(Key.S)) {
+			keyLocker.unlockKey(Key.S);
+		}
+
+		if(Keyboard.isKeyDown(Key.W) && !keyLocker.isKeyLocked(Key.W) && isViewingInventory) {
+			keyLocker.lockKey(Key.W);
+
+			if(scrollingMode == 1) {
+				if(inventorySelector > 0) {
+					inventorySelector--;
+				} else {
+					inventorySelector = 9;
+				}
+			} else if(inventorySelector >= 0 && !itemsInInventory[inventorySelector].isEmpty()) {
+				if(actionSelector > 0) {
+					actionSelector--;
+				} else {
+					actionSelector = 1;
+				}
+			}
+		}
+
+		if (Keyboard.isKeyUp(Key.W)) {
+			keyLocker.unlockKey(Key.W);
+		}
+
+		if(Keyboard.isKeyDown(Key.SPACE) && !keyLocker.isKeyLocked(Key.SPACE) && isViewingInventory) {
+			if(scrollingMode == 1) {
+				scrollingMode = 2;
+			} else {
+				scrollingMode = 1;
+				actionSelector = -1;
+			}
+			keyLocker.lockKey(Key.SPACE);
+		}
+
+		if(Keyboard.isKeyUp(Key.SPACE)) {
+			keyLocker.unlockKey(Key.SPACE);
 		}
 
 		//drop item
-		if(Keyboard.isKeyDown(Key.ONE) && !keyLocker.isKeyLocked(Key.ONE) && inventorySelector >= 0) {
+		/*if(Keyboard.isKeyDown(Key.ONE) && !keyLocker.isKeyLocked(Key.ONE) && inventorySelector >= 0) {
 			keyLocker.lockKey(Key.ONE);
 			if(!isUsingItem && !itemsInInventory[inventorySelector].isEmpty()) {
 				if(droppableItems.contains(itemsInInventory[inventorySelector]))
@@ -183,10 +219,10 @@ public class GamePanel extends JPanel {
 		}
 		if (Keyboard.isKeyUp(Key.ONE)) {
 			keyLocker.unlockKey(Key.ONE);
-		}
+		}*/
 
 		//use item
-		if(Keyboard.isKeyDown(Key.TWO) && !keyLocker.isKeyLocked(Key.TWO) && inventorySelector >= 0) {
+		/*if(Keyboard.isKeyDown(Key.TWO) && !keyLocker.isKeyLocked(Key.TWO) && inventorySelector >= 0) {
 			keyLocker.lockKey(Key.TWO);
 			isUsingItem = !isUsingItem;
 			if(isUsingItem && !itemsInInventory[inventorySelector].isEmpty()) {
@@ -199,7 +235,7 @@ public class GamePanel extends JPanel {
 		}
 		if (Keyboard.isKeyUp(Key.TWO)) {
 			keyLocker.unlockKey(Key.TWO);
-		}
+		}*/
 
 		//item info
 		// if(Keyboard.isKeyDown(Key.THREE) && !keyLocker.isKeyLocked(Key.THREE) && inventorySelector >= 0) {
@@ -275,6 +311,12 @@ public class GamePanel extends JPanel {
 
 			graphicsHandler.drawString("Drop", ScreenManager.getScreenWidth()/2 + 90, ScreenManager.getScreenHeight()/2 - 50, arial, new Color(255, 255, 255));
 			graphicsHandler.drawString("Use", ScreenManager.getScreenWidth()/2 + 94, ScreenManager.getScreenHeight()/2 + 50, arial, new Color(255, 255, 255));
+
+			if(actionSelector == 0) {
+				graphicsHandler.drawString("Drop", ScreenManager.getScreenWidth()/2 + 90, ScreenManager.getScreenHeight()/2 - 50, arial, new Color(0, 255, 0));
+			} else if(actionSelector == 1) {
+				graphicsHandler.drawString("Use", ScreenManager.getScreenWidth()/2 + 94, ScreenManager.getScreenHeight()/2 + 50, arial, new Color(0, 255, 0));
+			}
 			//graphicsHandler.drawString("Info", ScreenManager.getScreenWidth()/2 + 95, ScreenManager.getScreenHeight()/2 + 50, arial, new Color(255, 255, 255));
 
 			inventoryLabel.draw(graphicsHandler);
