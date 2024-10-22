@@ -21,6 +21,7 @@ public class PlayLevelScreen extends Screen {
     protected PlayLevelScreenState playLevelScreenState;
     protected BugFightScreen bugFightScreen; // BugFightScreen as a subscreen of PlayLevelScreen
     protected MemoryPuzzleScreen memoryPuzzleScreen;
+    protected WaitingPuzzleScreen waitingPuzzleScreen;
     protected WinScreen winScreen;
     protected FlagManager flagManager;
     protected TownhouseScreen townhouseScreen; // TownHouseScreen as a subscreen of PlayLevelSCreen
@@ -44,6 +45,7 @@ public class PlayLevelScreen extends Screen {
         flagManager.addFlag("playedMemPuzzle", false);
         flagManager.addFlag("moveToForestOne", false);
         flagManager.addFlag("moveToTownhouse", false);
+        flagManager.addFlag("isInWaitingPuzzle", false);
         flagManager.addFlag("usingKey", false); // These two used in conditionalScript logic
         flagManager.addFlag("usedKey", false); // ^^^
 
@@ -70,6 +72,7 @@ public class PlayLevelScreen extends Screen {
         winScreen = new WinScreen(this);
         bugFightScreen = new BugFightScreen(this);
         memoryPuzzleScreen = new MemoryPuzzleScreen(this);
+        waitingPuzzleScreen = new WaitingPuzzleScreen(this);
         townhouseScreen = new TownhouseScreen(this);
     }
 
@@ -89,6 +92,9 @@ public class PlayLevelScreen extends Screen {
             // if in the memory puzzle, bring up the puzzle interface
             case IN_MEM_PUZZLE:
                 memoryPuzzleScreen.update();
+                break;
+            case IN_WAITING_PUZZLE:
+                waitingPuzzleScreen.update();
                 break;
             case IN_TOWNHOUSE:
                 townhouseScreen.update();
@@ -120,10 +126,15 @@ public class PlayLevelScreen extends Screen {
             playLevelScreenState = PlayLevelScreenState.IN_MEM_PUZZLE;
         }
 
-        // if flag is set, change bug npc script and change flag back to avoid unnecessary running of this method
+        // if flag is set, change walrus npc script and change flag back to avoid unnecessary running of this method
         if (map.getFlagManager().isFlagSet("playedMemPuzzle")) {
             map.getNPCById(1).setInteractScript(new WalrusSmartScript());
             map.getFlagManager().unsetFlag("playedMemPuzzle");
+        }
+
+        // if flag is set, wating puzzle starts
+        if (map.getFlagManager().isFlagSet("isInWaitingPuzzle")) {
+            playLevelScreenState = PlayLevelScreenState.IN_WAITING_PUZZLE;
         }
 
         // if flag is set at any point during gameplay, game is "won"
@@ -164,6 +175,9 @@ public class PlayLevelScreen extends Screen {
             case IN_MEM_PUZZLE:
                 memoryPuzzleScreen.draw(graphicsHandler);
                 break;
+            case IN_WAITING_PUZZLE:
+                waitingPuzzleScreen.draw(graphicsHandler);
+                break;
             case IN_TOWNHOUSE:
                 townhouseScreen.draw(graphicsHandler);
                 break;
@@ -185,6 +199,12 @@ public class PlayLevelScreen extends Screen {
 
     public void exitMemPuzzle() {
         map.getFlagManager().unsetFlag("isInMemPuzzle");
+        playLevelScreenState = PlayLevelScreenState.RUNNING;
+        this.update();
+    }
+
+    public void exitWaitingPuzzle() {
+        map.getFlagManager().unsetFlag("isInWaitingPuzzle");
         playLevelScreenState = PlayLevelScreenState.RUNNING;
         this.update();
     }
@@ -213,7 +233,7 @@ public class PlayLevelScreen extends Screen {
 
     // This enum represents the different states this screen can be in
     private enum PlayLevelScreenState {
-        RUNNING, IN_BUG_BATTLE, IN_MEM_PUZZLE, IN_TOWNHOUSE, LEVEL_COMPLETED
+        RUNNING, IN_BUG_BATTLE, IN_MEM_PUZZLE, IN_WAITING_PUZZLE, IN_TOWNHOUSE, LEVEL_COMPLETED
     }
 
     /*public static Map getMap() {
