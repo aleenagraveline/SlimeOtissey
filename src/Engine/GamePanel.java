@@ -30,7 +30,6 @@ public class GamePanel extends JPanel {
 	private KeyLocker keyLocker = new KeyLocker();
 	private final Key pauseKey = Key.P;
 	private final Key inventoryKey = Key.I;
-	private final Key memoryKey = Key.M;
 	private Thread gameLoopProcess;
 	private Font arial = new Font("Arial", Font.BOLD, 18);
 	private static int inventorySelector = -1;
@@ -212,19 +211,6 @@ public class GamePanel extends JPanel {
 		//
 		
 	}
-
-	private void updatePuzzleState() {
-		if (Keyboard.isKeyDown(memoryKey) && !keyLocker.isKeyLocked(memoryKey)) {
-			isPlayingPuzzle = !isPlayingPuzzle;
-			keyLocker.lockKey(memoryKey);
-		}
-
-		if (Keyboard.isKeyUp(memoryKey)) {
-			keyLocker.unlockKey(memoryKey);
-		}
-	}
-
-
 
 	private void updateShowFPSState() {
 		if (Keyboard.isKeyDown(showFPSKey) && !keyLocker.isKeyLocked(showFPSKey)) {
