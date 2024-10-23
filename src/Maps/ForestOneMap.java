@@ -4,7 +4,7 @@ import Level.Map;
 import Level.SoundPlayer;
 import Level.Trigger;
 import Scripts.MapTransitions.SpawnTransitionScript;
-import Tilesets.CommonTileset;
+import Tilesets.ForestTileset;
 
 import java.util.ArrayList;
 import javax.swing.JFrame;
@@ -14,7 +14,7 @@ public class ForestOneMap extends Map {
     private SoundPlayer soundPlayer;
 
     public ForestOneMap() {
-        super("forest_one_map.txt", new CommonTileset());
+        super("forest_one_map.txt", new ForestTileset());
         this.playerStartPosition = getMapTile(0, 8).getLocation().addY(24); // middle of path on left
         addMusic("Resources/Whimsy Woods (online-audio-converter.com).wav");
     }
