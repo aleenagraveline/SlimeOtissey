@@ -277,6 +277,18 @@ public class ForestTileset extends Tileset {
         MapTileBuilder leavesAndRightBase = new MapTileBuilder(grassFrame).withMidBottomLayer(rightTreeBaseFrame).withMidTopLayer(treeLeaves01Frame).withTopLayer(treeLeaves02Frame).withTileType(TileType.NOT_PASSABLE);
             mapTiles.add(leavesAndRightBase);
 
+        // Special Tiles for forestTwo
+        MapTileBuilder mixedLeaves101 = new MapTileBuilder(grassFrame).withMidTopLayer(treeLeaves13Frame).withTopLayer(treeLeaves14Frame);
+            mapTiles.add(mixedLeaves101);
+        MapTileBuilder mixedLeaves102 = new MapTileBuilder(grassFrame).withMidTopLayer(treeLeaves06Frame).withTopLayer(treeLeaves02Frame);
+            mapTiles.add(mixedLeaves102);
+        MapTileBuilder mixedLeaves103 = new MapTileBuilder(treeLeaves05Frame).withTopLayer(treeLeaves01Frame);
+                mapTiles.add(mixedLeaves103);
+        MapTileBuilder leaves01OnBottomPath = new MapTileBuilder(bottomPathFrame).withTopLayer(treeLeaves01Frame);
+                mapTiles.add(leaves01OnBottomPath);
+        MapTileBuilder leaves02OnBottomPath = new MapTileBuilder(bottomPathFrame).withTopLayer(treeLeaves02Frame);
+                mapTiles.add(leaves02OnBottomPath);
+
         return mapTiles;
     }
 }
