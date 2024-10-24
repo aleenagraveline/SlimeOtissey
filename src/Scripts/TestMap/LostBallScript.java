@@ -19,6 +19,7 @@ public class LostBallScript extends Script {
             addText("Hi, I'm Alex!");
             addText("I need to find a friend.");
             addText("Where should I start?");
+            addText("(Use WASD to walk,\npress SPACE to interact)");
         }});
 
         scriptActions.add(new ChangeFlagScriptAction("hasLostBall", true));
