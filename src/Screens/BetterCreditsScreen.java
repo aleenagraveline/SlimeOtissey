@@ -3,20 +3,14 @@ package Screens;
 import Engine.*;
 import Game.GameState;
 import Game.ScreenCoordinator;
-import Level.Map;
-import Maps.TitleScreenMap;
-import SpriteFont.SpriteFont;
-
-import java.awt.*;
+import GameObject.Sprite;
 
 // This class is for the credits screen
 public class BetterCreditsScreen extends Screen {
     protected ScreenCoordinator screenCoordinator;
-    protected Map background;
     protected KeyLocker keyLocker = new KeyLocker();
-    protected SpriteFont creditsLabel;
-    protected SpriteFont createdByLabel;
-    protected SpriteFont returnInstructionsLabel;
+    protected Sprite bigAlex;
+    protected Sprite backgroundArt;
 
     public BetterCreditsScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -25,11 +19,13 @@ public class BetterCreditsScreen extends Screen {
     @Override
     public void initialize() {
         // setup graphics on screen (big Alex)
+        bigAlex = new Sprite(ImageLoader.load("BigAlex.png"));
+        bigAlex.setLocation(225, 175);
+        backgroundArt = new Sprite(ImageLoader.load("TransitionArt.png"));
         
     }
 
     public void update() {
-        background.update(null);
 
         if (Keyboard.isKeyUp(Key.SPACE)) {
             keyLocker.unlockKey(Key.SPACE);
@@ -42,9 +38,7 @@ public class BetterCreditsScreen extends Screen {
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
-        background.draw(graphicsHandler);
-        creditsLabel.draw(graphicsHandler);
-        createdByLabel.draw(graphicsHandler);
-        returnInstructionsLabel.draw(graphicsHandler);
+        backgroundArt.draw(graphicsHandler);
+        bigAlex.draw(graphicsHandler);
     }
 }

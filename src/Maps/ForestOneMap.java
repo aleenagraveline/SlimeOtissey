@@ -33,7 +33,7 @@ public class ForestOneMap extends Map {
         ArrayList<NPC> npcs = new ArrayList<>();
 
         // Initialize Otis right next to the player
-        Otis otis = new Otis(1, getMapTile(1, 8).getLocation()); // Change coordinates as needed to place Otis next to the player
+        Otis otis = new Otis(-1, getMapTile(0, 8).getLocation()); // Change coordinates as needed to place Otis next to the player
         npcs.add(otis);
 
         return npcs;

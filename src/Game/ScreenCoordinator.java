@@ -5,8 +5,8 @@ import java.security.SecureRandom;
 import Engine.DefaultScreen;
 import Engine.GraphicsHandler;
 import Engine.Screen;
+import Screens.BetterCreditsScreen;
 import Screens.CaveOneScreen;
-import Screens.CreditsScreen;
 import Screens.ForestCaveScreen;
 import Screens.ForestOneScreen;
 import Screens.ForestThreeScreen;
@@ -76,7 +76,7 @@ public class ScreenCoordinator extends Screen {
 		gameState = GameState.MENU;
 
 		// Fill majorScreens
-		majorScreens[CREDITS_INDEX] = new CreditsScreen(this);
+		majorScreens[CREDITS_INDEX] = new BetterCreditsScreen(this);
 		majorScreens[MENU_INDEX] = new TitleScreen(this);
 		majorScreens[SPAWN_INDEX] = new PlayLevelScreen(this);
 		majorScreens[FOREST_ONE_INDEX] = new ForestOneScreen(this);
