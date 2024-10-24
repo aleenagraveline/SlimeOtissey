@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import Level.Map;
 import Level.NPC;
 import NPCs.Dinosaur;
+import NPCs.Otis;
 import Scripts.MapTransitions.SpawnTransitionScript;
 import Scripts.TestMap.OtisHouseScript;
 import Scripts.TestMap.TownhouseSignScript;
@@ -24,6 +25,9 @@ public class TownhouseMap extends Map{
         Dinosaur dinosaur = new Dinosaur(1, getMapTile(6, 6).getLocation());
         dinosaur.setInteractScript(new OtisHouseScript());
         npcs.add(dinosaur);
+        
+        Otis otis = new Otis(4, getMapTile(14, 2).getLocation().subtractX(20));
+        npcs.add(otis);
 
         return npcs;
     }

@@ -1,8 +1,11 @@
 package Maps;
 
 import Level.Map;
+import Level.NPC;
 import Level.SoundPlayer;
 import Level.Trigger;
+
+import NPCs.Otis;
 import Scripts.MapTransitions.ForestTwoTransitionScript;
 import Scripts.MapTransitions.SpawnTransitionScript;
 import Tilesets.ForestTileset;
@@ -23,6 +26,17 @@ public class ForestOneMap extends Map {
      public void addMusic(String soundFilePath) {
         soundPlayer = new SoundPlayer(new JFrame(), soundFilePath, 100); // Create SoundPlayer with volume 100
         soundPlayer.play(); // Start playing the music
+    }
+
+    @Override
+    public ArrayList<NPC> loadNPCs() {
+        ArrayList<NPC> npcs = new ArrayList<>();
+
+        // Initialize Otis right next to the player
+        Otis otis = new Otis(1, getMapTile(1, 8).getLocation()); // Change coordinates as needed to place Otis next to the player
+        npcs.add(otis);
+
+        return npcs;
     }
 
     @Override

@@ -4,6 +4,7 @@ import EnhancedMapTiles.PushableRock;
 import Level.*;
 import NPCs.Bug;
 import NPCs.Dinosaur;
+import NPCs.Otis;
 import NPCs.Walrus;
 import Scripts.SimpleTextScript;
 import Scripts.MapTransitions.ForestOneTransitionScript;
@@ -46,6 +47,10 @@ public class TestMap extends Map {
         Bug bug = new Bug(3, getMapTile(7, 12).getLocation().subtractX(20));
         bug.setInteractScript(new BugScript());
         npcs.add(bug);
+
+        Otis otis = new Otis(4, getMapTile(19, 20).getLocation().subtractX(20));
+        npcs.add(otis);
+
 
         return npcs;
     }
