@@ -11,8 +11,8 @@ import Screens.ForestCaveScreen;
 import Screens.ForestOneScreen;
 import Screens.ForestThreeScreen;
 import Screens.ForestTwoScreen;
-import Screens.MenuScreen;
 import Screens.PlayLevelScreen;
+import Screens.TitleScreen;
 import Screens.RandomBattleScreens.RandomBugBattleScreen;
 
 
@@ -27,8 +27,8 @@ public class ScreenCoordinator extends Screen {
 	// Count, cap, and constants for random battles
 	protected int randomBattleStepCap;
 	protected int randomBattleStepCounter;
-	static final int RANDOM_BATTLE_STEP_MINIMUM = 500;
-	static final int RANDOM_BATTLE_STEP_MAXIMUM = 1000;
+	static final int RANDOM_BATTLE_STEP_MINIMUM = 700;
+	static final int RANDOM_BATTLE_STEP_MAXIMUM = 1200;
 
 	// -1 for error checking
 	protected int nextRandomBattle = -1;
@@ -73,11 +73,11 @@ public class ScreenCoordinator extends Screen {
 	@Override
 	public void initialize() {
 		// start game off with Menu Screen
-		gameState = GameState.FOREST_CAVE;
+		gameState = GameState.MENU;
 
 		// Fill majorScreens
 		majorScreens[CREDITS_INDEX] = new CreditsScreen(this);
-		majorScreens[MENU_INDEX] = new MenuScreen(this);
+		majorScreens[MENU_INDEX] = new TitleScreen(this);
 		majorScreens[SPAWN_INDEX] = new PlayLevelScreen(this);
 		majorScreens[FOREST_ONE_INDEX] = new ForestOneScreen(this);
 		majorScreens[FOREST_TWO_INDEX] = new ForestTwoScreen(this);
@@ -116,6 +116,7 @@ public class ScreenCoordinator extends Screen {
 						break;
 					case SPAWN:
 						currentScreen = majorScreens[SPAWN_INDEX];
+						randomBattleStepCounter = 0;
 						break;
 					case FOREST_ONE:
 						currentScreen = majorScreens[FOREST_ONE_INDEX];
@@ -128,9 +129,11 @@ public class ScreenCoordinator extends Screen {
 						break;
 					case FOREST_CAVE:
 						currentScreen = majorScreens[FOREST_CAVE_INDEX];
+						randomBattleStepCounter = 0;
 						break;
 					case CAVE_ONE:
 						currentScreen = majorScreens[CAVE_ONE_INDEX];
+						randomBattleStepCounter = 0;
 						break;
 					case RANDOM_BATTLE:
 						randomBattleScreens[nextRandomBattle].initialize();

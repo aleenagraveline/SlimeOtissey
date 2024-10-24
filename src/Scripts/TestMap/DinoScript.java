@@ -32,6 +32,7 @@ public class DinoScript extends Script {
                 addScriptAction(new NPCFacePlayerScriptAction());
                 addScriptAction(new TextboxScriptAction () {{
                     addText("Alex...Go away!");
+                    addText("And don't even think about following me!");
                 }});
                 addScriptAction(new NPCStandScriptAction(Direction.RIGHT));
 
