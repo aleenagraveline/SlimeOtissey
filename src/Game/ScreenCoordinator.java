@@ -73,7 +73,7 @@ public class ScreenCoordinator extends Screen {
 	@Override
 	public void initialize() {
 		// start game off with Menu Screen
-		gameState = GameState.FOREST_CAVE;
+		gameState = GameState.MENU;
 
 		// Fill majorScreens
 		majorScreens[CREDITS_INDEX] = new CreditsScreen(this);
