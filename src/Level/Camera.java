@@ -178,14 +178,24 @@ public class Camera extends Rectangle {
             for (int j = tileIndex.x - 1; j <= tileIndex.x + width + 1; j++) {
                 MapTile tile = map.getMapTile(j, i);
                 if (tile != null) {
+                    // Draw bottomLayer first
                     tile.drawBottomLayer(graphicsHandler);
+                    // Draw bottomMidLayer second
+                    if (tile.getMidBottomLayer() != null) {
+                        tile.drawMidBottomLayer(graphicsHandler);
+                    }
                 }
             }
         }
 
         for (EnhancedMapTile enhancedMapTile : activeEnhancedMapTiles) {
             if (containsDraw(enhancedMapTile)) {
+                // Draw bottomLayer first
                 enhancedMapTile.drawBottomLayer(graphicsHandler);
+                // Draw midBottomLayer second
+                if (enhancedMapTile.getMidBottomLayer() != null) {
+                    enhancedMapTile.drawMidBottomLayer(graphicsHandler);
+                }
             }
         }
     }
@@ -196,15 +206,29 @@ public class Camera extends Rectangle {
         for (int i = tileIndex.y - 1; i <= tileIndex.y + height + 1; i++) {
             for (int j = tileIndex.x - 1; j <= tileIndex.x + width + 1; j++) {
                 MapTile tile = map.getMapTile(j, i);
-                if (tile != null && tile.getTopLayer() != null) {
-                    tile.drawTopLayer(graphicsHandler);
+                if (tile != null) {
+                    // Draw midTopLayer first
+                    if (tile.getMidTopLayer() != null) {
+                        tile.drawMidTopLayer(graphicsHandler);
+                    }
+                    // Draw topLayer second
+                    if (tile.getTopLayer() != null) {
+                        tile.drawTopLayer(graphicsHandler);
+                    }
                 }
             }
         }
 
         for (EnhancedMapTile enhancedMapTile : activeEnhancedMapTiles) {
-            if (containsDraw(enhancedMapTile) && enhancedMapTile.getTopLayer() != null) {
-                enhancedMapTile.drawTopLayer(graphicsHandler);
+            if (containsDraw(enhancedMapTile)) {
+                // Draw midTopLayer first
+                if (enhancedMapTile.getMidTopLayer() != null) {
+                    enhancedMapTile.drawMidTopLayer(graphicsHandler);
+                }
+                // Draw topLayer second
+                if (enhancedMapTile.getTopLayer() != null) {
+                    enhancedMapTile.drawTopLayer(graphicsHandler);
+                }
             }
         }
     }
