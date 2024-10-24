@@ -7,6 +7,7 @@ import Engine.GraphicsHandler;
 import Engine.Screen;
 import Screens.CreditsScreen;
 import Screens.ForestOneScreen;
+import Screens.ForestTwoScreen;
 import Screens.MenuScreen;
 import Screens.PlayLevelScreen;
 import Screens.RandomBattleScreens.RandomBugBattleScreen;
@@ -29,7 +30,7 @@ public class ScreenCoordinator extends Screen {
 	// -1 for error checking
 	protected int nextRandomBattle = -1;
 	
-	static final int NUM_OF_MAJOR_SCREENS = 4; // The number of major screens to be loaded
+	static final int NUM_OF_MAJOR_SCREENS = 5; // The number of major screens to be loaded
 	static final int NUM_OF_RANDOM_BATTLES = 1;
 	
 	// Index for each major screen
@@ -37,6 +38,7 @@ public class ScreenCoordinator extends Screen {
 	static final int MENU_INDEX = 1;
 	static final int SPAWN_INDEX = 2;
 	static final int FOREST_ONE_INDEX = 3;
+	static final int FOREST_TWO_INDEX = 4;
 
 	// Index for each random battle screen
 	static final int RANDOM_BUG_INDEX = 0;
@@ -72,6 +74,7 @@ public class ScreenCoordinator extends Screen {
 		majorScreens[MENU_INDEX] = new MenuScreen(this);
 		majorScreens[SPAWN_INDEX] = new PlayLevelScreen(this);
 		majorScreens[FOREST_ONE_INDEX] = new ForestOneScreen(this);
+		majorScreens[FOREST_TWO_INDEX] = new ForestTwoScreen(this);
 
 		// Fill randomBattleScreens
 		randomBattleScreens[RANDOM_BUG_INDEX] = new RandomBugBattleScreen(this);
@@ -107,6 +110,9 @@ public class ScreenCoordinator extends Screen {
 						break;
 					case FOREST_ONE:
 						currentScreen = majorScreens[FOREST_ONE_INDEX];
+						break;
+					case FOREST_TWO:
+						currentScreen = majorScreens[FOREST_TWO_INDEX];
 						break;
 					case RANDOM_BATTLE:
 						randomBattleScreens[nextRandomBattle].initialize();

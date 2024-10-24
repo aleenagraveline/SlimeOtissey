@@ -3,6 +3,7 @@ package Maps;
 import Level.Map;
 import Level.SoundPlayer;
 import Level.Trigger;
+import Scripts.MapTransitions.ForestTwoTransitionScript;
 import Scripts.MapTransitions.SpawnTransitionScript;
 import Tilesets.ForestTileset;
 
@@ -30,7 +31,11 @@ public class ForestOneMap extends Map {
 
         // Spawn transition trigger
         triggers.add(new Trigger(0, 288, 12, 288, new SpawnTransitionScript()));
+        // ForestTwo transition trigger
+        triggers.add(new Trigger(1428, 288, 12, 288, new ForestTwoTransitionScript()));
+        
         return triggers;
+
     }
 
 }
