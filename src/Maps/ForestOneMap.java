@@ -29,7 +29,7 @@ public class ForestOneMap extends Map {
         ArrayList<Trigger> triggers = new ArrayList<>();
 
         // Spawn transition trigger
-        triggers.add(new Trigger(0, 384, 12, 144, new SpawnTransitionScript()));
+        triggers.add(new Trigger(0, 288, 12, 288, new SpawnTransitionScript()));
         return triggers;
     }
 
