@@ -16,6 +16,7 @@ public class EditorMaps {
             add("ForestTwoMap");
             add("ForestThreeMap");
             add("ForestCaveMap");
+            add("CaveOneMap");
         }};
     }
 
@@ -37,6 +38,8 @@ public class EditorMaps {
                 return new ForestThreeMap();
             case "ForestCaveMap":
                 return new ForestCaveMap();
+            case "CaveOneMap":
+                return new CaveOneMap();
             default:
                 throw new RuntimeException("Unrecognized map name");
         }

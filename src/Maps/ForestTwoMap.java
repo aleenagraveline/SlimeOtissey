@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import Level.Map;
 import Level.Trigger;
 import Scripts.MapTransitions.ForestOneTransitionScript;
+import Scripts.MapTransitions.ForestThreeTransitionScript;
 import Tilesets.ForestTileset;
 
 public class ForestTwoMap extends Map {
@@ -20,6 +21,9 @@ public class ForestTwoMap extends Map {
 
         // ForestOne transition trigger
         triggers.add(new Trigger(0, 288, 12, 288, new ForestOneTransitionScript()));
+        // ForestThree transition trigger
+        triggers.add(new Trigger(0,1200,12,192, new ForestThreeTransitionScript()));
+
         return triggers;
     }
     
