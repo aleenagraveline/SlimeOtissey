@@ -19,9 +19,16 @@ public class RandomBugBattleScreen extends Screen {
     protected ScreenCoordinator screenCoordinator;
     protected int currentMenuItemHovered = 0;
     protected int menuItemSelected = -1;
+
     protected SpriteFont attack;
     protected SpriteFont pass;
     protected SpriteFont runAway;
+
+    protected boolean attacking;
+    protected SpriteFont swordAttack;
+    protected SpriteFont hammerAttack;
+    protected SpriteFont bowAttack;
+
     protected Map background;
     protected int keyPressTimer;
     protected int pointerLocationX, pointerLocationY;
@@ -45,6 +52,7 @@ public class RandomBugBattleScreen extends Screen {
         // setup combat attributes
         playerHealth = 50;
         playerStrength = 5;
+        attacking = false;
 
         bugHealth = 15;
         bugStrength = 3;
@@ -56,7 +64,7 @@ public class RandomBugBattleScreen extends Screen {
         playerHealthDisplay.setOutlineColor(Color.black);
         playerHealthDisplay.setOutlineThickness(3);
 
-        bugHealthDisplay = new SpriteFont("BUG HEALTH: " + playerHealth, 500, 50, "Arial", 30, new Color(49, 207, 240));
+        bugHealthDisplay = new SpriteFont("BUG HEALTH: " + bugHealth, 500, 50, "Arial", 30, new Color(49, 207, 240));
         bugHealthDisplay.setOutlineColor(Color.black);
         bugHealthDisplay.setOutlineThickness(3);
 
@@ -71,6 +79,18 @@ public class RandomBugBattleScreen extends Screen {
         runAway = new SpriteFont("RUN AWAY", 550, 500, "Arial", 30, new Color(49, 207, 240));
         runAway.setOutlineColor(Color.black);
         runAway.setOutlineThickness(3);
+
+        swordAttack = new SpriteFont("SWORD", 100, 500, "Arial", 30, new Color(49, 207, 240));
+        swordAttack.setOutlineColor(Color.black);
+        swordAttack.setOutlineThickness(3);
+
+        hammerAttack = new SpriteFont("HAMMER", 300, 500, "Arial", 30, new Color(49, 207, 240));
+        hammerAttack.setOutlineColor(Color.black);
+        hammerAttack.setOutlineThickness(3);
+
+        bowAttack = new SpriteFont("BOW", 550, 500, "Arial", 30, new Color(49, 207, 240));
+        bowAttack.setOutlineColor(Color.black);
+        bowAttack.setOutlineThickness(3);
 
         // define/setup map
         background = new BugFightMap();
@@ -107,24 +127,46 @@ public class RandomBugBattleScreen extends Screen {
         }
 
         // sets location for blue square in front of text (pointerLocation) and also sets color of spritefont text based on which menu item is being hovered
-        if (currentMenuItemHovered == 0) {
-            attack.setColor(new Color(255, 215, 0));
-            pass.setColor(new Color(49, 207, 240));
-            runAway.setColor(new Color(49, 207, 240));
-            pointerLocationX = (int) attack.getX() - 30;
-            pointerLocationY = 507;
-        } else if (currentMenuItemHovered == 1) {
-            attack.setColor(new Color(49, 207, 240));
-            pass.setColor(new Color(255, 215, 0));
-            runAway.setColor(new Color(49, 207, 240));
-            pointerLocationX = (int) pass.getX() - 30;
-            pointerLocationY = 507;
-        } else if (currentMenuItemHovered == 2) {
-            attack.setColor(new Color(49, 207, 240));
-            pass.setColor(new Color(49, 207, 240));
-            runAway.setColor(new Color(255, 215, 0));
-            pointerLocationX = (int) runAway.getX() - 30;
-            pointerLocationY = 507;
+        if(!attacking) {
+            if (currentMenuItemHovered == 0) {
+                attack.setColor(new Color(255, 215, 0));
+                pass.setColor(new Color(49, 207, 240));
+                runAway.setColor(new Color(49, 207, 240));
+                pointerLocationX = (int) attack.getX() - 30;
+                pointerLocationY = 507;
+            } else if (currentMenuItemHovered == 1) {
+                attack.setColor(new Color(49, 207, 240));
+                pass.setColor(new Color(255, 215, 0));
+                runAway.setColor(new Color(49, 207, 240));
+                pointerLocationX = (int) pass.getX() - 30;
+                pointerLocationY = 507;
+            } else if (currentMenuItemHovered == 2) {
+                attack.setColor(new Color(49, 207, 240));
+                pass.setColor(new Color(49, 207, 240));
+                runAway.setColor(new Color(255, 215, 0));
+                pointerLocationX = (int) runAway.getX() - 30;
+                pointerLocationY = 507;
+            }
+        } else {
+            if (currentMenuItemHovered == 0) {
+                swordAttack.setColor(new Color(255, 215, 0));
+                hammerAttack.setColor(new Color(49, 207, 240));
+                bowAttack.setColor(new Color(49, 207, 240));
+                pointerLocationX = (int) swordAttack.getX() - 30;
+                pointerLocationY = 507;
+            } else if (currentMenuItemHovered == 1) {
+                swordAttack.setColor(new Color(49, 207, 240));
+                hammerAttack.setColor(new Color(255, 215, 0));
+                bowAttack.setColor(new Color(49, 207, 240));
+                pointerLocationX = (int) hammerAttack.getX() - 30;
+                pointerLocationY = 507;
+            } else if (currentMenuItemHovered == 2) {
+                swordAttack.setColor(new Color(49, 207, 240));
+                hammerAttack.setColor(new Color(49, 207, 240));
+                bowAttack.setColor(new Color(255, 215, 0));
+                pointerLocationX = (int) bowAttack.getX() - 30;
+                pointerLocationY = 507;
+            }
         }
 
         // if space is pressed on menu item, perform action depending on which button was pressed
@@ -134,8 +176,43 @@ public class RandomBugBattleScreen extends Screen {
         if (!keyLocker.isKeyLocked(Key.SPACE) && Keyboard.isKeyDown(Key.SPACE)) {
             menuItemSelected = currentMenuItemHovered;
             keyLocker.lockKey(Key.SPACE);
-            if (menuItemSelected == 0) { // continue level
-                bugHealth -= attack(playerStrength);
+            if(!attacking) {
+                if (menuItemSelected == 0) { // continue level
+                    attacking = true;
+                } else if (menuItemSelected == 1) { // restart level
+                    playerHealth -= attack(bugStrength);
+                    playerHealthDisplay.setText("PLAYER HEALTH: " + playerHealth);
+                    if (playerHealth <= 0) {
+                        this.screenCoordinator.leaveRandomBattle();
+                    }
+                } else if (menuItemSelected == 2) {
+                    this.screenCoordinator.leaveRandomBattle();
+                    this.background.setActiveScript(new SimpleTextScript(new String[] {
+                        "Alex ran away...", 
+                        "Alex won't gain any friendship points with Otis", 
+                        "But at least he's still alive!"}));
+                }
+            } else {
+                if (menuItemSelected == 0) { // sword atack
+                    if (!armored) {
+                        bugHealth -= attack(playerStrength) * 1.5;
+                    } else {
+                        bugHealth -= attack(playerStrength);
+                    }
+                } else if (menuItemSelected == 1) { // hammer attack
+                    if (armored) {
+                        bugHealth -= attack(playerStrength) * 1.5;
+                    } else {
+                        bugHealth -= attack(playerStrength);
+                    }
+                } else if (menuItemSelected == 2) { // bow attack
+                    if (flying) {
+                        bugHealth -= attack(playerStrength) * 2;
+                    } else {
+                        bugHealth -= attack(playerStrength) * 0.5;
+                    }
+                }
+
                 bugHealthDisplay.setText("BUG HEALTH: " + bugHealth);
                 if (bugHealth <= 0) {
                     this.screenCoordinator.leaveRandomBattle();
@@ -151,21 +228,10 @@ public class RandomBugBattleScreen extends Screen {
                         this.screenCoordinator.leaveRandomBattle();
                     }
                 }
-            } else if (menuItemSelected == 1) { // restart level
-                playerHealth -= attack(bugStrength);
-                playerHealthDisplay.setText("PLAYER HEALTH: " + playerHealth);
-                if (playerHealth <= 0) {
-                    this.screenCoordinator.leaveRandomBattle();
-                }
-            } else if (menuItemSelected == 2) {
-                this.screenCoordinator.leaveRandomBattle();
-                this.background.setActiveScript(new SimpleTextScript(new String[] {
-                    "Alex ran away...", 
-                    "Alex won't gain any friendship points with Otis", 
-                    "But at least he's still alive!"}));
-            }
 
-            menuItemSelected = -1;
+                attacking = false;
+                currentMenuItemHovered = 0;
+            }
         }
     }
 
@@ -175,9 +241,15 @@ public class RandomBugBattleScreen extends Screen {
         playerHealthDisplay.draw(graphicsHandler);
         bugHealthDisplay.draw(graphicsHandler);
 
-        attack.draw(graphicsHandler);
-        pass.draw(graphicsHandler);
-        runAway.draw(graphicsHandler);
+        if (!attacking) {
+            attack.draw(graphicsHandler);
+            pass.draw(graphicsHandler);
+            runAway.draw(graphicsHandler);
+        } else {
+            swordAttack.draw(graphicsHandler);
+            hammerAttack.draw(graphicsHandler);
+            bowAttack.draw(graphicsHandler);
+        }
 
         graphicsHandler.drawFilledRectangleWithBorder(pointerLocationX, pointerLocationY, 20, 20, new Color(49, 207, 240), Color.black, 2);
     }

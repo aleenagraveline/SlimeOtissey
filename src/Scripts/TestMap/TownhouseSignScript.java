@@ -3,6 +3,7 @@ package Scripts.TestMap;
 import java.util.ArrayList;
 
 import Level.Script;
+import ScriptActions.ChangeFlagScriptAction;
 import ScriptActions.LockPlayerScriptAction;
 import ScriptActions.ScriptAction;
 import ScriptActions.TextboxScriptAction;

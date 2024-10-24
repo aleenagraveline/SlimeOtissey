@@ -5,8 +5,12 @@ import java.security.SecureRandom;
 import Engine.DefaultScreen;
 import Engine.GraphicsHandler;
 import Engine.Screen;
+import Screens.CaveOneScreen;
 import Screens.CreditsScreen;
+import Screens.ForestCaveScreen;
 import Screens.ForestOneScreen;
+import Screens.ForestThreeScreen;
+import Screens.ForestTwoScreen;
 import Screens.MenuScreen;
 import Screens.PlayLevelScreen;
 import Screens.RandomBattleScreens.RandomBugBattleScreen;
@@ -23,13 +27,13 @@ public class ScreenCoordinator extends Screen {
 	// Count, cap, and constants for random battles
 	protected int randomBattleStepCap;
 	protected int randomBattleStepCounter;
-	static final int RANDOM_BATTLE_STEP_MINIMUM = 300;
-	static final int RANDOM_BATTLE_STEP_MAXIMUM = 600;
+	static final int RANDOM_BATTLE_STEP_MINIMUM = 500;
+	static final int RANDOM_BATTLE_STEP_MAXIMUM = 1000;
 
 	// -1 for error checking
 	protected int nextRandomBattle = -1;
 	
-	static final int NUM_OF_MAJOR_SCREENS = 4; // The number of major screens to be loaded
+	static final int NUM_OF_MAJOR_SCREENS = 8; // The number of major screens to be loaded
 	static final int NUM_OF_RANDOM_BATTLES = 1;
 	
 	// Index for each major screen
@@ -37,6 +41,10 @@ public class ScreenCoordinator extends Screen {
 	static final int MENU_INDEX = 1;
 	static final int SPAWN_INDEX = 2;
 	static final int FOREST_ONE_INDEX = 3;
+	static final int FOREST_TWO_INDEX = 4;
+	static final int FOREST_THREE_INDEX = 5;
+	static final int FOREST_CAVE_INDEX = 6;
+	static final int CAVE_ONE_INDEX = 7;
 
 	// Index for each random battle screen
 	static final int RANDOM_BUG_INDEX = 0;
@@ -72,6 +80,10 @@ public class ScreenCoordinator extends Screen {
 		majorScreens[MENU_INDEX] = new MenuScreen(this);
 		majorScreens[SPAWN_INDEX] = new PlayLevelScreen(this);
 		majorScreens[FOREST_ONE_INDEX] = new ForestOneScreen(this);
+		majorScreens[FOREST_TWO_INDEX] = new ForestTwoScreen(this);
+		majorScreens[FOREST_THREE_INDEX] = new ForestThreeScreen(this);
+		majorScreens[FOREST_CAVE_INDEX] = new ForestCaveScreen(this);
+		majorScreens[CAVE_ONE_INDEX] = new CaveOneScreen(this);
 
 		// Fill randomBattleScreens
 		randomBattleScreens[RANDOM_BUG_INDEX] = new RandomBugBattleScreen(this);
@@ -107,6 +119,18 @@ public class ScreenCoordinator extends Screen {
 						break;
 					case FOREST_ONE:
 						currentScreen = majorScreens[FOREST_ONE_INDEX];
+						break;
+					case FOREST_TWO:
+						currentScreen = majorScreens[FOREST_TWO_INDEX];
+						break;
+					case FOREST_THREE:
+						currentScreen = majorScreens[FOREST_THREE_INDEX];
+						break;
+					case FOREST_CAVE:
+						currentScreen = majorScreens[FOREST_CAVE_INDEX];
+						break;
+					case CAVE_ONE:
+						currentScreen = majorScreens[CAVE_ONE_INDEX];
 						break;
 					case RANDOM_BATTLE:
 						randomBattleScreens[nextRandomBattle].initialize();

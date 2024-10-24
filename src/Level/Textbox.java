@@ -142,12 +142,12 @@ public class Textbox {
         }
 
         if (options != null) {
-            if (Keyboard.isKeyDown(Key.DOWN)) {
+            if (Keyboard.isKeyDown(Key.S)) {
                 if (selectedOptionIndex < options.size() - 1) {
                     selectedOptionIndex++;
                 }
             }
-            if (Keyboard.isKeyDown(Key.UP)) {
+            if (Keyboard.isKeyDown(Key.W)) {
                 if (selectedOptionIndex > 0) {
                     selectedOptionIndex--;
                 }
