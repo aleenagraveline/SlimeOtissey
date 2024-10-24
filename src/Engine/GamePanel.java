@@ -225,7 +225,7 @@ public class GamePanel extends JPanel {
 			keyLocker.unlockKey(Key.SPACE);
 		} 
 
-		if(Keyboard.isKeyDown(Key.ENTER) && !keyLocker.isKeyLocked(Key.ENTER) && scrollingMode == 2) {
+		if(Keyboard.isKeyDown(Key.ENTER) && !keyLocker.isKeyLocked(Key.ENTER) && scrollingMode == 2 && isViewingInventory) {
 			keyLocker.lockKey(Key.ENTER);
 
 			//drop
@@ -254,7 +254,7 @@ public class GamePanel extends JPanel {
 			keyLocker.unlockKey(Key.ENTER);
 		}
 
-		if(Keyboard.isKeyDown(Key.C) && !keyLocker.isKeyLocked(Key.C)) {
+		if(Keyboard.isKeyDown(Key.C) && !keyLocker.isKeyLocked(Key.C) && isViewingInventory) {
 			keyLocker.lockKey(Key.C);
 			showInventoryInstructions = !showInventoryInstructions;
 
@@ -266,38 +266,6 @@ public class GamePanel extends JPanel {
 		if(Keyboard.isKeyUp(Key.C)) {
 			keyLocker.unlockKey(Key.C);
 		}
-
-		//drop item
-		/*if(Keyboard.isKeyDown(Key.ONE) && !keyLocker.isKeyLocked(Key.ONE) && inventorySelector >= 0) {
-			keyLocker.lockKey(Key.ONE);
-			if(!isUsingItem && !itemsInInventory[inventorySelector].isEmpty()) {
-				if(droppableItems.contains(itemsInInventory[inventorySelector]))
-				{
-					removeInventoryItem(itemsInInventory[inventorySelector]);
-					System.out.println(itemsInInventory[inventorySelector]);
-				}
-			}
-		}
-		if (Keyboard.isKeyUp(Key.ONE)) {
-			keyLocker.unlockKey(Key.ONE);
-		}*/
-
-		//use item
-		/*if(Keyboard.isKeyDown(Key.TWO) && !keyLocker.isKeyLocked(Key.TWO) && inventorySelector >= 0) {
-			keyLocker.lockKey(Key.TWO);
-			isUsingItem = !isUsingItem;
-			if(isUsingItem && !itemsInInventory[inventorySelector].isEmpty()) {
-				itemInUse = itemsInInventory[inventorySelector];
-				System.out.println("Using item");
-			} else {
-				itemInUse = "";
-				System.out.println("No item in use");
-			}
-		}
-		if (Keyboard.isKeyUp(Key.TWO)) {
-			keyLocker.unlockKey(Key.TWO);
-		}*/
-
 		//item info
 		// if(Keyboard.isKeyDown(Key.THREE) && !keyLocker.isKeyLocked(Key.THREE) && inventorySelector >= 0) {
 		// 	keyLocker.lockKey(Key.ONE);
