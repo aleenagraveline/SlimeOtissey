@@ -27,15 +27,6 @@ public class ForestTileset extends Tileset {
         MapTileBuilder grassTile = new MapTileBuilder(grassFrame);
         mapTiles.add(grassTile);
 
-                // updatedRock
-                Frame updatedRockFrame = new FrameBuilder(getSubImage(2, 0))
-                .withScale(tileScale)
-                .build();
-        MapTileBuilder updatedRockTile = new MapTileBuilder(grassFrame)
-                .withMidBottomLayer(updatedRockFrame)
-                .withTileType(TileType.NOT_PASSABLE);
-        mapTiles.add(updatedRockTile);
-
         // topPath
         Frame topPathFrame = new FrameBuilder(getSubImage(0,1))
                 .withScale(tileScale)
@@ -297,6 +288,16 @@ public class ForestTileset extends Tileset {
                 mapTiles.add(leaves01OnBottomPath);
         MapTileBuilder leaves02OnBottomPath = new MapTileBuilder(bottomPathFrame).withTopLayer(treeLeaves02Frame);
                 mapTiles.add(leaves02OnBottomPath);
+
+        // updatedRock
+        Frame updatedRockFrame = new FrameBuilder(getSubImage(2, 0))
+                .withScale(tileScale)
+                .build();
+        MapTileBuilder updatedRockTile = new MapTileBuilder(grassFrame)
+                .withMidBottomLayer(updatedRockFrame)
+                .withTileType(TileType.NOT_PASSABLE);
+        mapTiles.add(updatedRockTile);
+
 
         return mapTiles;
     }
