@@ -11,6 +11,7 @@ import GameObject.GameObject;
 import GameObject.Rectangle;
 import GameObject.SpriteSheet;
 import Utils.Direction;
+import Utils.Point;
 
 public abstract class Player extends GameObject {
     // values that affect player movement
@@ -256,6 +257,14 @@ public abstract class Player extends GameObject {
         else if (direction == Direction.RIGHT) {
             moveX(speed);
         }
+    }
+    
+    public float getSpeed() {
+        return walkSpeed;
+    }
+
+    public Point getTileLocation() {
+    return new Point(Math.round(getX() / 24), Math.round(getY() / 24));
     }
 
     public static 
