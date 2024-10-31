@@ -27,6 +27,8 @@ public class BugFightScreen extends Screen {
     protected SpriteFont runAway;
 
     protected boolean attacking;
+    protected boolean hasInteracted;
+
     protected SpriteFont swordAttack;
     protected SpriteFont hammerAttack;
     protected SpriteFont bowAttack;
@@ -56,6 +58,7 @@ public class BugFightScreen extends Screen {
         playerHealth = 50;
         playerStrength = 5;
         attacking = false;
+        hasInteracted = false;
 
         bugHealth = 15;
         bugStrength = 3;
@@ -71,11 +74,11 @@ public class BugFightScreen extends Screen {
         bugHealthDisplay.setOutlineColor(Color.black);
         bugHealthDisplay.setOutlineThickness(3);
 
-        attack = new SpriteFont("ATTACK", 100, 500, "Arial", 30, new Color(49, 207, 240));
+        attack = new SpriteFont("ATTACK", 200, 500, "Arial", 30, new Color(49, 207, 240));
         attack.setOutlineColor(Color.black);
         attack.setOutlineThickness(3);
 
-        block = new SpriteFont("BLOCK", 325, 500, "Arial", 30, new Color(49, 207, 240));
+        block = new SpriteFont("BLOCK", 460, 500, "Arial", 30, new Color(49, 207, 240));
         block.setOutlineColor(Color.black);
         block.setOutlineThickness(3);
 
@@ -109,6 +112,11 @@ public class BugFightScreen extends Screen {
         // update background map (to play tile animations)
         background.update(null);
 
+        if(hasInteracted) {
+            attack.setX(100);
+            block.setX(325);
+        }
+
         // if left or right is pressed, change menu item "hovered" over (blue square in front of text will move along with currentMenuItemHovered changing)
         if (Keyboard.isKeyDown(Key.D) && keyPressTimer == 0) {
             keyPressTimer = 14;
@@ -123,10 +131,16 @@ public class BugFightScreen extends Screen {
         }
 
         // if right is pressed on last menu item or left is pressed on first menu item, "loop" the selection back around to the beginning/end
-        if (currentMenuItemHovered > 2) {
+        if (currentMenuItemHovered < 0) {
+            if (hasInteracted) {
+                currentMenuItemHovered = 2;
+            } else {
+                currentMenuItemHovered = 1;
+            }
+        } else if (!hasInteracted && currentMenuItemHovered > 1) {
             currentMenuItemHovered = 0;
-        } else if (currentMenuItemHovered < 0) {
-            currentMenuItemHovered = 2;
+        } else if (hasInteracted && currentMenuItemHovered > 2){
+            currentMenuItemHovered = 0;
         }
 
         // sets location for blue square in front of text (pointerLocation) and also sets color of spritefont text based on which menu item is being hovered
@@ -143,7 +157,7 @@ public class BugFightScreen extends Screen {
                 runAway.setColor(new Color(49, 207, 240));
                 pointerLocationX = (int) block.getX() - 30;
                 pointerLocationY = 507;
-            } else if (currentMenuItemHovered == 2) {
+            } else if (currentMenuItemHovered == 2 && hasInteracted) {
                 attack.setColor(new Color(49, 207, 240));
                 block.setColor(new Color(49, 207, 240));
                 runAway.setColor(new Color(255, 215, 0));
@@ -188,12 +202,15 @@ public class BugFightScreen extends Screen {
                     if (playerHealth <= 0) {
                         this.playLevelScreen.resetLevel();
                     }
-                } else if (menuItemSelected == 2) {
-                    this.playLevelScreen.exitBugBattle();
-                    this.playLevelScreen.map.setActiveScript(new SimpleTextScript(new String[] {
-                        "Alex ran away...", 
-                        "Alex won't gain any friendship points with Otis", 
-                        "But at least he's still alive!"}));
+                    hasInteracted = true;
+                } else if (menuItemSelected == 2) { // exit fight peacefully
+                    if (hasInteracted) {
+                        this.playLevelScreen.exitBugBattle();
+                        this.playLevelScreen.map.setActiveScript(new SimpleTextScript(new String[] {
+                            "Alex ran away...", 
+                            "Alex won't gain any friendship points with Otis", 
+                            "But at least he's still alive!"}));
+                    }
                 }
             } else {
                 if (menuItemSelected == 0) { // sword atack
@@ -202,18 +219,24 @@ public class BugFightScreen extends Screen {
                     } else {
                         bugHealth -= attack(playerStrength);
                     }
+
+                    hasInteracted = true;
                 } else if (menuItemSelected == 1) { // hammer attack
                     if (armored) {
                         bugHealth -= attack(playerStrength) * 1.5;
                     } else {
                         bugHealth -= attack(playerStrength);
                     }
+
+                    hasInteracted = true;
                 } else if (menuItemSelected == 2) { // bow attack
                     if (flying) {
                         bugHealth -= attack(playerStrength) * 2;
                     } else {
                         bugHealth -= attack(playerStrength) * 0.5;
                     }
+
+                    hasInteracted = true;
                 }
 
                 bugHealthDisplay.setText("BUG HEALTH: " + bugHealth);
@@ -247,7 +270,8 @@ public class BugFightScreen extends Screen {
         if (!attacking) {
             attack.draw(graphicsHandler);
             block.draw(graphicsHandler);
-            runAway.draw(graphicsHandler);
+
+            if (hasInteracted) {runAway.draw(graphicsHandler);}
         } else {
             swordAttack.draw(graphicsHandler);
             hammerAttack.draw(graphicsHandler);
