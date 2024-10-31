@@ -42,7 +42,7 @@ public class TreeScript extends Script {
                         return true;
                     }
                 });
-
+                //addScriptAction(new ChangeFlagScriptAction("isInWaitingPuzzle", true));
                 addScriptAction(new TextboxScriptAction() {{
                     addText("...");
                     addText("I found a key inside of the tree!\nYippee!");

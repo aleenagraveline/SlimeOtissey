@@ -43,9 +43,9 @@ public class PlayLevelScreen extends Screen {
         flagManager.addFlag("hatesBugs", false);
         flagManager.addFlag("isInMemPuzzle", false);
         flagManager.addFlag("playedMemPuzzle", false);
+        flagManager.addFlag("isInWaitingPuzzle", false);
         flagManager.addFlag("moveToForestOne", false);
         flagManager.addFlag("moveToTownhouse", false);
-        flagManager.addFlag("isInWaitingPuzzle", false);
         flagManager.addFlag("usingKey", false); // These two used in conditionalScript logic
         flagManager.addFlag("usedKey", false); // ^^^
 
@@ -133,6 +133,8 @@ public class PlayLevelScreen extends Screen {
         }
 
         // if flag is set, wating puzzle starts
+
+        //System.out.println(map.getFlagManager().hasFlag("isInWaitingPuzzle"));
         if (map.getFlagManager().isFlagSet("isInWaitingPuzzle")) {
             playLevelScreenState = PlayLevelScreenState.IN_WAITING_PUZZLE;
         }
