@@ -18,6 +18,7 @@ public class PlayLevelScreen extends Screen {
     protected ScreenCoordinator screenCoordinator;
     protected Map map;
     protected Player player;
+    public static int playerHealth;
     protected PlayLevelScreenState playLevelScreenState;
     protected BugFightScreen bugFightScreen; // BugFightScreen as a subscreen of PlayLevelScreen
     protected MemoryPuzzleScreen memoryPuzzleScreen;
@@ -59,6 +60,7 @@ public class PlayLevelScreen extends Screen {
         player.setMap(map);
         playLevelScreenState = PlayLevelScreenState.RUNNING;
         player.setFacingDirection(Direction.LEFT);
+        playerHealth = 50;
 
         map.setPlayer(player);
 

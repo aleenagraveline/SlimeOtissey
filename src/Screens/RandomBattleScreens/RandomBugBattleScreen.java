@@ -8,6 +8,7 @@ import Engine.Screen;
 import Game.ScreenCoordinator;
 import Level.*;
 import Maps.BugFightMap;
+import Screens.PlayLevelScreen;
 import Scripts.SimpleTextScript;
 import SpriteFont.SpriteFont;
 
@@ -52,7 +53,7 @@ public class RandomBugBattleScreen extends Screen {
 
     public void initialize() {
         // setup combat attributes
-        playerHealth = 50;
+        this.playerHealth = PlayLevelScreen.playerHealth;
         playerStrength = 5;
         attacking = false;
         hasInteracted = false;
@@ -202,6 +203,7 @@ public class RandomBugBattleScreen extends Screen {
                     hasInteracted = true;
                 } else if (menuItemSelected == 2) { // exit fight peacefully
                     if (hasInteracted) {
+                        PlayLevelScreen.playerHealth = this.playerHealth;
                         this.screenCoordinator.leaveRandomBattle();
                         this.background.setActiveScript(new SimpleTextScript(new String[] {
                             "Alex ran away...", 
@@ -238,6 +240,7 @@ public class RandomBugBattleScreen extends Screen {
 
                 bugHealthDisplay.setText("BUG HEALTH: " + bugHealth);
                 if (bugHealth <= 0) {
+                    PlayLevelScreen.playerHealth = this.playerHealth;
                     this.screenCoordinator.leaveRandomBattle();
                     Player.gainFriendshipPoints(1);
                     this.background.setActiveScript(new SimpleTextScript(new String[] {
@@ -267,7 +270,7 @@ public class RandomBugBattleScreen extends Screen {
         if (!attacking) {
             attack.draw(graphicsHandler);
             block.draw(graphicsHandler);
-            
+
             if (hasInteracted) {runAway.draw(graphicsHandler);}
         } else {
             swordAttack.draw(graphicsHandler);

@@ -55,7 +55,7 @@ public class BugFightScreen extends Screen {
 
     public void initialize() {
         // setup combat attributes
-        playerHealth = 50;
+        this.playerHealth = PlayLevelScreen.playerHealth;
         playerStrength = 5;
         attacking = false;
         hasInteracted = false;
@@ -66,7 +66,7 @@ public class BugFightScreen extends Screen {
         flying = false;
 
         // setup menu options
-        playerHealthDisplay = new SpriteFont("PLAYER HEALTH: " + playerHealth, 50, 50, "Arial", 30, new Color(49, 207, 240));
+        playerHealthDisplay = new SpriteFont("PLAYER HEALTH: " + this.playerHealth, 50, 50, "Arial", 30, new Color(49, 207, 240));
         playerHealthDisplay.setOutlineColor(Color.black);
         playerHealthDisplay.setOutlineThickness(3);
 
@@ -205,6 +205,7 @@ public class BugFightScreen extends Screen {
                     hasInteracted = true;
                 } else if (menuItemSelected == 2) { // exit fight peacefully
                     if (hasInteracted) {
+                        PlayLevelScreen.playerHealth = this.playerHealth;
                         this.playLevelScreen.exitBugBattle();
                         this.playLevelScreen.map.setActiveScript(new SimpleTextScript(new String[] {
                             "Alex ran away...", 
@@ -241,6 +242,7 @@ public class BugFightScreen extends Screen {
 
                 bugHealthDisplay.setText("BUG HEALTH: " + bugHealth);
                 if (bugHealth <= 0) {
+                    PlayLevelScreen.playerHealth = this.playerHealth;
                     this.playLevelScreen.exitBugBattle();
                     Player.gainFriendshipPoints(1);
                     this.background.setActiveScript(new SimpleTextScript(new String[] {
