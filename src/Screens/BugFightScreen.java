@@ -23,7 +23,7 @@ public class BugFightScreen extends Screen {
     protected int menuItemSelected = -1;
 
     protected SpriteFont attack;
-    protected SpriteFont pass;
+    protected SpriteFont block;
     protected SpriteFont runAway;
 
     protected boolean attacking;
@@ -75,9 +75,9 @@ public class BugFightScreen extends Screen {
         attack.setOutlineColor(Color.black);
         attack.setOutlineThickness(3);
 
-        pass = new SpriteFont("PASS TURN", 300, 500, "Arial", 30, new Color(49, 207, 240));
-        pass.setOutlineColor(Color.black);
-        pass.setOutlineThickness(3);
+        block = new SpriteFont("BLOCK", 325, 500, "Arial", 30, new Color(49, 207, 240));
+        block.setOutlineColor(Color.black);
+        block.setOutlineThickness(3);
 
         runAway = new SpriteFont("RUN AWAY", 550, 500, "Arial", 30, new Color(49, 207, 240));
         runAway.setOutlineColor(Color.black);
@@ -133,19 +133,19 @@ public class BugFightScreen extends Screen {
         if(!attacking) {
             if (currentMenuItemHovered == 0) {
                 attack.setColor(new Color(255, 215, 0));
-                pass.setColor(new Color(49, 207, 240));
+                block.setColor(new Color(49, 207, 240));
                 runAway.setColor(new Color(49, 207, 240));
                 pointerLocationX = (int) attack.getX() - 30;
                 pointerLocationY = 507;
             } else if (currentMenuItemHovered == 1) {
                 attack.setColor(new Color(49, 207, 240));
-                pass.setColor(new Color(255, 215, 0));
+                block.setColor(new Color(255, 215, 0));
                 runAway.setColor(new Color(49, 207, 240));
-                pointerLocationX = (int) pass.getX() - 30;
+                pointerLocationX = (int) block.getX() - 30;
                 pointerLocationY = 507;
             } else if (currentMenuItemHovered == 2) {
                 attack.setColor(new Color(49, 207, 240));
-                pass.setColor(new Color(49, 207, 240));
+                block.setColor(new Color(49, 207, 240));
                 runAway.setColor(new Color(255, 215, 0));
                 pointerLocationX = (int) runAway.getX() - 30;
                 pointerLocationY = 507;
@@ -180,10 +180,10 @@ public class BugFightScreen extends Screen {
             menuItemSelected = currentMenuItemHovered;
             keyLocker.lockKey(Key.SPACE);
             if(!attacking) {
-                if (menuItemSelected == 0) { // continue level
+                if (menuItemSelected == 0) { // move to attack submenu
                     attacking = true;
-                } else if (menuItemSelected == 1) { // restart level
-                    playerHealth -= attack(bugStrength);
+                } else if (menuItemSelected == 1) { // block damage
+                    playerHealth -= attack(bugStrength) / 2;
                     playerHealthDisplay.setText("PLAYER HEALTH: " + playerHealth);
                     if (playerHealth <= 0) {
                         this.playLevelScreen.resetLevel();
@@ -246,7 +246,7 @@ public class BugFightScreen extends Screen {
 
         if (!attacking) {
             attack.draw(graphicsHandler);
-            pass.draw(graphicsHandler);
+            block.draw(graphicsHandler);
             runAway.draw(graphicsHandler);
         } else {
             swordAttack.draw(graphicsHandler);
