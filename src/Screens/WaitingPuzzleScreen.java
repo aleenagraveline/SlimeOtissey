@@ -22,6 +22,8 @@ public class WaitingPuzzleScreen extends Screen {
     protected SpriteFont countdown;
     protected int countdownTimer;
 
+    protected SpriteFont resetButton;
+
     protected Map background;
     protected int keyPressTimer;
     protected KeyLocker keyLocker = new KeyLocker();
@@ -39,9 +41,14 @@ public class WaitingPuzzleScreen extends Screen {
         countdownTimer = 600;
 
         // set up countdown displayer
-        countdown = new SpriteFont("TEN.", 300, 250, "Arial", 60, new Color(0, 255, 0));
+        countdown = new SpriteFont("TEN.", 300, 200, "Arial", 60, new Color(0, 255, 0));
+        resetButton = new SpriteFont("RESET COUNTDOWN", 300, 300, "Arial", 60, new Color(255, 0, 0));
+
         countdown.setOutlineColor(Color.black);
+        resetButton.setOutlineColor(new Color(49, 207, 240));
+
         countdown.setOutlineThickness(3);
+        resetButton.setOutlineThickness(3);
 
         // define/setup map
         background = new BugFightMap();
@@ -59,11 +66,14 @@ public class WaitingPuzzleScreen extends Screen {
         // if space is pressed on menu item, perform action depending on which button was pressed
         if (Keyboard.isKeyUp(Key.SPACE)) {
             keyLocker.unlockKey(Key.SPACE);
+            resetButton.setOutlineColor(new Color(49, 207, 240));
         }
         if (!keyLocker.isKeyLocked(Key.SPACE) && Keyboard.isKeyDown(Key.SPACE)) {
             countdownTimer = 600;
             countdown.setText("TEN.");
             countdown.setColor(new Color(0, 255, 0));
+
+            resetButton.setOutlineColor(new Color(255, 215, 0));
         }
 
     }
@@ -112,6 +122,7 @@ public class WaitingPuzzleScreen extends Screen {
             }
 
             countdown.draw(graphicsHandler);
+            resetButton.draw(graphicsHandler);
         }
     }
     
