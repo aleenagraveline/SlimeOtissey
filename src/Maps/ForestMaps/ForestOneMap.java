@@ -1,4 +1,4 @@
-package Maps;
+package Maps.ForestMaps;
 
 import Level.Map;
 import Level.NPC;

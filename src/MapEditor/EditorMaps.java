@@ -2,6 +2,13 @@ package MapEditor;
 
 import Level.Map;
 import Maps.*;
+import Maps.CaveMaps.CaveOneMap;
+import Maps.CaveMaps.CaveThreeMap;
+import Maps.CaveMaps.CaveTwoMap;
+import Maps.ForestMaps.ForestOneMap;
+import Maps.ForestMaps.ForestThreeMap;
+import Maps.ForestMaps.ForestTwoMap;
+import Maps.TransitionMaps.ForestCaveMap;
 
 import java.util.ArrayList;
 
@@ -17,6 +24,8 @@ public class EditorMaps {
             add("ForestThreeMap");
             add("ForestCaveMap");
             add("CaveOneMap");
+            add("CaveTwoMap");
+            add("CaveThreeMap");
         }};
     }
 
@@ -40,6 +49,10 @@ public class EditorMaps {
                 return new ForestCaveMap();
             case "CaveOneMap":
                 return new CaveOneMap();
+            case "CaveTwoMap":
+                return new CaveTwoMap();
+            case "CaveThreeMap":
+                return new CaveThreeMap();
             default:
                 throw new RuntimeException("Unrecognized map name");
         }

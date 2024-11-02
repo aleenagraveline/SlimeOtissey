@@ -6,14 +6,16 @@ import Engine.DefaultScreen;
 import Engine.GraphicsHandler;
 import Engine.Screen;
 import Screens.BetterCreditsScreen;
-import Screens.CaveOneScreen;
-import Screens.ForestCaveScreen;
-import Screens.ForestOneScreen;
-import Screens.ForestThreeScreen;
-import Screens.ForestTwoScreen;
 import Screens.PlayLevelScreen;
 import Screens.TitleScreen;
+import Screens.CaveScreens.CaveOneScreen;
+import Screens.CaveScreens.CaveThreeScreen;
+import Screens.CaveScreens.CaveTwoScreen;
+import Screens.ForestScreens.ForestOneScreen;
+import Screens.ForestScreens.ForestThreeScreen;
+import Screens.ForestScreens.ForestTwoScreen;
 import Screens.RandomBattleScreens.RandomBugBattleScreen;
+import Screens.TransitionScreens.ForestCaveScreen;
 
 
 
@@ -33,7 +35,7 @@ public class ScreenCoordinator extends Screen {
 	// -1 for error checking
 	protected int nextRandomBattle = -1;
 	
-	static final int NUM_OF_MAJOR_SCREENS = 8; // The number of major screens to be loaded
+	static final int NUM_OF_MAJOR_SCREENS = 10; // The number of major screens to be loaded
 	static final int NUM_OF_RANDOM_BATTLES = 1;
 	
 	// Index for each major screen
@@ -45,6 +47,8 @@ public class ScreenCoordinator extends Screen {
 	static final int FOREST_THREE_INDEX = 5;
 	static final int FOREST_CAVE_INDEX = 6;
 	static final int CAVE_ONE_INDEX = 7;
+	static final int CAVE_TWO_INDEX = 8;
+	static final int CAVE_THREE_INDEX = 9;
 
 	// Index for each random battle screen
 	static final int RANDOM_BUG_INDEX = 0;
@@ -84,6 +88,8 @@ public class ScreenCoordinator extends Screen {
 		majorScreens[FOREST_THREE_INDEX] = new ForestThreeScreen(this);
 		majorScreens[FOREST_CAVE_INDEX] = new ForestCaveScreen(this);
 		majorScreens[CAVE_ONE_INDEX] = new CaveOneScreen(this);
+		majorScreens[CAVE_TWO_INDEX] = new CaveTwoScreen(this);
+		majorScreens[CAVE_THREE_INDEX] = new CaveThreeScreen(this);
 
 		// Fill randomBattleScreens
 		randomBattleScreens[RANDOM_BUG_INDEX] = new RandomBugBattleScreen(this);
@@ -134,6 +140,12 @@ public class ScreenCoordinator extends Screen {
 					case CAVE_ONE:
 						currentScreen = majorScreens[CAVE_ONE_INDEX];
 						randomBattleStepCounter = 0;
+						break;
+					case CAVE_TWO:
+						currentScreen = majorScreens[CAVE_TWO_INDEX];
+						break;
+					case CAVE_THREE:
+						currentScreen = majorScreens[CAVE_THREE_INDEX];
 						break;
 					case RANDOM_BATTLE:
 						randomBattleScreens[nextRandomBattle].initialize();
