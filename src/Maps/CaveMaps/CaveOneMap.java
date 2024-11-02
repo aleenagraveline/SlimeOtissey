@@ -1,10 +1,11 @@
-package Maps;
+package Maps.CaveMaps;
 
 import Level.Map;
 import Level.NPC;
 import Tilesets.CaveTileset;
 import Level.Trigger;
 import NPCs.Otis;
+import Scripts.MapTransitions.CaveTwoTransitionScript;
 import Scripts.MapTransitions.ForestCaveTransitionScript;
 
 import java.util.ArrayList;
@@ -33,6 +34,9 @@ public class CaveOneMap extends Map {
 
         // ForestCave transition trigger
         triggers.add(new Trigger(96, 0, 96, 12, new ForestCaveTransitionScript()));
+        // CaveTwo transition
+        triggers.add(new Trigger(2148, 336, 12, 96, new CaveTwoTransitionScript()));
+
         return triggers;
 
     }

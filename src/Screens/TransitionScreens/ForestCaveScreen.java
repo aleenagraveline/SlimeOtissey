@@ -1,4 +1,4 @@
-package Screens;
+package Screens.TransitionScreens;
 
 import Engine.GraphicsHandler;
 import Engine.Screen;
@@ -7,36 +7,36 @@ import Game.ScreenCoordinator;
 import Level.FlagManager;
 import Level.Map;
 import Level.Player;
-import Maps.ForestThreeMap;
+import Maps.TransitionMaps.ForestCaveMap;
 import Players.Cat;
 import Utils.Direction;
 
-public class ForestThreeScreen extends Screen {
+public class ForestCaveScreen extends Screen {
     protected ScreenCoordinator screenCoordinator;
     protected Map map;
     protected Player player;
-    protected ForestThreeScreenState forestThreeScreenState;
+    protected ForestCaveScreenState forestCaveScreenState;
     protected FlagManager flagManager;
 
-    public ForestThreeScreen(ScreenCoordinator screenCoordinator) {
+    public ForestCaveScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
     }
 
     public void initialize() {
         // setup state
         flagManager = new FlagManager();
-        flagManager.addFlag("moveToForestTwo", false);
-        flagManager.addFlag("moveToForestCave", false);
+        flagManager.addFlag("moveToForestThree", false);
+        flagManager.addFlag("moveToCaveOne", false);
 
         // define/setup map
-        map = new ForestThreeMap();
+        map = new ForestCaveMap();
         map.setFlagManager(flagManager);
 
         // setup player
         player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
         player.setMap(map);
-        forestThreeScreenState = ForestThreeScreenState.RUNNING;
-        player.setFacingDirection(Direction.LEFT);
+        forestCaveScreenState = ForestCaveScreenState.RUNNING;
+        player.setFacingDirection(Direction.DOWN);
 
         map.setPlayer(player);
 
@@ -50,37 +50,36 @@ public class ForestThreeScreen extends Screen {
 
     public void update() {
         // based on screen state, perform specific actions
-        switch (forestThreeScreenState) {
+        switch (forestCaveScreenState) {
             // if level is "running" update player and map to keep game logic for the platformer level going
             case RUNNING:
                 player.update();
                 map.update(player);
-                this.screenCoordinator.increaseRandomBattleStepCounter();
                 break;
         }
 
-        if (map.getFlagManager().isFlagSet("moveToForestTwo")) {
-            screenCoordinator.setGameState(GameState.FOREST_TWO);
-            map.getFlagManager().unsetFlag("moveToForestTwo");
+        if (map.getFlagManager().isFlagSet("moveToForestThree")) {
+            screenCoordinator.setGameState(GameState.FOREST_THREE);
+            map.getFlagManager().unsetFlag("moveToForestThree");
         }
-        else if (map.getFlagManager().isFlagSet("moveToForestCave")) {
-            screenCoordinator.setGameState(GameState.FOREST_CAVE);
-            map.getFlagManager().unsetFlag("moveToForestCave");
+        else if (map.getFlagManager().isFlagSet("moveToCaveOne")) {
+            screenCoordinator.setGameState(GameState.CAVE_ONE);
+            map.getFlagManager().unsetFlag("moveToCaveOne");
         }
 
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
         // based on screen state, draw appropriate graphics
-        switch (forestThreeScreenState) {
+        switch (forestCaveScreenState) {
             case RUNNING:
                 map.draw(player, graphicsHandler);
                 break;
         }
     }
 
-    public ForestThreeScreenState getForestThreeScreenState() {
-        return forestThreeScreenState;
+    public ForestCaveScreenState getForestCaveScreenState() {
+        return forestCaveScreenState;
     }
 
     public void resetLevel() {
@@ -88,7 +87,7 @@ public class ForestThreeScreen extends Screen {
     }
 
     // This enum represents the different states this screen can be in
-    private enum ForestThreeScreenState {
+    private enum ForestCaveScreenState {
         RUNNING
     }
 }

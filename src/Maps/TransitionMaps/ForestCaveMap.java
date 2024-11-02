@@ -1,4 +1,4 @@
-package Maps;
+package Maps.TransitionMaps;
 
 import java.util.ArrayList;
 
