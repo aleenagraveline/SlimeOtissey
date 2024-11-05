@@ -130,14 +130,14 @@ public class RandomBugBattleScreen extends Screen {
 
         // if right is pressed on last menu item or left is pressed on first menu item, "loop" the selection back around to the beginning/end
         if (currentMenuItemHovered < 0) {
-            if (hasInteracted) {
+            if (hasInteracted || attacking) {
                 currentMenuItemHovered = 2;
             } else {
                 currentMenuItemHovered = 1;
             }
-        } else if (!hasInteracted && currentMenuItemHovered > 1) {
+        } else if ((hasInteracted || attacking) && currentMenuItemHovered > 2) {
             currentMenuItemHovered = 0;
-        } else if (hasInteracted && currentMenuItemHovered > 2){
+        } else if ((!hasInteracted && !attacking) && currentMenuItemHovered > 1){
             currentMenuItemHovered = 0;
         }
 
