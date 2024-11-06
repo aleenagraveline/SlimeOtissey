@@ -1,5 +1,6 @@
 package Screens;
 
+import Engine.GamePanel;
 import Engine.GraphicsHandler;
 import Engine.Screen;
 import Game.GameState;
@@ -27,6 +28,11 @@ public class ForestCaveScreen extends Screen {
         flagManager = new FlagManager();
         flagManager.addFlag("moveToForestThree", false);
         flagManager.addFlag("moveToCaveOne", false);
+        flagManager.addFlag("hasPushedFirstRock", false);
+        flagManager.addFlag("hasPushedSecondRock", false);
+        flagManager.addFlag("hasStartedRockPuzzle", false);
+        flagManager.addFlag("hasCompletedRockPuzzle", false);
+        flagManager.addFlag("hasCollectedKey", false);
 
         // define/setup map
         map = new ForestCaveMap();
@@ -56,6 +62,12 @@ public class ForestCaveScreen extends Screen {
                 player.update();
                 map.update(player);
                 break;
+        }
+
+        if(map.getFlagManager().isFlagSet("hasCompletedRockPuzzle") && !(map.getFlagManager().isFlagSet("hasCollectedKey"))) {
+            GamePanel.addToInventory("Key");
+            Player.gainFriendshipPoints(1);
+            map.getFlagManager().setFlag("hasCollectedKey");
         }
 
         if (map.getFlagManager().isFlagSet("moveToForestThree")) {

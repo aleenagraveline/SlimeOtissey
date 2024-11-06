@@ -7,19 +7,22 @@ import ScriptActions.*;
 
 // script for talking to dino npc
 // checkout the documentation website for a detailed guide on how this script works
-public class RockPuzzleSecondRockScript extends Script {
+public class RockPuzzleFirstRockScript extends Script {
 
     @Override
     public ArrayList<ScriptAction> loadScriptActions() {
 
         ArrayList<ScriptAction> scriptActions = new ArrayList<>();
         scriptActions.add(new LockPlayerScriptAction());
-        scriptActions.add(new TextboxScriptAction("I hate rocks..."));
-        scriptActions.add(new TextboxScriptAction("*Otis does a little hop* (I think he agrees?)"));
+
+        scriptActions.add(new TextboxScriptAction() {{
+            addText("Ugh...");
+            addText("These rocks are so heavy!");
+        }});
 
         scriptActions.add(new ConditionalScriptAction() {{
             addConditionalScriptActionGroup(new ConditionalScriptActionGroup() {{
-                addRequirement(new FlagRequirement("hasPushedFirstRock", true));
+                addRequirement(new FlagRequirement("hasPushedSecondRock", true));
                 
                 addScriptAction(new TextboxScriptAction() {{
                     addText("A few moments later...");
@@ -43,9 +46,10 @@ public class RockPuzzleSecondRockScript extends Script {
                 }});
             }});
         }});
-
-        scriptActions.add(new ChangeFlagScriptAction("hasPushedSecondRock", true));
+        
+        scriptActions.add(new ChangeFlagScriptAction("hasPushedFirstRock", true));
         scriptActions.add(new UnlockPlayerScriptAction());
         return scriptActions;
     }
 }
+

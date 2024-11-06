@@ -76,7 +76,7 @@ public class GamePanel extends JPanel {
 		pauseLabel.setOutlineColor(Color.black);
 		pauseLabel.setOutlineThickness(2.0f);
 
-		inventoryLabel = new SpriteFont("INVENTORY", 250, ScreenManager.getScreenHeight() + 140, "Arial", 24, Color.white);
+		inventoryLabel = new SpriteFont("INVENTORY", 200, ScreenManager.getScreenHeight() + 140, "Arial", 24, new Color(212, 173, 152));
 		inventoryLabel.setOutlineColor(Color.black);
 		inventoryLabel.setOutlineThickness(2.0f);
 
@@ -176,8 +176,8 @@ public class GamePanel extends JPanel {
 				} else {
 					inventorySelector = 0;
 				}
-			} else if(inventorySelector >= 0 && !itemsInInventory[inventorySelector].isEmpty()) {
-				if(actionSelector < 1) {
+			} else if(inventorySelector >= 0 && !itemsInInventory[inventorySelector].isEmpty() && !isUsingItem) {
+				if(actionSelector < 2) {
 					actionSelector++;
 				} else {
 					actionSelector = 0;
@@ -198,7 +198,7 @@ public class GamePanel extends JPanel {
 				} else {
 					inventorySelector = 9;
 				}
-			} else if(inventorySelector >= 0 && !itemsInInventory[inventorySelector].isEmpty()) {
+			} else if(inventorySelector >= 0 && !itemsInInventory[inventorySelector].isEmpty() && !isUsingItem) {
 				if(actionSelector > 0) {
 					actionSelector--;
 				} else {
@@ -214,9 +214,30 @@ public class GamePanel extends JPanel {
 		if(Keyboard.isKeyDown(Key.SPACE) && !keyLocker.isKeyLocked(Key.SPACE) && isViewingInventory) {
 			if(scrollingMode == 1 && inventorySelector >= 0 && !itemsInInventory[inventorySelector].equalsIgnoreCase("EMPTY")) {
 				scrollingMode = 2;
-			} else {
+			} else if(scrollingMode == 2 && actionSelector == 2) {
 				scrollingMode = 1;
 				actionSelector = -1;
+			} else if(scrollingMode == 2 && actionSelector >= 0) {
+				//drop
+				if(actionSelector == 0) {
+					if(!isUsingItem) {
+						System.out.println("Drop Item");
+						if(droppableItems.contains(itemsInInventory[inventorySelector]))
+						{
+							removeInventoryItem(itemsInInventory[inventorySelector]);
+							System.out.println(itemsInInventory[inventorySelector]);
+						}
+					}
+				} else if(actionSelector == 1) {
+					isUsingItem = !isUsingItem;
+					if(isUsingItem) {
+						itemInUse = itemsInInventory[inventorySelector];
+						System.out.println("Using item");
+					} else {
+						itemInUse = "";
+						System.out.println("No item in use");
+					}
+				}
 			}
 			keyLocker.lockKey(Key.SPACE);
 		}
@@ -225,34 +246,34 @@ public class GamePanel extends JPanel {
 			keyLocker.unlockKey(Key.SPACE);
 		} 
 
-		if(Keyboard.isKeyDown(Key.ENTER) && !keyLocker.isKeyLocked(Key.ENTER) && scrollingMode == 2 && isViewingInventory) {
-			keyLocker.lockKey(Key.ENTER);
+		// if(Keyboard.isKeyDown(Key.ENTER) && !keyLocker.isKeyLocked(Key.ENTER) && scrollingMode == 2 && isViewingInventory) {
+		// 	keyLocker.lockKey(Key.ENTER);
 
-			//drop
-			if(actionSelector == 0) {
-				if(!isUsingItem) {
-					System.out.println("Drop Item");
-					if(droppableItems.contains(itemsInInventory[inventorySelector]))
-					{
-						removeInventoryItem(itemsInInventory[inventorySelector]);
-						System.out.println(itemsInInventory[inventorySelector]);
-					}
-				}
-			} else if(actionSelector == 1) {
-				isUsingItem = !isUsingItem;
-				if(isUsingItem) {
-					itemInUse = itemsInInventory[inventorySelector];
-					System.out.println("Using item");
-				} else {
-					itemInUse = "";
-					System.out.println("No item in use");
-				}
-			}
-		}
+		// 	//drop
+		// 	if(actionSelector == 0) {
+		// 		if(!isUsingItem) {
+		// 			System.out.println("Drop Item");
+		// 			if(droppableItems.contains(itemsInInventory[inventorySelector]))
+		// 			{
+		// 				removeInventoryItem(itemsInInventory[inventorySelector]);
+		// 				System.out.println(itemsInInventory[inventorySelector]);
+		// 			}
+		// 		}
+		// 	} else if(actionSelector == 1) {
+		// 		isUsingItem = !isUsingItem;
+		// 		if(isUsingItem) {
+		// 			itemInUse = itemsInInventory[inventorySelector];
+		// 			System.out.println("Using item");
+		// 		} else {
+		// 			itemInUse = "";
+		// 			System.out.println("No item in use");
+		// 		}
+		// 	}
+		// }
 
-		if(Keyboard.isKeyUp(Key.ENTER)) {
-			keyLocker.unlockKey(Key.ENTER);
-		}
+		// if(Keyboard.isKeyUp(Key.ENTER)) {
+		// 	keyLocker.unlockKey(Key.ENTER);
+		// }
 
 		if(Keyboard.isKeyDown(Key.C) && !keyLocker.isKeyLocked(Key.C) && isViewingInventory) {
 			keyLocker.lockKey(Key.C);
@@ -308,25 +329,29 @@ public class GamePanel extends JPanel {
 		}
 
 		if(isViewingInventory) {
-
+			Color itemPanel = new Color(59, 46, 39);
+			Color inventoryBG = new Color(38, 28, 23);
+			Color inventoryBorders = new Color(212, 173, 152);
+			Color selectedColor = new Color(96, 117, 93);
+			Color inUseColor = new Color(35, 46, 33);
 			/*for(int inventorySpaces=0; inventorySpaces<10; inventorySpaces++) {
 				graphicsHandler.drawFilledRectangleWithBorder((int)(2.5 + ScreenManager.getScreenWidth()/10)*inventorySpaces, ScreenManager.getScreenHeight()/2 - 50, ScreenManager.getScreenWidth()/10, 100, new Color(0, 0, 0), new Color(0, 100, 0), 5);
 			}*/
 
-			graphicsHandler.drawFilledRectangleWithBorder(ScreenManager.getScreenWidth() / 2 - 150, ScreenManager.getScreenHeight()/2 - 150, 300, 300, new Color(0, 0, 100), new Color(255, 255, 255), 3);
+			graphicsHandler.drawFilledRectangleWithBorder(ScreenManager.getScreenWidth() / 2 - 200, ScreenManager.getScreenHeight()/2 - 150, 400, 300, inventoryBG, inventoryBorders, 3);
 
 			for(int inventorySlots=0; inventorySlots<10; inventorySlots++) {
-				Color colorToDraw = new Color (0, 0, 255);
+				Color colorToDraw = itemPanel;
 				if(inventorySlots == inventorySelector)
 				{
-					colorToDraw = new Color (0, 255, 0);
+					colorToDraw = selectedColor;
 				}
 
 				if(isUsingItem && itemsInInventory[inventorySlots].equalsIgnoreCase(itemInUse))
 				{
-					colorToDraw = new Color(0, 100, 100);
+					colorToDraw = inUseColor;
 				}
-				graphicsHandler.drawFilledRectangleWithBorder((ScreenManager.getScreenWidth() / 2 - 150), ((ScreenManager.getScreenHeight() / 10 - 30) * inventorySlots) + 170, 225, 30, colorToDraw, new Color(255, 255, 255), 3);
+				graphicsHandler.drawFilledRectangleWithBorder((ScreenManager.getScreenWidth() / 2 - 200), ((ScreenManager.getScreenHeight() / 10 - 30) * inventorySlots) + 170, 225, 30, colorToDraw, inventoryBorders, 3);
 			}
 
 			for(int itemToAdd=0; itemToAdd < inventorySlotsFilled; itemToAdd++) {
@@ -334,38 +359,45 @@ public class GamePanel extends JPanel {
 				if(itemsInInventory[itemToAdd].equalsIgnoreCase("EMPTY")) {
 					textToDisplay = "";
 				}
-				graphicsHandler.drawString(textToDisplay, (ScreenManager.getScreenWidth() / 2 - 140), ((ScreenManager.getScreenHeight() / 10 - 30) * itemToAdd) + 190, arial, new Color(255, 255, 255));
+				graphicsHandler.drawString(textToDisplay, (ScreenManager.getScreenWidth() / 2 - 190), ((ScreenManager.getScreenHeight() / 10 - 30) * itemToAdd) + 190, arial, inventoryBorders);
 			}
 
-			graphicsHandler.drawString("Drop", ScreenManager.getScreenWidth()/2 + 90, ScreenManager.getScreenHeight()/2 - 50, arial, new Color(255, 255, 255));
-			graphicsHandler.drawString("Use", ScreenManager.getScreenWidth()/2 + 94, ScreenManager.getScreenHeight()/2 + 50, arial, new Color(255, 255, 255));
+			if(scrollingMode == 2) {
+				graphicsHandler.drawString("Select an action", ScreenManager.getScreenWidth()/2 + 44, ScreenManager.getScreenHeight()/2 - 115, arial, inventoryBorders);
+				graphicsHandler.drawString("Drop Item", ScreenManager.getScreenWidth()/2 + 70, ScreenManager.getScreenHeight()/2 - 39, arial, inventoryBorders);
+				graphicsHandler.drawString("Use Item", ScreenManager.getScreenWidth()/2 + 74, ScreenManager.getScreenHeight()/2 + 37, arial, inventoryBorders);
+				graphicsHandler.drawString("Select New Item", ScreenManager.getScreenWidth()/2 + 44, ScreenManager.getScreenHeight()/2 + 115, arial, inventoryBorders);
+			}
+
 			if(scrollingMode > 0) {
 				if(actionSelector == 0) {
-					graphicsHandler.drawString("Drop", ScreenManager.getScreenWidth()/2 + 90, ScreenManager.getScreenHeight()/2 - 50, arial, new Color(0, 255, 0));
+					graphicsHandler.drawString("Drop Item", ScreenManager.getScreenWidth()/2 + 70, ScreenManager.getScreenHeight()/2 - 39, arial, selectedColor);
 				} else if(actionSelector == 1) {
 					if(isUsingItem) {
-						graphicsHandler.drawString("Use", ScreenManager.getScreenWidth()/2 + 94, ScreenManager.getScreenHeight()/2 + 50, arial, new Color(0, 100, 100));
+						graphicsHandler.drawString("Use Item", ScreenManager.getScreenWidth()/2 + 74, ScreenManager.getScreenHeight()/2 + 37, arial, inUseColor);
 					}
 					else {
-						graphicsHandler.drawString("Use", ScreenManager.getScreenWidth()/2 + 94, ScreenManager.getScreenHeight()/2 + 50, arial, new Color(0, 255, 0));
+						graphicsHandler.drawString("Use Item", ScreenManager.getScreenWidth()/2 + 74, ScreenManager.getScreenHeight()/2 + 37, arial, selectedColor);
 					}
+				} else if(actionSelector == 2) {
+					graphicsHandler.drawString("Select New Item", ScreenManager.getScreenWidth()/2 + 44, ScreenManager.getScreenHeight()/2 + 115, arial, selectedColor);
 				}
 			}
-			//graphicsHandler.drawString("Info", ScreenManager.getScreenWidth()/2 + 95, ScreenManager.getScreenHeight()/2 + 50, arial, new Color(255, 255, 255));
+			//graphicsHandler.drawString("Info", ScreenManager.getScreenWidth()/2 + 95, ScreenManager.getScreenHeight()/2 + 50, arial, inventoryBorders);
 
 			inventoryLabel.draw(graphicsHandler);
 
 			if(showInventoryInstructions) {
 				Font arial10 = new Font("Arial", Font.BOLD, 10);
-				Font arial8 = new Font("Arial", Font.ITALIC, 9);
+				Font arial9 = new Font("Arial", Font.ITALIC, 9);
 				Font arial15 = new Font("Arial", Font.BOLD, 15);
-				graphicsHandler.drawFilledRectangleWithBorder((ScreenManager.getScreenWidth() / 2 - 150), 170, 225, 265, new Color(0, 0, 255), new Color(255, 255, 255), 3);
-				graphicsHandler.drawString("Inventory Controls:", 250, ScreenManager.getScreenHeight()/2 - 90, arial15, new Color(255, 255, 255));
-				graphicsHandler.drawString("Scroll: W/S", 250, ScreenManager.getScreenHeight()/2 - 60, arial10, new Color(255, 255, 255));
-				graphicsHandler.drawString("Toggle Action/Item Selection: Spacebar", 250, ScreenManager.getScreenHeight()/2 - 30, arial10, new Color(255, 255, 255));
-				graphicsHandler.drawString("To switch to Action Select, item must be highlighted", 250, ScreenManager.getScreenHeight()/2, arial8, new Color(255, 255, 255));
-				graphicsHandler.drawString("Select Action: Enter", 250, ScreenManager.getScreenHeight()/2 + 30, arial10, new Color(255, 255, 255));
-				graphicsHandler.drawString("Toggle Controls: C", 250, ScreenManager.getScreenHeight()/2 + 60, arial10, new Color(255, 255, 255));
+				graphicsHandler.drawFilledRectangleWithBorder((ScreenManager.getScreenWidth() / 2 - 200), 170, 225, 265, itemPanel, inventoryBorders, 3);
+				graphicsHandler.drawString("Inventory Controls:", 200, ScreenManager.getScreenHeight()/2 - 90, arial15, inventoryBorders);
+				graphicsHandler.drawString("Scroll: W/S", 200, ScreenManager.getScreenHeight()/2 - 60, arial10, inventoryBorders);
+				graphicsHandler.drawString("Select/Deselect Item or Action: Spacebar", 200, ScreenManager.getScreenHeight()/2 - 30, arial10, inventoryBorders);
+				graphicsHandler.drawString("Open/Close Inventory Controls: C", 200, ScreenManager.getScreenHeight()/2, arial10, inventoryBorders);
+				graphicsHandler.drawString("Open/Close Inventory: I", 200, ScreenManager.getScreenHeight()/2 + 30, arial10, inventoryBorders);
+				graphicsHandler.drawString("Actions show on right when item is selected.", 200, ScreenManager.getScreenHeight()/2 + 60, arial9, inventoryBorders);
 			}
 		}
 
@@ -414,6 +446,13 @@ public class GamePanel extends JPanel {
 		}
 
 		if(itemInInventory) {
+			if(isUsingItem) {
+				if(itemsInInventory[itemSlot].equalsIgnoreCase(itemInUse)) {
+					isUsingItem = false;
+					scrollingMode = 1;
+					actionSelector = -1;
+				}
+			}
 			itemsInInventory[itemSlot] = "";
 			inventorySlotsFilled--;
 		} else {
