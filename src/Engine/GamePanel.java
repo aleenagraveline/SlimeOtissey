@@ -23,6 +23,7 @@ public class GamePanel extends JPanel {
 	private static GraphicsHandler graphicsHandler;
 
 	private boolean isGamePaused = false;
+	private int pauseTimer;
 	private boolean isViewingInventory = false;
 	private boolean isPlayingPuzzle = false;
 	private static boolean shouldDrawFriendshipPoints = false;
@@ -30,6 +31,7 @@ public class GamePanel extends JPanel {
 	private boolean showInventoryInstructions = false;
 
 	private SpriteFont pauseLabel;
+	private SpriteFont saveLabel;
 	private SpriteFont inventoryLabel;
 
 	private static SpriteFont friendshipPointsLabel;
@@ -72,9 +74,17 @@ public class GamePanel extends JPanel {
 
 		screenManager = new ScreenManager();
 
-		pauseLabel = new SpriteFont("PAUSE", 365, 280, "Arial", 24, Color.white);
+		pauseLabel = new SpriteFont("PAUSED", 305, 230, "Arial", 50, Color.white);
 		pauseLabel.setOutlineColor(Color.black);
 		pauseLabel.setOutlineThickness(2.0f);
+
+		saveLabel = new SpriteFont("PRESS SPACE TO SAVE", 235, 330, "Arial", 30, Color.white);
+		saveLabel.setOutlineColor(Color.black);
+		saveLabel.setOutlineThickness(2.0f);
+
+		saveLabel = new SpriteFont("PRESS SPACE TO SAVE", 235, 330, "Arial", 30, Color.white);
+		saveLabel.setOutlineColor(Color.black);
+		saveLabel.setOutlineThickness(2.0f);
 
 		inventoryLabel = new SpriteFont("INVENTORY", 200, ScreenManager.getScreenHeight() + 140, "Arial", 24, new Color(212, 173, 152));
 		inventoryLabel.setOutlineColor(Color.black);
@@ -104,6 +114,15 @@ public class GamePanel extends JPanel {
 	// this starts the timer (the game loop is started here)
 	public void startGame() {
 		gameLoopProcess.start();
+	}
+
+	public void loadGame() {
+
+	}
+
+	public void saveGame() {
+		keyLocker.lockKey(Key.SPACE);
+		System.out.println("saved!");
 	}
 
 	public ScreenManager getScreenManager() {
@@ -137,6 +156,7 @@ public class GamePanel extends JPanel {
 		if (Keyboard.isKeyDown(pauseKey) && !keyLocker.isKeyLocked(pauseKey)) {
 			isGamePaused = !isGamePaused;
 			keyLocker.lockKey(pauseKey);
+			pauseTimer = 0; // this is stupid but the keylocker won't work so this is what i must do
 		}
 
 		if (Keyboard.isKeyUp(pauseKey)) {
@@ -322,9 +342,22 @@ public class GamePanel extends JPanel {
 			friendshipPointsLabel.draw(graphicsHandler);
 		}
 
-		// if game is paused, draw pause gfx over Screen gfx
+		// if game is paused, draw pause gfx over Screen gfx, then check for if the game should be saved
 		if (isGamePaused) {
 			pauseLabel.draw(graphicsHandler);
+			saveLabel.draw(graphicsHandler);
+
+			if(Keyboard.isKeyDown(Key.SPACE) && !keyLocker.isKeyLocked(Key.SPACE) && pauseTimer <= 0) {
+				keyLocker.lockKey(Key.SPACE);
+				saveGame();
+				pauseTimer = Integer.MAX_VALUE; // this is stupid but the keylocker won't work so this is what i must do
+			}
+			pauseTimer--;
+	
+			if (Keyboard.isKeyUp(pauseKey)) {
+				keyLocker.unlockKey(Key.SPACE);
+			}
+
 			graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(), new Color(0, 0, 0, 100));
 		}
 
