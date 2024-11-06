@@ -22,6 +22,8 @@ public class WaitingPuzzleScreen extends Screen {
     protected SpriteFont countdown;
     protected int countdownTimer;
 
+    protected SpriteFont resetButton;
+
     protected Map background;
     protected int keyPressTimer;
     protected KeyLocker keyLocker = new KeyLocker();
@@ -36,12 +38,17 @@ public class WaitingPuzzleScreen extends Screen {
         // set up 
         
         // setup timer
-        countdownTimer = 1000;
+        countdownTimer = 600;
 
         // set up countdown displayer
-        countdown = new SpriteFont("TEN.", 50, 50, "Arial", 60, new Color(0, 255, 0));
+        countdown = new SpriteFont("TEN.", 300, 200, "Arial", 60, new Color(0, 255, 0));
+        resetButton = new SpriteFont("RESET COUNTDOWN", 80, 300, "Arial", 60, new Color(255, 0, 0));
+
         countdown.setOutlineColor(Color.black);
+        resetButton.setOutlineColor(Color.WHITE);
+
         countdown.setOutlineThickness(3);
+        resetButton.setOutlineThickness(3);
 
         // define/setup map
         background = new BugFightMap();
@@ -59,10 +66,14 @@ public class WaitingPuzzleScreen extends Screen {
         // if space is pressed on menu item, perform action depending on which button was pressed
         if (Keyboard.isKeyUp(Key.SPACE)) {
             keyLocker.unlockKey(Key.SPACE);
+            resetButton.setOutlineColor(Color.WHITE);
         }
         if (!keyLocker.isKeyLocked(Key.SPACE) && Keyboard.isKeyDown(Key.SPACE)) {
-            countdownTimer = 1000;
+            countdownTimer = 600;
             countdown.setText("TEN.");
+            countdown.setColor(new Color(0, 255, 0));
+
+            resetButton.setOutlineColor(new Color(255, 215, 0));
         }
 
     }
@@ -70,36 +81,48 @@ public class WaitingPuzzleScreen extends Screen {
     public void draw(GraphicsHandler graphicsHandler) {
         background.draw(graphicsHandler);
 
-        if(countdownTimer >= -200) {
+        if(countdownTimer >= -120) {
             countdownTimer--;
             System.out.println("" + countdownTimer);
-            if (countdownTimer == 900) {
+            if (countdownTimer == 540) {
                 countdown.setText("NINE.");
-            } else if (countdownTimer == 800) {
+                countdown.setColor(new Color(28, 227, 0));
+            } else if (countdownTimer == 480) {
                 countdown.setText("EIGHT.");
-            } else if (countdownTimer == 700) {
+                countdown.setColor(new Color(57, 198, 0));
+            } else if (countdownTimer == 420) {
                 countdown.setText("SEVEN.");
-            } else if (countdownTimer == 600) {
+                countdown.setColor(new Color(85, 170, 0));
+            } else if (countdownTimer == 360) {
                 countdown.setText("SIX.");
-            } else if (countdownTimer == 500) {
-                countdown.setText("FIVE.");
-            } else if (countdownTimer == 400) {
-                countdown.setText("FOUR.");
+                countdown.setColor(new Color(113, 142, 0));
             } else if (countdownTimer == 300) {
+                countdown.setText("FIVE.");
+                countdown.setColor(new Color(142, 113, 0));
+            } else if (countdownTimer == 240) {
+                countdown.setText("FOUR.");
+                countdown.setColor(new Color(170, 85, 0));
+            } else if (countdownTimer == 180) {
                 countdown.setText("THREE.");
-            } else if (countdownTimer == 200) {
+                countdown.setColor(new Color(198, 57, 0));
+            } else if (countdownTimer == 120) {
                 countdown.setText("TWO.");
-            } else if (countdownTimer == 100) {
+                countdown.setColor(new Color(227, 28, 0));
+            } else if (countdownTimer == 60) {
                 countdown.setText("ONE.");
+                countdown.setColor(new Color(255, 0, 0));
             } else if (countdownTimer <= 0) {
-                countdown.setText("yipee!");
+                countdown.setX(175);
+                countdown.setText("Passed the test!");
+                countdown.setColor(new Color(0, 255, 0));
             }
 
-            if(countdownTimer <= -200) {
+            if(countdownTimer <= -120) {
                 this.playLevelScreen.exitWaitingPuzzle();
             }
 
             countdown.draw(graphicsHandler);
+            resetButton.draw(graphicsHandler);
         }
     }
     

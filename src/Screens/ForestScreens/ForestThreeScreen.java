@@ -1,4 +1,4 @@
-package Screens;
+package Screens.ForestScreens;
 
 import Engine.GraphicsHandler;
 import Engine.Screen;
@@ -7,7 +7,7 @@ import Game.ScreenCoordinator;
 import Level.FlagManager;
 import Level.Map;
 import Level.Player;
-import Maps.ForestThreeMap;
+import Maps.ForestMaps.ForestThreeMap;
 import Players.Cat;
 import Utils.Direction;
 

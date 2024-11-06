@@ -1,6 +1,5 @@
-package Screens;
+package Screens.CaveScreens;
 
-import Engine.GamePanel;
 import Engine.GraphicsHandler;
 import Engine.Screen;
 import Game.GameState;
@@ -8,41 +7,36 @@ import Game.ScreenCoordinator;
 import Level.FlagManager;
 import Level.Map;
 import Level.Player;
-import Maps.ForestCaveMap;
+import Maps.CaveMaps.CaveThreeMap;
 import Players.Cat;
 import Utils.Direction;
 
-public class ForestCaveScreen extends Screen {
+public class CaveThreeScreen extends Screen {
     protected ScreenCoordinator screenCoordinator;
     protected Map map;
     protected Player player;
-    protected ForestCaveScreenState forestCaveScreenState;
+    protected CaveThreeScreenState caveThreeScreenState;
     protected FlagManager flagManager;
 
-    public ForestCaveScreen(ScreenCoordinator screenCoordinator) {
+    public CaveThreeScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
     }
 
     public void initialize() {
         // setup state
         flagManager = new FlagManager();
-        flagManager.addFlag("moveToForestThree", false);
-        flagManager.addFlag("moveToCaveOne", false);
-        flagManager.addFlag("hasPushedFirstRock", false);
-        flagManager.addFlag("hasPushedSecondRock", false);
-        flagManager.addFlag("hasStartedRockPuzzle", false);
-        flagManager.addFlag("hasCompletedRockPuzzle", false);
-        flagManager.addFlag("hasCollectedKey", false);
+        flagManager.addFlag("moveToCaveTwo", false);
+        flagManager.addFlag("moveToCaveIce", false);
 
         // define/setup map
-        map = new ForestCaveMap();
+        map = new CaveThreeMap();
         map.setFlagManager(flagManager);
 
         // setup player
         player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
         player.setMap(map);
-        forestCaveScreenState = ForestCaveScreenState.RUNNING;
-        player.setFacingDirection(Direction.DOWN);
+        caveThreeScreenState = CaveThreeScreenState.RUNNING;
+        player.setFacingDirection(Direction.UP);
 
         map.setPlayer(player);
 
@@ -56,7 +50,7 @@ public class ForestCaveScreen extends Screen {
 
     public void update() {
         // based on screen state, perform specific actions
-        switch (forestCaveScreenState) {
+        switch (caveThreeScreenState) {
             // if level is "running" update player and map to keep game logic for the platformer level going
             case RUNNING:
                 player.update();
@@ -64,34 +58,28 @@ public class ForestCaveScreen extends Screen {
                 break;
         }
 
-        if(map.getFlagManager().isFlagSet("hasCompletedRockPuzzle") && !(map.getFlagManager().isFlagSet("hasCollectedKey"))) {
-            GamePanel.addToInventory("Key");
-            Player.gainFriendshipPoints(1);
-            map.getFlagManager().setFlag("hasCollectedKey");
+        if (map.getFlagManager().isFlagSet("moveToCaveTwo")) {
+            screenCoordinator.setGameState(GameState.CAVE_TWO);
+            map.getFlagManager().unsetFlag("moveToCaveTwo");
         }
-
-        if (map.getFlagManager().isFlagSet("moveToForestThree")) {
-            screenCoordinator.setGameState(GameState.FOREST_THREE);
-            map.getFlagManager().unsetFlag("moveToForestThree");
-        }
-        else if (map.getFlagManager().isFlagSet("moveToCaveOne")) {
-            screenCoordinator.setGameState(GameState.CAVE_ONE);
-            map.getFlagManager().unsetFlag("moveToCaveOne");
+        else if (map.getFlagManager().isFlagSet("moveToCaveIce")) {
+            screenCoordinator.setGameState(GameState.CAVE_ICE);
+            map.getFlagManager().unsetFlag("moveToCaveIce");
         }
 
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
         // based on screen state, draw appropriate graphics
-        switch (forestCaveScreenState) {
+        switch (caveThreeScreenState) {
             case RUNNING:
                 map.draw(player, graphicsHandler);
                 break;
         }
     }
 
-    public ForestCaveScreenState getForestCaveScreenState() {
-        return forestCaveScreenState;
+    public CaveThreeScreenState getCaveThreeScreenState() {
+        return caveThreeScreenState;
     }
 
     public void resetLevel() {
@@ -99,7 +87,7 @@ public class ForestCaveScreen extends Screen {
     }
 
     // This enum represents the different states this screen can be in
-    private enum ForestCaveScreenState {
+    private enum CaveThreeScreenState {
         RUNNING
     }
 }

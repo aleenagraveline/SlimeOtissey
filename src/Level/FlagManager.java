@@ -14,6 +14,10 @@ public class FlagManager {
         flags.put(flagName, startingValue);
     }
 
+    public boolean hasFlag(String flagName) {
+        return flags.containsKey(flagName);
+    }
+
     public void setFlag(String flagName) {
         if (flags.containsKey(flagName)) {
             flags.put(flagName, true);
