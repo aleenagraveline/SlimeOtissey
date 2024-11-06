@@ -17,14 +17,14 @@ import Utils.Point;
 public class PlayLevelScreen extends Screen {
     protected ScreenCoordinator screenCoordinator;
     protected Map map;
-    protected Player player;
+    protected static Player player;
     public static int playerHealth;
     protected PlayLevelScreenState playLevelScreenState;
     protected BugFightScreen bugFightScreen; // BugFightScreen as a subscreen of PlayLevelScreen
     protected MemoryPuzzleScreen memoryPuzzleScreen;
     protected WaitingPuzzleScreen waitingPuzzleScreen;
     protected WinScreen winScreen;
-    protected FlagManager flagManager;
+    public static FlagManager flagManager;
     protected TownhouseScreen townhouseScreen; // TownHouseScreen as a subscreen of PlayLevelSCreen
     private static double currentVolume;
 
@@ -243,4 +243,12 @@ public class PlayLevelScreen extends Screen {
     /*public static Map getMap() {
         return map;
     }*/
+
+    public static int getPlayerX() {
+        return (int) player.getCalibratedXLocation();
+    }
+
+    public static int getPlayerY() {
+        return (int) player.getCalibratedYLocation();
+    }
 }

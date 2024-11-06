@@ -3,12 +3,16 @@ package Engine;
 import GameObject.Rectangle;
 import Level.FlagManager;
 import Level.Player;
+import Screens.PlayLevelScreen;
 import SpriteFont.SpriteFont;
 import Utils.Colors;
 import java.util.ArrayList;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 
 /*
@@ -122,7 +126,34 @@ public class GamePanel extends JPanel {
 
 	public void saveGame() {
 		keyLocker.lockKey(Key.SPACE);
-		System.out.println("saved!");
+		try {
+			File myObj = new File("src/Saves/savefile.txt");
+			FileWriter myWriter = new FileWriter(myObj);
+			String savePosition = "" + ((int) PlayLevelScreen.getPlayerX()) + " " + ((int) PlayLevelScreen.getPlayerY());
+
+			String saveHealth = "" + PlayLevelScreen.playerHealth;
+
+			String saveFriendship = "" + Player.getFriendshipPoints();
+
+			String saveInventory = "[";
+			for(int i=0; i<itemsInInventory.length; i++) {
+				if (!(itemsInInventory[i].equals("EMPTY"))) {
+					saveInventory = saveInventory + itemsInInventory[i] + ",";
+				}
+			}
+			saveInventory = saveInventory + "]";
+
+			String saveFlags = PlayLevelScreen.flagManager.flagsToString();
+
+			//String saveScreen = ScreenManager.getScreen().toString();
+
+			myWriter.write(savePosition + " " + saveHealth + " " + saveFriendship + " " + saveInventory + " " + saveFlags/* + " " + saveScreen*/);
+			myWriter.close();
+			System.out.println("Successfully wrote to save file.");
+		} catch (IOException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
 	}
 
 	public ScreenManager getScreenManager() {

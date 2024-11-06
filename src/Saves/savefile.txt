@@ -1,0 +1,1 @@
+372 248 50 0 [] isInWaitingPuzzle:false hasTalkedToDinosaur:false moveToForestOne:false isInBugBattle:false moveToTownhouse:false hasFoundKey:false isInMemPuzzle:false usedKey:false hatesBugs:false playedMemPuzzle:false hasTalkedToWalrus:false usingKey:false hasLostBall:true keyIsInTree:true  Game.ScreenCoordinator@6647717f

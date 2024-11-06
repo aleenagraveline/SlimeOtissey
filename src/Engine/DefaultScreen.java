@@ -11,6 +11,9 @@ public class DefaultScreen extends Screen {
     @Override
     public void initialize() { }
 
+    //@Override
+    //public String screenName() { return "default"; }
+
     @Override
     public void update() { }
 
