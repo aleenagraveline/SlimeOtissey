@@ -5,18 +5,13 @@ import java.security.SecureRandom;
 import Engine.DefaultScreen;
 import Engine.GraphicsHandler;
 import Engine.Screen;
+import Screens.*;
+import Screens.CaveScreens.*;
+import Screens.ForestScreens.*;
+import Screens.IceScreens.*;
+import Screens.RandomBattleScreens.*;
+import Screens.TransitionScreens.*;
 import Level.Map;
-import Screens.BetterCreditsScreen;
-import Screens.PlayLevelScreen;
-import Screens.TitleScreen;
-import Screens.CaveScreens.CaveOneScreen;
-import Screens.CaveScreens.CaveThreeScreen;
-import Screens.CaveScreens.CaveTwoScreen;
-import Screens.ForestScreens.ForestOneScreen;
-import Screens.ForestScreens.ForestThreeScreen;
-import Screens.ForestScreens.ForestTwoScreen;
-import Screens.RandomBattleScreens.RandomBugBattleScreen;
-import Screens.TransitionScreens.ForestCaveScreen;
 
 
 
@@ -36,7 +31,7 @@ public class ScreenCoordinator extends Screen {
 	// -1 for error checking
 	protected int nextRandomBattle = -1;
 	
-	static final int NUM_OF_MAJOR_SCREENS = 10; // The number of major screens to be loaded
+	static final int NUM_OF_MAJOR_SCREENS = 16; // The number of major screens to be loaded
 	static final int NUM_OF_RANDOM_BATTLES = 1;
 	
 	// Index for each major screen
@@ -50,6 +45,12 @@ public class ScreenCoordinator extends Screen {
 	static final int CAVE_ONE_INDEX = 7;
 	static final int CAVE_TWO_INDEX = 8;
 	static final int CAVE_THREE_INDEX = 9;
+	static final int CAVE_ICE_INDEX = 10;
+	static final int ICE_ONE_INDEX = 11;
+	static final int ICE_TWO_INDEX = 12;
+	static final int ICE_THREE_INDEX = 13;
+	static final int ICE_FOUR_INDEX = 14;
+	static final int ICE_FIVE_INDEX = 15;
 
 	// Index for each random battle screen
 	static final int RANDOM_BUG_INDEX = 0;
@@ -91,6 +92,12 @@ public class ScreenCoordinator extends Screen {
 		majorScreens[CAVE_ONE_INDEX] = new CaveOneScreen(this);
 		majorScreens[CAVE_TWO_INDEX] = new CaveTwoScreen(this);
 		majorScreens[CAVE_THREE_INDEX] = new CaveThreeScreen(this);
+		majorScreens[CAVE_ICE_INDEX] = new CaveIceScreen(this);
+		majorScreens[ICE_ONE_INDEX] = new IceOneScreen(this);
+		majorScreens[ICE_TWO_INDEX] = new IceTwoScreen(this);
+		majorScreens[ICE_THREE_INDEX] = new IceThreeScreen(this);
+		majorScreens[ICE_FOUR_INDEX] = new IceFourScreen(this);
+		majorScreens[ICE_FIVE_INDEX] = new IceFiveScreen(this);
 
 		// Fill randomBattleScreens
 		randomBattleScreens[RANDOM_BUG_INDEX] = new RandomBugBattleScreen(this);
@@ -147,6 +154,24 @@ public class ScreenCoordinator extends Screen {
 						break;
 					case CAVE_THREE:
 						currentScreen = majorScreens[CAVE_THREE_INDEX];
+						break;
+					case CAVE_ICE:
+						currentScreen = majorScreens[CAVE_ICE_INDEX];
+						break;
+					case ICE_ONE:
+						currentScreen = majorScreens[ICE_ONE_INDEX];
+						break;
+					case ICE_TWO:
+						currentScreen = majorScreens[ICE_TWO_INDEX];
+						break;
+					case ICE_THREE:
+						currentScreen = majorScreens[ICE_THREE_INDEX];
+						break;
+					case ICE_FOUR:
+						currentScreen = majorScreens[ICE_FOUR_INDEX];
+						break;
+					case ICE_FIVE:
+						currentScreen = majorScreens[ICE_FIVE_INDEX];
 						break;
 					case RANDOM_BATTLE:
 						randomBattleScreens[nextRandomBattle].initialize();

@@ -4,6 +4,7 @@ import Builders.FrameBuilder;
 import Builders.MapTileBuilder;
 import Engine.ImageLoader;
 import GameObject.Frame;
+import GameObject.ImageEffect;
 import Level.TileType;
 import Level.Tileset;
 
@@ -82,7 +83,7 @@ public class IceTileset extends Tileset {
         Frame iceHoleFrame = new FrameBuilder(getSubImage(1, 3))
                 .withScale(tileScale)
                 .build();
-        MapTileBuilder iceHoleTile = new MapTileBuilder(snowFloorFrame);
+        MapTileBuilder iceHoleTile = new MapTileBuilder(iceHoleFrame);
         mapTiles.add(iceHoleTile);
 
         // snowRock
@@ -113,67 +114,81 @@ public class IceTileset extends Tileset {
         Frame treeOneFrame = new FrameBuilder(getSubImage(2, 2))
                 .withScale(tileScale)
                 .build();
-        MapTileBuilder treeOneTile = new MapTileBuilder(treeOneFrame);
+        MapTileBuilder treeOneTile = new MapTileBuilder(snowFloorFrame)
+                .withMidBottomLayer(treeOneFrame)
+                .withTileType(TileType.NOT_PASSABLE);
         mapTiles.add(treeOneTile);
 
         // treeTwo
         Frame treeTwoFrame = new FrameBuilder(getSubImage(2, 3))
                 .withScale(tileScale)
                 .build();
-        MapTileBuilder treeTwoTile = new MapTileBuilder(treeTwoFrame);
+        MapTileBuilder treeTwoTile = new MapTileBuilder(snowFloorFrame)
+                .withMidBottomLayer(treeTwoFrame)
+                .withTileType(TileType.NOT_PASSABLE);
         mapTiles.add(treeTwoTile);
 
         // treeThree
         Frame treeThreeFrame = new FrameBuilder(getSubImage(2, 4))
                 .withScale(tileScale)
                 .build();
-        MapTileBuilder treeThreeTile = new MapTileBuilder(treeThreeFrame);
+        MapTileBuilder treeThreeTile = new MapTileBuilder(snowFloorFrame)
+                .withMidBottomLayer(treeThreeFrame)
+                .withTileType(TileType.NOT_PASSABLE);
         mapTiles.add(treeThreeTile);
 
         // treeFour
         Frame treeFourFrame = new FrameBuilder(getSubImage(3, 2))
                 .withScale(tileScale)
                 .build();
-        MapTileBuilder treeFourTile = new MapTileBuilder(treeFourFrame);
+        MapTileBuilder treeFourTile = new MapTileBuilder(snowFloorFrame)
+                .withMidBottomLayer(treeFourFrame)
+                .withTileType(TileType.NOT_PASSABLE);
         mapTiles.add(treeFourTile);
 
         // treeFive
         Frame treeFiveFrame = new FrameBuilder(getSubImage(3, 3))
                 .withScale(tileScale)
                 .build();
-        MapTileBuilder treeFiveTile = new MapTileBuilder(treeFiveFrame);
+        MapTileBuilder treeFiveTile = new MapTileBuilder(snowFloorFrame)
+                .withMidBottomLayer(treeFiveFrame)
+                .withTileType(TileType.NOT_PASSABLE);
         mapTiles.add(treeFiveTile);
 
         // treeSix
         Frame treeSixFrame = new FrameBuilder(getSubImage(3,4))
                 .withScale(tileScale)
                 .build();
-        MapTileBuilder treeSixTile = new MapTileBuilder(treeSixFrame);
+        MapTileBuilder treeSixTile = new MapTileBuilder(snowFloorFrame)
+                .withMidBottomLayer(treeSixFrame)
+                .withTileType(TileType.NOT_PASSABLE);
         mapTiles.add(treeSixTile);
 
         // treeSeven
         Frame treeSevenFrame = new FrameBuilder(getSubImage(4,2))
                 .withScale(tileScale)
                 .build();
-        MapTileBuilder treeSevenTile = new MapTileBuilder(treeSevenFrame);
+        MapTileBuilder treeSevenTile = new MapTileBuilder(snowFloorFrame)
+                .withMidBottomLayer(treeSevenFrame)
+                .withTileType(TileType.NOT_PASSABLE);
         mapTiles.add(treeSevenTile);
 
         // treeEight
         Frame treeEightFrame = new FrameBuilder(getSubImage(4,3))
                 .withScale(tileScale)
                 .build();
-        MapTileBuilder treeEightTile = new MapTileBuilder(treeEightFrame);
-                //.withMidBottomLayer(treeEightFrame)
-                //.withTileType(TileType.NOT_PASSABLE);
+        MapTileBuilder treeEightTile = new MapTileBuilder(snowFloorFrame)
+                .withMidBottomLayer(treeEightFrame)
+                .withTileType(TileType.NOT_PASSABLE);
         mapTiles.add(treeEightTile);
 
         // treeNine
         Frame treeNineFrame = new FrameBuilder(getSubImage(4,4))
                 .withScale(tileScale)
                 .build();
-        MapTileBuilder treeNineTile = new MapTileBuilder(treeNineFrame);
-                //.withMidBottomLayer(treeNineFrame)
-                //.withTileType(TileType.NOT_PASSABLE);
+        MapTileBuilder treeNineTile = new MapTileBuilder(snowFloorFrame)
+                .withMidBottomLayer(treeNineFrame)
+                .withTileType(TileType.NOT_PASSABLE);
         mapTiles.add(treeNineTile);
 
         // sign
@@ -181,7 +196,8 @@ public class IceTileset extends Tileset {
                 .withScale(tileScale)
                 .withBounds(1, 2, 14, 14)
                 .build();
-        MapTileBuilder signTile = new MapTileBuilder(signFrame)
+        MapTileBuilder signTile = new MapTileBuilder(snowFloorFrame)
+                .withMidBottomLayer(signFrame)
                 .withTileType(TileType.NOT_PASSABLE);
         mapTiles.add(signTile);
 
@@ -200,11 +216,43 @@ public class IceTileset extends Tileset {
         mapTiles.add(endLeftPathTile);
 
         // endRightPath
-        Frame endRightPathFrame = new FrameBuilder(getSubImage(4, 0))
+        Frame endRightPathFrame = new FrameBuilder(getSubImage(4, 1))
                 .withScale(tileScale)
                 .build();
         MapTileBuilder endRightPathTile = new MapTileBuilder(endRightPathFrame);
         mapTiles.add(endRightPathTile);
+
+        // pathFixOne
+        Frame pathFixOneFrame = new FrameBuilder(getSubImage(1, 1))
+                .withScale(tileScale)
+                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                .build();
+        MapTileBuilder pathFixOneTile = new MapTileBuilder(pathFixOneFrame);
+        mapTiles.add(pathFixOneTile);
+
+        // pathFixTwo
+        Frame pathFixTwoFrame = new FrameBuilder(getSubImage(2, 1))
+                .withScale(tileScale)
+                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                .build();
+        MapTileBuilder pathFixTwoTile = new MapTileBuilder(pathFixTwoFrame);
+        mapTiles.add(pathFixTwoTile);
+
+        // pathFixThree
+        Frame pathFixThreeFrame = new FrameBuilder(getSubImage(4, 0))
+                .withScale(tileScale)
+                .withImageEffect(ImageEffect.FLIP_VERTICAL)
+                .build();
+        MapTileBuilder pathFixThreeTile = new MapTileBuilder(pathFixThreeFrame);
+        mapTiles.add(pathFixThreeTile);
+
+        // pathFixFour
+        Frame pathFixFourFrame = new FrameBuilder(getSubImage(4, 1))
+                .withScale(tileScale)
+                .withImageEffect(ImageEffect.FLIP_VERTICAL)
+                .build();
+        MapTileBuilder pathFixFourTile = new MapTileBuilder(pathFixFourFrame);
+        mapTiles.add(pathFixFourTile);
         
         return mapTiles;
     }

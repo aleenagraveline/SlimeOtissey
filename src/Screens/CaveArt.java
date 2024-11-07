@@ -1,6 +1,7 @@
 package Screens;
 
 import Engine.*;
+import Level.Map;
 import Screens.CaveScreens.CaveOneScreen;
 import SpriteFont.SpriteFont;
 
@@ -45,5 +46,11 @@ public class CaveArt extends Screen {
         graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(), Color.black);
         //winMessage.draw(graphicsHandler);
         instructions.draw(graphicsHandler);
+    }
+
+    @Override
+    public Map getMap() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getMap'");
     }
 }

@@ -221,7 +221,7 @@ public abstract class Player extends GameObject {
     public Direction getLastWalkingXDirection() { return lastWalkingXDirection; }
     public Direction getLastWalkingYDirection() { return lastWalkingYDirection; }
 
-    
+
     public void lock() {
         isLocked = true;
         playerState = PlayerState.STANDING;
@@ -291,6 +291,12 @@ public abstract class Player extends GameObject {
         return friendshipPoints;
     }
 
+    public void setWalkingXDirection(Direction direction) {
+        this.currentWalkingXDirection = direction;
+    }
+    public void setWalkingYDirection(Direction direction) {
+        this.currentWalkingYDirection = direction;
+    }
     public static float getPlayerX() {
         return statX;
     }

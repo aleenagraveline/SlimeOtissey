@@ -1,6 +1,7 @@
 package Screens;
 
 import Engine.*;
+import Level.Map;
 import Screens.ForestScreens.ForestOneScreen;
 import SpriteFont.SpriteFont;
 
@@ -45,5 +46,11 @@ public class ForestArt extends Screen {
         graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(), Color.black);
         //winMessage.draw(graphicsHandler);
         instructions.draw(graphicsHandler);
+    }
+
+    @Override
+    public Map getMap() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getMap'");
     }
 }
