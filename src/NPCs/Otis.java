@@ -16,6 +16,7 @@ public class Otis extends NPC {
 
     public Otis(int id, Point location) {
         super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("Small Otis.png"), 24, 24), "STAND_LEFT");
+        this.setIsUncollidable(true);
     }
 
     @Override

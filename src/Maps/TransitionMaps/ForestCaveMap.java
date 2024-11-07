@@ -21,16 +21,16 @@ public class ForestCaveMap extends Map {
         this.playerStartPosition = getMapTile(6, 0).getLocation().subtractX(12); // middle of path at top
     }
 
-    // @Override
-    // public ArrayList<NPC> loadNPCs() {
-    //     ArrayList<NPC> npcs = new ArrayList<>();
+    @Override
+    public ArrayList<NPC> loadNPCs() {
+        ArrayList<NPC> npcs = new ArrayList<>();
 
-    //     // Initialize Otis right next to the player
-    //     Otis otis = new Otis(1, getMapTile(6, 0).getLocation()); // Change coordinates as needed to place Otis next to the player
-    //     npcs.add(otis);
+        // Initialize Otis right next to the player
+        Otis otis = new Otis(1, getMapTile(6, 0).getLocation()); // Change coordinates as needed to place Otis next to the player
+        npcs.add(otis);
 
-    //     return npcs;
-    // }
+        return npcs;
+    }
 
     @Override
     public ArrayList<Trigger> loadTriggers() {
