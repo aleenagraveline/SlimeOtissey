@@ -433,7 +433,7 @@ public class GamePanel extends JPanel {
 			}
 
 			if(scrollingMode == 2) {
-				graphicsHandler.drawString("Select an action", ScreenManager.getScreenWidth()/2 + 44, ScreenManager.getScreenHeight()/2 - 115, arial, inventoryBorders);
+				graphicsHandler.drawString("Select An Action ↓", ScreenManager.getScreenWidth()/2 + 44, ScreenManager.getScreenHeight()/2 - 115, arial, inventoryBorders);
 				graphicsHandler.drawString("Drop Item", ScreenManager.getScreenWidth()/2 + 70, ScreenManager.getScreenHeight()/2 - 39, arial, inventoryBorders);
 				graphicsHandler.drawString("Use Item", ScreenManager.getScreenWidth()/2 + 74, ScreenManager.getScreenHeight()/2 + 37, arial, inventoryBorders);
 				graphicsHandler.drawString("Select New Item", ScreenManager.getScreenWidth()/2 + 44, ScreenManager.getScreenHeight()/2 + 115, arial, inventoryBorders);

@@ -50,7 +50,6 @@ public class PlayLevelScreen extends Screen {
         flagManager.addFlag("usingKey", false); // These two used in conditionalScript logic
         flagManager.addFlag("usedKey", false); // ^^^
 
-
         // define/setup map
         map = new TestMap();
         map.setFlagManager(flagManager);
