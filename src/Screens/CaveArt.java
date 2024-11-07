@@ -1,0 +1,49 @@
+package Screens;
+
+import Engine.*;
+import Screens.CaveScreens.CaveOneScreen;
+import SpriteFont.SpriteFont;
+
+import java.awt.*;
+
+// This class is for the win level screen
+public class CaveArt extends Screen {
+    //protected SpriteFont winMessage;
+    protected SpriteFont instructions;
+    protected KeyLocker keyLocker = new KeyLocker();
+    protected CaveOneScreen caveOneScreen;
+
+    public CaveArt(CaveOneScreen caveOneScreen) {
+        this.caveOneScreen = caveOneScreen;
+        initialize();
+    }
+
+    @Override
+    public void initialize() {
+        //winMessage = new SpriteFont("You win!", 350, 239, "Arial", 30, Color.white);
+        instructions = new SpriteFont("Press Space to continue", 120, 279,"Arial", 20, Color.white);
+        keyLocker.lockKey(Key.SPACE);
+        //keyLocker.lockKey(Key.ESC);
+    }
+
+    @Override
+    public void update() {
+        if (Keyboard.isKeyUp(Key.SPACE)) {
+            keyLocker.unlockKey(Key.SPACE);
+        }
+        // if (Keyboard.isKeyUp(Key.ESC)) {
+        //     keyLocker.unlockKey(Key.ESC);
+        // }
+
+        // if space is pressed continue in the forest
+        if (Keyboard.isKeyDown(Key.SPACE) && !keyLocker.isKeyLocked(Key.SPACE)) {
+            caveOneScreen.update();
+        }
+    }
+
+    public void draw(GraphicsHandler graphicsHandler) {
+        graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(), Color.black);
+        //winMessage.draw(graphicsHandler);
+        instructions.draw(graphicsHandler);
+    }
+}

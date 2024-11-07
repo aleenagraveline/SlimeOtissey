@@ -173,10 +173,15 @@ public abstract class Player extends GameObject {
         if (playerState == PlayerState.STANDING) {
             // sets animation to a STAND animation based on which way player is facing
             this.currentAnimationName = facingDirection == Direction.RIGHT ? "STAND_RIGHT" : "STAND_LEFT";
+            this.currentAnimationName = facingDirection == Direction.UP ? "STAND_UP" : "STAND_DOWN";
         }
         else if (playerState == PlayerState.WALKING) {
             // sets animation to a WALK animation based on which way player is facing
             this.currentAnimationName = facingDirection == Direction.RIGHT ? "WALK_RIGHT" : "WALK_LEFT";
+        } 
+        else if (playerState == PlayerState.WALKING) {
+            // sets animation to a WALK animation based on which way player is facing
+            this.currentAnimationName = facingDirection == Direction.UP ? "WALK_UP" : "WALK_DOWN";
         }
     }
 
@@ -250,6 +255,10 @@ public abstract class Player extends GameObject {
         }
         else if (direction == Direction.LEFT) {
             this.currentAnimationName = "WALK_LEFT";
+        } else if (direction == Direction.UP) {
+            this.currentAnimationName = "WALK_UP";
+        } else if (direction == Direction.DOWN) {
+            this.currentAnimationName = "WALK_DOWN";
         }
         if (direction == Direction.UP) {
             moveY(-speed);
