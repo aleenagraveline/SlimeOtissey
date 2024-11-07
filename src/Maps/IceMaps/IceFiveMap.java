@@ -3,7 +3,6 @@ package Maps.IceMaps;
 import Level.Map;
 import Level.NPC;
 import Tilesets.IceTileset;
-import Utils.Point;
 import Level.Trigger;
 import NPCs.Otis;
 import Scripts.MapTransitions.IceFourTransitionScript;

@@ -3,7 +3,6 @@ package Maps.TransitionMaps;
 import Level.Map;
 import Level.NPC;
 import Tilesets.CaveIceTileset;
-import Utils.Point;
 import Level.Trigger;
 import NPCs.Otis;
 import Scripts.MapTransitions.CaveThreeTransitionScript;

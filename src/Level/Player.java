@@ -210,7 +210,7 @@ public abstract class Player extends GameObject {
     public Direction getLastWalkingXDirection() { return lastWalkingXDirection; }
     public Direction getLastWalkingYDirection() { return lastWalkingYDirection; }
 
-    
+
     public void lock() {
         isLocked = true;
         playerState = PlayerState.STANDING;
@@ -274,6 +274,13 @@ public abstract class Player extends GameObject {
 
     public static int getFriendshipPoints() {
         return friendshipPoints;
+    }
+
+    public void setWalkingXDirection(Direction direction) {
+        this.currentWalkingXDirection = direction;
+    }
+    public void setWalkingYDirection(Direction direction) {
+        this.currentWalkingYDirection = direction;
     }
 
     // Uncomment this to have game draw player's bounds to make it easier to visualize
