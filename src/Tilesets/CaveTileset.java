@@ -110,6 +110,12 @@ public class CaveTileset extends Tileset {
                 .withMidBottomLayer(pebblesFrame);
         mapTiles.add(pebblesTile);
 
+        // wall frame used to create overhang
+        MapTileBuilder overhangTile = new MapTileBuilder(caveFloorFrame)
+                .withTopLayer(caveWallFrame)
+                .withTileType(TileType.PASSABLE);
+        mapTiles.add(overhangTile);
+
         return mapTiles;
     }
 }
