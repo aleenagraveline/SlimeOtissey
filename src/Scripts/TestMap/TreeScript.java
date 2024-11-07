@@ -42,10 +42,16 @@ public class TreeScript extends Script {
                         return true;
                     }
                 });
-                //addScriptAction(new ChangeFlagScriptAction("isInWaitingPuzzle", true));
+                addScriptAction(new TextboxScriptAction() {{
+                    addText("There's something inside the tree!\nLet me try and get it...");
+                    addText("Uh oh. It seems I activated some dangerous device!");
+                    addText("It seems there's something etched into the walls,\nbut it makes no sense.");
+                    addText("And a countdown just started!");
+                }});
+                addScriptAction(new ChangeFlagScriptAction("isInWaitingPuzzle", true));
                 addScriptAction(new TextboxScriptAction() {{
                     addText("...");
-                    addText("I found a key inside of the tree!\nYippee!");
+                    addText("I found a key inside of the box!\nYippee!");
                     addText("Maybe I can use the key to break into Lodeon's castle! \n(Press I to check your inventory.)");
                 }});
 

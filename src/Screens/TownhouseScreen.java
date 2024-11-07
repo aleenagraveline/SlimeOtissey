@@ -45,6 +45,10 @@ public class TownhouseScreen extends Screen {
         map.preloadScripts();
     }
 
+    public Map getMap() {
+        return map;
+    }
+
     @Override
     public void update() {
         // Switch screens if we need, else keep updating this one

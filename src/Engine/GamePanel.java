@@ -3,12 +3,16 @@ package Engine;
 import GameObject.Rectangle;
 import Level.FlagManager;
 import Level.Player;
+import Screens.PlayLevelScreen;
 import SpriteFont.SpriteFont;
 import Utils.Colors;
 import java.util.ArrayList;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 
 /*
@@ -23,6 +27,7 @@ public class GamePanel extends JPanel {
 	private static GraphicsHandler graphicsHandler;
 
 	private boolean isGamePaused = false;
+	private int pauseTimer;
 	private boolean isViewingInventory = false;
 	private boolean isPlayingPuzzle = false;
 	private static boolean shouldDrawFriendshipPoints = false;
@@ -30,6 +35,8 @@ public class GamePanel extends JPanel {
 	private boolean showInventoryInstructions = false;
 
 	private SpriteFont pauseLabel;
+	private SpriteFont saveLabel;
+	private SpriteFont savedLabel;
 	private SpriteFont inventoryLabel;
 
 	private static SpriteFont friendshipPointsLabel;
@@ -72,9 +79,17 @@ public class GamePanel extends JPanel {
 
 		screenManager = new ScreenManager();
 
-		pauseLabel = new SpriteFont("PAUSE", 365, 280, "Arial", 24, Color.white);
+		pauseLabel = new SpriteFont("PAUSED", 305, 230, "Arial", 50, Color.white);
 		pauseLabel.setOutlineColor(Color.black);
 		pauseLabel.setOutlineThickness(2.0f);
+
+		saveLabel = new SpriteFont("PRESS SPACE TO SAVE", 235, 330, "Arial", 30, Color.white);
+		saveLabel.setOutlineColor(Color.black);
+		saveLabel.setOutlineThickness(2.0f);
+
+		savedLabel = new SpriteFont("GAME SAVED!", 304, 330, "Arial", 30, Color.white);
+		savedLabel.setOutlineColor(Color.black);
+		savedLabel.setOutlineThickness(2.0f);
 
 		inventoryLabel = new SpriteFont("INVENTORY", 200, ScreenManager.getScreenHeight() + 140, "Arial", 24, new Color(212, 173, 152));
 		inventoryLabel.setOutlineColor(Color.black);
@@ -104,6 +119,43 @@ public class GamePanel extends JPanel {
 	// this starts the timer (the game loop is started here)
 	public void startGame() {
 		gameLoopProcess.start();
+	}
+
+	public void loadGame() {
+		//later ;)
+	}
+
+	public void saveGame() {
+		keyLocker.lockKey(Key.SPACE);
+		try {
+			File myObj = new File("src/Saves/savefile.txt");
+			FileWriter myWriter = new FileWriter(myObj);
+			String savePosition = "" + ((int) Player.getPlayerX()) + " " + ((int) Player.getPlayerY());
+
+			String saveHealth = "" + PlayLevelScreen.playerHealth;
+
+			String saveFriendship = "" + Player.getFriendshipPoints();
+
+			String saveInventory = "[";
+			for(int i=0; i<itemsInInventory.length; i++) {
+				if (!(itemsInInventory[i].equals("EMPTY"))) {
+					saveInventory = saveInventory + itemsInInventory[i] + ",";
+				}
+			}
+			saveInventory = saveInventory + "]";
+
+			String saveFlags = PlayLevelScreen.flagManager.flagsToString();
+
+			String saveScreen = ScreenManager.getScreen().getMap().getMapFileName();
+			saveScreen = saveScreen.substring(0, saveScreen.length() - 7) + "screen";
+
+			myWriter.write(savePosition + " " + saveScreen + " " + saveHealth + " " + saveFriendship + " " + saveInventory + " " + saveFlags);
+			myWriter.close();
+			System.out.println("Successfully wrote to save file.");
+		} catch (IOException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
 	}
 
 	public ScreenManager getScreenManager() {
@@ -137,6 +189,7 @@ public class GamePanel extends JPanel {
 		if (Keyboard.isKeyDown(pauseKey) && !keyLocker.isKeyLocked(pauseKey)) {
 			isGamePaused = !isGamePaused;
 			keyLocker.lockKey(pauseKey);
+			pauseTimer = 0; // this is stupid but the keylocker won't work so this is what i must do
 		}
 
 		if (Keyboard.isKeyUp(pauseKey)) {
@@ -202,7 +255,7 @@ public class GamePanel extends JPanel {
 				if(actionSelector > 0) {
 					actionSelector--;
 				} else {
-					actionSelector = 1;
+					actionSelector = 2;
 				}
 			}
 		}
@@ -322,9 +375,26 @@ public class GamePanel extends JPanel {
 			friendshipPointsLabel.draw(graphicsHandler);
 		}
 
-		// if game is paused, draw pause gfx over Screen gfx
+		// if game is paused, draw pause gfx over Screen gfx, then check for if the game should be saved
 		if (isGamePaused) {
 			pauseLabel.draw(graphicsHandler);
+			if(pauseTimer <= 0) {
+				saveLabel.draw(graphicsHandler);
+			} else {
+				savedLabel.draw(graphicsHandler);
+			}
+
+			if(Keyboard.isKeyDown(Key.SPACE) && !keyLocker.isKeyLocked(Key.SPACE) && pauseTimer <= 0) {
+				keyLocker.lockKey(Key.SPACE);
+				saveGame();
+				pauseTimer = Integer.MAX_VALUE; // this is stupid but the keylocker won't work so this is what i must do
+			}
+			pauseTimer--;
+	
+			if (Keyboard.isKeyUp(pauseKey)) {
+				keyLocker.unlockKey(Key.SPACE);
+			}
+
 			graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(), new Color(0, 0, 0, 100));
 		}
 

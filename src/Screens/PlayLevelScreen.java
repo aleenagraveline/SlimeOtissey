@@ -24,7 +24,7 @@ public class PlayLevelScreen extends Screen {
     protected MemoryPuzzleScreen memoryPuzzleScreen;
     protected WaitingPuzzleScreen waitingPuzzleScreen;
     protected WinScreen winScreen;
-    protected FlagManager flagManager;
+    public static FlagManager flagManager;
     protected TownhouseScreen townhouseScreen; // TownHouseScreen as a subscreen of PlayLevelSCreen
     private static double currentVolume;
 
@@ -75,6 +75,10 @@ public class PlayLevelScreen extends Screen {
         memoryPuzzleScreen = new MemoryPuzzleScreen(this);
         waitingPuzzleScreen = new WaitingPuzzleScreen(this);
         townhouseScreen = new TownhouseScreen(this);
+    }
+
+    public Map getMap() {
+        return map;
     }
 
     public void update() {

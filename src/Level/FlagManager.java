@@ -1,5 +1,6 @@
 package Level;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
@@ -41,5 +42,19 @@ public class FlagManager {
             return flags.get(flagName);
         }
         return false;
+    }
+
+    public int totalFlags() {
+        return flags.size();
+    }
+
+    public String flagsToString() {
+        String strFlags = "";
+
+        for (String key: flags.keySet()) {
+            strFlags = strFlags + key + ":" + flags.get(key) + " ";
+        }
+
+        return strFlags;
     }
 }
