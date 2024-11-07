@@ -255,7 +255,7 @@ public class GamePanel extends JPanel {
 				if(actionSelector > 0) {
 					actionSelector--;
 				} else {
-					actionSelector = 1;
+					actionSelector = 2;
 				}
 			}
 		}
