@@ -21,9 +21,9 @@ public class CaveTwoMap extends Map {
     public ArrayList<NPC> loadNPCs() {
         ArrayList<NPC> npcs = new ArrayList<>();
 
-        // Initialize Otis right next to the player
-        // Otis otis = new Otis(1, getMapTile(0,18).getLocation().subtractX(12)); // Change coordinates as needed to place Otis next to the player
-        // npcs.add(otis);
+        //Initialize Otis right next to the player
+        Otis otis = new Otis(1, getMapTile(0,18).getLocation().subtractX(12)); // Change coordinates as needed to place Otis next to the player
+        npcs.add(otis);
 
         return npcs;
     }
