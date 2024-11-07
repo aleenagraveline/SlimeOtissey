@@ -90,4 +90,10 @@ public class CaveIceScreen extends Screen {
     private enum CaveIceScreenState {
         RUNNING
     }
+
+    @Override
+    public Map getMap() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getMap'");
+    }
 }

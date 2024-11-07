@@ -27,6 +27,9 @@ public abstract class Player extends GameObject {
     protected float moveAmountX, moveAmountY;
     protected float lastAmountMovedX, lastAmountMovedY;
 
+    protected static float statX;
+    protected static float statY;
+
     // values used to keep track of player's current state
     protected PlayerState playerState;
     protected PlayerState previousPlayerState;
@@ -105,6 +108,9 @@ public abstract class Player extends GameObject {
 
     // player WALKING state logic
     protected void playerWalking() {
+        statX = getCalibratedXLocation();
+        statY = getCalibratedYLocation();
+
         if (!keyLocker.isKeyLocked(INTERACT_KEY) && Keyboard.isKeyDown(INTERACT_KEY)) {
             keyLocker.lockKey(INTERACT_KEY);
             map.entityInteract(this);
@@ -167,10 +173,15 @@ public abstract class Player extends GameObject {
         if (playerState == PlayerState.STANDING) {
             // sets animation to a STAND animation based on which way player is facing
             this.currentAnimationName = facingDirection == Direction.RIGHT ? "STAND_RIGHT" : "STAND_LEFT";
+            this.currentAnimationName = facingDirection == Direction.UP ? "STAND_UP" : "STAND_DOWN";
         }
         else if (playerState == PlayerState.WALKING) {
             // sets animation to a WALK animation based on which way player is facing
             this.currentAnimationName = facingDirection == Direction.RIGHT ? "WALK_RIGHT" : "WALK_LEFT";
+        } 
+        else if (playerState == PlayerState.WALKING) {
+            // sets animation to a WALK animation based on which way player is facing
+            this.currentAnimationName = facingDirection == Direction.UP ? "WALK_UP" : "WALK_DOWN";
         }
     }
 
@@ -244,6 +255,10 @@ public abstract class Player extends GameObject {
         }
         else if (direction == Direction.LEFT) {
             this.currentAnimationName = "WALK_LEFT";
+        } else if (direction == Direction.UP) {
+            this.currentAnimationName = "WALK_UP";
+        } else if (direction == Direction.DOWN) {
+            this.currentAnimationName = "WALK_DOWN";
         }
         if (direction == Direction.UP) {
             moveY(-speed);
@@ -281,6 +296,13 @@ public abstract class Player extends GameObject {
     }
     public void setWalkingYDirection(Direction direction) {
         this.currentWalkingYDirection = direction;
+    }
+    public static float getPlayerX() {
+        return statX;
+    }
+
+    public static float getPlayerY() {
+        return statY;
     }
 
     // Uncomment this to have game draw player's bounds to make it easier to visualize

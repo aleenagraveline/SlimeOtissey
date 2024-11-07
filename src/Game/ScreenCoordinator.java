@@ -11,6 +11,7 @@ import Screens.ForestScreens.*;
 import Screens.IceScreens.*;
 import Screens.RandomBattleScreens.*;
 import Screens.TransitionScreens.*;
+import Level.Map;
 
 
 
@@ -78,7 +79,7 @@ public class ScreenCoordinator extends Screen {
 	@Override
 	public void initialize() {
 		// start game off with Menu Screen
-		gameState = GameState.ICE_TWO;
+		gameState = GameState.MENU;
 
 		// Fill majorScreens
 		majorScreens[CREDITS_INDEX] = new BetterCreditsScreen(this);
@@ -193,6 +194,11 @@ public class ScreenCoordinator extends Screen {
 	public void draw(GraphicsHandler graphicsHandler) {
 		// call the draw method for the currentScreen
 		currentScreen.draw(graphicsHandler);
+	}
+
+	@Override
+	public Map getMap() {
+		return currentScreen.getMap();
 	}
 
 	public void leaveRandomBattle() {

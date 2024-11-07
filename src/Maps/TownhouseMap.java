@@ -2,11 +2,16 @@ package Maps;
 
 import java.util.ArrayList;
 
+import EnhancedMapTiles.Food;
+import Level.EnhancedMapTile;
 import Level.Map;
+import Level.MapEntityStatus;
 import Level.NPC;
 import NPCs.Dinosaur;
 import NPCs.Otis;
 import Scripts.MapTransitions.SpawnTransitionScript;
+import Scripts.TestMap.FoodScript;
+import Scripts.TestMap.FoodSignScript;
 import Scripts.TestMap.OtisHouseScript;
 import Scripts.TestMap.TownhouseSignScript;
 import Tilesets.CommonTileset;
@@ -33,12 +38,28 @@ public class TownhouseMap extends Map{
     }
 
     @Override
+    public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
+        ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
+        Food apple = new Food(getMapTile(10, 10).getLocation());
+        enhancedMapTiles.add(apple);        
+        return enhancedMapTiles;
+    }
+
+    @Override
     public void loadScripts() {
         // door script
         getMapTile(12, 1).setInteractScript(new SpawnTransitionScript());
 
+        // food script
+        getMapTile(10, 10).setInteractScript(new FoodScript());
+
         // sign script
         getMapTile(5,2).setInteractScript(new TownhouseSignScript());
+
+        // food sign script
+        getMapTile(9, 7).setInteractScript(new FoodSignScript());
+
+        System.out.println("Loading");
     }
 
 }

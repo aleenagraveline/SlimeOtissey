@@ -90,4 +90,10 @@ public class IceOneScreen extends Screen {
     private enum IceOneScreenState {
         RUNNING
     }
+
+    @Override
+    public Map getMap() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getMap'");
+    }
 }

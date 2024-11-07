@@ -1,6 +1,8 @@
 package Screens;
 
 import Engine.*;
+import Level.Map;
+import Maps.TestMap;
 import SpriteFont.SpriteFont;
 
 import java.awt.*;
@@ -15,6 +17,10 @@ public class WinScreen extends Screen {
     public WinScreen(PlayLevelScreen playLevelScreen) {
         this.playLevelScreen = playLevelScreen;
         initialize();
+    }
+
+    public Map getMap() {
+        return new TestMap();
     }
 
     @Override

@@ -1,0 +1,1 @@
+77 248 test_screen 50 0 [] isInWaitingPuzzle:false hasTalkedToDinosaur:true moveToForestOne:false isInBugBattle:false moveToTownhouse:false hasFoundKey:false isInMemPuzzle:false usedKey:false hatesBugs:false playedMemPuzzle:false hasTalkedToWalrus:true usingKey:false hasLostBall:true keyIsInTree:true 

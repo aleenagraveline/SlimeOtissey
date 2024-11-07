@@ -4,6 +4,7 @@ import Builders.FrameBuilder;
 import Builders.MapTileBuilder;
 import Engine.ImageLoader;
 import GameObject.Frame;
+import GameObject.ImageEffect;
 import Level.TileType;
 import Level.Tileset;
 
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 public class CaveTileset extends Tileset {
 
     public CaveTileset() {
-        super(ImageLoader.load("CaveTileset.png"), 16, 16, 3);
+        super(ImageLoader.load("updatedCaveTileset.png"), 16, 16, 3);
     }
 
     @Override
@@ -115,6 +116,105 @@ public class CaveTileset extends Tileset {
                 .withTopLayer(caveWallFrame)
                 .withTileType(TileType.PASSABLE);
         mapTiles.add(overhangTile);
+        // // outerCorner
+        // Frame outerCornerFrame = new FrameBuilder(getSubImage(2,4))
+        //         .withScale(tileScale)
+        //         .build();
+        // MapTileBuilder outerCornerTile = new MapTileBuilder(outerCornerFrame);
+        // mapTiles.add(outerCornerTile);
+
+        // //leftPathEnd
+        // Frame leftPathEndFrame = new FrameBuilder(getSubImage(3,1))
+        //         .withScale(tileScale)
+        //         .build();
+        // MapTileBuilder leftPathEndTile = new MapTileBuilder(leftPathEndFrame);
+        // mapTiles.add(leftPathEndTile);
+
+        // //rightPathEnd
+        // Frame rightPathEndFrame = new FrameBuilder(getSubImage(3,2))
+        //         .withScale(tileScale)
+        //         .build();
+        // MapTileBuilder rightPathEndTile = new MapTileBuilder(rightPathEndFrame);
+        // mapTiles.add(rightPathEndTile);
+
+        // //leftPathEnd2
+        // Frame leftPathEnd2Frame = new FrameBuilder(getSubImage(3,1))
+        //         .withScale(tileScale)
+        //         .withImageEffect(ImageEffect.FLIP_VERTICAL)
+        //         .build();
+        // MapTileBuilder leftPathEnd2Tile = new MapTileBuilder(leftPathEnd2Frame);
+        // mapTiles.add(leftPathEnd2Tile);
+
+        // //rightPathEnd2
+        // Frame rightPathEnd2Frame = new FrameBuilder(getSubImage(3,2))
+        //         .withScale(tileScale)
+        //         .withImageEffect(ImageEffect.FLIP_VERTICAL)
+        //         .build();
+        // MapTileBuilder rightPathEnd2Tile = new MapTileBuilder(rightPathEnd2Frame);
+        // mapTiles.add(rightPathEnd2Tile);
+
+        // //topPathEnd
+        // Frame pathEndFrame = new FrameBuilder(getSubImage(3,0))
+        //         .withScale(tileScale)
+        //         .build();
+        // MapTileBuilder pathEndTile = new MapTileBuilder(pathEndFrame);
+        // mapTiles.add(pathEndTile);
+
+        // //bottomEnd
+        // Frame bottomEndFrame = new FrameBuilder(getSubImage(4,0))
+        //         .withScale(tileScale)
+        //         .build();
+        // MapTileBuilder bottomEndTile = new MapTileBuilder(bottomEndFrame);
+        // mapTiles.add(bottomEndTile);
+
+        // //flippedPathEnd
+        // Frame flippedPathEndFrame = new FrameBuilder(getSubImage(3,0))
+        //         .withScale(tileScale)
+        //         .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+        //         .build();
+        // MapTileBuilder flippedPathEndTile = new MapTileBuilder(flippedPathEndFrame);
+        // mapTiles.add(flippedPathEndTile);
+
+        // //flippedBottomEnd
+        // Frame flippedBottomEndFrame = new FrameBuilder(getSubImage(4,0))
+        //         .withScale(tileScale)
+        //         .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+        //         .build();
+        // MapTileBuilder flippedBottomEndTile = new MapTileBuilder(flippedBottomEndFrame);
+        // mapTiles.add(flippedBottomEndTile);
+
+        // //innerCorner
+        // Frame innerCornerFrame = new FrameBuilder(getSubImage(3,3))
+        //         .withScale(tileScale)
+        //         .build();
+        // MapTileBuilder innerCornerTile = new MapTileBuilder(innerCornerFrame);
+        // mapTiles.add(innerCornerTile);
+
+        // //sign
+        // Frame signFrame = new FrameBuilder(getSubImage(4, 1))
+        //         .withScale(tileScale)
+        //         .withBounds(1, 2, 14, 14)
+        //         .build();
+
+        // MapTileBuilder signTile = new MapTileBuilder(caveFloorFrame)
+        //         .withTopLayer(signFrame)
+        //         .withTileType(TileType.NOT_PASSABLE);
+
+        // mapTiles.add(signTile);
+
+        // //leftPath
+        // Frame leftPathFrame = new FrameBuilder(getSubImage(4,4))
+        //         .withScale(tileScale)
+        //         .build();
+        // MapTileBuilder leftPathTile = new MapTileBuilder(leftPathFrame);
+        // mapTiles.add(leftPathTile);
+
+        // //rightPath
+        // Frame rightPathFrame = new FrameBuilder(getSubImage(3,4))
+        //         .withScale(tileScale)
+        //         .build();
+        // MapTileBuilder rightPathTile = new MapTileBuilder(rightPathFrame);
+        // mapTiles.add(rightPathTile);
 
         return mapTiles;
     }

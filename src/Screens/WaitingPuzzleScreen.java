@@ -19,6 +19,8 @@ public class WaitingPuzzleScreen extends Screen {
 
     protected ScreenCoordinator screenCoordinator;
 
+    protected SpriteFont instructions;
+
     protected SpriteFont countdown;
     protected int countdownTimer;
 
@@ -41,12 +43,15 @@ public class WaitingPuzzleScreen extends Screen {
         countdownTimer = 600;
 
         // set up countdown displayer
+        instructions = new SpriteFont("TMB BPM BQUMZ NQVQAP                 1, 1, 2, 3, 5, ?", 20, 100, "Arial", 30, Color.WHITE);
         countdown = new SpriteFont("TEN.", 300, 200, "Arial", 60, new Color(0, 255, 0));
         resetButton = new SpriteFont("RESET COUNTDOWN", 80, 300, "Arial", 60, new Color(255, 0, 0));
 
-        countdown.setOutlineColor(Color.black);
+        instructions.setOutlineColor(Color.BLACK);
+        countdown.setOutlineColor(Color.BLACK);
         resetButton.setOutlineColor(Color.WHITE);
 
+        instructions.setOutlineThickness(2);
         countdown.setOutlineThickness(3);
         resetButton.setOutlineThickness(3);
 
@@ -59,6 +64,10 @@ public class WaitingPuzzleScreen extends Screen {
         keyLocker.lockKey(Key.SPACE);
     }
 
+    public Map getMap() {
+        return background;
+    }
+
     public void update() {
         // update background map (to play tile animations)
         background.update(null);
@@ -68,7 +77,7 @@ public class WaitingPuzzleScreen extends Screen {
             keyLocker.unlockKey(Key.SPACE);
             resetButton.setOutlineColor(Color.WHITE);
         }
-        if (!keyLocker.isKeyLocked(Key.SPACE) && Keyboard.isKeyDown(Key.SPACE)) {
+        if (!keyLocker.isKeyLocked(Key.SPACE) && Keyboard.isKeyDown(Key.SPACE) && countdownTimer >= 1) {
             countdownTimer = 600;
             countdown.setText("TEN.");
             countdown.setColor(new Color(0, 255, 0));
@@ -114,6 +123,7 @@ public class WaitingPuzzleScreen extends Screen {
             } else if (countdownTimer <= 0) {
                 countdown.setX(175);
                 countdown.setText("Passed the test!");
+                resetButton.setText("");
                 countdown.setColor(new Color(0, 255, 0));
             }
 
@@ -121,6 +131,7 @@ public class WaitingPuzzleScreen extends Screen {
                 this.playLevelScreen.exitWaitingPuzzle();
             }
 
+            instructions.draw(graphicsHandler);
             countdown.draw(graphicsHandler);
             resetButton.draw(graphicsHandler);
         }
