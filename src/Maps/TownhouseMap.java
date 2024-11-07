@@ -10,6 +10,7 @@ import NPCs.Dinosaur;
 import NPCs.Otis;
 import Scripts.MapTransitions.SpawnTransitionScript;
 import Scripts.TestMap.FoodScript;
+import Scripts.TestMap.FoodSignScript;
 import Scripts.TestMap.OtisHouseScript;
 import Scripts.TestMap.TownhouseSignScript;
 import Tilesets.CommonTileset;
@@ -64,7 +65,7 @@ public class TownhouseMap extends Map{
         getMapTile(5,2).setInteractScript(new TownhouseSignScript());
 
         // food sign script
-        getMapTile(9, 10).setInteractScript(new FoodScript());
+        getMapTile(9, 7).setInteractScript(new FoodSignScript());
     }
 
 }

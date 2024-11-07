@@ -18,8 +18,8 @@ public class FoodSignScript extends Script {
         scriptActions.add(new TextboxScriptAction() {{
             addText("Game Tip: Food");
             addText("Here lies an apple. Maybe Otis will enjoy it?");
-            addText("Food is a good way to increase your friendship with Otis");
-            addText("The amount of friendship points you gain is random (1-3 possible)");
+            addText("Food is a good way to increase your friendship with\nOtis");
+            addText("The amount of friendship points you gain is random\n(1-3 possible)");
             addText("So far, this is the only food in game...but stay tuned!");
         }});
 
