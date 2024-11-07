@@ -122,7 +122,7 @@ public class GamePanel extends JPanel {
 	}
 
 	public void loadGame() {
-
+		//later ;)
 	}
 
 	public void saveGame() {
