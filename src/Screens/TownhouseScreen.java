@@ -55,10 +55,11 @@ public class TownhouseScreen extends Screen {
         if (map.getFlagManager().isFlagSet("moveToSpawn")) {
             flagManager.unsetFlag("moveToSpawn");
             this.playLevelScreen.exitTownhouse();
-        } else if(map.getFlagManager().isFlagSet("hasEatenFood")) {
+        } else if(map.getEnhancedMapTiles().get(0).getMapEntityStatus().equals(MapEntityStatus.ACTIVE) && map.getFlagManager().isFlagSet("hasEatenFood")) {
             map.getEnhancedMapTiles().get(0).setIsHidden(true);
             eat();
-            map.getFlagManager().unsetFlag("hasEatenFood");
+            //map.getFlagManager().unsetFlag("hasEatenFood");
+            map.getEnhancedMapTiles().get(0).setMapEntityStatus(MapEntityStatus.INACTIVE);
         }
         else {
             player.update();
