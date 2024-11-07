@@ -1,4 +1,5 @@
 package Engine;
+import Level.Map;
 
 // Base Screen class
 // This game engine runs off the idea of "screens", which are classes that contain their own update/draw methods for a particular piece of the game
@@ -8,4 +9,5 @@ public abstract class Screen {
     //public abstract String screenName();
     public abstract void update();
     public abstract void draw(GraphicsHandler graphicsHandler);
+    public abstract Map getMap();
 }

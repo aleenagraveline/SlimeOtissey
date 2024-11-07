@@ -5,6 +5,7 @@ import java.security.SecureRandom;
 import Engine.DefaultScreen;
 import Engine.GraphicsHandler;
 import Engine.Screen;
+import Level.Map;
 import Screens.BetterCreditsScreen;
 import Screens.PlayLevelScreen;
 import Screens.TitleScreen;
@@ -168,6 +169,11 @@ public class ScreenCoordinator extends Screen {
 	public void draw(GraphicsHandler graphicsHandler) {
 		// call the draw method for the currentScreen
 		currentScreen.draw(graphicsHandler);
+	}
+
+	@Override
+	public Map getMap() {
+		return currentScreen.getMap();
 	}
 
 	public void leaveRandomBattle() {

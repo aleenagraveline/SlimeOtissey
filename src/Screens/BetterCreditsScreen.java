@@ -4,6 +4,8 @@ import Engine.*;
 import Game.GameState;
 import Game.ScreenCoordinator;
 import GameObject.Sprite;
+import Level.Map;
+import Maps.TestMap;
 import SpriteFont.SpriteFont;
 import java.awt.Color;
 
@@ -57,6 +59,10 @@ public class BetterCreditsScreen extends Screen {
         createdByLabel4.setOutlineThickness(1);
         createdByLabel5.setOutlineThickness(1);
         returnInstructionsLabel.setOutlineThickness(2);
+    }
+
+    public Map getMap() {
+        return new TestMap();
     }
 
     public void update() {

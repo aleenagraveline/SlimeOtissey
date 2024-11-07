@@ -17,7 +17,7 @@ import Utils.Point;
 public class PlayLevelScreen extends Screen {
     protected ScreenCoordinator screenCoordinator;
     protected Map map;
-    protected static Player player;
+    protected Player player;
     public static int playerHealth;
     protected PlayLevelScreenState playLevelScreenState;
     protected BugFightScreen bugFightScreen; // BugFightScreen as a subscreen of PlayLevelScreen
@@ -76,6 +76,10 @@ public class PlayLevelScreen extends Screen {
         memoryPuzzleScreen = new MemoryPuzzleScreen(this);
         waitingPuzzleScreen = new WaitingPuzzleScreen(this);
         townhouseScreen = new TownhouseScreen(this);
+    }
+
+    public Map getMap() {
+        return map;
     }
 
     public void update() {
@@ -243,12 +247,4 @@ public class PlayLevelScreen extends Screen {
     /*public static Map getMap() {
         return map;
     }*/
-
-    public static int getPlayerX() {
-        return (int) player.getCalibratedXLocation();
-    }
-
-    public static int getPlayerY() {
-        return (int) player.getCalibratedYLocation();
-    }
 }

@@ -33,6 +33,10 @@ public class CreditsScreen extends Screen {
         keyLocker.lockKey(Key.SPACE);
     }
 
+    public Map getMap() {
+        return background;
+    }
+
     public void update() {
         background.update(null);
 

@@ -47,6 +47,10 @@ public class MenuScreen extends Screen {
         keyLocker.lockKey(Key.SPACE);
     }
 
+    public Map getMap() {
+        return background;
+    }
+
     public void update() {
         // update background map (to play tile animations)
         background.update(null);

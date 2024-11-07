@@ -27,6 +27,9 @@ public abstract class Player extends GameObject {
     protected float moveAmountX, moveAmountY;
     protected float lastAmountMovedX, lastAmountMovedY;
 
+    protected static float statX;
+    protected static float statY;
+
     // values used to keep track of player's current state
     protected PlayerState playerState;
     protected PlayerState previousPlayerState;
@@ -105,6 +108,9 @@ public abstract class Player extends GameObject {
 
     // player WALKING state logic
     protected void playerWalking() {
+        statX = getCalibratedXLocation();
+        statY = getCalibratedYLocation();
+
         if (!keyLocker.isKeyLocked(INTERACT_KEY) && Keyboard.isKeyDown(INTERACT_KEY)) {
             keyLocker.lockKey(INTERACT_KEY);
             map.entityInteract(this);
@@ -274,6 +280,14 @@ public abstract class Player extends GameObject {
 
     public static int getFriendshipPoints() {
         return friendshipPoints;
+    }
+
+    public static float getPlayerX() {
+        return statX;
+    }
+
+    public static float getPlayerY() {
+        return statY;
     }
 
     // Uncomment this to have game draw player's bounds to make it easier to visualize

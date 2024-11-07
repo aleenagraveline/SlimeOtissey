@@ -48,6 +48,10 @@ public class CaveTwoScreen extends Screen {
         map.preloadScripts();
     }
 
+    public Map getMap() {
+        return map;
+    }
+
     public void update() {
         // based on screen state, perform specific actions
         switch (caveTwoScreenState) {

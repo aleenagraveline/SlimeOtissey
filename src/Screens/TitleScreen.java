@@ -4,6 +4,8 @@ import Engine.*;
 import Game.GameState;
 import Game.ScreenCoordinator;
 import GameObject.Sprite;
+import Level.Map;
+import Maps.TestMap;
 import SpriteFont.SpriteFont;
 
 import java.awt.*;
@@ -43,6 +45,10 @@ public class TitleScreen extends Screen {
         keyPressTimer = 0;
         menuItemSelected = -1;
         keyLocker.lockKey(Key.SPACE);
+    }
+
+    public Map getMap() {
+        return new TestMap();
     }
 
     public void update() {

@@ -36,6 +36,7 @@ public class GamePanel extends JPanel {
 
 	private SpriteFont pauseLabel;
 	private SpriteFont saveLabel;
+	private SpriteFont savedLabel;
 	private SpriteFont inventoryLabel;
 
 	private static SpriteFont friendshipPointsLabel;
@@ -86,9 +87,9 @@ public class GamePanel extends JPanel {
 		saveLabel.setOutlineColor(Color.black);
 		saveLabel.setOutlineThickness(2.0f);
 
-		saveLabel = new SpriteFont("PRESS SPACE TO SAVE", 235, 330, "Arial", 30, Color.white);
-		saveLabel.setOutlineColor(Color.black);
-		saveLabel.setOutlineThickness(2.0f);
+		savedLabel = new SpriteFont("GAME SAVED!", 304, 330, "Arial", 30, Color.white);
+		savedLabel.setOutlineColor(Color.black);
+		savedLabel.setOutlineThickness(2.0f);
 
 		inventoryLabel = new SpriteFont("INVENTORY", 200, ScreenManager.getScreenHeight() + 140, "Arial", 24, new Color(212, 173, 152));
 		inventoryLabel.setOutlineColor(Color.black);
@@ -129,7 +130,7 @@ public class GamePanel extends JPanel {
 		try {
 			File myObj = new File("src/Saves/savefile.txt");
 			FileWriter myWriter = new FileWriter(myObj);
-			String savePosition = "" + ((int) PlayLevelScreen.getPlayerX()) + " " + ((int) PlayLevelScreen.getPlayerY());
+			String savePosition = "" + ((int) Player.getPlayerX()) + " " + ((int) Player.getPlayerY());
 
 			String saveHealth = "" + PlayLevelScreen.playerHealth;
 
@@ -145,9 +146,10 @@ public class GamePanel extends JPanel {
 
 			String saveFlags = PlayLevelScreen.flagManager.flagsToString();
 
-			//String saveScreen = ScreenManager.getScreen().toString();
+			String saveScreen = ScreenManager.getScreen().getMap().getMapFileName();
+			saveScreen = saveScreen.substring(0, saveScreen.length() - 7) + "screen";
 
-			myWriter.write(savePosition + " " + saveHealth + " " + saveFriendship + " " + saveInventory + " " + saveFlags/* + " " + saveScreen*/);
+			myWriter.write(savePosition + " " + saveScreen + " " + saveHealth + " " + saveFriendship + " " + saveInventory + " " + saveFlags);
 			myWriter.close();
 			System.out.println("Successfully wrote to save file.");
 		} catch (IOException e) {
@@ -376,7 +378,11 @@ public class GamePanel extends JPanel {
 		// if game is paused, draw pause gfx over Screen gfx, then check for if the game should be saved
 		if (isGamePaused) {
 			pauseLabel.draw(graphicsHandler);
-			saveLabel.draw(graphicsHandler);
+			if(pauseTimer <= 0) {
+				saveLabel.draw(graphicsHandler);
+			} else {
+				savedLabel.draw(graphicsHandler);
+			}
 
 			if(Keyboard.isKeyDown(Key.SPACE) && !keyLocker.isKeyLocked(Key.SPACE) && pauseTimer <= 0) {
 				keyLocker.lockKey(Key.SPACE);
