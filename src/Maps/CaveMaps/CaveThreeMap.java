@@ -22,7 +22,7 @@ public class CaveThreeMap extends Map {
         ArrayList<NPC> npcs = new ArrayList<>();
 
         // Initialize Otis right next to the player
-        Otis otis = new Otis(1, getMapTile(2, 0).getLocation()); // Change coordinates as needed to place Otis next to the player
+        Otis otis = new Otis(1, getMapTile(11, 28).getLocation()); 
         npcs.add(otis);
 
         return npcs;
