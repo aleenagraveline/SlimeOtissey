@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import EnhancedMapTiles.Food;
 import Level.EnhancedMapTile;
 import Level.Map;
+import Level.MapEntityStatus;
 import Level.NPC;
 import NPCs.Dinosaur;
 import NPCs.Otis;
@@ -17,14 +18,9 @@ import Tilesets.CommonTileset;
 
 public class TownhouseMap extends Map{
 
-    public ArrayList<Food> foodCollection;
     public TownhouseMap() {
         super("townhouse_map.txt", new CommonTileset());
         this.playerStartPosition = getMapTile(12, 2).getLocation().subtractX(12).subtractY(24); // Position below door in house
-    }
-
-    public Food getFood(int index) {
-        return foodCollection.get(index);
     }
 
     @Override
@@ -44,12 +40,8 @@ public class TownhouseMap extends Map{
     @Override
     public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
         ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
-        this.foodCollection = new ArrayList<>();
-
         Food apple = new Food(getMapTile(10, 10).getLocation());
-        enhancedMapTiles.add(apple);
-        foodCollection.add(apple);
-        
+        enhancedMapTiles.add(apple);        
         return enhancedMapTiles;
     }
 
@@ -66,6 +58,8 @@ public class TownhouseMap extends Map{
 
         // food sign script
         getMapTile(9, 7).setInteractScript(new FoodSignScript());
+
+        System.out.println("Loading");
     }
 
 }
