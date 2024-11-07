@@ -18,9 +18,10 @@ public class ForestOneMap extends Map {
     private SoundPlayer soundPlayer;
 
     public ForestOneMap() {
+        
         super("forest_one_map.txt", new ForestTileset());
         this.playerStartPosition = getMapTile(0, 8).getLocation().addY(24); // middle of path on left
-        addMusic("Resources/Whimsy Woods (online-audio-converter.com).wav");
+        addMusic("Resources/WhimsyWoods (online-audio-converter.com).wav");
     }
 
      public void addMusic(String soundFilePath) {
