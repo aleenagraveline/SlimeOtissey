@@ -1,5 +1,6 @@
 package Screens;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import Engine.*;
@@ -55,11 +56,6 @@ public class TownhouseScreen extends Screen {
         if (map.getFlagManager().isFlagSet("moveToSpawn")) {
             flagManager.unsetFlag("moveToSpawn");
             this.playLevelScreen.exitTownhouse();
-        } else if(map.getEnhancedMapTiles().get(0).getMapEntityStatus().equals(MapEntityStatus.ACTIVE) && map.getFlagManager().isFlagSet("hasEatenFood")) {
-            map.getEnhancedMapTiles().get(0).setIsHidden(true);
-            eat();
-            //map.getFlagManager().unsetFlag("hasEatenFood");
-            map.getEnhancedMapTiles().get(0).setMapEntityStatus(MapEntityStatus.INACTIVE);
         }
         else {
             player.update();
@@ -71,12 +67,6 @@ public class TownhouseScreen extends Screen {
     @Override
     public void draw(GraphicsHandler graphicsHandler) {
         this.map.draw(player, graphicsHandler);
-    }
-
-    public void eat() {
-        Random random = new Random();
-        Player.gainFriendshipPoints(random.nextInt(3) + 1);
-        System.out.println("eating method running");
     }
     
 }

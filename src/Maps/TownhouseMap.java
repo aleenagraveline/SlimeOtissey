@@ -41,7 +41,11 @@ public class TownhouseMap extends Map{
     public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
         ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
         Food apple = new Food(getMapTile(10, 10).getLocation());
-        enhancedMapTiles.add(apple);        
+        apple.setInteractScript(new FoodScript());
+        Food apple2 = new Food(getMapTile(12, 10).getLocation());
+        apple2.setInteractScript(new FoodScript());
+        enhancedMapTiles.add(apple);
+        enhancedMapTiles.add(apple2);       
         return enhancedMapTiles;
     }
 
@@ -51,7 +55,7 @@ public class TownhouseMap extends Map{
         getMapTile(12, 1).setInteractScript(new SpawnTransitionScript());
 
         // food script
-        getMapTile(10, 10).setInteractScript(new FoodScript());
+        //getMapTile(10, 10).setInteractScript(new FoodScript());
 
         // sign script
         getMapTile(5,2).setInteractScript(new TownhouseSignScript());
