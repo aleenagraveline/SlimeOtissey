@@ -116,105 +116,152 @@ public class CaveTileset extends Tileset {
                 .withTopLayer(caveWallFrame)
                 .withTileType(TileType.PASSABLE);
         mapTiles.add(overhangTile);
-        // // outerCorner
-        // Frame outerCornerFrame = new FrameBuilder(getSubImage(2,4))
-        //         .withScale(tileScale)
-        //         .build();
-        // MapTileBuilder outerCornerTile = new MapTileBuilder(outerCornerFrame);
-        // mapTiles.add(outerCornerTile);
+        // outerCorner
+        Frame outerCornerFrame = new FrameBuilder(getSubImage(2,4))
+                .withScale(tileScale)
+                .build();
+        MapTileBuilder outerCornerTile = new MapTileBuilder(outerCornerFrame);
+        mapTiles.add(outerCornerTile);
 
-        // //leftPathEnd
-        // Frame leftPathEndFrame = new FrameBuilder(getSubImage(3,1))
-        //         .withScale(tileScale)
-        //         .build();
-        // MapTileBuilder leftPathEndTile = new MapTileBuilder(leftPathEndFrame);
-        // mapTiles.add(leftPathEndTile);
+        //leftPathEnd
+        Frame leftPathEndFrame = new FrameBuilder(getSubImage(3,1))
+                .withScale(tileScale)
+                .build();
+        MapTileBuilder leftPathEndTile = new MapTileBuilder(leftPathEndFrame);
+        mapTiles.add(leftPathEndTile);
 
-        // //rightPathEnd
-        // Frame rightPathEndFrame = new FrameBuilder(getSubImage(3,2))
-        //         .withScale(tileScale)
-        //         .build();
-        // MapTileBuilder rightPathEndTile = new MapTileBuilder(rightPathEndFrame);
-        // mapTiles.add(rightPathEndTile);
+        //rightPathEnd
+        Frame rightPathEndFrame = new FrameBuilder(getSubImage(3,2))
+                .withScale(tileScale)
+                .build();
+        MapTileBuilder rightPathEndTile = new MapTileBuilder(rightPathEndFrame);
+        mapTiles.add(rightPathEndTile);
 
-        // //leftPathEnd2
-        // Frame leftPathEnd2Frame = new FrameBuilder(getSubImage(3,1))
-        //         .withScale(tileScale)
-        //         .withImageEffect(ImageEffect.FLIP_VERTICAL)
-        //         .build();
-        // MapTileBuilder leftPathEnd2Tile = new MapTileBuilder(leftPathEnd2Frame);
-        // mapTiles.add(leftPathEnd2Tile);
+        //leftPathEnd2
+        Frame leftPathEnd2Frame = new FrameBuilder(getSubImage(3,1))
+                .withScale(tileScale)
+                .withImageEffect(ImageEffect.FLIP_VERTICAL)
+                .build();
+        MapTileBuilder leftPathEnd2Tile = new MapTileBuilder(leftPathEnd2Frame);
+        mapTiles.add(leftPathEnd2Tile);
 
-        // //rightPathEnd2
-        // Frame rightPathEnd2Frame = new FrameBuilder(getSubImage(3,2))
-        //         .withScale(tileScale)
-        //         .withImageEffect(ImageEffect.FLIP_VERTICAL)
-        //         .build();
-        // MapTileBuilder rightPathEnd2Tile = new MapTileBuilder(rightPathEnd2Frame);
-        // mapTiles.add(rightPathEnd2Tile);
+        //rightPathEnd2
+        Frame rightPathEnd2Frame = new FrameBuilder(getSubImage(3,2))
+                .withScale(tileScale)
+                .withImageEffect(ImageEffect.FLIP_VERTICAL)
+                .build();
+        MapTileBuilder rightPathEnd2Tile = new MapTileBuilder(rightPathEnd2Frame);
+        mapTiles.add(rightPathEnd2Tile);
 
-        // //topPathEnd
-        // Frame pathEndFrame = new FrameBuilder(getSubImage(3,0))
-        //         .withScale(tileScale)
-        //         .build();
-        // MapTileBuilder pathEndTile = new MapTileBuilder(pathEndFrame);
-        // mapTiles.add(pathEndTile);
+        //topPathEnd
+        Frame pathEndFrame = new FrameBuilder(getSubImage(3,0))
+                .withScale(tileScale)
+                .build();
+        MapTileBuilder pathEndTile = new MapTileBuilder(pathEndFrame);
+        mapTiles.add(pathEndTile);
 
-        // //bottomEnd
-        // Frame bottomEndFrame = new FrameBuilder(getSubImage(4,0))
-        //         .withScale(tileScale)
-        //         .build();
-        // MapTileBuilder bottomEndTile = new MapTileBuilder(bottomEndFrame);
-        // mapTiles.add(bottomEndTile);
+        //bottomEnd
+        Frame bottomEndFrame = new FrameBuilder(getSubImage(4,0))
+                .withScale(tileScale)
+                .build();
+        MapTileBuilder bottomEndTile = new MapTileBuilder(bottomEndFrame);
+        mapTiles.add(bottomEndTile);
 
-        // //flippedPathEnd
-        // Frame flippedPathEndFrame = new FrameBuilder(getSubImage(3,0))
-        //         .withScale(tileScale)
-        //         .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-        //         .build();
-        // MapTileBuilder flippedPathEndTile = new MapTileBuilder(flippedPathEndFrame);
-        // mapTiles.add(flippedPathEndTile);
+        //flippedPathEnd
+        Frame flippedPathEndFrame = new FrameBuilder(getSubImage(3,0))
+                .withScale(tileScale)
+                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                .build();
+        MapTileBuilder flippedPathEndTile = new MapTileBuilder(flippedPathEndFrame);
+        mapTiles.add(flippedPathEndTile);
 
-        // //flippedBottomEnd
-        // Frame flippedBottomEndFrame = new FrameBuilder(getSubImage(4,0))
-        //         .withScale(tileScale)
-        //         .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-        //         .build();
-        // MapTileBuilder flippedBottomEndTile = new MapTileBuilder(flippedBottomEndFrame);
-        // mapTiles.add(flippedBottomEndTile);
+        //flippedBottomEnd
+        Frame flippedBottomEndFrame = new FrameBuilder(getSubImage(4,0))
+                .withScale(tileScale)
+                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                .build();
+        MapTileBuilder flippedBottomEndTile = new MapTileBuilder(flippedBottomEndFrame);
+        mapTiles.add(flippedBottomEndTile);
 
-        // //innerCorner
-        // Frame innerCornerFrame = new FrameBuilder(getSubImage(3,3))
-        //         .withScale(tileScale)
-        //         .build();
-        // MapTileBuilder innerCornerTile = new MapTileBuilder(innerCornerFrame);
-        // mapTiles.add(innerCornerTile);
+        //innerCorner
+        Frame innerCornerFrame = new FrameBuilder(getSubImage(3,3))
+                .withScale(tileScale)
+                .build();
+        MapTileBuilder innerCornerTile = new MapTileBuilder(innerCornerFrame);
+        mapTiles.add(innerCornerTile);
 
-        // //sign
-        // Frame signFrame = new FrameBuilder(getSubImage(4, 1))
-        //         .withScale(tileScale)
-        //         .withBounds(1, 2, 14, 14)
-        //         .build();
+        //sign
+        Frame signFrame = new FrameBuilder(getSubImage(4, 1))
+                .withScale(tileScale)
+                .withBounds(1, 2, 14, 14)
+                .build();
 
-        // MapTileBuilder signTile = new MapTileBuilder(caveFloorFrame)
-        //         .withTopLayer(signFrame)
-        //         .withTileType(TileType.NOT_PASSABLE);
+        MapTileBuilder signTile = new MapTileBuilder(caveFloorFrame)
+                .withTopLayer(signFrame)
+                .withTileType(TileType.NOT_PASSABLE);
 
-        // mapTiles.add(signTile);
+        mapTiles.add(signTile);
 
-        // //leftPath
-        // Frame leftPathFrame = new FrameBuilder(getSubImage(4,4))
-        //         .withScale(tileScale)
-        //         .build();
-        // MapTileBuilder leftPathTile = new MapTileBuilder(leftPathFrame);
-        // mapTiles.add(leftPathTile);
+        //leftPath
+        Frame leftPathFrame = new FrameBuilder(getSubImage(4,4))
+                .withScale(tileScale)
+                .build();
+        MapTileBuilder leftPathTile = new MapTileBuilder(leftPathFrame);
+        mapTiles.add(leftPathTile);
 
-        // //rightPath
-        // Frame rightPathFrame = new FrameBuilder(getSubImage(3,4))
-        //         .withScale(tileScale)
-        //         .build();
-        // MapTileBuilder rightPathTile = new MapTileBuilder(rightPathFrame);
-        // mapTiles.add(rightPathTile);
+        //rightPath
+        Frame rightPathFrame = new FrameBuilder(getSubImage(3,4))
+                .withScale(tileScale)
+                .build();
+        MapTileBuilder rightPathTile = new MapTileBuilder(rightPathFrame);
+        mapTiles.add(rightPathTile);
+
+        //outerCornerFlipped
+        Frame outerCornerFlippedFrame = new FrameBuilder(getSubImage(2,4))
+                .withScale(tileScale)
+                .withImageEffect(ImageEffect.FLIP_VERTICAL)
+                .build();
+        MapTileBuilder outerCornerFlippedTile = new MapTileBuilder(outerCornerFlippedFrame);
+        mapTiles.add(outerCornerFlippedTile);
+
+        //innerCornerFlipped
+        Frame innerCornerFlippedFrame = new FrameBuilder(getSubImage(3,3))
+                .withScale(tileScale)
+                .withImageEffect(ImageEffect.FLIP_VERTICAL)
+                .build();
+        MapTileBuilder innerCornerFlippedTile = new MapTileBuilder(innerCornerFlippedFrame);
+        mapTiles.add(innerCornerFlippedTile);
+        
+        //outerCorner2
+        Frame outerCorner2Frame = new FrameBuilder(getSubImage(4,2))
+                .withScale(tileScale)
+                .build();
+        MapTileBuilder outerCorner2Tile = new MapTileBuilder(outerCorner2Frame);
+        mapTiles.add(outerCorner2Tile);
+
+        //innerCorner2
+        Frame innerCorner2Frame = new FrameBuilder(getSubImage(4,3))
+                .withScale(tileScale)
+                .build();
+        MapTileBuilder innerCorner2Tile = new MapTileBuilder(innerCorner2Frame);
+        mapTiles.add(innerCorner2Tile);
+
+        //outerCorner2Flipped
+                Frame outerCorner2FlippedFrame = new FrameBuilder(getSubImage(4,2))
+                .withScale(tileScale)
+                .withImageEffect(ImageEffect.FLIP_VERTICAL)
+                .build();
+        MapTileBuilder outerCorner2FlippedTile = new MapTileBuilder(outerCorner2FlippedFrame);
+        mapTiles.add(outerCorner2FlippedTile);
+
+        //innerCorner2Flipped
+        Frame innerCorner2FlippedFrame = new FrameBuilder(getSubImage(4,3))
+                .withScale(tileScale)
+                .withImageEffect(ImageEffect.FLIP_VERTICAL)
+                .build();
+        MapTileBuilder innerCorner2FlippedTile = new MapTileBuilder(innerCorner2FlippedFrame);
+        mapTiles.add(innerCorner2FlippedTile);
+
 
         return mapTiles;
     }
