@@ -16,9 +16,10 @@ public class LostBallScript extends Script {
         scriptActions.add(new LockPlayerScriptAction());
 
         scriptActions.add(new TextboxScriptAction() {{
-            addText("Hi, I'm Alex!");
-            addText("I need to find a friend.");
-            addText("Where should I start?");
+            addText("*Alex exits his house to embark on his \nregular morning walk*");
+            addText("Oh! Who are you little guy?");
+            addText("Hmm... I guess he doesn't talk");
+            addText("Well, I guess I'll get started on my walk, wanna \ncome with?");
             addText("(Use WASD to walk,\npress SPACE to interact)");
         }});
 

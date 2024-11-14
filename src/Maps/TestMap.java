@@ -10,6 +10,7 @@ import Scripts.SimpleTextScript;
 import Scripts.MapTransitions.ForestOneTransitionScript;
 import Scripts.TestMap.*;
 import Tilesets.CommonTileset;
+import Tilesets.VillageTileset;
 
 import java.util.ArrayList;
 
@@ -17,15 +18,15 @@ import java.util.ArrayList;
 public class TestMap extends Map {
 
     public TestMap() {
-        super("test_map.txt", new CommonTileset());
-        this.playerStartPosition = getMapTile(17, 20).getLocation();
+        super("test_map.txt", new VillageTileset());
+        this.playerStartPosition = getMapTile(4, 8).getLocation();
     }
 
     @Override
     public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
         ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
 
-        PushableRock pushableRock = new PushableRock(getMapTile(2, 7).getLocation());
+        PushableRock pushableRock = new PushableRock(getMapTile(20, 10).getLocation());
         enhancedMapTiles.add(pushableRock);
 
         return enhancedMapTiles;
@@ -35,11 +36,11 @@ public class TestMap extends Map {
     public ArrayList<NPC> loadNPCs() {
         ArrayList<NPC> npcs = new ArrayList<>();
 
-        Walrus walrus = new Walrus(1, getMapTile(4, 28).getLocation().subtractY(40));
+        Walrus walrus = new Walrus(1, getMapTile(16, 14).getLocation().subtractY(40));
         walrus.setInteractScript(new WalrusScript());
         npcs.add(walrus);
 
-        Dinosaur dinosaur = new Dinosaur(2, getMapTile(13, 4).getLocation());
+        Dinosaur dinosaur = new Dinosaur(2, getMapTile(4, 23).getLocation());
         dinosaur.setExistenceFlag("hasTalkedToDinosaur");
         dinosaur.setInteractScript(new DinoScript());
         npcs.add(dinosaur);
@@ -48,7 +49,7 @@ public class TestMap extends Map {
         bug.setInteractScript(new BugScript());
         npcs.add(bug);
 
-        Otis otis = new Otis(4, getMapTile(19, 20).getLocation().subtractX(20));
+        Otis otis = new Otis(4, getMapTile(5, 8).getLocation().subtractX(20));
         npcs.add(otis);
 
 
@@ -59,9 +60,9 @@ public class TestMap extends Map {
     public ArrayList<Trigger> loadTriggers() {
         ArrayList<Trigger> triggers = new ArrayList<>();
         // story start triggers
-        triggers.add(new Trigger(790, 1030, 100, 10, new LostBallScript(), "hasLostBall"));
-        triggers.add(new Trigger(790, 960, 10, 80, new LostBallScript(), "hasLostBall"));
-        triggers.add(new Trigger(890, 960, 10, 80, new LostBallScript(), "hasLostBall"));
+        triggers.add(new Trigger(144, 460, 148, 10, new LostBallScript(), "hasLostBall"));
+        triggers.add(new Trigger(144, 380, 10, 80, new LostBallScript(), "hasLostBall"));
+        triggers.add(new Trigger(292, 380, 10, 80, new LostBallScript(), "hasLostBall"));
 
         // forest transition trigger
         triggers.add(new Trigger(1140, 1152, 12, 144, new ForestOneTransitionScript()));
@@ -71,16 +72,16 @@ public class TestMap extends Map {
 
     @Override
     public void loadScripts() {
-        getMapTile(21, 19).setInteractScript(new SimpleTextScript("Alex's house"));
+        getMapTile(7, 7).setInteractScript(new SimpleTextScript("Alex's house"));
 
-        getMapTile(7, 26).setInteractScript(new SimpleTextScript("Walrus's house"));
+        getMapTile(19, 13).setInteractScript(new SimpleTextScript("Walrus's house"));
 
-        getMapTile(20, 4).setInteractScript(new SimpleTextScript("King Lodeon's... Castle..."));
+        getMapTile(11, 23).setInteractScript(new SimpleTextScript("King Lodeon's... Castle..."));
 
         // Forest sign interaction
         getMapTile(18, 26).setInteractScript(new SimpleTextScript("To Forest:\n>>>>"));
 
-        getMapTile(2, 6).setInteractScript(new TreeScript());
+        getMapTile(20, 9).setInteractScript(new TreeScript());
     }
 }
 
