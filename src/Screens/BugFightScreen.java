@@ -33,7 +33,7 @@ public class BugFightScreen extends Screen {
     protected SpriteFont hammerAttack;
     protected SpriteFont bowAttack;
 
-    protected Map background;
+    protected BugFightMap background;
     protected int keyPressTimer;
     protected int pointerLocationX, pointerLocationY;
     protected KeyLocker keyLocker = new KeyLocker();
@@ -41,7 +41,14 @@ public class BugFightScreen extends Screen {
     protected int playerHealth;
     protected int playerStrength;
     protected SpriteFont playerHealthDisplay;
+
+    protected SpriteFont critIndicator;
+    protected SpriteFont glanceIndicator;
+    protected SpriteFont damageIndicator;
+    protected boolean crit;
+    protected boolean glance;
     
+    protected int shakeTimer;
     protected int bugHealth;
     protected int bugStrength;
     protected boolean armored;
@@ -60,6 +67,7 @@ public class BugFightScreen extends Screen {
         attacking = false;
         hasInteracted = false;
 
+        shakeTimer = 0;
         bugHealth = 15;
         bugStrength = 3;
         armored = true;
@@ -97,6 +105,20 @@ public class BugFightScreen extends Screen {
         bowAttack = new SpriteFont("BOW", 550, 500, "Arial", 30, new Color(49, 207, 240));
         bowAttack.setOutlineColor(Color.black);
         bowAttack.setOutlineThickness(3);
+
+        critIndicator = new SpriteFont("CRIT!", 375, 300, "Arial", 30, Color.YELLOW);
+        critIndicator.setOutlineColor(Color.ORANGE);
+        critIndicator.setOutlineThickness(3);
+        crit = false;
+
+        glanceIndicator = new SpriteFont("Glance...", 375, 300, "Arial", 30, Color.LIGHT_GRAY);
+        glanceIndicator.setOutlineColor(Color.DARK_GRAY);
+        glanceIndicator.setOutlineThickness(3);
+        glance = false;
+
+        damageIndicator = new SpriteFont("0", 300, 300, "Arial", 30, Color.RED);
+        damageIndicator.setOutlineColor(new Color(120, 6, 6));
+        damageIndicator.setOutlineThickness(3);
 
         // define/setup map
         background = new BugFightMap();
@@ -218,33 +240,45 @@ public class BugFightScreen extends Screen {
                     }
                 }
             } else {
+                double attack = 0;
                 if (menuItemSelected == 0) { // sword atack
                     if (!armored) {
-                        bugHealth -= attack(playerStrength) * 1.5;
+                        attack = attack(playerStrength) * 1.5;
+                        bugHealth -= attack;
+                        crit = true;
                     } else {
-                        bugHealth -= attack(playerStrength);
+                        attack = attack(playerStrength);
+                        bugHealth -= attack;
                     }
 
                     hasInteracted = true;
                 } else if (menuItemSelected == 1) { // hammer attack
                     if (armored) {
-                        bugHealth -= attack(playerStrength) * 1.5;
+                        attack = attack(playerStrength) * 1.5;
+                        bugHealth -= attack;
+                        crit = true;
                     } else {
-                        bugHealth -= attack(playerStrength);
+                        attack = attack(playerStrength);
+                        bugHealth -= attack;
                     }
 
                     hasInteracted = true;
                 } else if (menuItemSelected == 2) { // bow attack
                     if (flying) {
-                        bugHealth -= attack(playerStrength) * 2;
+                        attack = attack(playerStrength) * 2;
+                        bugHealth -= attack;
+                        crit = true;
                     } else {
-                        bugHealth -= attack(playerStrength) * 0.5;
+                        attack = attack(playerStrength) * 0.5;
+                        bugHealth -= attack;
+                        glance = true;
                     }
 
                     hasInteracted = true;
                 }
 
                 bugHealthDisplay.setText("BUG HEALTH: " + bugHealth);
+                damageIndicator.setText("" + attack);
                 if (bugHealth <= 0) {
                     PlayLevelScreen.playerHealth = this.playerHealth;
                     this.playLevelScreen.exitBugBattle();
@@ -263,12 +297,26 @@ public class BugFightScreen extends Screen {
 
                 attacking = false;
                 currentMenuItemHovered = 0;
+                shakeTimer = 20;
             }
         }
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
+        if(shakeTimer > 0) {
+            if (shakeTimer % 5 == 0) { background.shakeBug(); }
+            background.shakeBug();
+            shakeTimer--;
+        } else {
+            background.unshakeBug();
+            crit = false;
+            glance = false;
+        }
         background.draw(graphicsHandler);
+
+        if(shakeTimer > 0) { damageIndicator.draw(graphicsHandler); }
+        if(crit) { critIndicator.draw(graphicsHandler); }
+        if(glance) { glanceIndicator.draw(graphicsHandler); }
 
         playerHealthDisplay.draw(graphicsHandler);
         bugHealthDisplay.draw(graphicsHandler);

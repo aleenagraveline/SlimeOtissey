@@ -17,13 +17,22 @@ import GameObject.Sprite;
 public class BugFightMap extends Map {
 
     private Sprite bug;
+    private Point bugLocation;
 
     public BugFightMap() {
         super("grass_fight_map.txt", new CommonTileset());
-        Point bugLocation = getMapTile(7, 7).getLocation().subtractX(20);
+        bugLocation = getMapTile(7, 7).getLocation().subtractX(20);
         bug = new Sprite(ImageLoader.loadSubImage("Bug.png", Colors.MAGENTA, 0, 0, 24, 15));
         bug.setScale(5);
         bug.setImageEffect(ImageEffect.FLIP_HORIZONTAL);
+        bug.setLocation(bugLocation.x, bugLocation.y);
+    }
+
+    public void shakeBug() {
+        bug.setLocation(bugLocation.x + (float) (Math.random() * 60 - 30), bugLocation.y + (float) (Math.random() * 60 - 30));
+    }
+
+    public void unshakeBug() {
         bug.setLocation(bugLocation.x, bugLocation.y);
     }
     

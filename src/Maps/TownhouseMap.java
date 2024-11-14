@@ -57,7 +57,8 @@ public class TownhouseMap extends Map{
         getMapTile(5,2).setInteractScript(new TownhouseSignScript());
 
         // food sign script
-        getMapTile(9, 7).setInteractScript(new FoodSignScript());
+        Level.Script temp = new FoodSignScript();
+        getMapTile(9, 7).setInteractScript(temp);
 
         System.out.println("Loading");
     }
