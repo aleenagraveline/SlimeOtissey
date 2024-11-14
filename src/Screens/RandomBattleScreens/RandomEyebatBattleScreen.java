@@ -7,7 +7,7 @@ import Engine.Keyboard;
 import Engine.Screen;
 import Game.ScreenCoordinator;
 import Level.*;
-import Maps.BatFightMap;
+import Maps.EyebatFightMap;
 import Screens.PlayLevelScreen;
 import Scripts.SimpleTextScript;
 import SpriteFont.SpriteFont;
@@ -32,7 +32,7 @@ public class RandomEyebatBattleScreen extends Screen {
     protected SpriteFont hammerAttack;
     protected SpriteFont bowAttack;
 
-    protected BatFightMap background;
+    protected EyebatFightMap background;
     protected int keyPressTimer;
     protected int pointerLocationX, pointerLocationY;
     protected KeyLocker keyLocker = new KeyLocker();
@@ -65,17 +65,17 @@ public class RandomEyebatBattleScreen extends Screen {
         attacking = false;
         hasInteracted = false;
 
-        batHealth = 15;
-        batStrength = 3;
-        armored = true;
-        flying = false;
+        batHealth = 20;
+        batStrength = 5;
+        armored = false;
+        flying = true;
 
         // setup menu options
         playerHealthDisplay = new SpriteFont("PLAYER HEALTH: " + playerHealth, 50, 50, "Arial", 30, new Color(49, 207, 240));
         playerHealthDisplay.setOutlineColor(Color.black);
         playerHealthDisplay.setOutlineThickness(3);
 
-        batHealthDisplay = new SpriteFont("bat HEALTH: " + batHealth, 500, 50, "Arial", 30, new Color(49, 207, 240));
+        batHealthDisplay = new SpriteFont("BAT HEALTH: " + batHealth, 500, 50, "Arial", 30, new Color(49, 207, 240));
         batHealthDisplay.setOutlineColor(Color.black);
         batHealthDisplay.setOutlineThickness(3);
 
@@ -103,22 +103,22 @@ public class RandomEyebatBattleScreen extends Screen {
         bowAttack.setOutlineColor(Color.black);
         bowAttack.setOutlineThickness(3);
 
-        critIndicator = new SpriteFont("CRIT!", 375, 300, "Arial", 30, Color.YELLOW);
+        critIndicator = new SpriteFont("CRIT!", 375, 250, "Arial", 30, Color.YELLOW);
         critIndicator.setOutlineColor(Color.ORANGE);
         critIndicator.setOutlineThickness(3);
         crit = false;
 
-        glanceIndicator = new SpriteFont("Glance...", 375, 300, "Arial", 30, Color.LIGHT_GRAY);
+        glanceIndicator = new SpriteFont("Glance...", 375, 250, "Arial", 30, Color.LIGHT_GRAY);
         glanceIndicator.setOutlineColor(Color.DARK_GRAY);
         glanceIndicator.setOutlineThickness(3);
         glance = false;
 
-        damageIndicator = new SpriteFont("0", 300, 300, "Arial", 30, Color.RED);
+        damageIndicator = new SpriteFont("0", 300, 250, "Arial", 30, Color.RED);
         damageIndicator.setOutlineColor(new Color(120, 6, 6));
         damageIndicator.setOutlineThickness(3);
 
         // define/setup map
-        background = new BatFightMap();
+        background = new EyebatFightMap();
         background.setAdjustCamera(false);
         
         // setup key/menu interactions

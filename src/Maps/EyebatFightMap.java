@@ -14,14 +14,14 @@ import Engine.ImageLoader;
 import GameObject.ImageEffect;
 import GameObject.Sprite;
 
-public class BatFightMap extends Map {
+public class EyebatFightMap extends Map {
 
     private Sprite bat;
     private Point batLocation;
 
-    public BatFightMap() {
+    public EyebatFightMap() {
         super("grass_fight_map.txt", new CommonTileset());
-        batLocation = getMapTile(7, 7).getLocation().subtractX(20);
+        batLocation = getMapTile(7, 6).getLocation().subtractX(20);
         bat = new Sprite(ImageLoader.loadSubImage("eyebat.png", Colors.MAGENTA, 0, 0, 24, 15));
         bat.setScale(5);
         //bat.setImageEffect(ImageEffect.FLIP_HORIZONTAL);
