@@ -4,6 +4,7 @@ import Level.Map;
 import Level.NPC;
 //import NPCs.Bat;
 import Tilesets.CommonTileset;
+import Tilesets.ForestTileset;
 import Utils.Colors;
 import Utils.Point;
 
@@ -26,7 +27,7 @@ public class EyebatFightMap extends Map {
     private Point batLocation;
 
     public EyebatFightMap() {
-        super("grass_fight_map.txt", new CommonTileset());
+        super("grass_fight_map.txt", new ForestTileset());
         batLocation = getMapTile(7, 6).getLocation().subtractX(20);
         batAnimations = new SpriteSheet(ImageLoader.load("eyebat.png", Colors.MAGENTA), 24, 15);
         currentAnim = 0;
