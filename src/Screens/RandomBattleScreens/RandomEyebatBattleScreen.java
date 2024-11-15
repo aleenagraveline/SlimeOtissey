@@ -47,6 +47,7 @@ public class RandomEyebatBattleScreen extends Screen {
     protected boolean crit;
     protected boolean glance;
     
+    protected int flapTimer;
     protected int shakeTimer;
     protected int batHealth;
     protected int batStrength;
@@ -65,6 +66,7 @@ public class RandomEyebatBattleScreen extends Screen {
         attacking = false;
         hasInteracted = false;
 
+        flapTimer = 7;
         batHealth = 20;
         batStrength = 5;
         armored = false;
@@ -132,6 +134,13 @@ public class RandomEyebatBattleScreen extends Screen {
     }
 
     public void update() {
+        if (flapTimer > 0) {
+            flapTimer--;
+        } else {
+            flapTimer = 7;
+            background.flapBat();
+        }
+
         // update background map (to play tile animations)
         background.update(null);
 
@@ -239,7 +248,7 @@ public class RandomEyebatBattleScreen extends Screen {
             } else {
                 double attack = 0;
                 if (menuItemSelected == 0) { // sword atack
-                    if (!armored) {
+                    if (!armored && !flying) {
                         attack = attack(playerStrength) * 1.5;
                         batHealth -= attack;
                         crit = true;
@@ -250,7 +259,7 @@ public class RandomEyebatBattleScreen extends Screen {
 
                     hasInteracted = true;
                 } else if (menuItemSelected == 1) { // hammer attack
-                    if (armored) {
+                    if (armored && !flying) {
                         attack = attack(playerStrength) * 1.5;
                         batHealth -= attack;
                         crit = true;
@@ -274,7 +283,7 @@ public class RandomEyebatBattleScreen extends Screen {
                     hasInteracted = true;
                 }
 
-                batHealthDisplay.setText("bat HEALTH: " + batHealth);
+                batHealthDisplay.setText("BAT HEALTH: " + batHealth);
                 damageIndicator.setText("" + attack);
                 if (batHealth <= 0) {
                     PlayLevelScreen.playerHealth = this.playerHealth;
@@ -304,10 +313,11 @@ public class RandomEyebatBattleScreen extends Screen {
             if (shakeTimer % 5 == 0) { background.shakeBat(); }
             background.shakeBat();
             shakeTimer--;
-        } else {
+        } else if (shakeTimer == 0) {
             background.unshakeBat();
             crit = false;
             glance = false;
+            shakeTimer--;
         }
 
         background.draw(graphicsHandler);

@@ -8,21 +8,30 @@ import Utils.Colors;
 import Utils.Point;
 
 import java.util.ArrayList;
+import java.awt.image.BufferedImage;
 
 import Engine.GraphicsHandler;
 import Engine.ImageLoader;
 import GameObject.ImageEffect;
 import GameObject.Sprite;
+import GameObject.SpriteSheet;
 
 public class EyebatFightMap extends Map {
 
     private Sprite bat;
+    private SpriteSheet batAnimations;
+    private int currentAnim;
+    private boolean flapUp;
+
     private Point batLocation;
 
     public EyebatFightMap() {
         super("grass_fight_map.txt", new CommonTileset());
         batLocation = getMapTile(7, 6).getLocation().subtractX(20);
-        bat = new Sprite(ImageLoader.loadSubImage("eyebat.png", Colors.MAGENTA, 0, 0, 24, 15));
+        batAnimations = new SpriteSheet(ImageLoader.load("eyebat.png", Colors.MAGENTA), 23, 15);
+        currentAnim = 0;
+        flapUp = true;
+        bat = new Sprite (batAnimations.getSprite(0,currentAnim));
         bat.setScale(5);
         //bat.setImageEffect(ImageEffect.FLIP_HORIZONTAL);
         bat.setLocation(batLocation.x, batLocation.y);
@@ -34,6 +43,25 @@ public class EyebatFightMap extends Map {
 
     public void unshakeBat() {
         bat.setLocation(batLocation.x, batLocation.y);
+    }
+
+    public void flapBat() {
+        if (flapUp) {
+            currentAnim++;
+        } else {
+            currentAnim--;
+        }
+
+        if (currentAnim > 3) {
+            flapUp = false;
+            currentAnim = 2;
+        } else if (currentAnim < 0) {
+            flapUp = true;
+            currentAnim = 1;
+        }
+
+        bat.setImage(batAnimations.getSprite(0, currentAnim));
+        bat.setLocation(batLocation.x, batLocation.y + currentAnim * 10);
     }
     
     // TODO In the future we should have moving enemies via npcs and not sprites
