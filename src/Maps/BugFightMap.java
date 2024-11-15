@@ -3,7 +3,7 @@ package Maps;
 import Level.Map;
 import Level.NPC;
 import NPCs.Bug;
-import Tilesets.CommonTileset;
+import Tilesets.ForestTileset;
 import Utils.Colors;
 import Utils.Point;
 
@@ -20,7 +20,7 @@ public class BugFightMap extends Map {
     private Point bugLocation;
 
     public BugFightMap() {
-        super("grass_fight_map.txt", new CommonTileset());
+        super("grass_fight_map.txt", new ForestTileset());
         bugLocation = getMapTile(7, 7).getLocation().subtractX(20);
         bug = new Sprite(ImageLoader.loadSubImage("Bug.png", Colors.MAGENTA, 0, 0, 24, 15));
         bug.setScale(5);
