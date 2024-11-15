@@ -28,7 +28,7 @@ public class EyebatFightMap extends Map {
     public EyebatFightMap() {
         super("grass_fight_map.txt", new CommonTileset());
         batLocation = getMapTile(7, 6).getLocation().subtractX(20);
-        batAnimations = new SpriteSheet(ImageLoader.load("eyebat.png", Colors.MAGENTA), 23, 15);
+        batAnimations = new SpriteSheet(ImageLoader.load("eyebat.png", Colors.MAGENTA), 24, 15);
         currentAnim = 0;
         flapUp = true;
         bat = new Sprite (batAnimations.getSprite(0,currentAnim));
