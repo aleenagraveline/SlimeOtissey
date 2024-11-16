@@ -27,6 +27,8 @@ public class IceTwoScreen extends Screen {
         flagManager = new FlagManager();
         flagManager.addFlag("moveToIceOne", false);
         flagManager.addFlag("moveToIceThree", false);
+        flagManager.addFlag("playerIsOnIce", false);
+        flagManager.addFlag("playerIsOffIce", true);
 
         // define/setup map
         map = new IceTwoMap();
