@@ -7,7 +7,6 @@ import GameObject.GameObject;
 import GameObject.SpriteSheet;
 import Level.EnhancedMapTile;
 import Level.Player;
-import Level.PlayerState;
 import Level.TileType;
 import Utils.Direction;
 import Utils.Point;
@@ -16,7 +15,6 @@ import Utils.Point;
 // when the player walks into it, the player continues moving until it hits a non-passable tile
 public class SlidingIce extends EnhancedMapTile {
     private static boolean sliding;
-    private static int i = 0;
 
     public SlidingIce(Point location) {
         super(location.x, location.y, new SpriteSheet(ImageLoader.load("IceTileset.png").getSubimage(51, 0, 16, 16), 16, 16), TileType.PASSABLE);
@@ -26,7 +24,7 @@ public class SlidingIce extends EnhancedMapTile {
     @Override
     public void update(Player player) {
         super.update(player);
-        // TODO Fix double speed
+        // TODO Fix double speed (maybe) (optional)
         // Sliding logic
         if (player.touching(this)) {
             player.lock();
@@ -45,6 +43,7 @@ public class SlidingIce extends EnhancedMapTile {
         }
         if (player.isLocked() && !sliding) {
             player.unlock();
+            sliding = true; // Handle weird edge case
         }
     }
 

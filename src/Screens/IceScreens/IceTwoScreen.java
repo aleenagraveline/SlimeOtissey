@@ -1,5 +1,6 @@
 package Screens.IceScreens;
 
+import Engine.GamePanel;
 import Engine.GraphicsHandler;
 import Engine.Screen;
 import Game.GameState;
@@ -29,6 +30,8 @@ public class IceTwoScreen extends Screen {
         flagManager.addFlag("moveToIceThree", false);
         flagManager.addFlag("playerIsOnIce", false);
         flagManager.addFlag("playerIsOffIce", true);
+        flagManager.addFlag("hasCompletedSlidingPuzzle", false);
+        flagManager.addFlag("hasGainedFriendship", false);
 
         // define/setup map
         map = new IceTwoMap();
@@ -38,7 +41,7 @@ public class IceTwoScreen extends Screen {
         player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
         player.setMap(map);
         iceTwoScreenState = IceTwoScreenState.RUNNING;
-        player.setFacingDirection(Direction.RIGHT); //TODO
+        player.setFacingDirection(Direction.RIGHT);
 
         map.setPlayer(player);
 
@@ -58,6 +61,11 @@ public class IceTwoScreen extends Screen {
                 player.update();
                 map.update(player);
                 break;
+        }
+
+        if(!map.getFlagManager().isFlagSet("hasGainedFriendship") && map.getFlagManager().isFlagSet("hasCompletedSlidingPuzzle")) {
+            Player.gainFriendshipPoints(2);
+            map.getFlagManager().setFlag("hasGainedFriendship");
         }
 
         if (map.getFlagManager().isFlagSet("moveToIceOne")) {
