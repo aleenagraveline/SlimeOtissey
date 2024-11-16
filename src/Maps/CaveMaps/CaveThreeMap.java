@@ -5,8 +5,10 @@ import Level.NPC;
 import Tilesets.CaveTileset;
 import Level.Trigger;
 import NPCs.Otis;
+import Scripts.SimpleTextScript;
 import Scripts.MapTransitions.CaveIceTransitionScript;
 import Scripts.MapTransitions.CaveTwoTransitionScript;
+import Scripts.TestMap.TreeScript;
 
 import java.util.ArrayList;
 
@@ -41,4 +43,12 @@ public class CaveThreeMap extends Map {
 
     }
     
+        @Override
+    public void loadScripts() {
+        getMapTile(6, 6).setInteractScript(new SimpleTextScript("Pink"));
+
+        getMapTile(6, 16).setInteractScript(new SimpleTextScript("Blue"));
+
+    }
 }
+

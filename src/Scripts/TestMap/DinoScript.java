@@ -43,17 +43,17 @@ public class DinoScript extends Script {
                     @Override
                     public ScriptState execute() {
                         // change door to the open door map tile
-                        Frame openDoorFrame = new FrameBuilder(map.getTileset().getSubImage(4, 4), 0)
+                        Frame openDoorFrame = new FrameBuilder(map.getTileset().getSubImage(0, 2), 0)
                             .withScale(map.getTileset().getTileScale())
                             .build();
 
-                        Point location = map.getMapTile(17, 4).getLocation();
+                        Point location = map.getMapTile(8, 23).getLocation();
 
                         MapTile mapTile = new MapTileBuilder(openDoorFrame)
                             .withTileType(TileType.NOT_PASSABLE)
                             .build(location.x, location.y);
 
-                        map.setMapTile(17, 4, mapTile);
+                        map.setMapTile(8, 23, mapTile);
                         return ScriptState.COMPLETED;
                     }
                 });
@@ -65,17 +65,17 @@ public class DinoScript extends Script {
                     @Override
                     public ScriptState execute() {
                         // change door back to the closed door map tile
-                        Frame doorFrame = new FrameBuilder(map.getTileset().getSubImage(4, 3), 0)
+                        Frame doorFrame = new FrameBuilder(map.getTileset().getSubImage(5, 4), 0)
                             .withScale(map.getTileset().getTileScale())
                             .build();
 
-                        Point location = map.getMapTile(17, 4).getLocation();
+                        Point location = map.getMapTile(8, 23).getLocation();
 
                         MapTile mapTile = new MapTileBuilder(doorFrame)
                             .withTileType(TileType.NOT_PASSABLE)
                             .build(location.x, location.y);
                         mapTile.setInteractScript(new TownhouseTransitionScript()); // Enable door to be interacted with after Otis goes inside
-                        map.setMapTile(17, 4, mapTile);
+                        map.setMapTile(8, 23, mapTile);
                         return ScriptState.COMPLETED;
                     }
                 });

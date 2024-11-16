@@ -1,4 +1,4 @@
-package Screens;
+package Screens.RandomBattleScreens;
 
 import Engine.GraphicsHandler;
 import Engine.Key;
@@ -7,16 +7,15 @@ import Engine.Keyboard;
 import Engine.Screen;
 import Game.ScreenCoordinator;
 import Level.*;
-import Maps.BugFightMap;
+import Maps.EyebatFightMap;
+import Screens.PlayLevelScreen;
 import Scripts.SimpleTextScript;
 import SpriteFont.SpriteFont;
 
 import java.awt.*;
 
-// This is the class for the bug combat screen
-public class BugFightScreen extends Screen {
-    // Hold playLevelScreen to return to same level screen
-    protected PlayLevelScreen playLevelScreen;
+// This is the class for the random bat battle screen
+public class RandomEyebatBattleScreen extends Screen {
 
     protected ScreenCoordinator screenCoordinator;
     protected int currentMenuItemHovered = 0;
@@ -33,7 +32,7 @@ public class BugFightScreen extends Screen {
     protected SpriteFont hammerAttack;
     protected SpriteFont bowAttack;
 
-    protected BugFightMap background;
+    protected EyebatFightMap background;
     protected int keyPressTimer;
     protected int pointerLocationX, pointerLocationY;
     protected KeyLocker keyLocker = new KeyLocker();
@@ -48,16 +47,16 @@ public class BugFightScreen extends Screen {
     protected boolean crit;
     protected boolean glance;
     
+    protected int flapTimer;
     protected int shakeTimer;
-    protected int bugHealth;
-    protected int bugStrength;
+    protected int batHealth;
+    protected int batStrength;
     protected boolean armored;
     protected boolean flying;
-    protected SpriteFont bugHealthDisplay;
+    protected SpriteFont batHealthDisplay;
 
-    public BugFightScreen(PlayLevelScreen playLevelScreen) {
-        this.playLevelScreen = playLevelScreen;
-        this.initialize();
+    public RandomEyebatBattleScreen(ScreenCoordinator screenCoordinator) {
+        this.screenCoordinator = screenCoordinator;
     }
 
     public void initialize() {
@@ -67,20 +66,20 @@ public class BugFightScreen extends Screen {
         attacking = false;
         hasInteracted = false;
 
-        shakeTimer = 0;
-        bugHealth = 15;
-        bugStrength = 3;
-        armored = true;
-        flying = false;
+        flapTimer = 7;
+        batHealth = 20;
+        batStrength = 5;
+        armored = false;
+        flying = true;
 
         // setup menu options
-        playerHealthDisplay = new SpriteFont("PLAYER HEALTH: " + this.playerHealth, 50, 50, "Arial", 30, new Color(49, 207, 240));
+        playerHealthDisplay = new SpriteFont("PLAYER HEALTH: " + playerHealth, 50, 50, "Arial", 30, new Color(49, 207, 240));
         playerHealthDisplay.setOutlineColor(Color.black);
         playerHealthDisplay.setOutlineThickness(3);
 
-        bugHealthDisplay = new SpriteFont("BUG HEALTH: " + bugHealth, 500, 50, "Arial", 30, new Color(49, 207, 240));
-        bugHealthDisplay.setOutlineColor(Color.black);
-        bugHealthDisplay.setOutlineThickness(3);
+        batHealthDisplay = new SpriteFont("BAT HEALTH: " + batHealth, 500, 50, "Arial", 30, new Color(49, 207, 240));
+        batHealthDisplay.setOutlineColor(Color.black);
+        batHealthDisplay.setOutlineThickness(3);
 
         attack = new SpriteFont("ATTACK", 200, 500, "Arial", 30, new Color(49, 207, 240));
         attack.setOutlineColor(Color.black);
@@ -106,22 +105,22 @@ public class BugFightScreen extends Screen {
         bowAttack.setOutlineColor(Color.black);
         bowAttack.setOutlineThickness(3);
 
-        critIndicator = new SpriteFont("CRIT!", 375, 300, "Arial", 30, Color.YELLOW);
+        critIndicator = new SpriteFont("CRIT!", 375, 250, "Arial", 30, Color.YELLOW);
         critIndicator.setOutlineColor(Color.ORANGE);
         critIndicator.setOutlineThickness(3);
         crit = false;
 
-        glanceIndicator = new SpriteFont("Glance...", 375, 300, "Arial", 30, Color.LIGHT_GRAY);
+        glanceIndicator = new SpriteFont("Glance...", 375, 250, "Arial", 30, Color.LIGHT_GRAY);
         glanceIndicator.setOutlineColor(Color.DARK_GRAY);
         glanceIndicator.setOutlineThickness(3);
         glance = false;
 
-        damageIndicator = new SpriteFont("0", 300, 300, "Arial", 30, Color.RED);
+        damageIndicator = new SpriteFont("0", 300, 250, "Arial", 30, Color.RED);
         damageIndicator.setOutlineColor(new Color(120, 6, 6));
         damageIndicator.setOutlineThickness(3);
 
         // define/setup map
-        background = new BugFightMap();
+        background = new EyebatFightMap();
         background.setAdjustCamera(false);
         
         // setup key/menu interactions
@@ -135,6 +134,13 @@ public class BugFightScreen extends Screen {
     }
 
     public void update() {
+        if (flapTimer > 0) {
+            flapTimer--;
+        } else {
+            flapTimer = 7;
+            background.flapBat();
+        }
+
         // update background map (to play tile animations)
         background.update(null);
 
@@ -223,17 +229,17 @@ public class BugFightScreen extends Screen {
                 if (menuItemSelected == 0) { // move to attack submenu
                     attacking = true;
                 } else if (menuItemSelected == 1) { // block damage
-                    playerHealth -= attack(bugStrength) / 2;
+                    playerHealth -= attack(batStrength) / 2;
                     playerHealthDisplay.setText("PLAYER HEALTH: " + playerHealth);
                     if (playerHealth <= 0) {
-                        this.playLevelScreen.resetLevel();
+                        this.screenCoordinator.leaveRandomBattle();
                     }
                     hasInteracted = true;
                 } else if (menuItemSelected == 2) { // exit fight peacefully
                     if (hasInteracted) {
                         PlayLevelScreen.playerHealth = this.playerHealth;
-                        this.playLevelScreen.exitBugBattle();
-                        this.playLevelScreen.map.setActiveScript(new SimpleTextScript(new String[] {
+                        this.screenCoordinator.leaveRandomBattle();
+                        this.background.setActiveScript(new SimpleTextScript(new String[] {
                             "Alex ran away...", 
                             "Alex won't gain any friendship points with Otis", 
                             "But at least he's still alive!"}));
@@ -242,56 +248,56 @@ public class BugFightScreen extends Screen {
             } else {
                 double attack = 0;
                 if (menuItemSelected == 0) { // sword atack
-                    if (!armored) {
+                    if (!armored && !flying) {
                         attack = attack(playerStrength) * 1.5;
-                        bugHealth -= attack;
+                        batHealth -= attack;
                         crit = true;
                     } else {
                         attack = attack(playerStrength);
-                        bugHealth -= attack;
+                        batHealth -= attack;
                     }
 
                     hasInteracted = true;
                 } else if (menuItemSelected == 1) { // hammer attack
-                    if (armored) {
+                    if (armored && !flying) {
                         attack = attack(playerStrength) * 1.5;
-                        bugHealth -= attack;
+                        batHealth -= attack;
                         crit = true;
                     } else {
                         attack = attack(playerStrength);
-                        bugHealth -= attack;
+                        batHealth -= attack;
                     }
 
                     hasInteracted = true;
                 } else if (menuItemSelected == 2) { // bow attack
                     if (flying) {
                         attack = attack(playerStrength) * 2;
-                        bugHealth -= attack;
+                        batHealth -= attack;
                         crit = true;
                     } else {
                         attack = attack(playerStrength) * 0.5;
-                        bugHealth -= attack;
+                        batHealth -= attack;
                         glance = true;
                     }
 
                     hasInteracted = true;
                 }
 
-                bugHealthDisplay.setText("BUG HEALTH: " + bugHealth);
+                batHealthDisplay.setText("BAT HEALTH: " + batHealth);
                 damageIndicator.setText("" + attack);
-                if (bugHealth <= 0) {
+                if (batHealth <= 0) {
                     PlayLevelScreen.playerHealth = this.playerHealth;
-                    this.playLevelScreen.exitBugBattle();
+                    this.screenCoordinator.leaveRandomBattle();
                     Player.gainFriendshipPoints(1);
                     this.background.setActiveScript(new SimpleTextScript(new String[] {
                     "Alex won!", 
                     "Alex gains friendship points with Otis!", 
                     "But Otis still hates him... too early to change that"}));
                 } else {
-                    playerHealth -= attack(bugStrength);
+                    playerHealth -= attack(batStrength);
                     playerHealthDisplay.setText("PLAYER HEALTH: " + playerHealth);
                     if (playerHealth <= 0) {
-                        this.playLevelScreen.resetLevel();
+                        this.screenCoordinator.leaveRandomBattle();
                     }
                 }
 
@@ -304,14 +310,16 @@ public class BugFightScreen extends Screen {
 
     public void draw(GraphicsHandler graphicsHandler) {
         if(shakeTimer > 0) {
-            if (shakeTimer % 5 == 0) { background.shakeBug(); }
-            background.shakeBug();
+            if (shakeTimer % 5 == 0) { background.shakeBat(); }
+            background.shakeBat();
             shakeTimer--;
-        } else {
-            background.unshakeBug();
+        } else if (shakeTimer == 0) {
+            background.unshakeBat();
             crit = false;
             glance = false;
+            shakeTimer--;
         }
+
         background.draw(graphicsHandler);
 
         if(shakeTimer > 0) { damageIndicator.draw(graphicsHandler); }
@@ -319,7 +327,7 @@ public class BugFightScreen extends Screen {
         if(glance) { glanceIndicator.draw(graphicsHandler); }
 
         playerHealthDisplay.draw(graphicsHandler);
-        bugHealthDisplay.draw(graphicsHandler);
+        batHealthDisplay.draw(graphicsHandler);
 
         if (!attacking) {
             attack.draw(graphicsHandler);
@@ -331,12 +339,11 @@ public class BugFightScreen extends Screen {
             hammerAttack.draw(graphicsHandler);
             bowAttack.draw(graphicsHandler);
         }
-        
+
         graphicsHandler.drawFilledRectangleWithBorder(pointerLocationX, pointerLocationY, 20, 20, new Color(49, 207, 240), Color.black, 2);
     }
 
     public int attack(int attackStrength) {
         return (int) (Math.random() * 7 - (attackStrength * 0.6)) + attackStrength;
     }
-    
 }

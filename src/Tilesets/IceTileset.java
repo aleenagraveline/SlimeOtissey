@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class IceTileset extends Tileset {
 
     public IceTileset() {
-        super(ImageLoader.load("IceTileset.png"), 16, 16, 3);
+        super(ImageLoader.load("updatedIceTileset.png"), 16, 16, 3);
     }
 
     @Override
@@ -253,6 +253,69 @@ public class IceTileset extends Tileset {
                 .build();
         MapTileBuilder pathFixFourTile = new MapTileBuilder(pathFixFourFrame);
         mapTiles.add(pathFixFourTile);
+
+        //outerCornerFlipped
+        Frame outerCornerFlippedFrame = new FrameBuilder(getSubImage(5,1))
+                .withScale(tileScale)
+                .withImageEffect(ImageEffect.FLIP_VERTICAL)
+                .build();
+        MapTileBuilder outerCornerFlippedTile = new MapTileBuilder(outerCornerFlippedFrame);
+        mapTiles.add(outerCornerFlippedTile);
+
+        //innerCornerFlipped
+        Frame innerCornerFlippedFrame = new FrameBuilder(getSubImage(5,0))
+                .withScale(tileScale)
+                .withImageEffect(ImageEffect.FLIP_VERTICAL)
+                .build();
+        MapTileBuilder innerCornerFlippedTile = new MapTileBuilder(innerCornerFlippedFrame);
+        mapTiles.add(innerCornerFlippedTile);
+        
+        //outerCorner2
+        Frame outerCorner2Frame = new FrameBuilder(getSubImage(5,3))
+                .withScale(tileScale)
+                .build();
+        MapTileBuilder outerCorner2Tile = new MapTileBuilder(outerCorner2Frame);
+        mapTiles.add(outerCorner2Tile);
+
+        //innerCorner2
+        Frame innerCorner2Frame = new FrameBuilder(getSubImage(5,2))
+                .withScale(tileScale)
+                .build();
+        MapTileBuilder innerCorner2Tile = new MapTileBuilder(innerCorner2Frame);
+        mapTiles.add(innerCorner2Tile);
+
+        //outerCorner2Flipped
+                Frame outerCorner2FlippedFrame = new FrameBuilder(getSubImage(5,3))
+                .withScale(tileScale)
+                .withImageEffect(ImageEffect.FLIP_VERTICAL)
+                .build();
+        MapTileBuilder outerCorner2FlippedTile = new MapTileBuilder(outerCorner2FlippedFrame);
+        mapTiles.add(outerCorner2FlippedTile);
+
+        //innerCorner2Flipped
+        Frame innerCorner2FlippedFrame = new FrameBuilder(getSubImage(5,2))
+                .withScale(tileScale)
+                .withImageEffect(ImageEffect.FLIP_VERTICAL)
+                .build();
+        MapTileBuilder innerCorner2FlippedTile = new MapTileBuilder(innerCorner2FlippedFrame);
+        mapTiles.add(innerCorner2FlippedTile);
+
+        //outerCorner
+        Frame outerCornerFrame = new FrameBuilder(getSubImage(5,1))
+                .withScale(tileScale)
+                //.withImageEffect(ImageEffect.FLIP_VERTICAL)
+                .build();
+        MapTileBuilder outerCornerTile = new MapTileBuilder(outerCornerFrame);
+        mapTiles.add(outerCornerTile);
+
+        //innerCorner
+        Frame innerCornerFrame = new FrameBuilder(getSubImage(5,0))
+                .withScale(tileScale)
+                //.withImageEffect(ImageEffect.FLIP_VERTICAL)
+                .build();
+        MapTileBuilder innerCornerTile = new MapTileBuilder(innerCornerFrame);
+        mapTiles.add(innerCornerTile);
+
         
         return mapTiles;
     }
