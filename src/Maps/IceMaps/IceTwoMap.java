@@ -7,7 +7,6 @@ import Tilesets.IceTileset;
 import Level.Trigger;
 import NPCs.Otis;
 import Scripts.SimpleTextScript;
-import Scripts.SimpleTextScript;
 import Scripts.IceTwoMap.*;
 import Scripts.MapTransitions.IceOneTransitionScript;
 import Scripts.MapTransitions.IceThreeTransitionScript;

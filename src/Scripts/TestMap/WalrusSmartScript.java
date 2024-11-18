@@ -19,6 +19,12 @@ public class WalrusSmartScript extends Script {
         scriptActions.add(new TextboxScriptAction() {{
             addText("Wow, good job solving that puzzle!");
             addText("You must be really smart...\nSo then why don't you have friends?");
+            addText("*Otis seems slightly annoyed by the mocking \nquestion*");
+            addText("*It almost seems like he wants to defend you?*");
+            addText("*Maybe Otis is starting to like you after all...*");
+            addText("Alex: Well, I've got my little slime friend here.");
+            addText("*Otis is now glaring at you*");
+            addText("*Okay...maybe a little too fast...noted for next time.*");
         }});
 
         scriptActions.add(new NPCUnlockScriptAction());
