@@ -8,6 +8,7 @@ import Level.Map;
 import Level.NPC;
 import Level.Trigger;
 import NPCs.Otis;
+import Scripts.SimpleTextScript;
 import Scripts.MapTransitions.ForestCaveTransitionScript;
 import Scripts.MapTransitions.ForestTwoTransitionScript;
 import Scripts.TestMap.FoodScript;
@@ -61,6 +62,12 @@ public class ForestThreeMap extends Map {
         // ForestCave transition trigger
         triggers.add(new Trigger(576, 1428, 192, 12, new ForestCaveTransitionScript()));
         return triggers;
+    }
+
+    @Override
+    public void loadScripts() {
+        getMapTile(11, 4).setInteractScript(new SimpleTextScript("Testing"));
+        getMapTile(15,16).setInteractScript(new SimpleTextScript("I love my apples :) \nI hope no one eats them!"));
     }
     
 }
