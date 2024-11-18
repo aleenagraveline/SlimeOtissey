@@ -1,6 +1,7 @@
 package EnhancedMapTiles;
 
 import Builders.FrameBuilder;
+import Builders.MapTileBuilder;
 import Engine.ImageLoader;
 import GameObject.Frame;
 import GameObject.GameObject;
@@ -27,9 +28,16 @@ public class CrackingIce1 extends EnhancedMapTile {
     }
 
     public void breakIce() {
-        System.out.println("Breaking " + x + " " + y);
-        MapTile crackedIceTile = new MapTile(this.x, this.y, new SpriteSheet(ImageLoader.load("IceTileset.png").getSubimage(51,17,16,16), 16, 16), TileType.PASSABLE); 
-        this.map.setMapTile((int) this.x, (int) this.y, crackedIceTile);
+        this.setIsHidden(true);
+
+        Frame brokenIceFrame = new FrameBuilder(map.getTileset().getSubImage(1, 3))
+                            .withScale(map.getTileset().getTileScale())
+                            .build();
+        MapTile brokenIceTile = new MapTileBuilder(brokenIceFrame)
+            .withTileType(TileType.PASSABLE)
+            .build(this.x, this.y);
+
+        this.map.setMapTile((int) this.x / 48, (int) this.y / 48, brokenIceTile);
     }
 
     @Override

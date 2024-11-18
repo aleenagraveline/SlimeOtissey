@@ -31,8 +31,8 @@ public class CrackingIce0 extends EnhancedMapTile {
     }
 
     public void crack() {
-        System.out.println("Cracking " + x + " " + y);
-        this.map.setMapTile((int) this.x, (int) this.y, new CrackingIce1(this.getLocation()));
+        this.setIsHidden(true);
+        this.map.addEnhancedMapTile(new CrackingIce1(this.getLocation()));
     }
 
     @Override

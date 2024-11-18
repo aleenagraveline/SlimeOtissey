@@ -35,7 +35,7 @@ public class IceFiveScreen extends Screen {
         player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
         player.setMap(map);
         iceFiveScreenState = IceFiveScreenState.RUNNING;
-        player.setFacingDirection(Direction.LEFT); //TODO
+        player.setFacingDirection(Direction.LEFT);
 
         map.setPlayer(player);
 

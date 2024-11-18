@@ -41,14 +41,13 @@ public class IceTwoMap extends Map {
             for (int column = 15; column < 32; column++) {
         
                 boolean doNotPlace = (row == 5 && column == 17) ||
-                (row == 5 && column == 31) || (row == 7 && column == 26) ||
-                (row == 8 && column == 31) || (row == 9 && column == 24) ||
-                (row == 10 && column == 31) || (row == 11 && column == 16) ||
-                (row == 15 && column == 25);
+                    (row == 5 && column == 31) || (row == 7 && column == 26) ||
+                    (row == 8 && column == 31) || (row == 9 && column == 24) ||
+                    (row == 10 && column == 31) || (row == 11 && column == 16) ||
+                    (row == 15 && column == 25);
                 
-                if (!doNotPlace){
-                    SlidingIce slidingIce = new SlidingIce(getMapTile(column, row).getLocation());
-                    enhancedMapTiles.add(slidingIce);
+                if (!doNotPlace) {
+                    enhancedMapTiles.add(new SlidingIce(getMapTile(column, row).getLocation()));
                 }
             }
         }
