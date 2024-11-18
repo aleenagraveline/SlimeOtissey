@@ -1,5 +1,6 @@
 package Maps.CaveMaps;
 
+import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
 import Tilesets.CaveTileset;
@@ -7,8 +8,11 @@ import Level.Trigger;
 import NPCs.Otis;
 import Scripts.MapTransitions.CaveTwoTransitionScript;
 import Scripts.MapTransitions.ForestCaveTransitionScript;
+import Scripts.TestMap.FoodScript;
 
 import java.util.ArrayList;
+
+import EnhancedMapTiles.Food;
 
 public class CaveOneMap extends Map {
 
@@ -39,6 +43,15 @@ public class CaveOneMap extends Map {
 
         return triggers;
 
+    }
+
+    @Override
+    public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
+        ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
+        Food apple = new Food(getMapTile(27, 4).getLocation());
+        apple.setInteractScript(new FoodScript());
+        enhancedMapTiles.add(apple);   
+        return enhancedMapTiles;
     }
     
 }

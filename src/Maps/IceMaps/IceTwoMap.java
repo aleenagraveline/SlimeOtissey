@@ -4,15 +4,15 @@ import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
 import Tilesets.IceTileset;
-import Utils.Point;
 import Level.Trigger;
-import NPCs.Otis;
 import Scripts.IceTwoMap.*;
 import Scripts.MapTransitions.IceOneTransitionScript;
 import Scripts.MapTransitions.IceThreeTransitionScript;
+import Scripts.TestMap.FoodScript;
 
 import java.util.ArrayList;
 
+import EnhancedMapTiles.Food;
 import EnhancedMapTiles.SlidingIce;
 
 public class IceTwoMap extends Map {
@@ -52,6 +52,10 @@ public class IceTwoMap extends Map {
                 }
             }
         }
+
+        Food apple = new Food(getMapTile(14, 8).getLocation());
+        apple.setInteractScript(new FoodScript());
+        enhancedMapTiles.add(apple);
 
         return enhancedMapTiles;
     }

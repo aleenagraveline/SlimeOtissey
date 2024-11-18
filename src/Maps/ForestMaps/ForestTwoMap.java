@@ -2,12 +2,15 @@ package Maps.ForestMaps;
 
 import java.util.ArrayList;
 
+import EnhancedMapTiles.Food;
+import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
 import Level.Trigger;
 import NPCs.Otis;
 import Scripts.MapTransitions.ForestOneTransitionScript;
 import Scripts.MapTransitions.ForestThreeTransitionScript;
+import Scripts.TestMap.FoodScript;
 import Tilesets.ForestTileset;
 
 public class ForestTwoMap extends Map {
@@ -27,6 +30,15 @@ public class ForestTwoMap extends Map {
 
         return npcs;
     }
+
+    @Override
+    public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
+        ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
+        Food apple = new Food(getMapTile(5, 16).getLocation());
+        apple.setInteractScript(new FoodScript());
+        enhancedMapTiles.add(apple);      
+        return enhancedMapTiles;
+     }
 
     @Override
     public ArrayList<Trigger> loadTriggers() {
