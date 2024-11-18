@@ -384,6 +384,22 @@ public class VillageTileset extends Tileset {
 
         MapTileBuilder innerCornerPath2Tile = new MapTileBuilder(innerCornerPath2Frame);
 
+        //outerCorner
+        Frame outerCornerFrame = new FrameBuilder(getSubImage(2,6))
+                .withScale(tileScale)
+                //.withImageEffect(ImageEffect.FLIP_VERTICAL)
+                .build();
+        MapTileBuilder outerCornerTile = new MapTileBuilder(outerCornerFrame);
+        mapTiles.add(outerCornerTile);
+
+        //innerCorner
+        Frame innerCornerFrame = new FrameBuilder(getSubImage(0,6))
+                .withScale(tileScale)
+                //.withImageEffect(ImageEffect.FLIP_VERTICAL)
+                .build();
+        MapTileBuilder innerCornerTile = new MapTileBuilder(innerCornerFrame);
+        mapTiles.add(innerCornerTile);
+
 
 
 

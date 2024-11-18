@@ -100,7 +100,7 @@ public class ScreenCoordinator extends Screen {
 		majorScreens[ICE_FIVE_INDEX] = new IceFiveScreen(this);
 
 		// Fill randomBattleScreens
-		randomBattleScreens[RANDOM_BUG_INDEX] = new RandomBugBattleScreen(this);
+		randomBattleScreens[RANDOM_BUG_INDEX] = new RandomEyebatBattleScreen(this);
 
 		// Initialize each major screen
 		for (int index = 0; index < NUM_OF_MAJOR_SCREENS; index++) {

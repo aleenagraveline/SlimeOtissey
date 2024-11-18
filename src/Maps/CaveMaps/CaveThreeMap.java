@@ -5,6 +5,17 @@ import Level.NPC;
 import Tilesets.CaveTileset;
 import Level.Trigger;
 import NPCs.Otis;
+import Scripts.SimpleTextScript;
+import Scripts.CrystalScripts.Crystal1Script;
+import Scripts.CrystalScripts.Crystal2Script;
+import Scripts.CrystalScripts.Crystal3Script;
+import Scripts.CrystalScripts.Crystal4Script;
+import Scripts.CrystalScripts.Crystal5Script;
+import Scripts.CrystalScripts.Crystal6Script;
+import Scripts.CrystalScripts.Crystal7Script;
+import Scripts.CrystalScripts.Crystal8Script;
+import Scripts.CrystalScripts.Crystal9Script;
+import Scripts.CrystalScripts.CrystalPuzzleCompleteScript;
 import Scripts.MapTransitions.CaveIceTransitionScript;
 import Scripts.MapTransitions.CaveTwoTransitionScript;
 
@@ -37,8 +48,28 @@ public class CaveThreeMap extends Map {
         // CaveIce transition
         triggers.add(new Trigger(804, 528, 12, 96, new CaveIceTransitionScript()));
 
+        //triggers.add(new Trigger(720, 528, 1, 96, new CrystalPuzzleCompleteScript(), "hasCompletedCrystalPuzzle"));
+
         return triggers;
 
     }
     
+        @Override
+    public void loadScripts() {
+        getMapTile(6, 6).setInteractScript(new SimpleTextScript("Pink"));
+
+        getMapTile(6, 16).setInteractScript(new SimpleTextScript("Blue"));
+
+        getMapTile(8, 14).setInteractScript(new Crystal1Script());
+        getMapTile(12, 14).setInteractScript(new Crystal2Script());
+        getMapTile(10, 16).setInteractScript(new Crystal3Script());
+        getMapTile(8, 18).setInteractScript(new Crystal4Script());
+        getMapTile(12,18).setInteractScript(new Crystal5Script());
+        getMapTile(8, 6).setInteractScript(new Crystal6Script());
+        getMapTile(10, 4).setInteractScript(new Crystal7Script());
+        getMapTile(10, 8).setInteractScript(new Crystal8Script());
+        getMapTile(12,6).setInteractScript(new Crystal9Script());
+
+    }
 }
+

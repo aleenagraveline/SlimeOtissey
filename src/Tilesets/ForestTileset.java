@@ -440,6 +440,51 @@ public class ForestTileset extends Tileset {
         MapTileBuilder rightPathTile = new MapTileBuilder(rightPathFrame);
         mapTiles.add(rightPathTile);
 
+        //outerCornerFlipped
+        Frame outerCornerFlippedFrame = new FrameBuilder(getSubImage(0,5))
+                .withScale(tileScale)
+                .withImageEffect(ImageEffect.FLIP_VERTICAL)
+                .build();
+        MapTileBuilder outerCornerFlippedTile = new MapTileBuilder(outerCornerFlippedFrame);
+        mapTiles.add(outerCornerFlippedTile);
+
+        //innerCornerFlipped
+        Frame innerCornerFlippedFrame = new FrameBuilder(getSubImage(0,2))
+                .withScale(tileScale)
+                .withImageEffect(ImageEffect.FLIP_VERTICAL)
+                .build();
+        MapTileBuilder innerCornerFlippedTile = new MapTileBuilder(innerCornerFlippedFrame);
+        mapTiles.add(innerCornerFlippedTile);
+        
+        //outerCorner2
+        Frame outerCorner2Frame = new FrameBuilder(getSubImage(1,6))
+                .withScale(tileScale)
+                .build();
+        MapTileBuilder outerCorner2Tile = new MapTileBuilder(outerCorner2Frame);
+        mapTiles.add(outerCorner2Tile);
+
+        //innerCorner2
+        Frame innerCorner2Frame = new FrameBuilder(getSubImage(0,6))
+                .withScale(tileScale)
+                .build();
+        MapTileBuilder innerCorner2Tile = new MapTileBuilder(innerCorner2Frame);
+        mapTiles.add(innerCorner2Tile);
+
+        //outerCorner2Flipped
+                Frame outerCorner2FlippedFrame = new FrameBuilder(getSubImage(1,6))
+                .withScale(tileScale)
+                .withImageEffect(ImageEffect.FLIP_VERTICAL)
+                .build();
+        MapTileBuilder outerCorner2FlippedTile = new MapTileBuilder(outerCorner2FlippedFrame);
+        mapTiles.add(outerCorner2FlippedTile);
+
+        //innerCorner2Flipped
+        Frame innerCorner2FlippedFrame = new FrameBuilder(getSubImage(0,6))
+                .withScale(tileScale)
+                .withImageEffect(ImageEffect.FLIP_VERTICAL)
+                .build();
+        MapTileBuilder innerCorner2FlippedTile = new MapTileBuilder(innerCorner2FlippedFrame);
+        mapTiles.add(innerCorner2FlippedTile);
 
         return mapTiles;
     }

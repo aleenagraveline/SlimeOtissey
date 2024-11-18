@@ -7,6 +7,7 @@ import Tilesets.IceTileset;
 import Utils.Point;
 import Level.Trigger;
 import NPCs.Otis;
+import Scripts.IceTwoMap.*;
 import Scripts.MapTransitions.IceOneTransitionScript;
 import Scripts.MapTransitions.IceThreeTransitionScript;
 
@@ -36,21 +37,21 @@ public class IceTwoMap extends Map {
     public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
         ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
 
-        // for (int row = 5; row < 16; row++) {
-        //     for (int column = 15; column < 32; column++) {
+        for (int row = 5; row < 16; row++) {
+            for (int column = 15; column < 32; column++) {
         
-        //         boolean doNotPlace = (row == 5 && column == 17) ||
-        //         (row == 5 && column == 31) || (row == 7 && column == 26) ||
-        //         (row == 8 && column == 31) || (row == 9 && column == 24) ||
-        //         (row == 10 && column == 31) || (row == 11 && column == 16) ||
-        //         (row == 15 && column == 25);
+                boolean doNotPlace = (row == 5 && column == 17) ||
+                (row == 5 && column == 31) || (row == 7 && column == 26) ||
+                (row == 8 && column == 31) || (row == 9 && column == 24) ||
+                (row == 10 && column == 31) || (row == 11 && column == 16) ||
+                (row == 15 && column == 25);
                 
-        //         if (!doNotPlace){
-        //             SlidingIce slidingIce = new SlidingIce(getMapTile(column, row).getLocation());
-        //             enhancedMapTiles.add(slidingIce);
-        //         }
-        //     }
-        // }
+                if (!doNotPlace){
+                    SlidingIce slidingIce = new SlidingIce(getMapTile(column, row).getLocation());
+                    enhancedMapTiles.add(slidingIce);
+                }
+            }
+        }
 
         return enhancedMapTiles;
     }
@@ -63,6 +64,17 @@ public class IceTwoMap extends Map {
         triggers.add(new Trigger(0, 672, 12, 96, new IceOneTransitionScript()));
         // IceThree transition
         triggers.add(new Trigger(2148, 240, 12, 96, new IceThreeTransitionScript()));
+
+        // Triggers to unlock player after leaving ice
+        triggers.add(new Trigger(672, 672, 12, 96, new OffIceScript(), "playerIsOffIce"));
+        triggers.add(new Trigger(1572, 288, 12, 96, new OffIceScript(), "playerIsOffIce"));
+
+        // Triggers to switch above triggers back to active when on ice
+        triggers.add(new Trigger(720, 672, 12, 96, new OnIceScript(), "playerIsOnIce"));
+        triggers.add(new Trigger(1524, 288, 12, 96, new OnIceScript(), "playerIsOnIce"));
+
+        // Trigger to gain friendship
+        triggers.add(new Trigger(1632, 240, 12, 96, new SlidingCompleteScript(), "hasCompletedSlidingPuzzle"));
 
         return triggers;
 
