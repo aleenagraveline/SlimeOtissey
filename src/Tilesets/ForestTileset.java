@@ -335,7 +335,7 @@ public class ForestTileset extends Tileset {
         mapTiles.add(outerCornerTile);
 
         //sign
-        Frame signFrame = new FrameBuilder(getSubImage(0, 5))
+        Frame signFrame = new FrameBuilder(getSubImage(1, 5))
                 .withScale(tileScale)
                 .withBounds(1, 2, 14, 14)
                 .build();

@@ -6,6 +6,7 @@ import Level.NPC;
 import Tilesets.CaveTileset;
 import Level.Trigger;
 import NPCs.Otis;
+import Scripts.SimpleTextScript;
 import Scripts.MapTransitions.CaveTwoTransitionScript;
 import Scripts.MapTransitions.ForestCaveTransitionScript;
 import Scripts.TestMap.FoodScript;
@@ -54,4 +55,8 @@ public class CaveOneMap extends Map {
         return enhancedMapTiles;
     }
     
+    @Override
+    public void loadScripts() {
+        getMapTile(4, 6).setInteractScript(new SimpleTextScript("Testing"));
+    }
 }

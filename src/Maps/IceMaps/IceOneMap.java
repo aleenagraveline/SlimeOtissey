@@ -7,6 +7,7 @@ import Tilesets.IceTileset;
 import Level.Trigger;
 import Scripts.MapTransitions.IceTwoTransitionScript;
 import Scripts.TestMap.FoodScript;
+import Scripts.SimpleTextScript;
 import Scripts.MapTransitions.CaveIceTransitionScript;
 
 import java.util.ArrayList;
@@ -51,6 +52,11 @@ public class IceOneMap extends Map {
 
         return triggers;
 
+    }
+
+    @Override
+    public void loadScripts() {
+        getMapTile(10, 11).setInteractScript(new SimpleTextScript("Testing"));
     }
     
 }
