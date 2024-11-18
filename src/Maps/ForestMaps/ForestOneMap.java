@@ -1,5 +1,6 @@
 package Maps.ForestMaps;
 
+import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
 import Level.SoundPlayer;
@@ -8,10 +9,13 @@ import Level.Trigger;
 import NPCs.Otis;
 import Scripts.MapTransitions.ForestTwoTransitionScript;
 import Scripts.MapTransitions.SpawnTransitionScript;
+import Scripts.TestMap.FoodScript;
 import Tilesets.ForestTileset;
 
 import java.util.ArrayList;
 import javax.swing.JFrame;
+
+import EnhancedMapTiles.Food;
 
 public class ForestOneMap extends Map {
 
@@ -23,6 +27,15 @@ public class ForestOneMap extends Map {
         this.playerStartPosition = getMapTile(0, 8).getLocation().addY(24); // middle of path on left
         addMusic("Resources/WhimsyWoods (online-audio-converter.com).wav");
     }
+
+    @Override
+    public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
+        ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
+        Food apple = new Food(getMapTile(22, 6).getLocation());
+        apple.setInteractScript(new FoodScript());
+        enhancedMapTiles.add(apple);   
+        return enhancedMapTiles;
+     }
 
      public void addMusic(String soundFilePath) {
         soundPlayer = new SoundPlayer(new JFrame(), soundFilePath, 100); // Create SoundPlayer with volume 100

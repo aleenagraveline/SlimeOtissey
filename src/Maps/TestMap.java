@@ -1,5 +1,6 @@
 package Maps;
 
+import EnhancedMapTiles.Food;
 import EnhancedMapTiles.PushableRock;
 import Level.*;
 import NPCs.Bug;
@@ -28,6 +29,10 @@ public class TestMap extends Map {
 
         PushableRock pushableRock = new PushableRock(getMapTile(20, 10).getLocation());
         enhancedMapTiles.add(pushableRock);
+
+        Food apple = new Food(getMapTile(3, 23).getLocation());
+        apple.setInteractScript(new FoodScript());
+        enhancedMapTiles.add(apple);
 
         return enhancedMapTiles;
     }
