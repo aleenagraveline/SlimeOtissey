@@ -34,16 +34,16 @@ public class ForestThreeMap extends Map {
     @Override
     public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
         ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
-        Food apple = new Food(getMapTile(21, 15).getLocation());
+        Food apple = new Food(getMapTile(18, 16).getLocation());
         apple.setInteractScript(new FoodScript());
         enhancedMapTiles.add(apple);
-        Food apple2 = new Food(getMapTile(19, 12).getLocation());
+        Food apple2 = new Food(getMapTile(14, 14).getLocation());
         apple2.setInteractScript(new FoodScript());
         enhancedMapTiles.add(apple2);     
-        Food apple3 = new Food(getMapTile(17, 9).getLocation());
+        Food apple3 = new Food(getMapTile(17, 14).getLocation());
         apple3.setInteractScript(new FoodScript()); 
         enhancedMapTiles.add(apple3);
-        Food apple4 = new Food(getMapTile(23, 14).getLocation());
+        Food apple4 = new Food(getMapTile(18, 19).getLocation());
         apple4.setInteractScript(new FoodScript());
         enhancedMapTiles.add(apple4);
         return enhancedMapTiles;
