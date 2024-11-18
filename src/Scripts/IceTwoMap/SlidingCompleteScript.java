@@ -17,6 +17,7 @@ public class SlidingCompleteScript extends Script {
 
         scriptActions.add(new TextboxScriptAction() {{
             addText("*Otis hops in delight, having enjoyed sliding around\non the ice.*");
+            addText("Thought it seems he had a little trouble keeping up");
             addText("(Friendship with Otis increased!)");
         }});
         
