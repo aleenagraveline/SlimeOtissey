@@ -6,6 +6,7 @@ import Level.Map;
 import Level.NPC;
 import Level.Trigger;
 import NPCs.Otis;
+import Scripts.SimpleTextScript;
 import Scripts.MapTransitions.ForestOneTransitionScript;
 import Scripts.MapTransitions.ForestThreeTransitionScript;
 import Tilesets.ForestTileset;
@@ -38,6 +39,11 @@ public class ForestTwoMap extends Map {
         triggers.add(new Trigger(0,1200,12,192, new ForestThreeTransitionScript()));
 
         return triggers;
+    }
+
+    @Override
+    public void loadScripts() {
+        getMapTile(17, 8).setInteractScript(new SimpleTextScript("There isn't mush-room over here you should try \nlooking somewhere else"));
     }
     
 }
