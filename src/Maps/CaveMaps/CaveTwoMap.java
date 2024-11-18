@@ -8,6 +8,7 @@ import Level.Trigger;
 import NPCs.Otis;
 import Scripts.MapTransitions.CaveThreeTransitionScript;
 import Scripts.TestMap.FoodScript;
+import Scripts.SimpleTextScript;
 import Scripts.MapTransitions.CaveOneTransitionScript;
 
 import java.util.ArrayList;
@@ -52,6 +53,11 @@ public class CaveTwoMap extends Map {
 
         return triggers;
 
+    }
+
+    @Override
+    public void loadScripts() {
+        getMapTile(10, 2).setInteractScript(new SimpleTextScript("Testing"));
     }
     
 }

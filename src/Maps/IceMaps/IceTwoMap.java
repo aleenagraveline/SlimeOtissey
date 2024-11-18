@@ -6,6 +6,7 @@ import Level.NPC;
 import Tilesets.IceTileset;
 import Level.Trigger;
 import NPCs.Otis;
+import Scripts.SimpleTextScript;
 import Scripts.IceTwoMap.*;
 import Scripts.MapTransitions.IceOneTransitionScript;
 import Scripts.MapTransitions.IceThreeTransitionScript;
@@ -83,6 +84,11 @@ public class IceTwoMap extends Map {
 
         return triggers;
 
+    }
+
+    @Override
+    public void loadScripts() {
+        getMapTile(9, 13).setInteractScript(new SimpleTextScript("Caution \nIce is Slippery when wet!"));
     }
     
 }
