@@ -5,6 +5,7 @@ import Level.Map;
 import Level.NPC;
 import Tilesets.IceTileset;
 import Level.Trigger;
+import NPCs.Otis;
 import Scripts.IceTwoMap.*;
 import Scripts.MapTransitions.IceOneTransitionScript;
 import Scripts.MapTransitions.IceThreeTransitionScript;

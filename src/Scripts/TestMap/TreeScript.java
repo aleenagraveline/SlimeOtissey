@@ -47,12 +47,21 @@ public class TreeScript extends Script {
                     addText("Uh oh. It seems I activated some dangerous device!");
                     addText("It seems there's something etched into the walls,\nbut it makes no sense.");
                     addText("And a countdown just started!");
+                    addText("*Otis backs away and starts to tremble in fear*");
+                    addText("Alex: Don't worry Otis, we'll be okay!");
+                    addText("*Otis looks at you skeptically...better figure \nthis out!*");
                 }});
                 addScriptAction(new ChangeFlagScriptAction("isInWaitingPuzzle", true));
                 addScriptAction(new TextboxScriptAction() {{
                     addText("...");
                     addText("I found a key inside of the box!\nYippee!");
                     addText("Maybe I can use the key to break into Lodeon's castle! \n(Press I to check your inventory.)");
+                    addText("*Otis jumps on the key*");
+                    addText("Alex: Otis! Give me the key back!");
+                    addText("*Otis seems to...laugh? He's enjoying this!*");
+                    addText("Alex: Otis...we can break into a house with this!");
+                    addText("*Otis seems to hesitate...but he drops the key. \nThen he sticks his tongue out at you.*");
+
                 }});
 
                 addScriptAction(new ChangeFlagScriptAction("hasFoundKey", true));
