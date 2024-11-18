@@ -177,8 +177,7 @@ public class MemoryPuzzleScreen extends Screen {
 				this.playLevelScreen.exitMemPuzzle();
                 this.playLevelScreen.map.setActiveScript(new SimpleTextScript(new String[] {
                     "You did the puzzle!", 
-                    "This is when you would get another key.", 
-                    "But there's only enough metal in this world for one key."}));
+                    "*Even Otis looks slightly impressed*" }));
                     Player.gainFriendshipPoints(1);
 			}
 		}
