@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import EnhancedMapTiles.Food;
 import Level.EnhancedMapTile;
 import Level.Map;
-import Level.MapEntityStatus;
 import Level.NPC;
 import NPCs.Dinosaur;
 import NPCs.Otis;
@@ -53,9 +52,6 @@ public class TownhouseMap extends Map{
     public void loadScripts() {
         // door script
         getMapTile(12, 1).setInteractScript(new SpawnTransitionScript());
-
-        // food script
-        //getMapTile(10, 10).setInteractScript(new FoodScript());
 
         // sign script
         getMapTile(5,2).setInteractScript(new TownhouseSignScript());

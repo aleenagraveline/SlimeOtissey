@@ -4,7 +4,6 @@ import Level.Map;
 import Level.NPC;
 import Tilesets.CaveIceTileset;
 import Level.Trigger;
-import NPCs.Otis;
 import Scripts.MapTransitions.CaveThreeTransitionScript;
 import Scripts.MapTransitions.IceOneTransitionScript;
 
