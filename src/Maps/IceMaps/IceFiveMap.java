@@ -5,6 +5,7 @@ import Level.Map;
 import Level.NPC;
 import Tilesets.IceTileset;
 import Level.Trigger;
+import Scripts.SimpleTextScript;
 import Scripts.MapTransitions.IceFourTransitionScript;
 import Scripts.TestMap.FoodScript;
 
@@ -48,6 +49,11 @@ public class IceFiveMap extends Map {
         apple.setInteractScript(new FoodScript());
         enhancedMapTiles.add(apple);   
         return enhancedMapTiles;
+    }
+
+    @Override
+    public void loadScripts() {
+        getMapTile(6, 26).setInteractScript(new SimpleTextScript("Testing"));
     }
     
 }

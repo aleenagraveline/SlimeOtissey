@@ -9,6 +9,7 @@ import Level.Map;
 import Level.Player;
 import Maps.IceMaps.IceFourMap;
 import Players.Cat;
+import Scripts.SimpleTextScript;
 import Utils.Direction;
 
 public class IceFourScreen extends Screen {
@@ -90,6 +91,11 @@ public class IceFourScreen extends Screen {
     private enum IceFourScreenState {
         RUNNING
     }
+
+    // @Override
+    // public void loadScripts() {
+    //     getMapTile(3, 7).setInteractScript(new SimpleTextScript("Testing"));
+    // }
 
     @Override
     public Map getMap() {

@@ -7,6 +7,7 @@ import Level.SoundPlayer;
 import Level.Trigger;
 
 import NPCs.Otis;
+import Scripts.SimpleTextScript;
 import Scripts.MapTransitions.ForestTwoTransitionScript;
 import Scripts.MapTransitions.SpawnTransitionScript;
 import Scripts.TestMap.FoodScript;
@@ -64,6 +65,11 @@ public class ForestOneMap extends Map {
         
         return triggers;
 
+    }
+
+    @Override
+    public void loadScripts() {
+        getMapTile(3, 7).setInteractScript(new SimpleTextScript("Testing"));
     }
 
 }
