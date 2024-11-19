@@ -64,7 +64,7 @@ public class IceTwoScreen extends Screen {
         }
 
         if(!map.getFlagManager().isFlagSet("hasGainedFriendship") && map.getFlagManager().isFlagSet("hasCompletedSlidingPuzzle")) {
-            Player.gainFriendshipPoints(2);
+            Player.gainFriendshipPoints(4,6);
             map.getFlagManager().setFlag("hasGainedFriendship");
         }
 
