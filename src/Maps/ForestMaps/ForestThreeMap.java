@@ -66,7 +66,7 @@ public class ForestThreeMap extends Map {
 
     @Override
     public void loadScripts() {
-        getMapTile(11, 4).setInteractScript(new SimpleTextScript("Testing"));
+        getMapTile(11, 4).setInteractScript(new SimpleTextScript("It's rumored that talking mushrooms live among the \ntrees"));
         getMapTile(15,16).setInteractScript(new SimpleTextScript("I love my apples :) \nI hope no one eats them!"));
     }
     

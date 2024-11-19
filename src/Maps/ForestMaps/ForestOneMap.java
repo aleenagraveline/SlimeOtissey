@@ -69,7 +69,7 @@ public class ForestOneMap extends Map {
 
     @Override
     public void loadScripts() {
-        getMapTile(3, 7).setInteractScript(new SimpleTextScript("Testing"));
+        getMapTile(3, 7).setInteractScript(new SimpleTextScript("Whimsy Woods \nStay on the path"));
     }
 
 }
