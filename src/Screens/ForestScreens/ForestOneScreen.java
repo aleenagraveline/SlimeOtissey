@@ -27,6 +27,7 @@ public class ForestOneScreen extends Screen {
         flagManager = new FlagManager();
         flagManager.addFlag("moveToSpawn", false);
         flagManager.addFlag("moveToForestTwo", false);
+        flagManager.addFlag("scaredOtis",false);
 
         // define/setup map
         map = new ForestOneMap();

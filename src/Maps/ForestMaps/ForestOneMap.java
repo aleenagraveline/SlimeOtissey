@@ -7,7 +7,9 @@ import Level.SoundPlayer;
 import Level.Trigger;
 
 import NPCs.Otis;
+import Scripts.ScaredOtisScript;
 import Scripts.SimpleTextScript;
+import Scripts.CrystalScripts.CrystalPuzzleCompleteScript;
 import Scripts.MapTransitions.ForestTwoTransitionScript;
 import Scripts.MapTransitions.SpawnTransitionScript;
 import Scripts.TestMap.FoodScript;
@@ -62,6 +64,8 @@ public class ForestOneMap extends Map {
         triggers.add(new Trigger(0, 288, 12, 288, new SpawnTransitionScript()));
         // ForestTwo transition trigger
         triggers.add(new Trigger(1428, 288, 12, 288, new ForestTwoTransitionScript()));
+
+        triggers.add(new Trigger(100, 288, 10, 288, new ScaredOtisScript(),"scaredOtis"));
         
         return triggers;
 
