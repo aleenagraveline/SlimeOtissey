@@ -9,7 +9,6 @@ import Level.Trigger;
 import NPCs.Otis;
 import Scripts.ScaredOtisScript;
 import Scripts.SimpleTextScript;
-import Scripts.CrystalScripts.CrystalPuzzleCompleteScript;
 import Scripts.MapTransitions.ForestTwoTransitionScript;
 import Scripts.MapTransitions.SpawnTransitionScript;
 import Scripts.TestMap.FoodScript;
