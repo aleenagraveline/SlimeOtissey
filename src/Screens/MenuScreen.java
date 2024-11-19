@@ -15,7 +15,7 @@ public class MenuScreen extends Screen {
     protected int currentMenuItemHovered = 0; // current menu item being "hovered" over
     protected int menuItemSelected = -1;
     protected SpriteFont newGame;
-    protected SpriteFont loadGame;
+    //protected SpriteFont loadGame;
     protected SpriteFont credits;
     protected Map background;
     protected int keyPressTimer;
@@ -32,11 +32,11 @@ public class MenuScreen extends Screen {
         newGame.setOutlineColor(Color.black);
         newGame.setOutlineThickness(3);
 
-        loadGame = new SpriteFont("LOAD GAME", 200, 223, "Arial", 30, new Color(49, 207, 240));
+        /*loadGame = new SpriteFont("LOAD GAME", 200, 223, "Arial", 30, new Color(49, 207, 240));
         loadGame.setOutlineColor(Color.black);
-        loadGame.setOutlineThickness(3);
+        loadGame.setOutlineThickness(3);*/
 
-        credits = new SpriteFont("CREDITS", 200, 323, "Arial", 30, new Color(49, 207, 240));
+        credits = new SpriteFont("CREDITS", 200, 223, "Arial", 30, new Color(49, 207, 240));
         credits.setOutlineColor(Color.black);
         credits.setOutlineThickness(3);
 
@@ -69,32 +69,32 @@ public class MenuScreen extends Screen {
         }
 
         // if S is pressed on last menu item or W is pressed on first menu item, "loop" the selection back around to the beginning/end
-        if (currentMenuItemHovered > 2) {
+        if (currentMenuItemHovered > 1) {
             currentMenuItemHovered = 0;
         } else if (currentMenuItemHovered < 0) {
-            currentMenuItemHovered = 2;
+            currentMenuItemHovered = 1;
         }
 
         // sets location for blue square in front of text (pointerLocation) and also sets color of spritefont text based on which menu item is being hovered
         if (currentMenuItemHovered == 0) {
             newGame.setColor(new Color(255, 215, 0));
-            loadGame.setColor(new Color(49, 207, 240));
+            //loadGame.setColor(new Color(49, 207, 240));
             credits.setColor(new Color(49, 207, 240));
             pointerLocationX = 170;
             pointerLocationY = 130;
         } else if (currentMenuItemHovered == 1) {
             newGame.setColor(new Color(49, 207, 240));
-            loadGame.setColor(new Color(255, 215, 0));
-            credits.setColor(new Color(49, 207, 240));
+            //loadGame.setColor(new Color(255, 215, 0));
+            credits.setColor(new Color(255, 215, 0));
             pointerLocationX = 170;
             pointerLocationY = 230;
-        } else if (currentMenuItemHovered == 2) {
+        } /*else if (currentMenuItemHovered == 2) {
             newGame.setColor(new Color(49, 207, 240));
             loadGame.setColor(new Color(49, 207, 240));
             credits.setColor(new Color(255, 215, 0));
             pointerLocationX = 170;
             pointerLocationY = 330;
-        }
+        }*/
 
         // if space is pressed on menu item, change to appropriate screen based on which menu item was chosen
         if (Keyboard.isKeyUp(Key.SPACE)) {
@@ -104,9 +104,9 @@ public class MenuScreen extends Screen {
             menuItemSelected = currentMenuItemHovered;
             if (menuItemSelected == 0) {
                 screenCoordinator.setGameState(GameState.SPAWN);
-            } else if (menuItemSelected == 1) {
+            }/* else if (menuItemSelected == 1) {
                 screenCoordinator.setGameState(GameState.SPAWN);
-            } else if (menuItemSelected == 2) {
+            }*/ else if (menuItemSelected == 1) {
                 screenCoordinator.setGameState(GameState.CREDITS);
             }
         }
@@ -115,7 +115,7 @@ public class MenuScreen extends Screen {
     public void draw(GraphicsHandler graphicsHandler) {
         background.draw(graphicsHandler);
         newGame.draw(graphicsHandler);
-        loadGame.draw(graphicsHandler);
+        //loadGame.draw(graphicsHandler);
         credits.draw(graphicsHandler);
         graphicsHandler.drawFilledRectangleWithBorder(pointerLocationX, pointerLocationY, 20, 20, new Color(49, 207, 240), Color.black, 2);
     }
