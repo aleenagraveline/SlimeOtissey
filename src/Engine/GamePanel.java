@@ -208,10 +208,13 @@ public class GamePanel extends JPanel {
 			isViewingInventory = !isViewingInventory;
 			if(isViewingInventory) {
 				scrollingMode = 1;
+				enableDrawFriendshipPoints(true);
 			}
 			else {
 				scrollingMode = 0;
+				enableDrawFriendshipPoints(false);
 			}
+
 			keyLocker.lockKey(inventoryKey);
 		}
 

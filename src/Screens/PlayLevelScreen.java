@@ -88,7 +88,6 @@ public class PlayLevelScreen extends Screen {
             case RUNNING:
                 player.update();
                 map.update(player);
-                GamePanel.enableDrawFriendshipPoints(true);
                 break;
             // if in the bug battle, bring up battle screen
             case IN_BUG_BATTLE:
