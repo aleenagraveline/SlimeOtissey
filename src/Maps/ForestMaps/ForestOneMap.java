@@ -7,6 +7,7 @@ import Level.SoundPlayer;
 import Level.Trigger;
 
 import NPCs.Otis;
+import Scripts.ScaredOtisScript;
 import Scripts.SimpleTextScript;
 import Scripts.MapTransitions.ForestTwoTransitionScript;
 import Scripts.MapTransitions.SpawnTransitionScript;
@@ -62,6 +63,8 @@ public class ForestOneMap extends Map {
         triggers.add(new Trigger(0, 288, 12, 288, new SpawnTransitionScript()));
         // ForestTwo transition trigger
         triggers.add(new Trigger(1428, 288, 12, 288, new ForestTwoTransitionScript()));
+
+        triggers.add(new Trigger(100, 288, 10, 288, new ScaredOtisScript(),"scaredOtis"));
         
         return triggers;
 
@@ -69,7 +72,7 @@ public class ForestOneMap extends Map {
 
     @Override
     public void loadScripts() {
-        getMapTile(3, 7).setInteractScript(new SimpleTextScript("Testing"));
+        getMapTile(3, 7).setInteractScript(new SimpleTextScript("Whimsy Woods \nStay on the path"));
     }
 
 }

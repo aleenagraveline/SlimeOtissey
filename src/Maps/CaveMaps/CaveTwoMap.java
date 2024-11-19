@@ -57,7 +57,7 @@ public class CaveTwoMap extends Map {
 
     @Override
     public void loadScripts() {
-        getMapTile(10, 2).setInteractScript(new SimpleTextScript("Testing"));
+        getMapTile(10, 2).setInteractScript(new SimpleTextScript("Do not trust anyone."));
     }
     
 }
