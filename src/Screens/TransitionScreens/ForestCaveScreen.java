@@ -70,7 +70,7 @@ public class ForestCaveScreen extends Screen {
 
         if(map.getFlagManager().isFlagSet("hasCompletedRockPuzzle") && !(map.getFlagManager().isFlagSet("hasCollectedKey"))) {
             GamePanel.addToInventory("Key");
-            Player.gainFriendshipPoints(1);
+            Player.gainFriendshipPoints(4, 6);
             map.getFlagManager().setFlag("hasCollectedKey");
         }
 

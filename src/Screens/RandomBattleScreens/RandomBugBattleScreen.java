@@ -279,7 +279,7 @@ public class RandomBugBattleScreen extends Screen {
                 if (bugHealth <= 0) {
                     PlayLevelScreen.playerHealth = this.playerHealth;
                     this.screenCoordinator.leaveRandomBattle();
-                    Player.gainFriendshipPoints(1);
+                    Player.gainFriendshipPoints(4, 6);
                     this.background.setActiveScript(new SimpleTextScript(new String[] {
                     "Alex won!", 
                     "Alex gains friendship points with Otis!", 

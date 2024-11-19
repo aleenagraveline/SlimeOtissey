@@ -282,7 +282,7 @@ public class BugFightScreen extends Screen {
                 if (bugHealth <= 0) {
                     PlayLevelScreen.playerHealth = this.playerHealth;
                     this.playLevelScreen.exitBugBattle();
-                    Player.gainFriendshipPoints(1);
+                    Player.gainFriendshipPoints(4, 6);
                     this.background.setActiveScript(new SimpleTextScript(new String[] {
                     "Alex won!", 
                     "Alex gains friendship points with Otis!", 

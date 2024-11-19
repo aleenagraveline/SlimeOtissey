@@ -178,7 +178,7 @@ public class MemoryPuzzleScreen extends Screen {
                 this.playLevelScreen.map.setActiveScript(new SimpleTextScript(new String[] {
                     "You did the puzzle!", 
                     "*Even Otis looks slightly impressed*" }));
-                    Player.gainFriendshipPoints(1);
+                    Player.gainFriendshipPoints(4, 6);
 			}
 		}
 	}
