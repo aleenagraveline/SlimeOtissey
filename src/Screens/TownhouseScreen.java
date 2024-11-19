@@ -60,7 +60,6 @@ public class TownhouseScreen extends Screen {
         else {
             player.update();
             map.update(player);
-            GamePanel.enableDrawFriendshipPoints(true);
         }
     }
 
