@@ -53,7 +53,7 @@ public class IceFiveMap extends Map {
 
     @Override
     public void loadScripts() {
-        getMapTile(6, 26).setInteractScript(new SimpleTextScript("Testing"));
+        getMapTile(6, 26).setInteractScript(new SimpleTextScript("I've lead you right where I need you."));
     }
     
 }

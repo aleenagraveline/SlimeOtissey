@@ -56,7 +56,7 @@ public class IceOneMap extends Map {
 
     @Override
     public void loadScripts() {
-        getMapTile(10, 11).setInteractScript(new SimpleTextScript("Testing"));
+        getMapTile(10, 11).setInteractScript(new SimpleTextScript("I see you've got a friend with you... remember me \n\"Otis\"?"));
     }
     
 }

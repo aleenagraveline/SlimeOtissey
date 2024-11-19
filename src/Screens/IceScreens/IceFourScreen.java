@@ -92,14 +92,15 @@ public class IceFourScreen extends Screen {
         RUNNING
     }
 
-    // @Override
-    // public void loadScripts() {
-    //     getMapTile(3, 7).setInteractScript(new SimpleTextScript("Testing"));
-    // }
-
     @Override
     public Map getMap() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getMap'");
     }
+
+    // @Override
+    // public void loadScripts() {
+    //     getMapTile(3, 7).setInteractScript(new SimpleTextScript("Testing"));
+    // }
+
 }

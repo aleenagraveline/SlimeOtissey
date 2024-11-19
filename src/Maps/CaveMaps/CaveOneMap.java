@@ -57,6 +57,6 @@ public class CaveOneMap extends Map {
     
     @Override
     public void loadScripts() {
-        getMapTile(4, 6).setInteractScript(new SimpleTextScript("Testing"));
+        getMapTile(4, 6).setInteractScript(new SimpleTextScript("*No one understands what this sign says, \nit seems to be written in a different language*"));
     }
 }
