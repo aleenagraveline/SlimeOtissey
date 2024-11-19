@@ -1,6 +1,7 @@
 package Level;
 
 import java.awt.Color;
+import java.util.Random;
 
 import Engine.GamePanel;
 import Engine.GraphicsHandler;
@@ -10,6 +11,7 @@ import Engine.Keyboard;
 import GameObject.GameObject;
 import GameObject.Rectangle;
 import GameObject.SpriteSheet;
+import Screens.PlayLevelScreen;
 import Utils.Direction;
 import Utils.Point;
 
@@ -282,9 +284,18 @@ public abstract class Player extends GameObject {
     return new Point(Math.round(getX() / 24), Math.round(getY() / 24));
     }
 
-    public static 
-    void gainFriendshipPoints(int pointsToGain) {
-        friendshipPoints += pointsToGain;
+    public static void gainFriendshipPoints(int min, int max) {
+        Random rand = new Random();
+        max = (max + 1) - min;
+        friendshipPoints += rand.nextInt(max) + min;
+    }
+
+    public static void gainHealth() {
+        Random rand = new Random();
+        PlayLevelScreen.playerHealth = rand.nextInt(5) + 1;
+        if(PlayLevelScreen.playerHealth >= 50) {
+            PlayLevelScreen.playerHealth = 50;
+        }
     }
 
     public static int getFriendshipPoints() {

@@ -31,15 +31,8 @@ public class FoodScript extends Script {
                         public ScriptState execute() {
                             entity.setMapEntityStatus(MapEntityStatus.INACTIVE);
                             entity.setIsHidden(true);
-                            Random random = new Random();
-                            Player.gainFriendshipPoints(random.nextInt(3) + 1);
-                            int healthToGain = random.nextInt(5) + 1;
-                            if(PlayLevelScreen.playerHealth + healthToGain > 50) {
-                                PlayLevelScreen.playerHealth = 50;
-                            } else {
-                                PlayLevelScreen.playerHealth += healthToGain;
-                            }
-                            
+                            Player.gainFriendshipPoints(1, 3);
+                            Player.gainHealth();
                             return ScriptState.COMPLETED;
                         }
                     });    

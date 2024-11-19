@@ -148,7 +148,7 @@ public class PlayLevelScreen extends Screen {
         if (map.getFlagManager().isFlagSet("hasFoundKey")) {
             //playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
             GamePanel.addToInventory("Key");
-            Player.gainFriendshipPoints(1);
+            Player.gainFriendshipPoints(1, 2);
             map.getFlagManager().unsetFlag("hasFoundKey");
         }
 

@@ -288,7 +288,7 @@ public class RandomEyebatBattleScreen extends Screen {
                 if (batHealth <= 0) {
                     PlayLevelScreen.playerHealth = this.playerHealth;
                     this.screenCoordinator.leaveRandomBattle();
-                    Player.gainFriendshipPoints(1);
+                    Player.gainFriendshipPoints(7, 10);
                     this.background.setActiveScript(new SimpleTextScript(new String[] {
                     "Alex won!", 
                     "Alex gains friendship points with Otis!", 
