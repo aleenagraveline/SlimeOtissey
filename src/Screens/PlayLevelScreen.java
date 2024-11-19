@@ -203,6 +203,12 @@ public class PlayLevelScreen extends Screen {
         this.update();
     }
 
+    public void exitKingBattle() {
+        map.getFlagManager().unsetFlag("isInKingBattle");
+        playLevelScreenState = PlayLevelScreenState.RUNNING;
+        this.update();
+    }
+
     public void exitMemPuzzle() {
         map.getFlagManager().unsetFlag("isInMemPuzzle");
         playLevelScreenState = PlayLevelScreenState.RUNNING;
