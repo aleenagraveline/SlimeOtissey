@@ -17,6 +17,7 @@ public class IceFiveScreen extends Screen {
     protected Player player;
     protected IceFiveScreenState iceFiveScreenState;
     protected FlagManager flagManager;
+    protected FellThroughIceScreen fellThroughIceScreen;
 
     public IceFiveScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -26,6 +27,7 @@ public class IceFiveScreen extends Screen {
         // setup state
         flagManager = new FlagManager();
         flagManager.addFlag("moveToIceFour", false);
+        flagManager.addFlag("fellThroughIce", false);
 
         // define/setup map
         map = new IceFiveMap();
@@ -35,7 +37,7 @@ public class IceFiveScreen extends Screen {
         player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
         player.setMap(map);
         iceFiveScreenState = IceFiveScreenState.RUNNING;
-        player.setFacingDirection(Direction.LEFT); //TODO
+        player.setFacingDirection(Direction.LEFT);
 
         map.setPlayer(player);
 
@@ -45,6 +47,8 @@ public class IceFiveScreen extends Screen {
         // preloads all scripts ahead of time rather than loading them dynamically
         // both are supported, however preloading is recommended
         map.preloadScripts();
+
+        this.fellThroughIceScreen = new FellThroughIceScreen(this);
     }
 
     public void update() {
@@ -55,13 +59,18 @@ public class IceFiveScreen extends Screen {
                 player.update();
                 map.update(player);
                 break;
+            case FELL_THROUGH_ICE:
+                fellThroughIceScreen.update();
+                break;
         }
 
         if (map.getFlagManager().isFlagSet("moveToIceFour")) {
             screenCoordinator.setGameState(GameState.ICE_FOUR);
             map.getFlagManager().unsetFlag("moveToIceFour");
         }
-
+        if (map.getFlagManager().isFlagSet("fellThroughIce")) {
+            this.iceFiveScreenState = IceFiveScreenState.FELL_THROUGH_ICE;
+        }
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
@@ -69,6 +78,9 @@ public class IceFiveScreen extends Screen {
         switch (iceFiveScreenState) {
             case RUNNING:
                 map.draw(player, graphicsHandler);
+                break;
+            case FELL_THROUGH_ICE:
+                fellThroughIceScreen.draw(graphicsHandler);
                 break;
         }
     }
@@ -83,12 +95,11 @@ public class IceFiveScreen extends Screen {
 
     // This enum represents the different states this screen can be in
     private enum IceFiveScreenState {
-        RUNNING
+        RUNNING, FELL_THROUGH_ICE
     }
 
     @Override
     public Map getMap() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getMap'");
+        return this.map;
     }
 }

@@ -15,7 +15,7 @@ import Scripts.CrystalScripts.Crystal6Script;
 import Scripts.CrystalScripts.Crystal7Script;
 import Scripts.CrystalScripts.Crystal8Script;
 import Scripts.CrystalScripts.Crystal9Script;
-import Scripts.CrystalScripts.CrystalPuzzleCompleteScript;
+// import Scripts.CrystalScripts.CrystalPuzzleCompleteScript;
 import Scripts.MapTransitions.CaveIceTransitionScript;
 import Scripts.MapTransitions.CaveTwoTransitionScript;
 
