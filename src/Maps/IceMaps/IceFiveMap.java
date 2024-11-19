@@ -17,7 +17,7 @@ public class IceFiveMap extends Map {
 
     public IceFiveMap() {
         super("ice_five_map.txt", new IceTileset());
-        this.playerStartPosition = getMapTile(21, 4).getLocation();
+        this.playerStartPosition = getMapTile(21, 4).getLocation().subtractX(24);
     }
 
     @Override
