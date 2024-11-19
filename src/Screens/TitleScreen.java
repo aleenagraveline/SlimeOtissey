@@ -16,6 +16,7 @@ public class TitleScreen extends Screen {
     protected int currentMenuItemHovered = 0; // current menu item being "hovered" over
     protected int menuItemSelected = -1;
     protected SpriteFont newGame;
+    // maybe for sprint 6... :(
     //protected SpriteFont loadGame;
     protected SpriteFont credits;
     protected int keyPressTimer;
