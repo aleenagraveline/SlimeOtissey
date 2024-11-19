@@ -52,7 +52,7 @@ public class CaveThreeMap extends Map {
         // CaveIce transition
         triggers.add(new Trigger(804, 528, 12, 96, new CaveIceTransitionScript()));
 
-        triggers.add(new Trigger(750, 528, 10, 96, new CrystalPuzzleCompleteScript(), "hasCompletedCrystalPuzzle"));
+        // triggers.add(new Trigger(750, 528, 10, 96, new CrystalPuzzleCompleteScript(), "hasCompletedCrystalPuzzle"));
 
         return triggers;
 
