@@ -1,5 +1,6 @@
 package Maps.CaveMaps;
 
+import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
 import Tilesets.CaveTileset;
@@ -20,6 +21,9 @@ import Scripts.MapTransitions.CaveIceTransitionScript;
 import Scripts.MapTransitions.CaveTwoTransitionScript;
 
 import java.util.ArrayList;
+
+import EnhancedMapTiles.EnhancedRock;
+import EnhancedMapTiles.PushableRock;
 
 public class CaveThreeMap extends Map {
 
@@ -48,7 +52,7 @@ public class CaveThreeMap extends Map {
         // CaveIce transition
         triggers.add(new Trigger(804, 528, 12, 96, new CaveIceTransitionScript()));
 
-        //triggers.add(new Trigger(720, 528, 1, 96, new CrystalPuzzleCompleteScript(), "hasCompletedCrystalPuzzle"));
+        triggers.add(new Trigger(750, 528, 10, 96, new CrystalPuzzleCompleteScript(), "hasCompletedCrystalPuzzle"));
 
         return triggers;
 
@@ -71,5 +75,17 @@ public class CaveThreeMap extends Map {
         getMapTile(12,6).setInteractScript(new Crystal9Script());
 
     }
+
+    // @Override
+    // public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
+    //     ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
+
+    //     EnhancedRock enhancedRock = new EnhancedRock(getMapTile(15, 11).getLocation());
+    //     EnhancedRock enhancedRock2 = new EnhancedRock(getMapTile(15, 12).getLocation());
+    //     enhancedMapTiles.add(enhancedRock);
+    //     enhancedMapTiles.add(enhancedRock2);
+
+    //     return enhancedMapTiles;
+    // }
 }
 
