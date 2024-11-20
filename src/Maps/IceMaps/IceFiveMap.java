@@ -5,6 +5,7 @@ import Level.Map;
 import Level.NPC;
 import Tilesets.IceTileset;
 import Level.Trigger;
+import NPCs.Otis;
 import Scripts.SimpleTextScript;
 import Scripts.MapTransitions.IceFourTransitionScript;
 import Scripts.TestMap.FoodScript;
@@ -26,8 +27,8 @@ public class IceFiveMap extends Map {
         ArrayList<NPC> npcs = new ArrayList<>();
 
         // Initialize Otis right next to the player
-        // Otis otis = new Otis(1, getMapTile(0,18).getLocation().subtractX(12)); // Change coordinates as needed to place Otis next to the player
-        // npcs.add(otis);
+        Otis otis = new Otis(1, getMapTile(21,5).getLocation().subtractX(12)); // Change coordinates as needed to place Otis next to the player
+        npcs.add(otis);
 
         return npcs;
     }
