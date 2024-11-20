@@ -28,7 +28,7 @@ public class KingFightMap extends Map {
     public KingFightMap() {
         super("grass_fight_map.txt", new ForestTileset());
         KingLocation = getMapTile(7, 6).getLocation().subtractX(20);
-        kingAnimations = new SpriteSheet(ImageLoader.load("King Lodeon.png", Colors.MAGENTA), 24, 15);
+        kingAnimations = new SpriteSheet(ImageLoader.load("King Lodeon.png", Colors.MAGENTA), 24, 24);
         currentResistance = 0;
         king = new Sprite (kingAnimations.getSprite(1, currentResistance));
         king.setScale(5);
@@ -47,7 +47,7 @@ public class KingFightMap extends Map {
     public int cycleKingResistance() {
         currentResistance = (int) (Math.random() * 3);
 
-        king.setImage(kingAnimations.getSprite(0, currentResistance));
+        king.setImage(kingAnimations.getSprite(1, currentResistance));
 
         return currentResistance;
     }

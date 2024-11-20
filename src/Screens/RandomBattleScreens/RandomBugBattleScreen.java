@@ -239,24 +239,32 @@ public class RandomBugBattleScreen extends Screen {
             } else {
                 double attack = 0;
                 if (menuItemSelected == 0) { // sword atack
-                    if (!armored) {
+                    if (!armored && !flying) {
                         attack = attack(playerStrength) * 1.5;
                         bugHealth -= attack;
                         crit = true;
-                    } else {
+                    } else if (!flying) {
                         attack = attack(playerStrength);
                         bugHealth -= attack;
+                    } else {
+                        attack = attack(playerStrength) * 0.5;
+                        bugHealth -= attack;
+                        glance = true;
                     }
 
                     hasInteracted = true;
                 } else if (menuItemSelected == 1) { // hammer attack
-                    if (armored) {
+                    if (armored && !flying) {
                         attack = attack(playerStrength) * 1.5;
                         bugHealth -= attack;
                         crit = true;
-                    } else {
+                    } else if (!flying) {
                         attack = attack(playerStrength);
                         bugHealth -= attack;
+                    } else {
+                        attack = attack(playerStrength) * 0.5;
+                        bugHealth -= attack;
+                        glance = true;
                     }
 
                     hasInteracted = true;
