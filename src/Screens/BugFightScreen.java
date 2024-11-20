@@ -300,6 +300,11 @@ public class BugFightScreen extends Screen {
                     playerHealthDisplay.setText("PLAYER HEALTH: " + playerHealth);
                     if (playerHealth <= 0) {
                         this.playLevelScreen.resetLevel();
+                        this.playLevelScreen.map.setActiveScript(new SimpleTextScript(new String[] {
+                        "Alex was defeated...", 
+                        "It seems Otis has dragged you back to the beginning\nof your adventure.", 
+                        "But you'll have to earn back all your progress...",
+                        "Rough."}));
                     }
                 }
 

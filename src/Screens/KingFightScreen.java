@@ -289,12 +289,9 @@ public class KingFightScreen extends Screen {
                 damageIndicator.setText("" + attack);
                 if (kingHealth <= 0) {
                     PlayLevelScreen.playerHealth = this.playerHealth;
-                    this.playLevelScreen.exitKingBattle();
                     Player.gainFriendshipPoints(100, 100);
-                    this.playLevelScreen.map.setActiveScript(new SimpleTextScript(new String[] {
-                    "Alex defeated King Lodeon!", 
-                    "Otis seems extremely pleased!", 
-                    "Now, to finish this adventure!"}));
+
+                    this.playLevelScreen.endGame();
                 } else {
                     playerHealth -= attack(kingStrength);
                     playerHealthDisplay.setText("PLAYER HEALTH: " + playerHealth);

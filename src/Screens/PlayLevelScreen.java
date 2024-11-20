@@ -241,6 +241,10 @@ public class PlayLevelScreen extends Screen {
         this.update();
     }
 
+    public void endGame() {
+        exitKingBattle();
+    }
+
     public void setCurrentVolume(float volume) {
         this.currentVolume = currentVolume;
       }
