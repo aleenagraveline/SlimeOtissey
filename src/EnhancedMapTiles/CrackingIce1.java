@@ -10,7 +10,7 @@ import Level.EnhancedMapTile;
 import Level.MapTile;
 import Level.Player;
 import Level.TileType;
-import Scripts.IceFallScript;
+import Scripts.IceFiveMap.IceFallScript;
 import Utils.Point;
 
 // This class is for the cracking ice in the map that fully breaks after the player has walked on the tile
@@ -25,10 +25,14 @@ public class CrackingIce1 extends EnhancedMapTile {
         super.update(player);
         if (player.touching(this)) {
             this.breakIce();
-            player.lock();
             map.setActiveScript(new IceFallScript());
         }
+    }
 
+    // Method to allow one-line passing in CrackingIce1
+    public CrackingIce1 withExistenceFlag(String existenceFlag) {
+        this.setExistenceFlag(existenceFlag);
+        return this;
     }
 
     public void breakIce() {

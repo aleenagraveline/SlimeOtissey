@@ -1,4 +1,4 @@
-package Scripts;
+package Scripts.IceFiveMap;
 
 import java.util.ArrayList;
 

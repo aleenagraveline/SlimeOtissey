@@ -2,6 +2,7 @@ package Screens.IceScreens;
 
 import Engine.GraphicsHandler;
 import Engine.Screen;
+import EnhancedMapTiles.CrackingIce0;
 import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.FlagManager;
@@ -9,6 +10,7 @@ import Level.Map;
 import Level.Player;
 import Maps.IceMaps.IceFiveMap;
 import Players.Cat;
+import Scripts.IceFiveMap.IcePuzzleSolvedScript;
 import Utils.Direction;
 
 public class IceFiveScreen extends Screen {
@@ -28,6 +30,7 @@ public class IceFiveScreen extends Screen {
         flagManager = new FlagManager();
         flagManager.addFlag("moveToIceFour", false);
         flagManager.addFlag("fellThroughIce", false);
+        flagManager.addFlag("icePuzzleSolved", false);
 
         // define/setup map
         map = new IceFiveMap();
@@ -69,7 +72,14 @@ public class IceFiveScreen extends Screen {
             map.getFlagManager().unsetFlag("moveToIceFour");
         }
         if (map.getFlagManager().isFlagSet("fellThroughIce")) {
+            CrackingIce0.numOfIceCracked = 0;
             this.iceFiveScreenState = IceFiveScreenState.FELL_THROUGH_ICE;
+        }
+
+        // Check if all ice has been cracked, i.e. puzzle has been solved
+        if (CrackingIce0.numOfIceCracked == 77) {
+            CrackingIce0.numOfIceCracked = 0; // Remove from update cycle to allow script to run
+            map.setActiveScript(new IcePuzzleSolvedScript());
         }
     }
 
