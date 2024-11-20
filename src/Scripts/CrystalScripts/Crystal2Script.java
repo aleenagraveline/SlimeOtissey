@@ -9,14 +9,14 @@ import Level.MapTile;
 import Level.Script;
 import Level.ScriptState;
 import Level.TileType;
+import Screens.CaveScreens.CaveThreeScreen;
+import ScriptActions.ChangeFlagScriptAction;
 import ScriptActions.ConditionalScriptAction;
 import ScriptActions.ConditionalScriptActionGroup;
 import ScriptActions.ScriptAction;
 import Utils.Point;
 
 public class Crystal2Script extends Script{
-
-    public static boolean crystal2Script = false;
 
     @Override
     public ArrayList<ScriptAction> loadScriptActions() {
@@ -40,7 +40,8 @@ public class Crystal2Script extends Script{
                             .build(location.x, location.y);
 
                         map.setMapTile(12, 14, mapTile);
-                        crystal2Script = true;
+                        CaveThreeScreen.changeCounter += 1;
+                        //scriptActions.add(new ChangeFlagScriptAction("crystal2Flag", true));
                         return ScriptState.COMPLETED;
                     }
                 });

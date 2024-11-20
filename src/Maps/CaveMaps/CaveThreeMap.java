@@ -7,6 +7,7 @@ import Tilesets.CaveTileset;
 import Level.Trigger;
 import NPCs.Otis;
 import Scripts.SimpleTextScript;
+import Scripts.SimpleTileChangeScript;
 import Scripts.CrystalScripts.Crystal1Script;
 import Scripts.CrystalScripts.Crystal2Script;
 import Scripts.CrystalScripts.Crystal3Script;
@@ -16,7 +17,7 @@ import Scripts.CrystalScripts.Crystal6Script;
 import Scripts.CrystalScripts.Crystal7Script;
 import Scripts.CrystalScripts.Crystal8Script;
 import Scripts.CrystalScripts.Crystal9Script;
-// import Scripts.CrystalScripts.CrystalPuzzleCompleteScript;
+import Scripts.CrystalScripts.CrystalPuzzleCompleteScript;
 import Scripts.MapTransitions.CaveIceTransitionScript;
 import Scripts.MapTransitions.CaveTwoTransitionScript;
 
@@ -52,7 +53,7 @@ public class CaveThreeMap extends Map {
         // CaveIce transition
         triggers.add(new Trigger(804, 528, 12, 96, new CaveIceTransitionScript()));
 
-        // triggers.add(new Trigger(750, 528, 10, 96, new CrystalPuzzleCompleteScript(), "hasCompletedCrystalPuzzle"));
+        //triggers.add(new Trigger(750, 528, 10, 96, new CrystalPuzzleCompleteScript(), "hasCompletedCrystalPuzzle"));
 
         return triggers;
 
