@@ -232,11 +232,7 @@ public class KingFightScreen extends Screen {
                 } else if (menuItemSelected == 2) { // exit fight peacefully
                     if (hasInteracted) {
                         PlayLevelScreen.playerHealth = this.playerHealth;
-                        this.playLevelScreen.exitKingBattle();
-                        this.playLevelScreen.map.setActiveScript(new SimpleTextScript(new String[] {
-                            "Alex ran away...", 
-                            "Alex won't gain any friendship points with Otis", 
-                            "But at least he's still alive!"}));
+                        this.playLevelScreen.exitKingBattleAsCoward();
                     }
                 }
             } else {
@@ -291,12 +287,12 @@ public class KingFightScreen extends Screen {
                     PlayLevelScreen.playerHealth = this.playerHealth;
                     Player.gainFriendshipPoints(100, 100);
 
-                    this.playLevelScreen.endGame();
+                    this.playLevelScreen.exitKingBattleAsVictor();
                 } else {
                     playerHealth -= attack(kingStrength);
                     playerHealthDisplay.setText("PLAYER HEALTH: " + playerHealth);
                     if (playerHealth <= 0) {
-                        this.playLevelScreen.resetLevel();
+                        this.playLevelScreen.exitKingBattleAsLoser();
                     }
                 }
 

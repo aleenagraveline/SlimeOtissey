@@ -49,7 +49,7 @@ public class BugScript extends Script {
                 });
                 
                 addScriptAction(new TextboxScriptAction("HOW DARE YOU??"));
-                addScriptAction(new ChangeFlagScriptAction("isInBugBattle", true));
+                addScriptAction(new ChangeFlagScriptAction("isInKingBattle", true));
                 addScriptAction(new ChangeFlagScriptAction("hatesBugs", true));
             }});
         }});

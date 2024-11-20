@@ -29,6 +29,8 @@ public class PlayLevelScreen extends Screen {
     protected TownhouseScreen townhouseScreen; // TownHouseScreen as a subscreen of PlayLevelSCreen
     private static double currentVolume;
 
+    private String ending;
+
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
     }
@@ -78,6 +80,8 @@ public class PlayLevelScreen extends Screen {
         memoryPuzzleScreen = new MemoryPuzzleScreen(this);
         waitingPuzzleScreen = new WaitingPuzzleScreen(this);
         townhouseScreen = new TownhouseScreen(this);
+
+        ending = null;
     }
 
     public Map getMap() {
@@ -217,10 +221,29 @@ public class PlayLevelScreen extends Screen {
         this.update();
     }
 
-    public void exitKingBattle() {
+    public void exitKingBattleAsVictor() {
         map.getFlagManager().unsetFlag("isInKingBattle");
-        playLevelScreenState = PlayLevelScreenState.RUNNING;
+        ending = "victor";
+        playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
         this.update();
+    }
+
+    public void exitKingBattleAsLoser() {
+        map.getFlagManager().unsetFlag("isInKingBattle");
+        ending = "loser";
+        playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
+        this.update();
+    }
+
+    public void exitKingBattleAsCoward() {
+        map.getFlagManager().unsetFlag("isInKingBattle");
+        ending = "coward";
+        playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
+        this.update();
+    }
+
+    public String getEnding() {
+        return ending;
     }
 
     public void exitMemPuzzle() {
@@ -239,10 +262,6 @@ public class PlayLevelScreen extends Screen {
         map.getFlagManager().unsetFlag("moveToTownhouse");
         playLevelScreenState = PlayLevelScreenState.RUNNING;
         this.update();
-    }
-
-    public void endGame() {
-        exitKingBattle();
     }
 
     public void setCurrentVolume(float volume) {
