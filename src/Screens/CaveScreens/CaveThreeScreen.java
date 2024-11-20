@@ -30,6 +30,7 @@ public class CaveThreeScreen extends Screen {
         flagManager = new FlagManager();
         flagManager.addFlag("moveToCaveTwo", false);
         flagManager.addFlag("moveToCaveIce", false);
+        flagManager.addFlag("hasGainedFriendship", false);
         flagManager.addFlag("hasCompletedCrystalPuzzle", false);
         // flagManager.addFlag("crystal1Flag", false);
         // flagManager.addFlag("crystal2Flag", false);
@@ -74,10 +75,11 @@ public class CaveThreeScreen extends Screen {
                 map.update(player);
                 break;
         }
-
+        
         if(!map.getFlagManager().isFlagSet("hasGainedFriendship") && map.getFlagManager().isFlagSet("hasCompletedCrystalPuzzle")) {
             Player.gainFriendshipPoints(4,6);
             map.getFlagManager().setFlag("hasGainedFriendship");
+            System.out.println("yay friends");
         }
 
         if((changeCounter == 9)) {
