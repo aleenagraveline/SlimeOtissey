@@ -197,7 +197,7 @@ public class CaveTileset extends Tileset {
                 .build();
 
         MapTileBuilder signTile = new MapTileBuilder(caveFloorFrame)
-                .withTopLayer(signFrame)
+                .withMidBottomLayer(signFrame)
                 .withTileType(TileType.NOT_PASSABLE);
 
         mapTiles.add(signTile);
