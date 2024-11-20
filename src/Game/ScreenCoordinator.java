@@ -32,7 +32,7 @@ public class ScreenCoordinator extends Screen {
 	protected int nextRandomBattle = -1;
 	
 	static final int NUM_OF_MAJOR_SCREENS = 16; // The number of major screens to be loaded
-	static final int NUM_OF_RANDOM_BATTLES = 1;
+	static final int NUM_OF_RANDOM_BATTLES = 2;
 	
 	// Index for each major screen
 	static final int CREDITS_INDEX = 0;
@@ -54,6 +54,7 @@ public class ScreenCoordinator extends Screen {
 
 	// Index for each random battle screen
 	static final int RANDOM_BUG_INDEX = 0;
+	static final int RANDOM_EYEBAT_INDEX = 1;
 
 	// currently shown Screen
 	protected Screen currentScreen = new DefaultScreen();
@@ -100,7 +101,8 @@ public class ScreenCoordinator extends Screen {
 		majorScreens[ICE_FIVE_INDEX] = new IceFiveScreen(this);
 
 		// Fill randomBattleScreens
-		randomBattleScreens[RANDOM_BUG_INDEX] = new RandomEyebatBattleScreen(this);
+		randomBattleScreens[RANDOM_BUG_INDEX] = new RandomBugBattleScreen(this);
+		randomBattleScreens[RANDOM_EYEBAT_INDEX] = new RandomEyebatBattleScreen(this);
 
 		// Initialize each major screen
 		for (int index = 0; index < NUM_OF_MAJOR_SCREENS; index++) {
@@ -206,7 +208,15 @@ public class ScreenCoordinator extends Screen {
 	}
 
 	public void enterRandomBattle() {
-		nextRandomBattle = RANDOM_NUMBERS.nextInt(NUM_OF_RANDOM_BATTLES);
+		int decider = RANDOM_NUMBERS.nextInt(100);
+		if (decider < 40) {
+			this.nextRandomBattle = RANDOM_EYEBAT_INDEX;
+		}
+		else {
+			this.nextRandomBattle = RANDOM_BUG_INDEX;
+		}
+		// Keeping this here in case we go back to equal random chances for some reason
+		// nextRandomBattle = RANDOM_NUMBERS.nextInt(NUM_OF_RANDOM_BATTLES);
 		this.gameStateBeforeBattle = gameState;
 		this.gameState = GameState.RANDOM_BATTLE;
 	}
