@@ -20,10 +20,12 @@ import Scripts.CrystalScripts.Crystal9Script;
 import Scripts.CrystalScripts.CrystalPuzzleCompleteScript;
 import Scripts.MapTransitions.CaveIceTransitionScript;
 import Scripts.MapTransitions.CaveTwoTransitionScript;
+import Scripts.TestMap.FoodScript;
 
 import java.util.ArrayList;
 
 import EnhancedMapTiles.EnhancedRock;
+import EnhancedMapTiles.Food;
 import EnhancedMapTiles.PushableRock;
 
 public class CaveThreeMap extends Map {
@@ -77,16 +79,13 @@ public class CaveThreeMap extends Map {
 
     }
 
-    // @Override
-    // public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
-    //     ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
-
-    //     EnhancedRock enhancedRock = new EnhancedRock(getMapTile(15, 11).getLocation());
-    //     EnhancedRock enhancedRock2 = new EnhancedRock(getMapTile(15, 12).getLocation());
-    //     enhancedMapTiles.add(enhancedRock);
-    //     enhancedMapTiles.add(enhancedRock2);
-
-    //     return enhancedMapTiles;
-    // }
+    @Override
+    public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
+        ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
+        Food apple = new Food(getMapTile(14, 2).getLocation());
+        apple.setInteractScript(new FoodScript());
+        enhancedMapTiles.add(apple);   
+        return enhancedMapTiles;
+    }
 }
 
