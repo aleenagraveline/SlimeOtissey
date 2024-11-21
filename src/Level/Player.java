@@ -8,6 +8,7 @@ import Engine.GraphicsHandler;
 import Engine.Key;
 import Engine.KeyLocker;
 import Engine.Keyboard;
+import Game.ScreenCoordinator;
 import GameObject.GameObject;
 import GameObject.Rectangle;
 import GameObject.SpriteSheet;
@@ -16,6 +17,9 @@ import Utils.Direction;
 import Utils.Point;
 
 public abstract class Player extends GameObject {
+    // Boolean used to check if player steps should count towards a random battle
+    public static boolean shouldIncreaseRandomStepCounter = false;
+
     // values that affect player movement
     // these should be set in a subclass
     protected float walkSpeed = 0;
@@ -73,6 +77,12 @@ public abstract class Player extends GameObject {
             // move player with respect to map collisions based on how much player needs to move this frame
             lastAmountMovedY = super.moveYHandleCollision(moveAmountY);
             lastAmountMovedX = super.moveXHandleCollision(moveAmountX);
+
+            // Add amounts moved to randomBattleStepCounter if necessary
+            if (shouldIncreaseRandomStepCounter) {
+                ScreenCoordinator.increaseRandomBattleStepCounter(Math.abs(lastAmountMovedX));
+                ScreenCoordinator.increaseRandomBattleStepCounter(Math.abs(lastAmountMovedY));
+            }
         }
     
         handlePlayerAnimation();

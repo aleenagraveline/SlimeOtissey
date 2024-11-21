@@ -30,6 +30,8 @@ public class ForestOneScreen extends Screen {
         flagManager.addFlag("moveToSpawn", false);
         flagManager.addFlag("moveToForestTwo", false);
         flagManager.addFlag("scaredOtis",false);
+        flagManager.addFlag("isCountingSteps", false);
+        flagManager.addFlag("isNotCountingSteps", true);
 
         // define/setup map
         map = new ForestOneMap();
@@ -62,7 +64,6 @@ public class ForestOneScreen extends Screen {
             case RUNNING:
                 player.update();
                 map.update(player);
-                this.screenCoordinator.increaseRandomBattleStepCounter();
                 break;
         }
 
@@ -74,6 +75,7 @@ public class ForestOneScreen extends Screen {
             screenCoordinator.setGameState(GameState.FOREST_TWO);
             map.getFlagManager().unsetFlag("moveToForestTwo");
         }
+        // TODO Pretty sure this part is unnecessary - John
         if(map.getFlagManager().isFlagSet("moveToForestOne")){
             canPlayMusic = true;
         }

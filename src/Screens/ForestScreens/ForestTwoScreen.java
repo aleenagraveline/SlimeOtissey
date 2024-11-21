@@ -28,6 +28,8 @@ public class ForestTwoScreen extends Screen {
         flagManager.addFlag("moveToForestOne", false);
         flagManager.addFlag("moveToForestThree", false);
         flagManager.addFlag("hasEnteredForestTwo", false);
+        flagManager.addFlag("isCountingSteps", false);
+        flagManager.addFlag("isNotCountingSteps", true);
 
         // define/setup map
         map = new ForestTwoMap();
@@ -60,7 +62,6 @@ public class ForestTwoScreen extends Screen {
             case RUNNING:
                 player.update();
                 map.update(player);
-                this.screenCoordinator.increaseRandomBattleStepCounter();
                 break;
         }
 

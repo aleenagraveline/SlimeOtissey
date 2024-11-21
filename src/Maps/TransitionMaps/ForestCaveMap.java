@@ -9,6 +9,8 @@ import Level.Map;
 import Level.NPC;
 import Level.Trigger;
 import NPCs.Otis;
+import Scripts.ActivateRandomStepCounterScript;
+import Scripts.DeactivateRandomStepCounterScript;
 import Scripts.MapTransitions.CaveOneTransitionScript;
 import Scripts.MapTransitions.ForestThreeTransitionScript;
 import Scripts.OtisInteractionScripts.OtisForestCaveScript;
@@ -42,13 +44,24 @@ public class ForestCaveMap extends Map {
         triggers.add(new Trigger(192, 624, 5, 48, new RockPuzzleFirstRockScript(), "hasPushedFirstRock"));
         triggers.add(new Trigger(379, 624, 5, 48, new RockPuzzleSecondRockScript(), "hasPushedSecondRock"));
         triggers.add(new Trigger(192, 680, 192, 48, new RockPuzzleCompleteScript(), "hasCompletedRockPuzzle"));
+
+        // Otis interaction trigger
         triggers.add(new Trigger(1272, 48, 240, 10, new OtisForestCaveScript(), "hasEnteredForestCave"));
 
         // ForestThree transition trigger
         triggers.add(new Trigger(1296, 0, 192, 12, new ForestThreeTransitionScript()));
         // CaveOne transition trigger
         triggers.add(new Trigger(1668, 2352, 12, 96, new CaveOneTransitionScript()));
-        //rock puzzle complete trigger
+
+        // Got lazy here again, need to come back to these - John
+        // Triggers to stop counting for random battles
+        triggers.add(new Trigger(1296, 36, 192, 12, new DeactivateRandomStepCounterScript(), "isNotCountingSteps"));
+        triggers.add(new Trigger(192, 516, 192, 12, new DeactivateRandomStepCounterScript(), "isNotCountingSteps"));
+        // Triggers to start counting for random battles
+        triggers.add(new Trigger(1296, 96, 192, 12, new ActivateRandomStepCounterScript(), "isCountingSteps"));
+        triggers.add(new Trigger(192, 456, 240, 12, new ActivateRandomStepCounterScript(), "isCountingSteps"));
+        triggers.add(new Trigger(432, 456, 12, 168, new ActivateRandomStepCounterScript(), "isCountingSteps"));
+
         return triggers;
     }
 
