@@ -16,8 +16,8 @@ public class OtisIceFourScript extends Script {
         scriptActions.add(new LockPlayerScriptAction());
 
         scriptActions.add(new TextboxScriptAction() {{
-            addText("Otis seems very nervous to leave the village...");
-            addText("I don't think he wants to go back to where he \ncame from.");
+            addText("Alex: Now of course snowland has to be the largest \none...");
+            addText("*Otis bounces...is he laughing? That's...unexpected...*");
         }});
         
         scriptActions.add(new ChangeFlagScriptAction("hasEnteredIceFour", true));

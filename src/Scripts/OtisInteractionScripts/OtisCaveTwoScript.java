@@ -16,8 +16,8 @@ public class OtisCaveTwoScript extends Script {
         scriptActions.add(new LockPlayerScriptAction());
 
         scriptActions.add(new TextboxScriptAction() {{
-            addText("Otis seems very nervous to leave the village...");
-            addText("I don't think he wants to go back to where he \ncame from.");
+            addText("Alex: I wonder how big this cave is...*");
+            addText("*Otis seems to want to keep moving*");
         }});
         
         scriptActions.add(new ChangeFlagScriptAction("hasEnteredCaveTwo", true));

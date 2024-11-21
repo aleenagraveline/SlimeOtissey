@@ -16,8 +16,9 @@ public class OtisIceFiveScript extends Script {
         scriptActions.add(new LockPlayerScriptAction());
 
         scriptActions.add(new TextboxScriptAction() {{
-            addText("Otis seems very nervous to leave the village...");
-            addText("I don't think he wants to go back to where he \ncame from.");
+            addText("Alex: I think our walk is almost over.");
+            addText("*Otis moves slightly closer, like he wants comfort*");
+            addText("*I wonder how much friendship we've gained since the \nvillage*");
         }});
         
         scriptActions.add(new ChangeFlagScriptAction("hasEnteredIceFive", true));

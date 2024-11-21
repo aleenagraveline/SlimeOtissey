@@ -16,8 +16,8 @@ public class OtisCaveThreeScript extends Script {
         scriptActions.add(new LockPlayerScriptAction());
 
         scriptActions.add(new TextboxScriptAction() {{
-            addText("Otis seems very nervous to leave the village...");
-            addText("I don't think he wants to go back to where he \ncame from.");
+            addText("*Otis seems particularly interested in the crystals \nin this section of the cave*");
+            addText("*Seems like he really wants to check them out.*");
         }});
         
         scriptActions.add(new ChangeFlagScriptAction("hasEnteredCaveThree", true));
