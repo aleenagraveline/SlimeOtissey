@@ -79,7 +79,7 @@ public class GamePanel extends JPanel {
 
 		screenManager = new ScreenManager();
 
-		pauseLabel = new SpriteFont("PAUSED", 305, 230, "Arial", 50, Color.white);
+		pauseLabel = new SpriteFont("PAUSED", 305, 265, "Arial", 50, Color.white);
 		pauseLabel.setOutlineColor(Color.black);
 		pauseLabel.setOutlineThickness(2.0f);
 
@@ -125,7 +125,7 @@ public class GamePanel extends JPanel {
 		//later ;)
 	}
 
-	public void saveGame() {
+	/*public void saveGame() {
 		keyLocker.lockKey(Key.SPACE);
 		try {
 			File myObj = new File("src/Saves/savefile.txt");
@@ -156,7 +156,7 @@ public class GamePanel extends JPanel {
 			System.out.println("An error occurred.");
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	public ScreenManager getScreenManager() {
 		return screenManager;
@@ -381,7 +381,7 @@ public class GamePanel extends JPanel {
 		// if game is paused, draw pause gfx over Screen gfx, then check for if the game should be saved
 		if (isGamePaused) {
 			pauseLabel.draw(graphicsHandler);
-			if(pauseTimer <= 0) {
+			/*if(pauseTimer <= 0) {
 				saveLabel.draw(graphicsHandler);
 			} else {
 				savedLabel.draw(graphicsHandler);
@@ -396,7 +396,7 @@ public class GamePanel extends JPanel {
 	
 			if (Keyboard.isKeyUp(pauseKey)) {
 				keyLocker.unlockKey(Key.SPACE);
-			}
+			}*/
 
 			graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(), new Color(0, 0, 0, 100));
 		}

@@ -341,7 +341,7 @@ public class ForestTileset extends Tileset {
                 .build();
 
         MapTileBuilder signTile = new MapTileBuilder(grassFrame)
-                .withTopLayer(signFrame)
+                .withMidBottomLayer(signFrame)
                 .withTileType(TileType.NOT_PASSABLE);
 
         mapTiles.add(signTile);

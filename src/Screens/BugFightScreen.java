@@ -242,24 +242,32 @@ public class BugFightScreen extends Screen {
             } else {
                 double attack = 0;
                 if (menuItemSelected == 0) { // sword atack
-                    if (!armored) {
+                    if (!armored && !flying) {
                         attack = attack(playerStrength) * 1.5;
                         bugHealth -= attack;
                         crit = true;
-                    } else {
+                    } else if (!flying) {
                         attack = attack(playerStrength);
                         bugHealth -= attack;
+                    } else {
+                        attack = attack(playerStrength) * 0.5;
+                        bugHealth -= attack;
+                        glance = true;
                     }
 
                     hasInteracted = true;
                 } else if (menuItemSelected == 1) { // hammer attack
-                    if (armored) {
+                    if (armored && !flying) {
                         attack = attack(playerStrength) * 1.5;
                         bugHealth -= attack;
                         crit = true;
-                    } else {
+                    } else if (!flying) {
                         attack = attack(playerStrength);
                         bugHealth -= attack;
+                    } else {
+                        attack = attack(playerStrength) * 0.5;
+                        bugHealth -= attack;
+                        glance = true;
                     }
 
                     hasInteracted = true;
@@ -283,7 +291,7 @@ public class BugFightScreen extends Screen {
                     PlayLevelScreen.playerHealth = this.playerHealth;
                     this.playLevelScreen.exitBugBattle();
                     Player.gainFriendshipPoints(4, 6);
-                    this.background.setActiveScript(new SimpleTextScript(new String[] {
+                    this.playLevelScreen.map.setActiveScript(new SimpleTextScript(new String[] {
                     "Alex won!", 
                     "Alex gains friendship points with Otis!", 
                     "But Otis still hates him... too early to change that"}));
@@ -292,6 +300,11 @@ public class BugFightScreen extends Screen {
                     playerHealthDisplay.setText("PLAYER HEALTH: " + playerHealth);
                     if (playerHealth <= 0) {
                         this.playLevelScreen.resetLevel();
+                        this.playLevelScreen.map.setActiveScript(new SimpleTextScript(new String[] {
+                        "Alex was defeated...", 
+                        "It seems Otis has dragged you back to the beginning\nof your adventure.", 
+                        "But you'll have to earn back all your progress...",
+                        "Rough."}));
                     }
                 }
 

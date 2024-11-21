@@ -9,6 +9,8 @@ import Level.Map;
 import Level.Player;
 import Maps.CaveMaps.CaveThreeMap;
 import Players.Cat;
+import ScriptActions.ChangeFlagScriptAction;
+import Scripts.CrystalScripts.CrystalPuzzleCompleteScript;
 import Utils.Direction;
 
 public class CaveThreeScreen extends Screen {
@@ -17,6 +19,7 @@ public class CaveThreeScreen extends Screen {
     protected Player player;
     protected CaveThreeScreenState caveThreeScreenState;
     protected FlagManager flagManager;
+    public static int changeCounter = 0;
 
     public CaveThreeScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -27,6 +30,17 @@ public class CaveThreeScreen extends Screen {
         flagManager = new FlagManager();
         flagManager.addFlag("moveToCaveTwo", false);
         flagManager.addFlag("moveToCaveIce", false);
+        flagManager.addFlag("hasGainedFriendship", false);
+        flagManager.addFlag("hasCompletedCrystalPuzzle", false);
+        // flagManager.addFlag("crystal1Flag", false);
+        // flagManager.addFlag("crystal2Flag", false);
+        // flagManager.addFlag("crystal3Flag", false);
+        // flagManager.addFlag("crystal4Flag", false);
+        // flagManager.addFlag("crystal5Flag", false);
+        // flagManager.addFlag("crystal6Flag", false);
+        // flagManager.addFlag("crystal7Flag", false);
+        // flagManager.addFlag("crystal8Flag", false);
+        // flagManager.addFlag("crystal9Flag", false);
 
         // define/setup map
         map = new CaveThreeMap();
@@ -61,8 +75,20 @@ public class CaveThreeScreen extends Screen {
                 map.update(player);
                 break;
         }
+        
+        if(!map.getFlagManager().isFlagSet("hasGainedFriendship") && map.getFlagManager().isFlagSet("hasCompletedCrystalPuzzle")) {
+            Player.gainFriendshipPoints(4,6);
+            map.getFlagManager().setFlag("hasGainedFriendship");
+            System.out.println("yay friends");
+        }
+
+        if((changeCounter == 9)) {
+            map.setActiveScript(new CrystalPuzzleCompleteScript());
+            changeCounter = 0;
+        }
 
         if (map.getFlagManager().isFlagSet("moveToCaveTwo")) {
+
             screenCoordinator.setGameState(GameState.CAVE_TWO);
             map.getFlagManager().unsetFlag("moveToCaveTwo");
         }

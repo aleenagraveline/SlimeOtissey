@@ -252,9 +252,13 @@ public class RandomEyebatBattleScreen extends Screen {
                         attack = attack(playerStrength) * 1.5;
                         batHealth -= attack;
                         crit = true;
-                    } else {
+                    } else if (!flying) {
                         attack = attack(playerStrength);
                         batHealth -= attack;
+                    } else {
+                        attack = attack(playerStrength) * 0.5;
+                        batHealth -= attack;
+                        glance = true;
                     }
 
                     hasInteracted = true;
@@ -263,9 +267,13 @@ public class RandomEyebatBattleScreen extends Screen {
                         attack = attack(playerStrength) * 1.5;
                         batHealth -= attack;
                         crit = true;
-                    } else {
+                    } else if (!flying) {
                         attack = attack(playerStrength);
                         batHealth -= attack;
+                    } else {
+                        attack = attack(playerStrength) * 0.5;
+                        batHealth -= attack;
+                        glance = true;
                     }
 
                     hasInteracted = true;

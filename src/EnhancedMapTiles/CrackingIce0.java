@@ -12,6 +12,7 @@ import Utils.Point;
 
 // This class is for the cracking ice in the map that cracks after the player has walked on the tile
 public class CrackingIce0 extends EnhancedMapTile {
+    public static int numOfIceCracked = 0;
     private boolean shouldCrack;
 
     public CrackingIce0(Point location) {
@@ -32,7 +33,8 @@ public class CrackingIce0 extends EnhancedMapTile {
 
     public void crack() {
         this.setIsHidden(true);
-        this.map.addEnhancedMapTile(new CrackingIce1(this.getLocation()));
+        this.map.addEnhancedMapTile(new CrackingIce1(this.getLocation()).withExistenceFlag("icePuzzleSolved"));
+        numOfIceCracked++;
     }
 
     @Override

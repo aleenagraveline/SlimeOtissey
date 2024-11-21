@@ -4,6 +4,7 @@ import Level.Map;
 import Level.NPC;
 import Tilesets.CaveIceTileset;
 import Level.Trigger;
+import NPCs.Otis;
 import Scripts.MapTransitions.CaveThreeTransitionScript;
 import Scripts.MapTransitions.IceOneTransitionScript;
 
@@ -20,9 +21,9 @@ public class CaveIceMap extends Map {
     public ArrayList<NPC> loadNPCs() {
         ArrayList<NPC> npcs = new ArrayList<>();
 
-        // Initialize Otis right next to the player
-        // Otis otis = new Otis(1, getMapTile(0,18).getLocation().subtractX(12)); // Change coordinates as needed to place Otis next to the player
-        // npcs.add(otis);
+        //Initialize Otis right next to the player
+        Otis otis = new Otis(1, getMapTile(0,11).getLocation().subtractX(12)); // Change coordinates as needed to place Otis next to the player
+        npcs.add(otis);
 
         return npcs;
     }

@@ -21,12 +21,15 @@ public class PlayLevelScreen extends Screen {
     public static int playerHealth;
     protected PlayLevelScreenState playLevelScreenState;
     protected BugFightScreen bugFightScreen; // BugFightScreen as a subscreen of PlayLevelScreen
+    protected KingFightScreen kingFightScreen;
     protected MemoryPuzzleScreen memoryPuzzleScreen;
     protected WaitingPuzzleScreen waitingPuzzleScreen;
     protected WinScreen winScreen;
     public static FlagManager flagManager;
     protected TownhouseScreen townhouseScreen; // TownHouseScreen as a subscreen of PlayLevelSCreen
     private static double currentVolume;
+
+    private String ending;
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -41,6 +44,7 @@ public class PlayLevelScreen extends Screen {
         flagManager.addFlag("hasFoundKey", false);
         flagManager.addFlag("keyIsInTree", true);
         flagManager.addFlag("isInBugBattle", false);
+        flagManager.addFlag("isInKingBattle", false);
         flagManager.addFlag("hatesBugs", false);
         flagManager.addFlag("isInMemPuzzle", false);
         flagManager.addFlag("playedMemPuzzle", false);
@@ -72,9 +76,12 @@ public class PlayLevelScreen extends Screen {
 
         winScreen = new WinScreen(this);
         bugFightScreen = new BugFightScreen(this);
+        kingFightScreen = new KingFightScreen(this);
         memoryPuzzleScreen = new MemoryPuzzleScreen(this);
         waitingPuzzleScreen = new WaitingPuzzleScreen(this);
         townhouseScreen = new TownhouseScreen(this);
+
+        ending = null;
     }
 
     public Map getMap() {
@@ -92,6 +99,9 @@ public class PlayLevelScreen extends Screen {
             // if in the bug battle, bring up battle screen
             case IN_BUG_BATTLE:
                 bugFightScreen.update();
+                break;
+            case IN_KING_BATTLE:
+                kingFightScreen.update();
                 break;
             // if in the memory puzzle, bring up the puzzle interface
             case IN_MEM_PUZZLE:
@@ -117,6 +127,11 @@ public class PlayLevelScreen extends Screen {
         // if flag is set, bug battle starts
         if (map.getFlagManager().isFlagSet("isInBugBattle")) {
             playLevelScreenState = PlayLevelScreenState.IN_BUG_BATTLE;
+        }
+
+        // if flag is set, king battle starts
+        if (map.getFlagManager().isFlagSet("isInKingBattle")) {
+            playLevelScreenState = PlayLevelScreenState.IN_KING_BATTLE;
         }
 
         // if flag is set, change bug npc script and change flag back to avoid unnecessary running of this method
@@ -178,6 +193,9 @@ public class PlayLevelScreen extends Screen {
             case IN_BUG_BATTLE:
                 bugFightScreen.draw(graphicsHandler);
                 break;
+            case IN_KING_BATTLE:
+                kingFightScreen.draw(graphicsHandler);
+                break;
             case IN_MEM_PUZZLE:
                 memoryPuzzleScreen.draw(graphicsHandler);
                 break;
@@ -201,6 +219,31 @@ public class PlayLevelScreen extends Screen {
         map.getFlagManager().unsetFlag("isInBugBattle");
         playLevelScreenState = PlayLevelScreenState.RUNNING;
         this.update();
+    }
+
+    public void exitKingBattleAsVictor() {
+        map.getFlagManager().unsetFlag("isInKingBattle");
+        ending = "victor";
+        playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
+        this.update();
+    }
+
+    public void exitKingBattleAsLoser() {
+        map.getFlagManager().unsetFlag("isInKingBattle");
+        ending = "loser";
+        playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
+        this.update();
+    }
+
+    public void exitKingBattleAsCoward() {
+        map.getFlagManager().unsetFlag("isInKingBattle");
+        ending = "coward";
+        playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
+        this.update();
+    }
+
+    public String getEnding() {
+        return ending;
     }
 
     public void exitMemPuzzle() {
@@ -239,7 +282,7 @@ public class PlayLevelScreen extends Screen {
 
     // This enum represents the different states this screen can be in
     private enum PlayLevelScreenState {
-        RUNNING, IN_BUG_BATTLE, IN_MEM_PUZZLE, IN_WAITING_PUZZLE, IN_TOWNHOUSE, LEVEL_COMPLETED
+        RUNNING, IN_BUG_BATTLE, IN_KING_BATTLE, IN_MEM_PUZZLE, IN_WAITING_PUZZLE, IN_TOWNHOUSE, LEVEL_COMPLETED
     }
 
     /*public static Map getMap() {

@@ -32,6 +32,7 @@ public class RockPuzzleSecondRockScript extends Script {
                         map.getEnhancedMapTiles().get(2).setIsHidden(true);
                         map.getEnhancedMapTiles().get(3).setIsHidden(true);
                         map.getEnhancedMapTiles().get(4).setIsHidden(true);
+                        map.getEnhancedMapTiles().get(5).setIsHidden(true);
                         return ScriptState.COMPLETED;
                     }
                 });

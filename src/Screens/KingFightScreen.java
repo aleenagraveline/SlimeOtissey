@@ -1,4 +1,4 @@
-package Screens.RandomBattleScreens;
+package Screens;
 
 import Engine.GraphicsHandler;
 import Engine.Key;
@@ -7,15 +7,16 @@ import Engine.Keyboard;
 import Engine.Screen;
 import Game.ScreenCoordinator;
 import Level.*;
-import Maps.BugFightMap;
-import Screens.PlayLevelScreen;
+import Maps.KingFightMap;
 import Scripts.SimpleTextScript;
 import SpriteFont.SpriteFont;
 
 import java.awt.*;
 
-// This is the class for the random bug battle screen
-public class RandomBugBattleScreen extends Screen {
+// This is the class for the king combat screen
+public class KingFightScreen extends Screen {
+    // Hold playLevelScreen to return to same level screen
+    protected PlayLevelScreen playLevelScreen;
 
     protected ScreenCoordinator screenCoordinator;
     protected int currentMenuItemHovered = 0;
@@ -32,7 +33,7 @@ public class RandomBugBattleScreen extends Screen {
     protected SpriteFont hammerAttack;
     protected SpriteFont bowAttack;
 
-    protected BugFightMap background;
+    protected KingFightMap background;
     protected int keyPressTimer;
     protected int pointerLocationX, pointerLocationY;
     protected KeyLocker keyLocker = new KeyLocker();
@@ -48,14 +49,15 @@ public class RandomBugBattleScreen extends Screen {
     protected boolean glance;
     
     protected int shakeTimer;
-    protected int bugHealth;
-    protected int bugStrength;
+    protected int kingHealth;
+    protected int kingStrength;
     protected boolean armored;
     protected boolean flying;
-    protected SpriteFont bugHealthDisplay;
+    protected SpriteFont kingHealthDisplay;
 
-    public RandomBugBattleScreen(ScreenCoordinator screenCoordinator) {
-        this.screenCoordinator = screenCoordinator;
+    public KingFightScreen(PlayLevelScreen playLevelScreen) {
+        this.playLevelScreen = playLevelScreen;
+        this.initialize();
     }
 
     public void initialize() {
@@ -65,19 +67,20 @@ public class RandomBugBattleScreen extends Screen {
         attacking = false;
         hasInteracted = false;
 
-        bugHealth = 15;
-        bugStrength = 3;
-        armored = true;
+        shakeTimer = 0;
+        kingHealth = 75;
+        kingStrength = 6;
+        armored = false;
         flying = false;
 
         // setup menu options
-        playerHealthDisplay = new SpriteFont("PLAYER HEALTH: " + playerHealth, 50, 50, "Arial", 30, new Color(49, 207, 240));
+        playerHealthDisplay = new SpriteFont("PLAYER HEALTH: " + this.playerHealth, 50, 50, "Arial", 30, new Color(49, 207, 240));
         playerHealthDisplay.setOutlineColor(Color.black);
         playerHealthDisplay.setOutlineThickness(3);
 
-        bugHealthDisplay = new SpriteFont("BUG HEALTH: " + bugHealth, 500, 50, "Arial", 30, new Color(49, 207, 240));
-        bugHealthDisplay.setOutlineColor(Color.black);
-        bugHealthDisplay.setOutlineThickness(3);
+        kingHealthDisplay = new SpriteFont("KING HEALTH: " + kingHealth, 500, 50, "Arial", 30, new Color(49, 207, 240));
+        kingHealthDisplay.setOutlineColor(Color.black);
+        kingHealthDisplay.setOutlineThickness(3);
 
         attack = new SpriteFont("ATTACK", 200, 500, "Arial", 30, new Color(49, 207, 240));
         attack.setOutlineColor(Color.black);
@@ -118,7 +121,7 @@ public class RandomBugBattleScreen extends Screen {
         damageIndicator.setOutlineThickness(3);
 
         // define/setup map
-        background = new BugFightMap();
+        background = new KingFightMap();
         background.setAdjustCamera(false);
         
         // setup key/menu interactions
@@ -220,20 +223,16 @@ public class RandomBugBattleScreen extends Screen {
                 if (menuItemSelected == 0) { // move to attack submenu
                     attacking = true;
                 } else if (menuItemSelected == 1) { // block damage
-                    playerHealth -= attack(bugStrength) / 2;
+                    playerHealth -= attack(kingStrength) / 2;
                     playerHealthDisplay.setText("PLAYER HEALTH: " + playerHealth);
                     if (playerHealth <= 0) {
-                        this.screenCoordinator.leaveRandomBattle();
+                        this.playLevelScreen.resetLevel();
                     }
                     hasInteracted = true;
                 } else if (menuItemSelected == 2) { // exit fight peacefully
                     if (hasInteracted) {
                         PlayLevelScreen.playerHealth = this.playerHealth;
-                        this.screenCoordinator.leaveRandomBattle();
-                        this.background.setActiveScript(new SimpleTextScript(new String[] {
-                            "Alex ran away...", 
-                            "Alex won't gain any friendship points with Otis", 
-                            "But at least he's still alive!"}));
+                        this.playLevelScreen.exitKingBattleAsCoward();
                     }
                 }
             } else {
@@ -241,14 +240,14 @@ public class RandomBugBattleScreen extends Screen {
                 if (menuItemSelected == 0) { // sword atack
                     if (!armored && !flying) {
                         attack = attack(playerStrength) * 1.5;
-                        bugHealth -= attack;
+                        kingHealth -= attack;
                         crit = true;
                     } else if (!flying) {
                         attack = attack(playerStrength);
-                        bugHealth -= attack;
+                        kingHealth -= attack;
                     } else {
                         attack = attack(playerStrength) * 0.5;
-                        bugHealth -= attack;
+                        kingHealth -= attack;
                         glance = true;
                     }
 
@@ -256,14 +255,14 @@ public class RandomBugBattleScreen extends Screen {
                 } else if (menuItemSelected == 1) { // hammer attack
                     if (armored && !flying) {
                         attack = attack(playerStrength) * 1.5;
-                        bugHealth -= attack;
+                        kingHealth -= attack;
                         crit = true;
                     } else if (!flying) {
                         attack = attack(playerStrength);
-                        bugHealth -= attack;
+                        kingHealth -= attack;
                     } else {
                         attack = attack(playerStrength) * 0.5;
-                        bugHealth -= attack;
+                        kingHealth -= attack;
                         glance = true;
                     }
 
@@ -271,53 +270,61 @@ public class RandomBugBattleScreen extends Screen {
                 } else if (menuItemSelected == 2) { // bow attack
                     if (flying) {
                         attack = attack(playerStrength) * 2;
-                        bugHealth -= attack;
+                        kingHealth -= attack;
                         crit = true;
                     } else {
                         attack = attack(playerStrength) * 0.5;
-                        bugHealth -= attack;
+                        kingHealth -= attack;
                         glance = true;
                     }
 
                     hasInteracted = true;
                 }
 
-                bugHealthDisplay.setText("BUG HEALTH: " + bugHealth);
+                kingHealthDisplay.setText("KING HEALTH: " + kingHealth);
                 damageIndicator.setText("" + attack);
-                if (bugHealth <= 0) {
+                if (kingHealth <= 0) {
                     PlayLevelScreen.playerHealth = this.playerHealth;
-                    this.screenCoordinator.leaveRandomBattle();
-                    Player.gainFriendshipPoints(4, 6);
-                    this.background.setActiveScript(new SimpleTextScript(new String[] {
-                    "Alex won!", 
-                    "Alex gains friendship points with Otis!", 
-                    "But Otis still hates him... too early to change that"}));
+                    Player.gainFriendshipPoints(100, 100);
+
+                    this.playLevelScreen.exitKingBattleAsVictor();
                 } else {
-                    playerHealth -= attack(bugStrength);
+                    playerHealth -= attack(kingStrength);
                     playerHealthDisplay.setText("PLAYER HEALTH: " + playerHealth);
                     if (playerHealth <= 0) {
-                        this.screenCoordinator.leaveRandomBattle();
+                        this.playLevelScreen.exitKingBattleAsLoser();
                     }
                 }
 
                 attacking = false;
                 currentMenuItemHovered = 0;
                 shakeTimer = 20;
+
+                int newResistance = background.cycleKingResistance();
+                if (newResistance == 0) {
+                    armored = false;
+                    flying = false;
+                } else if (newResistance == 1) {
+                    armored = true;
+                    flying = false;
+                } else {
+                    armored = false;
+                    flying = true;
+                }
             }
         }
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
         if(shakeTimer > 0) {
-            if (shakeTimer % 5 == 0) { background.shakeBug(); }
-            background.shakeBug();
+            if (shakeTimer % 5 == 0) { background.shakeKing(); }
+            background.shakeKing();
             shakeTimer--;
         } else {
-            background.unshakeBug();
+            background.unshakeKing();
             crit = false;
             glance = false;
         }
-
         background.draw(graphicsHandler);
 
         if(shakeTimer > 0) { damageIndicator.draw(graphicsHandler); }
@@ -325,7 +332,7 @@ public class RandomBugBattleScreen extends Screen {
         if(glance) { glanceIndicator.draw(graphicsHandler); }
 
         playerHealthDisplay.draw(graphicsHandler);
-        bugHealthDisplay.draw(graphicsHandler);
+        kingHealthDisplay.draw(graphicsHandler);
 
         if (!attacking) {
             attack.draw(graphicsHandler);
@@ -337,11 +344,12 @@ public class RandomBugBattleScreen extends Screen {
             hammerAttack.draw(graphicsHandler);
             bowAttack.draw(graphicsHandler);
         }
-
+        
         graphicsHandler.drawFilledRectangleWithBorder(pointerLocationX, pointerLocationY, 20, 20, new Color(49, 207, 240), Color.black, 2);
     }
 
     public int attack(int attackStrength) {
         return (int) (Math.random() * 7 - (attackStrength * 0.6)) + attackStrength;
     }
+    
 }
