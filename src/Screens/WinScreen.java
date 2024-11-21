@@ -34,13 +34,13 @@ public class WinScreen extends Screen {
     public void update() {
         if (screenCoordinator.getEnding().equals("victor")) {
             if (Player.getFriendshipPoints() >= 150) { // best ending
-                winMessage.setText("You've free'd the slimes! 1 of 6");
+                winMessage.setText("You've freed the slimes! 1 of 6");
             } else { // good ending
                 winMessage.setText("The King is dead but this isn't over. 2 of 6");
             }
         } else if (screenCoordinator.getEnding().equals("loser")) {
             if (Player.getFriendshipPoints() >= 150) { // okay ending
-                winMessage.setText("Nuetral ending. 3 of 6");
+                winMessage.setText("Neutral ending. 3 of 6");
             } else { // worst ending
                 winMessage.setText("You and Otis died. 4 of 6");
             }
