@@ -147,7 +147,9 @@ public class ScreenCoordinator extends Screen {
 						break;
 					case FOREST_ONE:
 						currentScreen = majorScreens[FOREST_ONE_INDEX];
-						MusicManager.playMusic("WhimsyWoods (online-audio-converter.com).wav");
+						if (previousGameState == GameState.SPAWN) {
+							MusicManager.playMusic("WhimsyWoods (online-audio-converter.com).wav");
+						}
 						break;
 					case FOREST_TWO:
 						currentScreen = majorScreens[FOREST_TWO_INDEX];
