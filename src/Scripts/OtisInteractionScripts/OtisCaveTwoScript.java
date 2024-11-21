@@ -1,4 +1,4 @@
-package Scripts;
+package Scripts.OtisInteractionScripts;
 
 import java.util.ArrayList;
 
@@ -7,7 +7,7 @@ import ScriptActions.*;
 
 // script for talking to dino npc
 // checkout the documentation website for a detailed guide on how this script works
-public class ScaredOtisScript extends Script {
+public class OtisCaveTwoScript extends Script {
 
     @Override
     public ArrayList<ScriptAction> loadScriptActions() {
