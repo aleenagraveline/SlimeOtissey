@@ -3,10 +3,11 @@ package Maps.ForestMaps;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
-import Level.SoundPlayer;
+import Level.MusicManager;
 import Level.Trigger;
 
 import NPCs.Otis;
+import Screens.ForestScreens.ForestOneScreen;
 import Scripts.ScaredOtisScript;
 import Scripts.SimpleTextScript;
 import Scripts.MapTransitions.ForestTwoTransitionScript;
@@ -18,17 +19,19 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 
 import EnhancedMapTiles.Food;
+import Game.ScreenCoordinator;
+
 
 public class ForestOneMap extends Map {
 
-    private SoundPlayer soundPlayer;
+
 
     public ForestOneMap() {
         
         super("forest_one_map.txt", new ForestTileset());
         this.playerStartPosition = getMapTile(0, 8).getLocation().addY(24); // middle of path on left
-        addMusic("Resources/WhimsyWoods (online-audio-converter.com).wav");
     }
+
 
     @Override
     public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
@@ -38,11 +41,6 @@ public class ForestOneMap extends Map {
         enhancedMapTiles.add(apple);   
         return enhancedMapTiles;
      }
-
-     public void addMusic(String soundFilePath) {
-        soundPlayer = new SoundPlayer(new JFrame(), soundFilePath, 100); // Create SoundPlayer with volume 100
-        soundPlayer.play(); // Start playing the music
-    }
 
     @Override
     public ArrayList<NPC> loadNPCs() {
