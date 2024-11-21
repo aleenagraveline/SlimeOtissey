@@ -25,7 +25,7 @@ public class WinScreen extends Screen {
 
     @Override
     public void initialize() {
-        winMessage = new SpriteFont("You win!", 350, 239, "Arial", 30, Color.white);
+        winMessage = new SpriteFont("You win!", 100, 239, "Arial", 30, Color.white);
         keyLocker.lockKey(Key.SPACE);
         keyLocker.lockKey(Key.ESC);
     }
@@ -34,21 +34,21 @@ public class WinScreen extends Screen {
     public void update() {
         if (screenCoordinator.getEnding().equals("victor")) {
             if (Player.getFriendshipPoints() >= 150) { // best ending
-                winMessage.setText("best ending [placeholder]");
+                winMessage.setText("You've free'd the slimes! 1 of 6");
             } else { // good ending
-                winMessage.setText("good ending [placeholder]");
+                winMessage.setText("The King is dead but this isn't over. 2 of 6");
             }
         } else if (screenCoordinator.getEnding().equals("loser")) {
             if (Player.getFriendshipPoints() >= 150) { // okay ending
-                winMessage.setText("okay ending [placeholder]");
+                winMessage.setText("Nuetral ending. 3 of 6");
             } else { // worst ending
-                winMessage.setText("worst ending [placeholder]");
+                winMessage.setText("You and Otis died. 4 of 6");
             }
         } else if (screenCoordinator.getEnding().equals("coward")) {
             if (Player.getFriendshipPoints() >= 150) { // best ending
-                winMessage.setText("meh ending [placeholder]");
+                winMessage.setText("Coward 5 of 6");
             } else { // bad ending
-                winMessage.setText("bad ending [placeholder]");
+                winMessage.setText("This is bad. 6 of 6");
             }
         }
 
