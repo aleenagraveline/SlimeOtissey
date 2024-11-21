@@ -6,7 +6,9 @@ import Level.NPC;
 import Tilesets.IceTileset;
 import Level.Trigger;
 import NPCs.Otis;
+import ScriptActions.ChangeFlagScriptAction;
 import Scripts.SimpleTextScript;
+import Scripts.StartKingFight;
 import Scripts.MapTransitions.IceFourTransitionScript;
 import Scripts.OtisInteractionScripts.OtisIceFiveScript;
 import Scripts.TestMap.FoodScript;
@@ -75,6 +77,8 @@ public class IceFiveMap extends Map {
     @Override
     public void loadScripts() {
         getMapTile(6, 26).setInteractScript(new SimpleTextScript("I've lead you right where I need you."));
+        getMapTile(5, 29).setInteractScript(new StartKingFight());
+        getMapTile(4, 29).setInteractScript(new StartKingFight());
     }
     
 }

@@ -32,7 +32,7 @@ public class IceFiveScreen extends Screen {
         flagManager.addFlag("fellThroughIce", false);
         flagManager.addFlag("icePuzzleSolved", false);
         flagManager.addFlag("hasEnteredIceFive", false);
-
+        flagManager.addFlag("isInKingBattle", false);
         // define/setup map
         map = new IceFiveMap();
         map.setFlagManager(flagManager);
@@ -75,6 +75,9 @@ public class IceFiveScreen extends Screen {
         if (map.getFlagManager().isFlagSet("fellThroughIce")) {
             CrackingIce0.numOfIceCracked = 0;
             this.iceFiveScreenState = IceFiveScreenState.FELL_THROUGH_ICE;
+        }
+        if (map.getFlagManager().isFlagSet("isInKingBattle")) {
+            screenCoordinator.setGameState(GameState.KING_BATTLE);
         }
 
         // Check if all ice has been cracked, i.e. puzzle has been solved
