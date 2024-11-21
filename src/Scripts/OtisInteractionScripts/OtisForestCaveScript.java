@@ -16,11 +16,13 @@ public class OtisForestCaveScript extends Script {
         scriptActions.add(new LockPlayerScriptAction());
 
         scriptActions.add(new TextboxScriptAction() {{
-            addText("Otis seems very nervous to leave the village...");
-            addText("I don't think he wants to go back to where he \ncame from.");
+            addText("*Otis seems to hesitate entering this section of the woods...*");
+            addText("*Maybe he senses something different ahead?*");
+            addText("Alex: Come on, buddy!");
+            addText("*Otis looks skeptical...but he follows.*");
         }});
         
-        scriptActions.add(new ChangeFlagScriptAction("scaredOtis", true));
+        scriptActions.add(new ChangeFlagScriptAction("hasEnteredForestCave", true));
         scriptActions.add(new UnlockPlayerScriptAction());
         return scriptActions;
     }

@@ -292,7 +292,7 @@ public abstract class Player extends GameObject {
 
     public static void gainHealth() {
         Random rand = new Random();
-        PlayLevelScreen.playerHealth = rand.nextInt(5) + 1;
+        PlayLevelScreen.playerHealth += rand.nextInt(5) + 1;
         if(PlayLevelScreen.playerHealth >= 50) {
             PlayLevelScreen.playerHealth = 50;
         }

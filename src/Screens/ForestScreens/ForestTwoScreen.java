@@ -27,6 +27,7 @@ public class ForestTwoScreen extends Screen {
         flagManager = new FlagManager();
         flagManager.addFlag("moveToForestOne", false);
         flagManager.addFlag("moveToForestThree", false);
+        flagManager.addFlag("hasEnteredForestTwo", false);
 
         // define/setup map
         map = new ForestTwoMap();
