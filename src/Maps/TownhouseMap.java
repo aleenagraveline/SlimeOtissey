@@ -14,11 +14,12 @@ import Scripts.TestMap.FoodSignScript;
 import Scripts.TestMap.OtisHouseScript;
 import Scripts.TestMap.TownhouseSignScript;
 import Tilesets.CommonTileset;
+import Tilesets.VillageTileset;
 
 public class TownhouseMap extends Map{
 
     public TownhouseMap() {
-        super("townhouse_map.txt", new CommonTileset());
+        super("townhouse_map.txt", new VillageTileset());
         this.playerStartPosition = getMapTile(12, 2).getLocation().subtractX(12).subtractY(24); // Position below door in house
     }
 

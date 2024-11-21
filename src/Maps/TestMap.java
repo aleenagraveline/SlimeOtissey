@@ -27,7 +27,7 @@ public class TestMap extends Map {
     public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
         ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
 
-        PushableRock pushableRock = new PushableRock(getMapTile(20, 10).getLocation());
+        PushableRock pushableRock = new PushableRock(getMapTile(1, 26).getLocation());
         enhancedMapTiles.add(pushableRock);
 
         Food apple = new Food(getMapTile(3, 23).getLocation());
@@ -84,9 +84,9 @@ public class TestMap extends Map {
         getMapTile(11, 23).setInteractScript(new SimpleTextScript("King Lodeon's... Castle..."));
 
         // Forest sign interaction
-        getMapTile(18, 26).setInteractScript(new SimpleTextScript("To Forest:\n>>>>"));
+        getMapTile(18, 25).setInteractScript(new SimpleTextScript("To Forest:\n>>>>"));
 
-        getMapTile(20, 9).setInteractScript(new TreeScript());
+        getMapTile(1, 25).setInteractScript(new TreeScript());
     }
 }
 
