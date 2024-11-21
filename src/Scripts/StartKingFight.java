@@ -1,4 +1,4 @@
-package Scripts.TestMap;
+package Scripts;
 
 import java.util.ArrayList;
 
@@ -7,20 +7,16 @@ import ScriptActions.*;
 
 // script for talking to bug npc
 // checkout the documentation website for a detailed guide on how this script works
-public class BugScript extends Script {
+public class StartKingFight extends Script {
 
     @Override
     public ArrayList<ScriptAction> loadScriptActions() {
         ArrayList<ScriptAction> scriptActions = new ArrayList<>();
         scriptActions.add(new LockPlayerScriptAction());
 
-        scriptActions.add(new NPCLockScriptAction());
-
-        scriptActions.add(new NPCFacePlayerScriptAction());
-
         scriptActions.add(new TextboxScriptAction() {{
-            addText("Hello Alex!");
-            addText("Do you like bugs?", new String[] { "Yes", "No" });
+            addText("Well then... You've finally arrived.");
+            addText("Are you prepared for this?", new String[] { "Yes", "No" });
         }});
 
         scriptActions.add(new ConditionalScriptAction() {{
@@ -33,10 +29,8 @@ public class BugScript extends Script {
                     }
                 });
 
-                addScriptAction(new TextboxScriptAction() {{
-                    addText("I knew you were a cool guy!");
-                    addText("I'm going to let you in on a little secret...\nYou can push some rocks out of the way.");
-                }});
+                addScriptAction(new TextboxScriptAction() {{ addText("Very well. Let us end this."); }});
+                addScriptAction(new ChangeFlagScriptAction("isInKingBattle", true));
             }});
 
             addConditionalScriptActionGroup(new ConditionalScriptActionGroup() {{
@@ -48,13 +42,10 @@ public class BugScript extends Script {
                     }
                 });
                 
-                addScriptAction(new TextboxScriptAction("HOW DARE YOU??"));
-                addScriptAction(new ChangeFlagScriptAction("isInBugBattle", true));
-                addScriptAction(new ChangeFlagScriptAction("hatesBugs", true));
+                addScriptAction(new TextboxScriptAction("Too bad."));
+                addScriptAction(new ChangeFlagScriptAction("isInKingBattle", true));
             }});
         }});
-
-        scriptActions.add(new NPCUnlockScriptAction());
         scriptActions.add(new UnlockPlayerScriptAction());
 
         return scriptActions;

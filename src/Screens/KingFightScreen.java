@@ -16,7 +16,7 @@ import java.awt.*;
 // This is the class for the king combat screen
 public class KingFightScreen extends Screen {
     // Hold playLevelScreen to return to same level screen
-    protected PlayLevelScreen playLevelScreen;
+    //protected PlayLevelScreen playLevelScreen;
 
     protected ScreenCoordinator screenCoordinator;
     protected int currentMenuItemHovered = 0;
@@ -55,9 +55,8 @@ public class KingFightScreen extends Screen {
     protected boolean flying;
     protected SpriteFont kingHealthDisplay;
 
-    public KingFightScreen(PlayLevelScreen playLevelScreen) {
-        this.playLevelScreen = playLevelScreen;
-        this.initialize();
+    public KingFightScreen(ScreenCoordinator screenCoordinator) {
+        this.screenCoordinator = screenCoordinator;
     }
 
     public void initialize() {
@@ -226,7 +225,7 @@ public class KingFightScreen extends Screen {
                     playerHealth -= attack(kingStrength) / 2;
                     playerHealthDisplay.setText("PLAYER HEALTH: " + playerHealth);
                     if (playerHealth <= 0) {
-                        this.playLevelScreen.resetLevel();
+                        this.playLevelScreen.exitKingBattleAsLoser();
                     }
                     hasInteracted = true;
                 } else if (menuItemSelected == 2) { // exit fight peacefully
