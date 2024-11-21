@@ -11,6 +11,8 @@ import Screens.ForestScreens.*;
 import Screens.IceScreens.*;
 import Screens.RandomBattleScreens.*;
 import Screens.TransitionScreens.*;
+import Scripts.EnterRandomBattleScript;
+import Scripts.SimpleTextScript;
 import Level.Map;
 import Level.MusicManager;
 
@@ -253,10 +255,10 @@ public class ScreenCoordinator extends Screen {
 		else {
 			this.nextRandomBattle = RANDOM_BUG_INDEX;
 		}
-		// Keeping this here in case we go back to equal random chances for some reason
+		// Keeping this here in case we go back to equal random chances for some reason - John
 		// nextRandomBattle = RANDOM_NUMBERS.nextInt(NUM_OF_RANDOM_BATTLES);
 		this.gameStateBeforeBattle = gameState;
-		this.gameState = GameState.RANDOM_BATTLE;
+		getMap().setActiveScript(new EnterRandomBattleScript(this));
 	}
 
 	public static void increaseRandomBattleStepCounter() {
