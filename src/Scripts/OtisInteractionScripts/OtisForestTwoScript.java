@@ -16,8 +16,9 @@ public class OtisForestTwoScript extends Script {
         scriptActions.add(new LockPlayerScriptAction());
 
         scriptActions.add(new TextboxScriptAction() {{
-            addText("Otis seems very nervous to leave the village...");
-            addText("I don't think he wants to go back to where he \ncame from.");
+            addText("*Otis seems to be growing incredibly stressed...*");
+            addText("*He must not like the forest very much...*");
+            addText("Alex: At least I have my weapons to fight off \nthe bugs...");
         }});
         
         scriptActions.add(new ChangeFlagScriptAction("hasEnteredForestTwo", true));

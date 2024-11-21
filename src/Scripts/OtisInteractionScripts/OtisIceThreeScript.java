@@ -16,8 +16,8 @@ public class OtisIceThreeScript extends Script {
         scriptActions.add(new LockPlayerScriptAction());
 
         scriptActions.add(new TextboxScriptAction() {{
-            addText("Otis seems very nervous to leave the village...");
-            addText("I don't think he wants to go back to where he \ncame from.");
+            addText("*Otis seems to have livened up his steps after \nthe sliding adventure*");
+            addText("*It was pretty fun, maybe we can do it again soon?*");
         }});
         
         scriptActions.add(new ChangeFlagScriptAction("hasEnteredIceThree", true));

@@ -16,8 +16,8 @@ public class OtisIceTwoScript extends Script {
         scriptActions.add(new LockPlayerScriptAction());
 
         scriptActions.add(new TextboxScriptAction() {{
-            addText("Otis seems very nervous to leave the village...");
-            addText("I don't think he wants to go back to where he \ncame from.");
+            addText("*Otis shivers...the ice must be making him cold*");
+            addText("*I wonder if live slimes can freeze?*");
         }});
         
         scriptActions.add(new ChangeFlagScriptAction("hasEnteredIceTwo", true));

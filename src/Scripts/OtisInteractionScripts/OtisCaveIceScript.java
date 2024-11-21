@@ -18,7 +18,7 @@ public class OtisCaveIceScript extends Script {
         scriptActions.add(new TextboxScriptAction() {{
             addText("*It's getting hard to see Otis in here...*");
             addText("Alex: Otis, follow the sound of my footsteps");
-            addText("*There's no response, but you're pretty sure that Otis heard you.");
+            addText("*There's no response, but you're pretty sure that Otis \nheard you.");
         }});
         
         scriptActions.add(new ChangeFlagScriptAction("hasEnteredCaveIce", true));

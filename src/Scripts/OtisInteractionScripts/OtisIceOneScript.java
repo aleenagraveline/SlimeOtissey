@@ -16,8 +16,8 @@ public class OtisIceOneScript extends Script {
         scriptActions.add(new LockPlayerScriptAction());
 
         scriptActions.add(new TextboxScriptAction() {{
-            addText("Otis seems very nervous to leave the village...");
-            addText("I don't think he wants to go back to where he \ncame from.");
+            addText("*Otis begins to trail behind slightly...*");
+            addText("Alex: If you're bored, I'm sure we'll find something \n to do soon...");
         }});
         
         scriptActions.add(new ChangeFlagScriptAction("hasEnteredIceOne", true));

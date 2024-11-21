@@ -16,8 +16,8 @@ public class OtisForestThreeScript extends Script {
         scriptActions.add(new LockPlayerScriptAction());
 
         scriptActions.add(new TextboxScriptAction() {{
-            addText("Otis seems very nervous to leave the village...");
-            addText("I don't think he wants to go back to where he \ncame from.");
+            addText("*Otis begins to look a little tired...*");
+            addText("*I wonder if he's hungry? Maybe I'll \n try to find him food*");
         }});
         
         scriptActions.add(new ChangeFlagScriptAction("hasEnteredForestThree", true));
