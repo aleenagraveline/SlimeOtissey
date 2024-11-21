@@ -11,6 +11,8 @@ import Screens.ForestScreens.*;
 import Screens.IceScreens.*;
 import Screens.RandomBattleScreens.*;
 import Screens.TransitionScreens.*;
+import Scripts.EnterRandomBattleScript;
+import Scripts.SimpleTextScript;
 import Level.Map;
 import Level.MusicManager;
 
@@ -24,8 +26,8 @@ public class ScreenCoordinator extends Screen {
 	static final SecureRandom RANDOM_NUMBERS = new SecureRandom();
 	
 	// Count, cap, and constants for random battles
-	protected int randomBattleStepCap;
-	protected int randomBattleStepCounter;
+	public static int randomBattleStepCap;
+	public static float randomBattleStepCounter;
 	static final int RANDOM_BATTLE_STEP_MINIMUM = 700;
 	static final int RANDOM_BATTLE_STEP_MAXIMUM = 1200;
 
@@ -127,8 +129,8 @@ public class ScreenCoordinator extends Screen {
 	public void update() {
 		do {
 			if (randomBattleStepCounter >= randomBattleStepCap) {
-				this.randomBattleStepCounter = 0;
-				this.randomBattleStepCap = RANDOM_NUMBERS.nextInt(RANDOM_BATTLE_STEP_MINIMUM, RANDOM_BATTLE_STEP_MAXIMUM);
+				randomBattleStepCounter = 0;
+				randomBattleStepCap = RANDOM_NUMBERS.nextInt(RANDOM_BATTLE_STEP_MINIMUM, RANDOM_BATTLE_STEP_MAXIMUM);
 				this.enterRandomBattle();
 			}
 
@@ -141,7 +143,6 @@ public class ScreenCoordinator extends Screen {
 						break;
 					case SPAWN:
 						currentScreen = majorScreens[SPAWN_INDEX];
-						randomBattleStepCounter = 0;
 						MusicManager.playMusic("VillageSong (online-audio-converter.com).wav");
 						break;
 					case FOREST_ONE:
@@ -156,11 +157,9 @@ public class ScreenCoordinator extends Screen {
 						break;
 					case FOREST_CAVE:
 						currentScreen = majorScreens[FOREST_CAVE_INDEX];
-						randomBattleStepCounter = 0;
 						break;
 					case CAVE_ONE:
 						currentScreen = majorScreens[CAVE_ONE_INDEX];
-						randomBattleStepCounter = 0;
 						MusicManager.playMusic("VillageSong (online-audio-converter.com).wav");
 						break;
 					case CAVE_TWO:
@@ -256,17 +255,17 @@ public class ScreenCoordinator extends Screen {
 		else {
 			this.nextRandomBattle = RANDOM_BUG_INDEX;
 		}
-		// Keeping this here in case we go back to equal random chances for some reason
+		// Keeping this here in case we go back to equal random chances for some reason - John
 		// nextRandomBattle = RANDOM_NUMBERS.nextInt(NUM_OF_RANDOM_BATTLES);
 		this.gameStateBeforeBattle = gameState;
-		this.gameState = GameState.RANDOM_BATTLE;
+		getMap().setActiveScript(new EnterRandomBattleScript(this));
 	}
 
-	public void increaseRandomBattleStepCounter() {
+	public static void increaseRandomBattleStepCounter() {
 		randomBattleStepCounter++;
 	}
 
-	public void increaseRandomBattleStepCounter(int incrementAmount) {
+	public static void increaseRandomBattleStepCounter(float incrementAmount) {
 		randomBattleStepCounter += incrementAmount;
 	}
 }

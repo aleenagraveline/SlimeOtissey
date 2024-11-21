@@ -9,6 +9,8 @@ import Level.Trigger;
 import NPCs.Otis;
 import Screens.ForestScreens.ForestOneScreen;
 import Scripts.OtisInteractionScripts.ScaredOtisScript;
+import Scripts.ActivateRandomStepCounterScript;
+import Scripts.DeactivateRandomStepCounterScript;
 import Scripts.SimpleTextScript;
 import Scripts.MapTransitions.ForestTwoTransitionScript;
 import Scripts.MapTransitions.SpawnTransitionScript;
@@ -64,14 +66,27 @@ public class ForestOneMap extends Map {
         triggers.add(new Trigger(1428, 288, 12, 288, new ForestTwoTransitionScript()));
 
         triggers.add(new Trigger(100, 288, 10, 288, new ScaredOtisScript(),"scaredOtis"));
-        
+
+        // Triggers to stop counting for random battles
+        triggers.add(new Trigger(36, 288, 12, 288, new DeactivateRandomStepCounterScript(), "isNotCountingSteps"));
+        triggers.add(new Trigger(1392, 288, 12, 288, new DeactivateRandomStepCounterScript(), "isNotCountingSteps"));
+        triggers.add(new Trigger(48, 398, 1344, 12, new DeactivateRandomStepCounterScript(), "isNotCountingSteps"));
+        triggers.add(new Trigger(48, 454, 1344, 12, new DeactivateRandomStepCounterScript(), "isNotCountingSteps"));
+        // Triggers to start counting for random battles
+        triggers.add(new Trigger(96, 366, 1248, 12, new ActivateRandomStepCounterScript(), "isCountingSteps"));
+        triggers.add(new Trigger(96, 486, 1248, 12, new ActivateRandomStepCounterScript(), "isCountingSteps"));
+        triggers.add(new Trigger(96, 288, 12, 78, new ActivateRandomStepCounterScript(), "isCountingSteps"));
+        triggers.add(new Trigger(1332, 288, 12, 78, new ActivateRandomStepCounterScript(), "isCountingSteps"));
+        triggers.add(new Trigger(96, 498, 12, 78, new ActivateRandomStepCounterScript(), "isCountingSteps"));
+        triggers.add(new Trigger(1332, 498, 12, 78, new ActivateRandomStepCounterScript(), "isCountingSteps"));
+
         return triggers;
 
     }
 
     @Override
     public void loadScripts() {
-        getMapTile(3, 7).setInteractScript(new SimpleTextScript("Whimsy Woods \nStay on the path"));
+        getMapTile(3, 7).setInteractScript(new SimpleTextScript("Whimsy Woods \nDANGER: Stay on the path"));
     }
 
 }

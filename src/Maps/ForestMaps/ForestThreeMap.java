@@ -8,6 +8,8 @@ import Level.Map;
 import Level.NPC;
 import Level.Trigger;
 import NPCs.Otis;
+import Scripts.ActivateRandomStepCounterScript;
+import Scripts.DeactivateRandomStepCounterScript;
 import Scripts.SimpleTextScript;
 import Scripts.MapTransitions.ForestCaveTransitionScript;
 import Scripts.MapTransitions.ForestTwoTransitionScript;
@@ -63,6 +65,14 @@ public class ForestThreeMap extends Map {
 
         // ForestCave transition trigger
         triggers.add(new Trigger(576, 1428, 192, 12, new ForestCaveTransitionScript()));
+
+        // Got lazy here, should revisit locations - John
+        // Triggers to stop counting for random battles
+        triggers.add(new Trigger(0, 384, 1200, 12, new DeactivateRandomStepCounterScript(), "isNotCountingSteps"));
+        triggers.add(new Trigger(0, 1104, 1200, 12, new DeactivateRandomStepCounterScript(), "isNotCountingSteps"));
+        // Triggers to start counting for random battles
+        triggers.add(new Trigger(0, 444, 1200, 12, new ActivateRandomStepCounterScript(), "isCountingSteps"));
+        triggers.add(new Trigger(0, 1044, 1200, 12, new ActivateRandomStepCounterScript(), "isCountingSteps"));
 
         triggers.add(new Trigger(1104, 96, 10, 336, new OtisForestThreeScript(), "hasEnteredForestThree"));
         return triggers;
