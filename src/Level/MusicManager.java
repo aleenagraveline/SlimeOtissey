@@ -1,36 +1,43 @@
 package Level;
 
-import javax.swing.JFrame;
-import java.util.HashMap;
-import java.util.Map;
+import javax.sound.sampled.*;
+import java.io.File;
+import Engine.Config;
+import Screens.PlayLevelScreen;
 
 public class MusicManager {
-    private static SoundPlayer currentSoundPlayer;
-    private static Map<String, String> mapToSongFile = new HashMap<>();
+    //iniitialize static variables
+    private static Map currentMap = null;
+    private static Clip currentClip = null;
+    private static PlayLevelScreen playLevelScreenInstance = new PlayLevelScreen(null);
 
-    static {
-        // Set paths for each map's music
-        mapToSongFile.put("Village", "Resources/VillageSong (online-audio-converter.com).wav");
-        mapToSongFile.put("ForestOneMap", "Resources/WhimsyWoods (online-audio-converter.com).wav");
-        mapToSongFile.put("CaveOneMap", "Resources/Cave.wav");
-    }
-
-    public static void playMapMusic(JFrame jFrame, String mapName) {
-        // Get song file for the map
-        String soundFilePath = mapToSongFile.get(mapName);
-
-        if (soundFilePath != null) {
-            // Stop current song if already playing
-            if (currentSoundPlayer != null && currentSoundPlayer.clip.isRunning()) {
-                currentSoundPlayer.clip.stop();
-                currentSoundPlayer.clip.close();
+    public static void playMusic (String musicFilePath) {
+        
+        if (currentMap == null || currentMap != playLevelScreenInstance.getMap()) {
+            try {
+                if (currentClip != null)
+                    currentClip.stop();
+                
+                currentClip = AudioSystem.getClip();
+            } catch (Exception e) { 
+                System.out.println(e.toString());
             }
+        }
+            
+        try {
+            File song = new File(Config.RESOURCES_PATH + musicFilePath);
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(song);
+                
+            //create and play clip
+            currentClip.open(audioInputStream);
+            currentClip.loop(Clip.LOOP_CONTINUOUSLY);
+            currentClip.start();
+                
+            //store currentMap when song played
+            currentMap = playLevelScreenInstance.getMap();
 
-            // Start new song for the new map
-            currentSoundPlayer = new SoundPlayer(jFrame, soundFilePath, 100); // 100 for full volume
-            currentSoundPlayer.play();
-        } else {
-            System.out.println("No song mapped for " + mapName);
+        } catch (Exception e) {
+            System.out.println(e.toString());
         }
     }
 }

@@ -6,6 +6,7 @@ import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.FlagManager;
 import Level.Map;
+import Level.MusicManager;
 import Level.Player;
 import Maps.ForestMaps.ForestOneMap;
 import Players.Cat;
@@ -17,6 +18,7 @@ public class ForestOneScreen extends Screen {
     protected Player player;
     protected ForestOneScreenState forestOneScreenState;
     protected FlagManager flagManager;
+    public static boolean canPlayMusic = false;
 
     public ForestOneScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -72,7 +74,9 @@ public class ForestOneScreen extends Screen {
             screenCoordinator.setGameState(GameState.FOREST_TWO);
             map.getFlagManager().unsetFlag("moveToForestTwo");
         }
-
+        if(map.getFlagManager().isFlagSet("moveToForestOne")){
+            canPlayMusic = true;
+        }
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
