@@ -43,7 +43,7 @@ public class CaveOneMap extends Map {
         triggers.add(new Trigger(0, 336, 12, 96, new ForestCaveTransitionScript()));
         // CaveTwo transition
         triggers.add(new Trigger(2148, 336, 12, 96, new CaveTwoTransitionScript()));
-        triggers.add(new Trigger(100, 288, 10, 288, new OtisCaveOneScript(), "hasEnteredCaveOne"));
+        triggers.add(new Trigger(48, 180, 10, 444, new OtisCaveOneScript(), "hasEnteredCaveOne"));
 
         return triggers;
 

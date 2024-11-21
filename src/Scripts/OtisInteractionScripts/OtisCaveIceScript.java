@@ -16,8 +16,9 @@ public class OtisCaveIceScript extends Script {
         scriptActions.add(new LockPlayerScriptAction());
 
         scriptActions.add(new TextboxScriptAction() {{
-            addText("Otis seems very nervous to leave the village...");
-            addText("I don't think he wants to go back to where he \ncame from.");
+            addText("*It's getting hard to see Otis in here...*");
+            addText("Alex: Otis, follow the sound of my footsteps");
+            addText("*There's no response, but you're pretty sure that Otis heard you.");
         }});
         
         scriptActions.add(new ChangeFlagScriptAction("hasEnteredCaveIce", true));

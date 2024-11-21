@@ -43,7 +43,7 @@ public class IceFourMap extends Map {
         // IceFive transition
         triggers.add(new Trigger(0, 336, 12, 96, new IceFiveTransitionScript()));
 
-        triggers.add(new Trigger(100, 288, 10, 288, new OtisIceFourScript(), "hasEnteredIceFour"));
+        triggers.add(new Trigger(1008, 48, 96, 10, new OtisIceFourScript(), "hasEnteredIceFour"));
 
         return triggers;
 

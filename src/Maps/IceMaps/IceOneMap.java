@@ -53,7 +53,7 @@ public class IceOneMap extends Map {
         // IceTwo transition
         triggers.add(new Trigger(1140, 336, 12, 96, new IceTwoTransitionScript()));
 
-        triggers.add(new Trigger(100, 288, 10, 288, new OtisIceOneScript(), "hasEnteredIceOne"));
+        triggers.add(new Trigger(144, 804, 96, 10, new OtisIceOneScript(), "hasEnteredIceOne"));
 
         return triggers;
 

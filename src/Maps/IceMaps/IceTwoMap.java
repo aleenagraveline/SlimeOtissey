@@ -83,7 +83,7 @@ public class IceTwoMap extends Map {
         // Trigger to gain friendship
         triggers.add(new Trigger(1632, 240, 12, 96, new SlidingCompleteScript(), "hasCompletedSlidingPuzzle"));
 
-        triggers.add(new Trigger(100, 288, 10, 288, new OtisIceTwoScript(), "hasEnteredIceTwo"));
+        triggers.add(new Trigger(48, 672, 10, 96, new OtisIceTwoScript(), "hasEnteredIceTwo"));
 
         return triggers;
 
