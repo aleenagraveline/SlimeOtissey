@@ -9,6 +9,8 @@ import NPCs.Otis;
 import Scripts.SimpleTextScript;
 import Scripts.MapTransitions.CaveTwoTransitionScript;
 import Scripts.MapTransitions.ForestCaveTransitionScript;
+import Scripts.OtisInteractionScripts.OtisCaveOneScript;
+import Scripts.OtisInteractionScripts.OtisForestCaveScript;
 import Scripts.TestMap.FoodScript;
 
 import java.util.ArrayList;
@@ -41,6 +43,7 @@ public class CaveOneMap extends Map {
         triggers.add(new Trigger(0, 336, 12, 96, new ForestCaveTransitionScript()));
         // CaveTwo transition
         triggers.add(new Trigger(2148, 336, 12, 96, new CaveTwoTransitionScript()));
+        triggers.add(new Trigger(100, 288, 10, 288, new OtisCaveOneScript(), "hasEnteredCaveOne"));
 
         return triggers;
 

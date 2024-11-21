@@ -20,6 +20,8 @@ import Scripts.CrystalScripts.Crystal9Script;
 import Scripts.CrystalScripts.CrystalPuzzleCompleteScript;
 import Scripts.MapTransitions.CaveIceTransitionScript;
 import Scripts.MapTransitions.CaveTwoTransitionScript;
+import Scripts.OtisInteractionScripts.OtisCaveThreeScript;
+import Scripts.OtisInteractionScripts.OtisForestCaveScript;
 import Scripts.TestMap.FoodScript;
 
 import java.util.ArrayList;
@@ -54,6 +56,8 @@ public class CaveThreeMap extends Map {
         triggers.add(new Trigger(528, 1428, 96, 12, new CaveTwoTransitionScript()));
         // CaveIce transition
         triggers.add(new Trigger(804, 528, 12, 96, new CaveIceTransitionScript()));
+
+        triggers.add(new Trigger(100, 288, 10, 288, new OtisCaveThreeScript(), "hasEnteredCaveThree"));
 
         //triggers.add(new Trigger(750, 528, 10, 96, new CrystalPuzzleCompleteScript(), "hasCompletedCrystalPuzzle"));
 

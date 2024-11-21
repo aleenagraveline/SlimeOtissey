@@ -31,6 +31,7 @@ public class IceFiveScreen extends Screen {
         flagManager.addFlag("moveToIceFour", false);
         flagManager.addFlag("fellThroughIce", false);
         flagManager.addFlag("icePuzzleSolved", false);
+        flagManager.addFlag("hasEnteredIceFive", false);
 
         // define/setup map
         map = new IceFiveMap();

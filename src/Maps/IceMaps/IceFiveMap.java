@@ -8,7 +8,9 @@ import Level.Trigger;
 import NPCs.Otis;
 import Scripts.SimpleTextScript;
 import Scripts.MapTransitions.IceFourTransitionScript;
+import Scripts.OtisInteractionScripts.OtisIceFiveScript;
 import Scripts.TestMap.FoodScript;
+
 
 import java.util.ArrayList;
 
@@ -39,6 +41,8 @@ public class IceFiveMap extends Map {
 
         // IceFour transition
         triggers.add(new Trigger(1044, 192, 12, 96, new IceFourTransitionScript()));
+
+        triggers.add(new Trigger(100, 288, 10, 288, new OtisIceFiveScript(), "hasEnteredIceFive"));
 
         return triggers;
 

@@ -32,6 +32,7 @@ public class IceTwoScreen extends Screen {
         flagManager.addFlag("playerIsOffIce", true);
         flagManager.addFlag("hasCompletedSlidingPuzzle", false);
         flagManager.addFlag("hasGainedFriendship", false);
+        flagManager.addFlag("hasEnteredIceTwo", false);
 
         // define/setup map
         map = new IceTwoMap();

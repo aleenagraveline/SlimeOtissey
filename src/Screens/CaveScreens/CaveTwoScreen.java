@@ -27,6 +27,7 @@ public class CaveTwoScreen extends Screen {
         flagManager = new FlagManager();
         flagManager.addFlag("moveToCaveOne", false);
         flagManager.addFlag("moveToCaveThree", false);
+        flagManager.addFlag("hasEnteredCaveTwo", false);
 
         // define/setup map
         map = new CaveTwoMap();

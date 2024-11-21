@@ -20,7 +20,7 @@ public class OtisCaveIceScript extends Script {
             addText("I don't think he wants to go back to where he \ncame from.");
         }});
         
-        scriptActions.add(new ChangeFlagScriptAction("scaredOtis", true));
+        scriptActions.add(new ChangeFlagScriptAction("hasEnteredCaveIce", true));
         scriptActions.add(new UnlockPlayerScriptAction());
         return scriptActions;
     }

@@ -10,6 +10,8 @@ import Scripts.SimpleTextScript;
 import Scripts.IceTwoMap.*;
 import Scripts.MapTransitions.IceOneTransitionScript;
 import Scripts.MapTransitions.IceThreeTransitionScript;
+import Scripts.OtisInteractionScripts.OtisIceOneScript;
+import Scripts.OtisInteractionScripts.OtisIceTwoScript;
 import Scripts.TestMap.FoodScript;
 
 import java.util.ArrayList;
@@ -80,6 +82,8 @@ public class IceTwoMap extends Map {
 
         // Trigger to gain friendship
         triggers.add(new Trigger(1632, 240, 12, 96, new SlidingCompleteScript(), "hasCompletedSlidingPuzzle"));
+
+        triggers.add(new Trigger(100, 288, 10, 288, new OtisIceTwoScript(), "hasEnteredIceTwo"));
 
         return triggers;
 

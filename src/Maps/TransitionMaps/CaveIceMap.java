@@ -7,6 +7,8 @@ import Level.Trigger;
 import NPCs.Otis;
 import Scripts.MapTransitions.CaveThreeTransitionScript;
 import Scripts.MapTransitions.IceOneTransitionScript;
+import Scripts.OtisInteractionScripts.OtisCaveIceScript;
+import Scripts.OtisInteractionScripts.OtisForestCaveScript;
 
 import java.util.ArrayList;
 
@@ -37,6 +39,8 @@ public class CaveIceMap extends Map {
 
         // IceOne transition
         triggers.add(new Trigger (2640, 0, 96, 12, new IceOneTransitionScript()));
+
+        triggers.add(new Trigger(100, 288, 10, 288, new OtisCaveIceScript(), "hasEnteredCaveIce"));
 
         return triggers;
 

@@ -7,6 +7,8 @@ import Tilesets.IceTileset;
 import Level.Trigger;
 import NPCs.Otis;
 import Scripts.MapTransitions.IceTwoTransitionScript;
+import Scripts.OtisInteractionScripts.OtisForestCaveScript;
+import Scripts.OtisInteractionScripts.OtisIceOneScript;
 import Scripts.TestMap.FoodScript;
 import Scripts.SimpleTextScript;
 import Scripts.MapTransitions.CaveIceTransitionScript;
@@ -50,6 +52,8 @@ public class IceOneMap extends Map {
         triggers.add(new Trigger(144, 852, 96, 12, new CaveIceTransitionScript()));
         // IceTwo transition
         triggers.add(new Trigger(1140, 336, 12, 96, new IceTwoTransitionScript()));
+
+        triggers.add(new Trigger(100, 288, 10, 288, new OtisIceOneScript(), "hasEnteredIceOne"));
 
         return triggers;
 
