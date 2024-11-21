@@ -52,7 +52,7 @@ public abstract class Player extends GameObject {
 
     protected boolean isLocked = false;
 
-    protected static int friendshipPoints = 0;
+    protected static int friendshipPoints = 150;
 
     public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
         super(spriteSheet, x, y, startingAnimationName);
@@ -189,11 +189,22 @@ public abstract class Player extends GameObject {
         }
         else if (playerState == PlayerState.WALKING) {
             // sets animation to a WALK animation based on which way player is facing
-            this.currentAnimationName = facingDirection == Direction.RIGHT ? "WALK_RIGHT" : "WALK_LEFT";
+            if (facingDirection == Direction.RIGHT) {
+                this.currentAnimationName = "WALK_RIGHT";
+            }
+            else if (facingDirection == Direction.LEFT) {
+                this.currentAnimationName = "WALK_LEFT";
+            }
+            else if (facingDirection == Direction.UP) {
+                this.currentAnimationName = "WALK_UP";
+            }
+            else if (facingDirection == Direction.DOWN){
+                this.currentAnimationName = "WALK_DOWN";
+            }
         } 
-        else if (playerState == PlayerState.WALKING) {
+        if (playerState == PlayerState.WALKING) {
             // sets animation to a WALK animation based on which way player is facing
-            this.currentAnimationName = facingDirection == Direction.UP ? "WALK_UP" : "WALK_DOWN";
+
         }
     }
 
