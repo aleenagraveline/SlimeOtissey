@@ -6,7 +6,7 @@ import Level.Script;
 import ScriptActions.ChangeFlagScriptAction;
 import ScriptActions.ScriptAction;
 
-public class onIceScript extends Script {
+public class OnIceScript extends Script {
     @Override
     public ArrayList<ScriptAction> loadScriptActions() {
         ArrayList<ScriptAction> scriptActions = new ArrayList<>();

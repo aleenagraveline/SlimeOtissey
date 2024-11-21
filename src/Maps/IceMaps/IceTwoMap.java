@@ -73,12 +73,12 @@ public class IceTwoMap extends Map {
         triggers.add(new Trigger(2148, 240, 12, 96, new IceThreeTransitionScript()));
 
         // Triggers to unlock player after leaving ice
-        triggers.add(new Trigger(672, 672, 12, 96, new offIceScript(), "playerIsOffIce"));
-        triggers.add(new Trigger(1572, 288, 12, 96, new offIceScript(), "playerIsOffIce"));
+        triggers.add(new Trigger(672, 672, 12, 96, new OffIceScript(), "playerIsOffIce"));
+        triggers.add(new Trigger(1572, 288, 12, 96, new OffIceScript(), "playerIsOffIce"));
 
         // Triggers to switch above triggers back to active when on ice
-        triggers.add(new Trigger(720, 672, 12, 96, new onIceScript(), "playerIsOnIce"));
-        triggers.add(new Trigger(1524, 288, 12, 96, new onIceScript(), "playerIsOnIce"));
+        triggers.add(new Trigger(720, 672, 12, 96, new OnIceScript(), "playerIsOnIce"));
+        triggers.add(new Trigger(1524, 288, 12, 96, new OnIceScript(), "playerIsOnIce"));
 
         // Trigger to gain friendship
         triggers.add(new Trigger(1632, 240, 12, 96, new SlidingCompleteScript(), "hasCompletedSlidingPuzzle"));
