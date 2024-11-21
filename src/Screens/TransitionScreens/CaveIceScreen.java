@@ -27,6 +27,7 @@ public class CaveIceScreen extends Screen {
         flagManager = new FlagManager();
         flagManager.addFlag("moveToCaveThree", false);
         flagManager.addFlag("moveToIceOne", false);
+        flagManager.addFlag("hasEnteredCaveIce", false);
 
         // define/setup map
         map = new CaveIceMap();

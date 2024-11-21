@@ -1,4 +1,4 @@
-package Scripts;
+package Scripts.OtisInteractionScripts;
 
 import java.util.ArrayList;
 
@@ -7,7 +7,7 @@ import ScriptActions.*;
 
 // script for talking to dino npc
 // checkout the documentation website for a detailed guide on how this script works
-public class ScaredOtisScript extends Script {
+public class OtisForestTwoScript extends Script {
 
     @Override
     public ArrayList<ScriptAction> loadScriptActions() {
@@ -20,7 +20,7 @@ public class ScaredOtisScript extends Script {
             addText("I don't think he wants to go back to where he \ncame from.");
         }});
         
-        scriptActions.add(new ChangeFlagScriptAction("scaredOtis", true));
+        scriptActions.add(new ChangeFlagScriptAction("hasEnteredForestTwo", true));
         scriptActions.add(new UnlockPlayerScriptAction());
         return scriptActions;
     }

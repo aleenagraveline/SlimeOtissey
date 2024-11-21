@@ -27,6 +27,7 @@ public class CaveOneScreen extends Screen {
         flagManager = new FlagManager();
         flagManager.addFlag("moveToForestCave", false);
         flagManager.addFlag("moveToCaveTwo", false);
+        flagManager.addFlag("hasEnteredCaveOne", false);
 
         // define/setup map
         map = new CaveOneMap();

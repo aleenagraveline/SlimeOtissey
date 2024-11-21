@@ -27,6 +27,7 @@ public class IceOneScreen extends Screen {
         flagManager = new FlagManager();
         flagManager.addFlag("moveToCaveIce", false);
         flagManager.addFlag("moveToIceTwo", false);
+        flagManager.addFlag("hasEnteredIceOne", false);
 
         // define/setup map
         map = new IceOneMap();

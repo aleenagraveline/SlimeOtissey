@@ -8,10 +8,11 @@ import Level.Trigger;
 
 import NPCs.Otis;
 import Screens.ForestScreens.ForestOneScreen;
-import Scripts.ScaredOtisScript;
+import Scripts.OtisInteractionScripts.ScaredOtisScript;
 import Scripts.SimpleTextScript;
 import Scripts.MapTransitions.ForestTwoTransitionScript;
 import Scripts.MapTransitions.SpawnTransitionScript;
+import Scripts.OtisInteractionScripts.ScaredOtisScript;
 import Scripts.TestMap.FoodScript;
 import Tilesets.ForestTileset;
 

@@ -32,6 +32,7 @@ public class CaveThreeScreen extends Screen {
         flagManager.addFlag("moveToCaveIce", false);
         flagManager.addFlag("hasGainedFriendship", false);
         flagManager.addFlag("hasCompletedCrystalPuzzle", false);
+        flagManager.addFlag("hasEnteredCaveThree", false);
         // flagManager.addFlag("crystal1Flag", false);
         // flagManager.addFlag("crystal2Flag", false);
         // flagManager.addFlag("crystal3Flag", false);

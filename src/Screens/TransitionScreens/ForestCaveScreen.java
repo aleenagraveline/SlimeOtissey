@@ -33,6 +33,7 @@ public class ForestCaveScreen extends Screen {
         flagManager.addFlag("hasStartedRockPuzzle", false);
         flagManager.addFlag("hasCompletedRockPuzzle", false);
         flagManager.addFlag("hasCollectedKey", false);
+        flagManager.addFlag("hasEnteredForestCave", false);
 
         // define/setup map
         map = new ForestCaveMap();

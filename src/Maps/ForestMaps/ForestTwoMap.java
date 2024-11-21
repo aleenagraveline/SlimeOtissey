@@ -11,6 +11,8 @@ import NPCs.Otis;
 import Scripts.SimpleTextScript;
 import Scripts.MapTransitions.ForestOneTransitionScript;
 import Scripts.MapTransitions.ForestThreeTransitionScript;
+import Scripts.OtisInteractionScripts.OtisForestCaveScript;
+import Scripts.OtisInteractionScripts.OtisForestTwoScript;
 import Scripts.TestMap.FoodScript;
 import Tilesets.ForestTileset;
 
@@ -49,6 +51,7 @@ public class ForestTwoMap extends Map {
         triggers.add(new Trigger(0, 288, 12, 288, new ForestOneTransitionScript()));
         // ForestThree transition trigger
         triggers.add(new Trigger(0,1200,12,192, new ForestThreeTransitionScript()));
+        triggers.add(new Trigger(100, 288, 10, 288, new OtisForestTwoScript(), "hasEnteredForestTwo"));
 
         return triggers;
     }

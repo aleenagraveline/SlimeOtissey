@@ -11,6 +11,7 @@ import Level.Trigger;
 import NPCs.Otis;
 import Scripts.MapTransitions.CaveOneTransitionScript;
 import Scripts.MapTransitions.ForestThreeTransitionScript;
+import Scripts.OtisInteractionScripts.OtisForestCaveScript;
 import Scripts.RockPuzzleScripts.*;
 import Tilesets.ForestCaveTileset;
 
@@ -41,6 +42,7 @@ public class ForestCaveMap extends Map {
         triggers.add(new Trigger(192, 624, 5, 48, new RockPuzzleFirstRockScript(), "hasPushedFirstRock"));
         triggers.add(new Trigger(379, 624, 5, 48, new RockPuzzleSecondRockScript(), "hasPushedSecondRock"));
         triggers.add(new Trigger(192, 680, 192, 48, new RockPuzzleCompleteScript(), "hasCompletedRockPuzzle"));
+        triggers.add(new Trigger(100, 288, 10, 288, new OtisForestCaveScript(), "hasEnteredForestCave"));
 
         // ForestThree transition trigger
         triggers.add(new Trigger(1296, 0, 192, 12, new ForestThreeTransitionScript()));

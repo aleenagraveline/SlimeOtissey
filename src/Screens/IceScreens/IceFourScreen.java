@@ -28,6 +28,7 @@ public class IceFourScreen extends Screen {
         flagManager = new FlagManager();
         flagManager.addFlag("moveToIceThree", false);
         flagManager.addFlag("moveToIceFive", false);
+        flagManager.addFlag("hasEnteredIceFour", false);
 
         // define/setup map
         map = new IceFourMap();
