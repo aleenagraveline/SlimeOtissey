@@ -19,7 +19,7 @@ public class CaveOneMap extends Map {
 
     public CaveOneMap() {
         super("cave_one_map.txt", new CaveTileset());
-        this.playerStartPosition = getMapTile(2, 0).getLocation().addX(24); // middle of path on left
+        this.playerStartPosition = getMapTile(0, 7).getLocation(); // middle of path on left
     }
 
     @Override
@@ -27,7 +27,7 @@ public class CaveOneMap extends Map {
         ArrayList<NPC> npcs = new ArrayList<>();
 
         // Initialize Otis right next to the player
-        Otis otis = new Otis(1, getMapTile(2, 0).getLocation()); // Change coordinates as needed to place Otis next to the player
+        Otis otis = new Otis(1, getMapTile(0, 7).getLocation().subtractX(24)); // Change coordinates as needed to place Otis next to the player
         npcs.add(otis);
 
         return npcs;
@@ -38,7 +38,7 @@ public class CaveOneMap extends Map {
         ArrayList<Trigger> triggers = new ArrayList<>();
 
         // ForestCave transition trigger
-        triggers.add(new Trigger(96, 0, 96, 12, new ForestCaveTransitionScript()));
+        triggers.add(new Trigger(0, 336, 12, 96, new ForestCaveTransitionScript()));
         // CaveTwo transition
         triggers.add(new Trigger(2148, 336, 12, 96, new CaveTwoTransitionScript()));
 
