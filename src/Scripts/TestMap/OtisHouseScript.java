@@ -18,7 +18,7 @@ public class OtisHouseScript extends Script {
 
         scriptActions.add(new TextboxScriptAction() {{
             addText("Alex?!");
-            addText("How did you get into my castle?!");
+            addText("How did you get into my mansion?!");
             addText("Why is a slime following you??!!");
             addText("I haven't seen one of those in years!");
             addText("Don't those belong to King Lodeon?");

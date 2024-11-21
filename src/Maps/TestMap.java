@@ -81,7 +81,7 @@ public class TestMap extends Map {
 
         getMapTile(19, 13).setInteractScript(new SimpleTextScript("Walrus's house"));
 
-        getMapTile(11, 23).setInteractScript(new SimpleTextScript("King Lodeon's... Castle..."));
+        getMapTile(11, 23).setInteractScript(new SimpleTextScript("Dino's Mansion"));
 
         // Forest sign interaction
         getMapTile(18, 25).setInteractScript(new SimpleTextScript("To Forest:\n>>>>"));
