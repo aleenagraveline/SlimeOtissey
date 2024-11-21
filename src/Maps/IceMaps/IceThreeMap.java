@@ -61,7 +61,7 @@ public class IceThreeMap extends Map {
 
     @Override
     public void loadScripts() {
-        getMapTile(8, 6).setInteractScript(new SimpleTextScript("Don't you miss your brothers and sisters? \n I wonder how they're doing."));
+        getMapTile(8, 6).setInteractScript(new SimpleTextScript("Don't you miss your brothers and sisters? \nI wonder how they're doing."));
     }
     
 }
