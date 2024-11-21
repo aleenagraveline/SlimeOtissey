@@ -7,7 +7,7 @@ import ScriptActions.ChangeFlagScriptAction;
 import ScriptActions.ScriptAction;
 import ScriptActions.UnlockPlayerScriptAction;
 
-public class OffIceScript extends Script {
+public class offIceScript extends Script {
     @Override
     public ArrayList<ScriptAction> loadScriptActions() {
         ArrayList<ScriptAction> scriptActions = new ArrayList<>();
