@@ -52,7 +52,7 @@ public class CaveTwoMap extends Map {
         triggers.add(new Trigger(0, 864, 12, 96, new CaveOneTransitionScript()));
         // CaveThree transition
         triggers.add(new Trigger(528, 0, 96, 12, new CaveThreeTransitionScript()));
-        triggers.add(new Trigger(100, 288, 10, 288, new OtisCaveTwoScript(), "hasEnteredCaveTwo"));
+        triggers.add(new Trigger(48, 864, 10, 96, new OtisCaveTwoScript(), "hasEnteredCaveTwo"));
 
         return triggers;
 

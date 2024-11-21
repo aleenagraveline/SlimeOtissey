@@ -16,8 +16,8 @@ public class OtisCaveOneScript extends Script {
         scriptActions.add(new LockPlayerScriptAction());
 
         scriptActions.add(new TextboxScriptAction() {{
-            addText("Otis seems very nervous to leave the village...");
-            addText("I don't think he wants to go back to where he \ncame from.");
+            addText("Alex: Woah, it's a cave!");
+            addText("*Otis looks slightly less stressed being out of the forest*");
         }});
         
         scriptActions.add(new ChangeFlagScriptAction("hasEnteredCaveOne", true));

@@ -64,7 +64,7 @@ public class ForestThreeMap extends Map {
         // ForestCave transition trigger
         triggers.add(new Trigger(576, 1428, 192, 12, new ForestCaveTransitionScript()));
 
-        triggers.add(new Trigger(100, 288, 10, 288, new OtisForestThreeScript(), "hasEnteredForestThree"));
+        triggers.add(new Trigger(1104, 96, 10, 336, new OtisForestThreeScript(), "hasEnteredForestThree"));
         return triggers;
     }
 

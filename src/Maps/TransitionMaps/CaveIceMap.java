@@ -40,7 +40,7 @@ public class CaveIceMap extends Map {
         // IceOne transition
         triggers.add(new Trigger (2640, 0, 96, 12, new IceOneTransitionScript()));
 
-        triggers.add(new Trigger(100, 288, 10, 288, new OtisCaveIceScript(), "hasEnteredCaveIce"));
+        triggers.add(new Trigger(48, 432, 10, 288, new OtisCaveIceScript(), "hasEnteredCaveIce"));
 
         return triggers;
 
