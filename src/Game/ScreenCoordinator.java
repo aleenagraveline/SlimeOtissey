@@ -12,6 +12,7 @@ import Screens.IceScreens.*;
 import Screens.RandomBattleScreens.*;
 import Screens.TransitionScreens.*;
 import Level.Map;
+import Level.MusicManager;
 
 
 
@@ -133,9 +134,11 @@ public class ScreenCoordinator extends Screen {
 					case SPAWN:
 						currentScreen = majorScreens[SPAWN_INDEX];
 						randomBattleStepCounter = 0;
+						MusicManager.playMusic("VillageSong (online-audio-converter.com).wav");
 						break;
 					case FOREST_ONE:
 						currentScreen = majorScreens[FOREST_ONE_INDEX];
+						MusicManager.playMusic("WhimsyWoods (online-audio-converter.com).wav");
 						break;
 					case FOREST_TWO:
 						currentScreen = majorScreens[FOREST_TWO_INDEX];
@@ -150,6 +153,7 @@ public class ScreenCoordinator extends Screen {
 					case CAVE_ONE:
 						currentScreen = majorScreens[CAVE_ONE_INDEX];
 						randomBattleStepCounter = 0;
+						MusicManager.playMusic("VillageSong (online-audio-converter.com).wav");
 						break;
 					case CAVE_TWO:
 						currentScreen = majorScreens[CAVE_TWO_INDEX];
@@ -162,6 +166,7 @@ public class ScreenCoordinator extends Screen {
 						break;
 					case ICE_ONE:
 						currentScreen = majorScreens[ICE_ONE_INDEX];
+						//MusicManager.playMusic("WhimsyWoods (online-audio-converter.com).wav");
 						break;
 					case ICE_TWO:
 						currentScreen = majorScreens[ICE_TWO_INDEX];
