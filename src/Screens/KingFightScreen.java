@@ -5,6 +5,7 @@ import Engine.Key;
 import Engine.KeyLocker;
 import Engine.Keyboard;
 import Engine.Screen;
+import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.*;
 import Maps.KingFightMap;
@@ -67,7 +68,7 @@ public class KingFightScreen extends Screen {
         hasInteracted = false;
 
         shakeTimer = 0;
-        kingHealth = 75;
+        kingHealth = 66;
         kingStrength = 6;
         armored = false;
         flying = false;
@@ -225,13 +226,13 @@ public class KingFightScreen extends Screen {
                     playerHealth -= attack(kingStrength) / 2;
                     playerHealthDisplay.setText("PLAYER HEALTH: " + playerHealth);
                     if (playerHealth <= 0) {
-                        this.playLevelScreen.exitKingBattleAsLoser();
+                        this.screenCoordinator.exitKingBattleAsLoser();
                     }
                     hasInteracted = true;
                 } else if (menuItemSelected == 2) { // exit fight peacefully
                     if (hasInteracted) {
                         PlayLevelScreen.playerHealth = this.playerHealth;
-                        this.playLevelScreen.exitKingBattleAsCoward();
+                        this.screenCoordinator.exitKingBattleAsCoward();
                     }
                 }
             } else {
@@ -286,12 +287,12 @@ public class KingFightScreen extends Screen {
                     PlayLevelScreen.playerHealth = this.playerHealth;
                     Player.gainFriendshipPoints(100, 100);
 
-                    this.playLevelScreen.exitKingBattleAsVictor();
+                    this.screenCoordinator.exitKingBattleAsVictor();
                 } else {
                     playerHealth -= attack(kingStrength);
                     playerHealthDisplay.setText("PLAYER HEALTH: " + playerHealth);
                     if (playerHealth <= 0) {
-                        this.playLevelScreen.exitKingBattleAsLoser();
+                        this.screenCoordinator.exitKingBattleAsLoser();
                     }
                 }
 

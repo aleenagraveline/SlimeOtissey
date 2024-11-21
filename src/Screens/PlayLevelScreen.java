@@ -72,7 +72,6 @@ public class PlayLevelScreen extends Screen {
         // both are supported, however preloading is recommended
         map.preloadScripts();
 
-        winScreen = new WinScreen(this);
         bugFightScreen = new BugFightScreen(this);
         memoryPuzzleScreen = new MemoryPuzzleScreen(this);
         waitingPuzzleScreen = new WaitingPuzzleScreen(this);
@@ -204,24 +203,6 @@ public class PlayLevelScreen extends Screen {
     public void exitBugBattle() {
         map.getFlagManager().unsetFlag("isInBugBattle");
         playLevelScreenState = PlayLevelScreenState.RUNNING;
-        this.update();
-    }
-
-    public void exitKingBattleAsVictor() {
-        ending = "victor";
-        playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
-        this.update();
-    }
-
-    public void exitKingBattleAsLoser() {
-        ending = "loser";
-        playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
-        this.update();
-    }
-
-    public void exitKingBattleAsCoward() {
-        ending = "coward";
-        playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
         this.update();
     }
 
