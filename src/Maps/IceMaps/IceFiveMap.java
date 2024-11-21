@@ -76,7 +76,9 @@ public class IceFiveMap extends Map {
 
     @Override
     public void loadScripts() {
-        getMapTile(6, 26).setInteractScript(new SimpleTextScript("I've lead you right where I need you."));
+        getMapTile(6, 26).setInteractScript(new SimpleTextScript("I've lead you right where I need you. \n(Interact with the snow rocks)"));
+        getMapTile(1, 7).setInteractScript(new SimpleTextScript("You did it! There is nothing else here."));
+        getMapTile(15, 7).setInteractScript(new SimpleTextScript("CAUTION: \nThin Ice (You should step on it)"));
         getMapTile(5, 29).setInteractScript(new StartKingFight());
         getMapTile(4, 29).setInteractScript(new StartKingFight());
     }
