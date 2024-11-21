@@ -81,7 +81,8 @@ public class VillageTileset extends Tileset {
                 .withScale(tileScale)
                 .build();
         MapTileBuilder fullRoofTile = new MapTileBuilder(grassFrame)
-                .withMidBottomLayer(fullRoofFrame);
+                .withMidBottomLayer(fullRoofFrame)
+                .withTileType(TileType.NOT_PASSABLE);
         mapTiles.add(fullRoofTile);
 
         //leftRoof
@@ -91,7 +92,7 @@ public class VillageTileset extends Tileset {
 
         MapTileBuilder leftHouseRoofTile = new MapTileBuilder(grassFrame)
                 .withTopLayer(leftHouseRoofFrame)
-                .withTileType(TileType.PASSABLE);
+                .withTileType(TileType.NOT_PASSABLE);
 
         mapTiles.add(leftHouseRoofTile);
 
@@ -103,7 +104,7 @@ public class VillageTileset extends Tileset {
 
         MapTileBuilder rightRoofTile = new MapTileBuilder(grassFrame)
                 .withTopLayer(rightRoofFrame)
-                .withTileType(TileType.PASSABLE);
+                .withTileType(TileType.NOT_PASSABLE);
 
         mapTiles.add(rightRoofTile);
 
@@ -400,7 +401,14 @@ public class VillageTileset extends Tileset {
         MapTileBuilder innerCornerTile = new MapTileBuilder(innerCornerFrame);
         mapTiles.add(innerCornerTile);
 
-
+        // houseWall2
+        Frame houseWall2Frame = new FrameBuilder(getSubImage(1, 0))
+                .withScale(tileScale)
+                .build();
+        MapTileBuilder houseWall2Tile = new MapTileBuilder(grassFrame)
+                .withMidBottomLayer(houseWall2Frame)
+                .withTileType(TileType.PASSABLE);
+        mapTiles.add(houseWall2Tile);
 
 
 
