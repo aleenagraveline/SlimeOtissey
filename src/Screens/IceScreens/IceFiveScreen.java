@@ -77,7 +77,8 @@ public class IceFiveScreen extends Screen {
             this.iceFiveScreenState = IceFiveScreenState.FELL_THROUGH_ICE;
         }
         if (map.getFlagManager().isFlagSet("isInKingBattle")) {
-            screenCoordinator.setGameState(GameState.KING_BATTLE);
+            screenCoordinator.setGameState(GameState.KING_FIGHT);
+            map.getFlagManager().unsetFlag("isInKingBattle");
         }
 
         // Check if all ice has been cracked, i.e. puzzle has been solved

@@ -32,7 +32,7 @@ public class ScreenCoordinator extends Screen {
 	// -1 for error checking
 	protected int nextRandomBattle = -1;
 	
-	static final int NUM_OF_MAJOR_SCREENS = 16; // The number of major screens to be loaded
+	static final int NUM_OF_MAJOR_SCREENS = 18; // The number of major screens to be loaded
 	static final int NUM_OF_RANDOM_BATTLES = 2;
 	
 	// Index for each major screen
@@ -52,6 +52,8 @@ public class ScreenCoordinator extends Screen {
 	static final int ICE_THREE_INDEX = 13;
 	static final int ICE_FOUR_INDEX = 14;
 	static final int ICE_FIVE_INDEX = 15;
+	static final int KING_FIGHT_INDEX = 16;
+	static final int WIN_SCREEN_INDEX = 17;
 
 	// Index for each random battle screen
 	static final int RANDOM_BUG_INDEX = 0;
@@ -68,6 +70,8 @@ public class ScreenCoordinator extends Screen {
 	// keep track of gameState so ScreenCoordinator knows which Screen to show
 	protected GameState gameState;
 	protected GameState previousGameState;
+
+	private String ending;
 
 	public GameState getGameState() {
 		return gameState;
@@ -100,6 +104,8 @@ public class ScreenCoordinator extends Screen {
 		majorScreens[ICE_THREE_INDEX] = new IceThreeScreen(this);
 		majorScreens[ICE_FOUR_INDEX] = new IceFourScreen(this);
 		majorScreens[ICE_FIVE_INDEX] = new IceFiveScreen(this);
+		majorScreens[KING_FIGHT_INDEX] = new KingFightScreen(this);
+		majorScreens[WIN_SCREEN_INDEX] = new WinScreen(this);
 
 		// Fill randomBattleScreens
 		randomBattleScreens[RANDOM_BUG_INDEX] = new RandomBugBattleScreen(this);
@@ -113,6 +119,8 @@ public class ScreenCoordinator extends Screen {
 		// Set random battle cap and counter to appropriate values
 		randomBattleStepCounter = 0;
 		randomBattleStepCap = RANDOM_NUMBERS.nextInt(RANDOM_BATTLE_STEP_MINIMUM, RANDOM_BATTLE_STEP_MAXIMUM);		
+
+		ending = "";
 	}
 
 	@Override
@@ -180,6 +188,12 @@ public class ScreenCoordinator extends Screen {
 					case ICE_FIVE:
 						currentScreen = majorScreens[ICE_FIVE_INDEX];
 						break;
+					case KING_FIGHT:
+						currentScreen = majorScreens[KING_FIGHT_INDEX];
+						break;
+					case WIN_SCREEN:
+						currentScreen = majorScreens[WIN_SCREEN_INDEX];
+						break;
 					case RANDOM_BATTLE:
 						randomBattleScreens[nextRandomBattle].initialize();
 						currentScreen = randomBattleScreens[nextRandomBattle];
@@ -206,6 +220,28 @@ public class ScreenCoordinator extends Screen {
 	@Override
 	public Map getMap() {
 		return currentScreen.getMap();
+	}
+
+	public void exitKingBattleAsVictor() {
+        ending = "victor";
+		setGameState(GameState.WIN_SCREEN);
+		System.out.println(ending);
+    }
+
+    public void exitKingBattleAsLoser() {
+        ending = "loser";
+		setGameState(GameState.WIN_SCREEN);
+		System.out.println(ending);
+    }
+
+    public void exitKingBattleAsCoward() {
+        ending = "coward";
+		setGameState(GameState.WIN_SCREEN);
+		System.out.println(ending);
+    }
+
+	public String getEnding() {
+		return ending;
 	}
 
 	public void leaveRandomBattle() {
