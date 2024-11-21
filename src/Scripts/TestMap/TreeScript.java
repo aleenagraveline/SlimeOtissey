@@ -55,7 +55,7 @@ public class TreeScript extends Script {
                 addScriptAction(new TextboxScriptAction() {{
                     addText("...");
                     addText("I found a key inside of the box!\nYippee!");
-                    addText("Maybe I can use the key to break into Lodeon's castle! \n(Press I to check your inventory.)");
+                    addText("Maybe I can use the key to break into Dino's Mansion! \n(Press I to check your inventory.)");
                     addText("*Otis jumps on the key*");
                     addText("Alex: Otis! Give me the key back!");
                     addText("*Otis seems to...laugh? He's enjoying this!*");
