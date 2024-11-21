@@ -70,7 +70,7 @@ public class TestMap extends Map {
         triggers.add(new Trigger(292, 380, 10, 80, new LostBallScript(), "hasLostBall"));
 
         // forest transition trigger
-        triggers.add(new Trigger(1140, 1104, 12, 144, new ForestOneTransitionScript()));
+        triggers.add(new Trigger(1140, 1050, 12, 200, new ForestOneTransitionScript()));
 
         return triggers;
     }

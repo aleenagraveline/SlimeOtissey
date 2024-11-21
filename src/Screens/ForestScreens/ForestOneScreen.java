@@ -76,6 +76,7 @@ public class ForestOneScreen extends Screen {
             map.getFlagManager().unsetFlag("moveToForestTwo");
         }
         // TODO Pretty sure this part is unnecessary - John
+        // You're right, maybe I should delete it - MollyAnn
         if(map.getFlagManager().isFlagSet("moveToForestOne")){
             canPlayMusic = true;
         }
