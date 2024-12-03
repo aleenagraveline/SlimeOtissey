@@ -147,9 +147,7 @@ public class ScreenCoordinator extends Screen {
 						break;
 					case FOREST_ONE:
 						currentScreen = majorScreens[FOREST_ONE_INDEX];
-						if (previousGameState == GameState.SPAWN) {
 							MusicManager.playMusic("WhimsyWoods (online-audio-converter.com).wav");
-						}
 						break;
 					case FOREST_TWO:
 						currentScreen = majorScreens[FOREST_TWO_INDEX];
@@ -162,7 +160,7 @@ public class ScreenCoordinator extends Screen {
 						break;
 					case CAVE_ONE:
 						currentScreen = majorScreens[CAVE_ONE_INDEX];
-						MusicManager.playMusic("VillageSong (online-audio-converter.com).wav");
+						MusicManager.playMusic("Cave (online-audio-converter.com) (1).wav");
 						break;
 					case CAVE_TWO:
 						currentScreen = majorScreens[CAVE_TWO_INDEX];
