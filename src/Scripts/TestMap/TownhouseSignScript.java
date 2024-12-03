@@ -18,7 +18,7 @@ public class TownhouseSignScript extends Script {
         scriptActions.add(new LockPlayerScriptAction());
         scriptActions.add(new TextboxScriptAction() {{
             addText("Kings Monthly October 2024\nInterior Design Contest Winner: Dino!");
-            addText("Judge's Comments: \"The artistic minimalism is truly \ninspiring and I love the grss patches\"");
+            addText("Judge's Comments: \"The artistic minimalism is truly \ninspiring and I love the grass patches\"");
         }});
         scriptActions.add(new UnlockPlayerScriptAction());
 
