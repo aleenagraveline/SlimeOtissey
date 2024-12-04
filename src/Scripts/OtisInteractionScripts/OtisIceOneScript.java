@@ -17,7 +17,8 @@ public class OtisIceOneScript extends Script {
 
         scriptActions.add(new TextboxScriptAction() {{
             addText("*Otis begins to trail behind slightly...*");
-            addText("Alex: If you're bored, I'm sure we'll find something \n to do soon...");
+            addText("Alex: Come on Bud! We'll make it to the Kingdom \nin no time!");
+            addText("Alex: It'll be okay, I'll keep you safe...");
         }});
         
         scriptActions.add(new ChangeFlagScriptAction("hasEnteredIceOne", true));

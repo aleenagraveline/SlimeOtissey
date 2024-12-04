@@ -17,7 +17,6 @@ public class OtisIceTwoScript extends Script {
 
         scriptActions.add(new TextboxScriptAction() {{
             addText("*Otis shivers...the ice must be making him cold*");
-            addText("*I wonder if live slimes can freeze?*");
         }});
         
         scriptActions.add(new ChangeFlagScriptAction("hasEnteredIceTwo", true));

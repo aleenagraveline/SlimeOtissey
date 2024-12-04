@@ -16,8 +16,10 @@ public class OtisIceFourScript extends Script {
         scriptActions.add(new LockPlayerScriptAction());
 
         scriptActions.add(new TextboxScriptAction() {{
-            addText("Alex: Now of course snowland has to be the largest \none...");
-            addText("*Otis bounces...is he laughing? That's...unexpected...*");
+            addText("Alex: Hey Otis?");
+            addText("Alex: How many slimes has the king experimented on?");
+            addText("*Otis looks sad... That answers my question*");
+            addText("Alex: I see...");
         }});
         
         scriptActions.add(new ChangeFlagScriptAction("hasEnteredIceFour", true));

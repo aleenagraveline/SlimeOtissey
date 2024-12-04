@@ -33,6 +33,7 @@ public class DinoScript extends Script {
                 addScriptAction(new TextboxScriptAction () {{
                     addText("Alex...Go away!");
                     addText("And don't even think about following me!");
+                    addText("*Moonwalks away*");
                 }});
                 addScriptAction(new NPCStandScriptAction(Direction.RIGHT));
 

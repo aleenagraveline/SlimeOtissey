@@ -16,8 +16,8 @@ public class OtisIceThreeScript extends Script {
         scriptActions.add(new LockPlayerScriptAction());
 
         scriptActions.add(new TextboxScriptAction() {{
-            addText("*Otis seems to have livened up his steps after \nthe sliding adventure*");
-            addText("*It was pretty fun, maybe we can do it again soon?*");
+            addText("*Otis is on edge about these signs that are placed \naround*");
+            addText("*Does King Lodeon know we're coming?*");
         }});
         
         scriptActions.add(new ChangeFlagScriptAction("hasEnteredIceThree", true));

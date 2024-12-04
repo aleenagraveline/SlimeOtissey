@@ -23,7 +23,7 @@ public class OtisHouseScript extends Script {
             addText("I haven't seen one of those in years!");
             addText("Don't those belong to King Lodeon?");
             addText("Give him to me! I could sell him for a high price!");
-            addText("*Otis scurries slides behind your feet, trying to \nhide himself...Aww...*");
+            addText("*Otis scurries slides behind your feet, trying to \nhide himself*");
             addText("Alex: Well this one is mine, back off!");
             addText("Dino: Fine...but you better watch your back.");
         }});

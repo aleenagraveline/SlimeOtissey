@@ -17,7 +17,6 @@ public class OtisCaveOneScript extends Script {
 
         scriptActions.add(new TextboxScriptAction() {{
             addText("Alex: Woah, it's a cave!");
-            addText("*Otis looks slightly less stressed being out of the forest*");
         }});
         
         scriptActions.add(new ChangeFlagScriptAction("hasEnteredCaveOne", true));

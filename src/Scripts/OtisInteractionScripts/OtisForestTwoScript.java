@@ -18,7 +18,8 @@ public class OtisForestTwoScript extends Script {
         scriptActions.add(new TextboxScriptAction() {{
             addText("*Otis seems to be growing incredibly stressed...*");
             addText("*He must not like the forest very much...*");
-            addText("Alex: At least I have my weapons to fight off \nthe bugs...");
+            addText("Alex: I guess you being able to morph into weapons \nisn't the worst thing after all!");
+            addText("Otis: *Glares*");
         }});
         
         scriptActions.add(new ChangeFlagScriptAction("hasEnteredForestTwo", true));
