@@ -20,7 +20,11 @@ Changes to content in the `docs` folder will not show up on the website unless t
 
 ## Credits
 **Alex Thimineur**: Programmed the base game
+
 **John Caceres**: Programmed map transitions, Random battle pop-ups, and Ice Puzzles in the Ice Biome
+
 **MollyAnn O'Malley**: Created the Art and Music, Cave Puzzle, and Made everything look pretty
-**Aleena Graveline**: Programmed the Inventory, Food System, and Friendship point system.
-**Ryan Barbarito**: Programmed the Combat System, Final Boss Battle with King Lodeon, and Village puzzles.
+
+**Aleena Graveline**: Programmed the Inventory, Food System, and Friendship point system
+
+**Ryan Barbarito**: Programmed the Combat System, Final Boss Battle with King Lodeon, and Village puzzles
